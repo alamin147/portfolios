@@ -44,10 +44,12 @@ export default function Hero() {
                   <span className="text-sky-400 font-semibold"> coding </span>
                   and learning new technologies. I thrive both working
                   independently and in teams, with experience in
-                  <span className="text-emerald-400 font-semibold">
+                  <span className="text-sky-400 font-semibold">
                     {" "}
-                    programming competitions
+                    programming competitions.{" "}
                   </span>
+                    I love building <span className="text-emerald-400 font-semibold">full-stack</span> apps, exploring backend architecture. I'm always curious about new tech, constantly experimenting, and leveling up my skills in software development. I enjoy turning ideas into clean, working code.
+                    <br/>Always building, always growing. Let's connect and make something awesome!
                   .
                 </p>
               </div>
