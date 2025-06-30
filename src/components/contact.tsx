@@ -38,9 +38,9 @@ export default function Contact() {
 
   // Fix: Create a new instance of the scroll animation hook
   const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
-  const { ref: contactFormRef, isVisible: contactVisible } = useScrollAnimation();
+  const { ref: contactFormRef, isVisible: contactVisible } =
+    useScrollAnimation();
   const { ref: contactsRef, isVisible: contactsVisible } = useScrollAnimation();
-
 
   const validateForm = (): boolean => {
     const newErrors: Partial<TInputs> = {};
@@ -88,7 +88,8 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    const form = e.target;
+    console.log(form);
     if (!validateForm()) {
       return;
     }
@@ -133,8 +134,8 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
           {/* Contact Form */}
           <div
-          ref={contactFormRef as any}
-          className={`lg:col-span-3 mb-20 transition-all duration-1000 ${
+            ref={contactFormRef as any}
+            className={`lg:col-span-3 mb-20 transition-all duration-1000 ${
               contactVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-8"
@@ -142,7 +143,6 @@ export default function Contact() {
           >
             {/*  */}
             <div className="glass-card hover:glass-card-hover rounded-3xl p-8 sm:p-10 transition-all duration-500 relative overflow-hidden glow-animation">
-
               <div className="relative z-10">
                 <h3 className="text-center text-3xl font-bold bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent mb-2">
                   Get In Touch
@@ -264,16 +264,16 @@ export default function Contact() {
                   </div>
                 </form>
               </div>
-
             </div>
           </div>
 
           {/* Contact Information */}
           <div
-          ref={contactsRef as any}
-            className={`lg:col-span-2 flex flex-col  space-y-8 transition-all duration-1000 ${contactsVisible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-8"
+            ref={contactsRef as any}
+            className={`lg:col-span-2 flex flex-col  space-y-8 transition-all duration-1000 ${
+              contactsVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-8"
             }`}
           >
             <div className="text-center lg:text-left mb-4">
@@ -295,14 +295,14 @@ export default function Contact() {
                 title="Address"
                 description="Dhaka, Bangladesh"
                 color="from-sky-500 to-sky-600"
-                />
+              />
               <ContactInfo
                 icon={<Phone className="h-6 w-6" />}
                 title="Phone Number"
                 description="+8801322332323"
                 color="from-sky-500 to-sky-600"
                 // color="from-emerald-500 to-emerald-600"
-                />
+              />
               <ContactInfo
                 icon={<Mail className="h-6 w-6" />}
                 title="Email Address"
@@ -355,13 +355,19 @@ const ContactInfo = ({
   description: string;
   color: string;
 }) => (
-  <div className="bg-gray-700/40  border border-white/10 backdrop-blur-xl
+  <div
+    className="bg-gray-700/40  border border-white/10 backdrop-blur-xl
                     transition-all duration-300
                     hover:g-cyan-500/30 hover:shadow-[0_10px_25px_rgba(8,145,178,0.4)] hover:scale-105
-                    rounded-2xl p-5 group">
+                    rounded-2xl p-5 group"
+  >
     <div className="flex items-center">
       <div
-        className={`flex-shrink-0 p-3 rounded-xl ${typeof color === 'string' && color.includes('from-') ? `bg-gradient-to-r ${color}` : ''} text-white group-hover:scale-110 transition-transform duration-300 shadow-lg`}
+        className={`flex-shrink-0 p-3 rounded-xl ${
+          typeof color === "string" && color.includes("from-")
+            ? `bg-gradient-to-r ${color}`
+            : ""
+        } text-white group-hover:scale-110 transition-transform duration-300 shadow-lg`}
       >
         {icon}
       </div>
