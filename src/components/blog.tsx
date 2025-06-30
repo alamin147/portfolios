@@ -1,13 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  Clock,
-  X,
-  Calendar,
-  Eye,
-  Heart,
-  MessageCircle,
-  ArrowRight,
-} from "lucide-react";
+import { Clock, X, Calendar, ArrowRight } from "lucide-react";
 
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 import SectionTitle from "./section-title";
@@ -15,87 +7,38 @@ import { Button } from "./ui/button";
 
 type BlogPost = {
   _id: string;
-  imgUrl: string;
   title: string;
+  imgUrl: string;
+  des: string;
   category: string;
   time: string;
-  des: string;
   shortDes: string;
-  views?: number;
-  likes?: number;
-  comments?: number;
+  featured?: boolean;
 };
 
 export default function Blog() {
   const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
   const { ref: featuredRef, isVisible: featuredVisible } = useScrollAnimation();
   const { ref: gridRef, isVisible: gridVisible } = useScrollAnimation();
-
   const [allBlog, setAllBlog] = useState<BlogPost[]>([]);
   const [selectedBlog, setSelectedBlog] = useState<BlogPost | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const mockBlogs = [
-    {
-      _id: "1",
-      imgUrl: "/placeholder.svg?height=400&width=600",
-      title: "The Future of Web Development: What's Coming in 2024",
-      category: "Web Development",
-      time: new Date().toISOString(),
-      shortDes:
-        "Explore the cutting-edge technologies and trends that will shape web development in the coming year.",
-      des: "The web development landscape is constantly evolving, and 2024 promises to bring exciting new technologies and methodologies. From AI-powered development tools to advanced frameworks, we're seeing unprecedented innovation.\n\nIn this comprehensive guide, we'll explore the emerging trends including WebAssembly adoption, edge computing integration, and the rise of micro-frontends. We'll also dive into how AI is transforming the development process and what it means for developers.",
-      views: 1250,
-      likes: 89,
-      comments: 23,
-    },
-    {
-      _id: "2",
-      imgUrl: "/placeholder.svg?height=300&width=400",
-      title: "Mastering TypeScript: Advanced Patterns and Techniques",
-      category: "TypeScript",
-      time: new Date(Date.now() - 86400000).toISOString(),
-      shortDes:
-        "Deep dive into advanced TypeScript patterns that will make your code more robust and maintainable.",
-      des: "TypeScript has become an essential tool for modern JavaScript development. This article explores advanced patterns and techniques that go beyond the basics.\n\nWe'll cover conditional types, mapped types, template literal types, and advanced utility types. You'll learn how to create type-safe APIs, implement complex validation logic, and build reusable type utilities.",
-      views: 890,
-      likes: 67,
-      comments: 15,
-    },
-    {
-      _id: "3",
-      imgUrl: "/placeholder.svg?height=300&width=400",
-      title: "Building Scalable Node.js Applications",
-      category: "Backend",
-      time: new Date(Date.now() - 172800000).toISOString(),
-      shortDes:
-        "Learn the architectural patterns and best practices for building Node.js applications that scale.",
-      des: "Scalability is crucial for modern applications. This guide covers the essential patterns and practices for building Node.js applications that can handle growth.\n\nWe'll explore microservices architecture, database optimization, caching strategies, and monitoring techniques. You'll learn how to design systems that perform well under load.",
-      views: 654,
-      likes: 45,
-      comments: 12,
-    },
-    {
-      _id: "4",
-      imgUrl: "/placeholder.svg?height=300&width=400",
-      title: "CSS Grid vs Flexbox: When to Use What",
-      category: "CSS",
-      time: new Date(Date.now() - 259200000).toISOString(),
-      shortDes:
-        "A comprehensive comparison of CSS Grid and Flexbox with practical examples and use cases.",
-      des: "CSS Grid and Flexbox are powerful layout tools, but knowing when to use each can be challenging. This article provides clear guidance on choosing the right tool for your layout needs.\n\nWe'll compare their strengths, explore real-world examples, and provide decision frameworks to help you make the right choice for your projects.",
-      views: 432,
-      likes: 34,
-      comments: 8,
-    },
-  ];
-  const [featuredBlog, setFeaturedBlog] = useState<BlogPost | null>(
-    mockBlogs[0]
-  );
+  const [featuredBlog, setFeaturedBlog]: any = useState();
 
   useEffect(() => {
-    setAllBlog(mockBlogs);
-    setFeaturedBlog(mockBlogs[0]);
+    fetch(`${import.meta.env.VITE_SERVER_URL}/blog`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        setAllBlog(result);
+        if (result.length === 0) return;
+        const featured = result.find((blog: BlogPost) => blog.featured);
+        setFeaturedBlog(featured);
+      });
   }, []);
 
   const openModal = (blog: BlogPost) => {
@@ -149,7 +92,7 @@ export default function Blog() {
         </div>
 
         {/* Featured Article */}
-        {featuredBlog && (
+        {
           <div
             ref={featuredRef as any}
             className={`mb-20 transition-all duration-1000 delay-300 ${
@@ -162,8 +105,8 @@ export default function Blog() {
               <div className="grid lg:grid-cols-2 gap-0">
                 <div className="relative h-64 lg:h-[30rem] overflow-hidden">
                   <img
-                    src={featuredBlog.imgUrl || "/placeholder.svg"}
-                    alt={featuredBlog.title}
+                    src={featuredBlog?.imgUrl || "/placeholder.svg"}
+                    alt={featuredBlog?.title}
                     className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent"></div>
@@ -177,27 +120,23 @@ export default function Blog() {
                 <div className="p-8 lg:p-12 flex flex-col justify-center">
                   <div className="mb-4">
                     <span className="glass-button text-sky-300 px-3 py-1 rounded-full text-sm font-medium">
-                      {featuredBlog.category}
+                      {featuredBlog?.category}
                     </span>
                   </div>
 
                   <h3 className="text-3xl lg:text-4xl font-bold text-white mb-4 group-hover:text-sky-300 transition-colors duration-300">
-                    {featuredBlog.title}
+                    {featuredBlog?.title}
                   </h3>
 
                   <p className="text-gray-300 text-lg mb-6 leading-relaxed">
-                    {featuredBlog.shortDes}
+                    {featuredBlog?.shortDes}
                   </p>
 
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center space-x-4 text-sm text-gray-400">
                       <div className="flex items-center">
                         <Calendar className="h-4 w-4 mr-1" />
-                        {formatDate(featuredBlog.time)}
-                      </div>
-                      <div className="flex items-center">
-                        <Eye className="h-4 w-4 mr-1" />
-                        {featuredBlog.views}
+                        {formatDate(featuredBlog?.time)}
                       </div>
                     </div>
                   </div>
@@ -215,7 +154,7 @@ export default function Blog() {
               </div>
             </div>
           </div>
-        )}
+        }
 
         {/* Blog Grid */}
         <div
@@ -226,66 +165,52 @@ export default function Blog() {
               : "opacity-0 translate-y-8"
           }`}
         >
-          {allBlog?.slice(1).map((blog) => (
-            <div
-              key={blog._id}
-              className="group glass-card rounded-2xl overflow-hidden hover:glass-card-hover transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-sky-500/20 cursor-pointer"
-              style={{
-                transitionDelay: gridVisible ? `${100}ms` : "0ms",
-              }}
-              onClick={() => openModal(blog)}
-            >
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src={blog.imgUrl || "/placeholder.svg"}
-                  alt={blog.title}
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                <div className="absolute top-4 left-4">
-                  <span className="glass-button text-white px-3 py-1 rounded-full text-xs font-medium">
-                    {blog.category}
-                  </span>
+          {allBlog
+            ?.filter((blog) => !blog.featured)
+            .map((blog) => (
+              <div
+                key={blog._id}
+                className="group glass-card rounded-2xl overflow-hidden hover:glass-card-hover transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-sky-500/20 cursor-pointer"
+                style={{
+                  transitionDelay: gridVisible ? `${100}ms` : "0ms",
+                }}
+                onClick={() => openModal(blog)}
+              >
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={blog.imgUrl}
+                    alt={blog.title}
+                    className="w-full h-full object-cover aspect-[16/9] group-hover:scale-110 transition-transform duration-500 bg-gray-800"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                  <div className="absolute top-4 left-4">
+                    <span className="glass-button text-white px-3 py-1 rounded-full text-xs font-medium">
+                      {blog.category}
+                    </span>
+                  </div>
                 </div>
-                <div className="absolute bottom-4 left-4 right-4">
-                  <div className="flex items-center space-x-3 text-white text-xs">
+
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-sky-300 transition-colors duration-300 line-clamp-2">
+                    {blog.title}
+                  </h3>
+                  <p className="text-gray-300 text-sm mb-4 line-clamp-3">
+                    {blog.shortDes}
+                  </p>
+
+                  <div className="flex items-center justify-between text-sm text-gray-400">
                     <div className="flex items-center">
-                      <Eye className="h-3 w-3 mr-1" />
-                      {blog.views}
+                      <Clock className="h-4 w-4 mr-1" />
+                      <span>{getTimeAgo(blog.time)}</span>
                     </div>
-                    <div className="flex items-center">
-                      <Heart className="h-3 w-3 mr-1" />
-                      {blog.likes}
-                    </div>
-                    <div className="flex items-center">
-                      <MessageCircle className="h-3 w-3 mr-1" />
-                      {blog.comments}
+                    <div className="flex items-center text-sky-400 group-hover:text-sky-300 transition-colors duration-300">
+                      <span className="mr-1">Read</span>
+                      <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
                     </div>
                   </div>
                 </div>
               </div>
-
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-sky-300 transition-colors duration-300 line-clamp-2">
-                  {blog.title}
-                </h3>
-                <p className="text-gray-300 text-sm mb-4 line-clamp-3">
-                  {blog.shortDes}
-                </p>
-
-                <div className="flex items-center justify-between text-sm text-gray-400">
-                  <div className="flex items-center">
-                    <Clock className="h-4 w-4 mr-1" />
-                    <span>{getTimeAgo(blog.time)}</span>
-                  </div>
-                  <div className="flex items-center text-sky-400 group-hover:text-sky-300 transition-colors duration-300">
-                    <span className="mr-1">Read</span>
-                    <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
+            ))}
         </div>
 
         {/* Blog Modal */}
@@ -317,20 +242,6 @@ export default function Blog() {
                     <span className="glass-button text-white px-4 py-2 rounded-full text-sm font-medium">
                       {selectedBlog.category}
                     </span>
-                    <div className="flex items-center space-x-4 text-white text-sm">
-                      {selectedBlog.views && (
-                        <div className="flex items-center">
-                          <Eye className="h-4 w-4 mr-1" />
-                          {selectedBlog.views}
-                        </div>
-                      )}
-                      {selectedBlog.likes && (
-                        <div className="flex items-center">
-                          <Heart className="h-4 w-4 mr-1" />
-                          {selectedBlog.likes}
-                        </div>
-                      )}
-                    </div>
                   </div>
                   <h1 className="text-4xl font-bold text-white">
                     {selectedBlog.title}
