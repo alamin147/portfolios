@@ -1,6 +1,13 @@
-import { GraduationCap, School, Medal, MapPin, Calendar, Users } from "lucide-react"
-import { useScrollAnimation } from "@/hooks/use-scroll-animation"
-import SectionTitle from "./section-title"
+import {
+  GraduationCap,
+  School,
+  Medal,
+  MapPin,
+  Calendar,
+  Users,
+} from "lucide-react";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
+import SectionTitle from "./section-title";
 
 const educationData = [
   {
@@ -13,10 +20,15 @@ const educationData = [
     icon: <GraduationCap size={32} />,
     color: "from-sky-500/40 to-sky-500/90",
     description:
-    "Focused on software engineering, algorithms, and modern web technologies. Active participant in programming competitions and tech communities.",
-    highlights: ["Data Structures & Algorithms", "Software Engineering", "Web Development", "Database Systems"],
-},
-{
+      "Focused on software engineering and modern web technologies. Active participant in programming competitions and tech communities.",
+    highlights: [
+      "Web Development",
+      "Software Engineering",
+      "Database Systems",
+      "Data Structures & Algorithms",
+    ],
+  },
+  {
     period: "2018 - 2020",
     degree: "Higher Secondary Certificate",
     major: "Science",
@@ -26,14 +38,14 @@ const educationData = [
     icon: <School size={32} />,
     color: "from-sky-500/90 to-sky-500/40",
     description:
-      "Strong foundation in mathematics, physics, and chemistry. Developed analytical thinking and problem-solving skills.",
-    highlights: ["Mathematics", "Physics", "Chemistry", "Computer Science"],
+      "Strong foundation in mathematics, physics. Developed analytical thinking and problem-solving skills.",
+    highlights: ["Mathematics", "Physics", "Chemistry", "Biology"],
   },
-]
+];
 
 export default function Education() {
-  const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation()
-  const { ref: timelineRef, isVisible: timelineVisible } = useScrollAnimation()
+  const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
+  const { ref: timelineRef, isVisible: timelineVisible } = useScrollAnimation();
 
   return (
     <section id="education" className="py-20 px-4 relative overflow-hidden">
@@ -42,10 +54,11 @@ export default function Education() {
         <div
           ref={headerRef as any}
           className={`text-center mb-20 transition-all duration-1000 ${
-            headerVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            headerVisible
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-8"
           }`}
         >
-
           <SectionTitle
             title="Education"
             desc="My academic journey has equipped me with the knowledge and skills needed to excel in the field of computer science."
@@ -56,7 +69,9 @@ export default function Education() {
         <div
           ref={timelineRef as any}
           className={`relative transition-all duration-1000 delay-300 ${
-            timelineVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            timelineVisible
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-8"
           }`}
         >
           {/* Central Timeline Line */}
@@ -86,7 +101,9 @@ export default function Education() {
                 <div className="w-full lg:w-5/12">
                   <div className="group glass-card hover:glass-card-hover rounded-3xl overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-sky-500/20 relative">
                     {/* Card Header */}
-                    <div className={`p-6 bg-gradient-to-r ${edu.color} bg-opacity-20`}>
+                    <div
+                      className={`p-6 bg-gradient-to-r ${edu.color} bg-opacity-20`}
+                    >
                       <div className="flex items-center justify-between mb-4">
                         <div
                           className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${edu.color} flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}
@@ -102,14 +119,18 @@ export default function Education() {
                       </div>
 
                       <div className="mb-2">
-                        <span className="text-gray-300 text-lg">{edu.degree}</span>
+                        <span className="text-gray-300 text-lg">
+                          {edu.degree}
+                        </span>
                       </div>
                       <h3 className="text-2xl lg:text-3xl font-bold text-white mb-3 group-hover:text-sky-200 transition-colors duration-300">
                         {edu.major}
                       </h3>
 
                       <div className="space-y-2">
-                        <div className="text-white font-medium text-lg">{edu.institution}</div>
+                        <div className="text-white font-medium text-lg">
+                          {edu.institution}
+                        </div>
                         <div className="flex items-center text-gray-300">
                           <MapPin className="h-4 w-4 mr-2 text-sky-400" />
                           {edu.location}
@@ -119,7 +140,9 @@ export default function Education() {
 
                     {/* Card Body */}
                     <div className="p-6">
-                      <p className="text-gray-300 mb-6 leading-relaxed">{edu.description}</p>
+                      <p className="text-gray-300 mb-6 leading-relaxed">
+                        {edu.description}
+                      </p>
 
                       {/* Highlights */}
                       <div className="mb-6">
@@ -144,11 +167,16 @@ export default function Education() {
                         <div className="glass-card rounded-2xl p-4">
                           <div className="flex items-center mb-3">
                             <Medal className="h-5 w-5 text-emerald-400 mr-2" />
-                            <span className="text-white font-semibold">Achievements</span>
+                            <span className="text-white font-semibold">
+                              Achievements
+                            </span>
                           </div>
                           <ul className="space-y-2">
                             {edu.achievements.map((achievement, i) => (
-                              <li key={i} className="text-gray-300 text-sm flex items-start">
+                              <li
+                                key={i}
+                                className="text-gray-300 text-sm flex items-start"
+                              >
                                 <div className="w-2 h-2 bg-gradient-to-r from-sky-400 to-emerald-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
                                 {achievement}
                               </li>
@@ -168,5 +196,5 @@ export default function Education() {
         </div>
       </div>
     </section>
-  )
+  );
 }
