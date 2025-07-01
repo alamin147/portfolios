@@ -1,4 +1,3 @@
-"use client"
 
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer"
 import type { ReactNode } from "react"
@@ -42,7 +41,7 @@ export function AnimatedSection({ children, className = "", animation = "fadeUp"
   }
 
   return (
-    <div ref={ref} className={`${getAnimationClass()} ${className}`} style={{ transitionDelay: `${delay}ms` }}>
+    <div ref={ref as any} className={`${getAnimationClass()} ${className}`} style={{ transitionDelay: `${delay}ms` }}>
       {children}
     </div>
   )
