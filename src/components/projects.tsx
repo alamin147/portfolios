@@ -166,13 +166,17 @@ import { ExternalLink } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 import SectionTitle from "./section-title";
 import { useEffect, useState } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Projects() {
   const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
   const { ref: projectsRef, isVisible: projectsVisible } = useScrollAnimation();
 
   const [projects, setProject] = useState<Project[]>();
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
+    setLoading(true);
     fetch(`${import.meta.env.VITE_SERVER_URL}/project`, {
       method: "GET",
       headers: {
@@ -181,8 +185,12 @@ export default function Projects() {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
         setProject(result);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching projects:", error);
+        setLoading(false);
       });
   }, []);
 
@@ -226,7 +234,38 @@ export default function Projects() {
               : "opacity-0 translate-y-8"
           }`}
         >
-          {projects &&
+          {loading ? (
+            // Skeleton loading UI
+            Array.from({ length: 6 }).map((_, index) => (
+              <div
+                key={index}
+                className="group glass-card rounded-2xl overflow-hidden"
+                style={{
+                  transitionDelay: projectsVisible ? `${index * 100}ms` : "0ms",
+                }}
+              >
+                {/* Skeleton Image */}
+                <div className="relative overflow-hidden">
+                  <Skeleton className="w-full h-48" />
+                </div>
+
+                {/* Skeleton Content */}
+                <div className="p-6 relative z-10">
+                  <Skeleton className="h-6 w-3/4 mb-3" />
+                  <Skeleton className="h-4 w-full mb-2" />
+                  <Skeleton className="h-4 w-2/3 mb-4" />
+
+                  {/* Skeleton Technologies */}
+                  <div className="flex flex-wrap gap-2">
+                    <Skeleton className="h-6 w-20 rounded-full" />
+                    <Skeleton className="h-6 w-24 rounded-full" />
+                    <Skeleton className="h-6 w-16 rounded-full" />
+                  </div>
+                </div>
+              </div>
+            ))
+          ) : (
+            projects &&
             projects.length > 0 &&
             projects.map((project: Project) => (
               <div
@@ -297,7 +336,8 @@ export default function Projects() {
                   </div>
                 </div>
               </div>
-            ))}
+            ))
+          )}
         </div>
       </div>
       <div className="text-center mt-12">
