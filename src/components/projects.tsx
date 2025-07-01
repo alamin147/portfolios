@@ -99,14 +99,16 @@ export default function Projects() {
                         Live Demo
                       </Button>
                     </a>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="cursor-pointer glass-card text-white hover:text-cyan-100 rounded-full transition-all duration-300"
-                    >
-                      <ExternalLink className="h-4 w-4 mr-2" />
-                      Details
-                    </Button>
+                    <a href={`/projects/${project._id}`}>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="cursor-pointer glass-card text-white hover:text-cyan-100 rounded-full transition-all duration-300"
+                      >
+                        <ExternalLink className="h-4 w-4 mr-2" />
+                        Details
+                      </Button>
+                    </a>
                   </div>
                 </div>
 

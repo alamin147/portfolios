@@ -150,7 +150,7 @@ export default function ProjectsPage() {
                           </Button>
                         </a>
                         <a
-                          href={project.github}
+                          href={`/projects/${project._id}`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
