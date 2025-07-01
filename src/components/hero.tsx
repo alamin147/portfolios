@@ -48,15 +48,27 @@ export default function Hero() {
                     {" "}
                     programming competitions.{" "}
                   </span>
-                    I love building <span className="text-emerald-400 font-semibold">full-stack</span> apps, exploring backend architecture. I'm always curious about new tech, constantly experimenting, and leveling up my skills in software development. I enjoy turning ideas into clean, working code.
-                    <br/>Always building, always growing. Let's connect and make something awesome!
-                  .
+                  I love building{" "}
+                  <span className="text-emerald-400 font-semibold">
+                    full-stack
+                  </span>{" "}
+                  apps, exploring backend architecture. I'm always curious about
+                  new tech, constantly experimenting, and leveling up my skills
+                  in software development. I enjoy turning ideas into clean,
+                  working code.
+                  <br />
+                  Always building, always growing. Let's connect and make
+                  something awesome! .
                 </p>
               </div>
             </div>
 
             <div className="flex flex-wrap items-center gap-4 justify-center lg:justify-start">
-              <a href={resume} target="_black">
+              <a
+                href={resume}
+                target="_black"
+                download="Alamin_Resume_Backend.pdf"
+              >
                 <CustomBtn
                   children={<Download className="mr-2 h-5 w-5" />}
                   title="Download Resume"
@@ -137,9 +149,9 @@ export default function Hero() {
           }`}
         >
           {[
-            { number: "50+", label: "Projects Completed" },
+            { number: "20+", label: "Projects Completed" },
             { number: "2+", label: "Years Experience" },
-            { number: "100+", label: "Problems Solved" },
+            { number: "950+", label: "Problems Solved" },
             { number: "10+", label: "Technologies" },
           ].map((stat, index) => (
             <div
