@@ -10,6 +10,7 @@ import { FloatingElements } from "@/components/floating-elements";
 import Navbar from "@/components/navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProjectsPage from "./components/projectsPage";
+import ProjectDetailsPage from "./components/project-details";
 
 function App() {
   return (
@@ -55,6 +56,16 @@ function App() {
                   <>
                     <Navbar />
                     <ProjectsPage />
+                    <Footer />
+                  </>
+                }
+              />
+              <Route
+                path="/projects/:id"
+                element={
+                  <>
+                    <Navbar />
+                    <ProjectDetailsPage />
                     <Footer />
                   </>
                 }
