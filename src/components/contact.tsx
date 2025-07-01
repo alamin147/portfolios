@@ -1,20 +1,15 @@
 import type React from "react";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import "@/components/css/contact.css";
-import {
-  Mail,
-  MapPin,
-  Phone,
-  Send,
-  CheckCircle,
-  AlertCircle,
-} from "lucide-react";
+import { Mail, MapPin, Phone, Send } from "lucide-react";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import SectionTitle from "./section-title";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { Toast } from "./custom/toast";
 
 type TInputs = {
   name: string;
@@ -22,96 +17,35 @@ type TInputs = {
   subject: string;
   message: string;
 };
+const url = import.meta.env.VITE_URL;
 
 export default function Contact() {
-  const [formData, setFormData] = useState<TInputs>({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
-  const [errors, setErrors] = useState<Partial<TInputs>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<
-    "idle" | "success" | "error"
-  >("idle");
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<TInputs>();
 
-  // Fix: Create a new instance of the scroll animation hook
   const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
   const { ref: contactFormRef, isVisible: contactVisible } =
     useScrollAnimation();
   const { ref: contactsRef, isVisible: contactsVisible } = useScrollAnimation();
 
-  const validateForm = (): boolean => {
-    const newErrors: Partial<TInputs> = {};
-
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
-    }
-
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (
-      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email)
-    ) {
-      newErrors.email = "Please enter a valid email address";
-    }
-
-    if (!formData.subject.trim()) {
-      newErrors.subject = "Subject is required";
-    }
-
-    if (!formData.message.trim()) {
-      newErrors.message = "Message is required";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-    // Clear error when user starts typing
-    if (errors[name as keyof TInputs]) {
-      setErrors((prev) => ({
-        ...prev,
-        [name]: undefined,
-      }));
-    }
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const form = e.target;
-    console.log(form);
-    if (!validateForm()) {
-      return;
-    }
-
-    setIsSubmitting(true);
-    setSubmitStatus("idle");
-
+  const onSubmit = async (data: TInputs) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-
-      setSubmitStatus("success");
-      setFormData({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
-      });
-      setErrors({});
+      const response = await axios.post(url, data);
+      reset();
+      if (response.data.success == true) {
+        Toast({
+          message: "Email sent to Al Amin. Thanks for reaching out",
+          success: true,
+        });
+      } else {
+        Toast({ message: "Email counld not sent. Try again", success: false });
+      }
     } catch (error) {
-      setSubmitStatus("error");
-    } finally {
-      setIsSubmitting(false);
+      Toast({ message: "Email counld not sent. Try again", success: false });
     }
   };
 
@@ -152,41 +86,18 @@ export default function Contact() {
                   amazing together.
                 </p>
 
-                {/* Status Messages */}
-                {submitStatus === "success" && (
-                  <div className="mb-6 p-4 rounded-lg glass-card border border-green-500/30 bg-green-500/10">
-                    <div className="flex items-center text-green-400">
-                      <CheckCircle className="h-5 w-5 mr-2" />
-                      <span>
-                        Message sent successfully! I'll get back to you soon.
-                      </span>
-                    </div>
-                  </div>
-                )}
-
-                {submitStatus === "error" && (
-                  <div className="mb-6 p-4 rounded-lg glass-card border border-red-500/30 bg-red-500/10">
-                    <div className="flex items-center text-red-400">
-                      <AlertCircle className="h-5 w-5 mr-2" />
-                      <span>Email could not be sent. Please try again.</span>
-                    </div>
-                  </div>
-                )}
-
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <Input
                         type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
                         placeholder="Your Name"
                         className="glass-input text-white placeholder:text-gray-400 focus:glass-input transition-all duration-300 py-6"
+                        {...register("name", { required: "Name is required" })}
                       />
                       {errors.name && (
                         <p className="text-red-400 mt-1 text-sm font-medium">
-                          {errors.name}
+                          {errors.name.message}
                         </p>
                       )}
                     </div>
@@ -194,15 +105,20 @@ export default function Contact() {
                     <div>
                       <Input
                         type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
                         placeholder="Your Email"
                         className="glass-input text-white placeholder:text-gray-400 focus:glass-input transition-all duration-300 py-6"
+                        {...register("email", {
+                          required: "Email is required",
+                          pattern: {
+                            value:
+                              /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                            message: "Please enter a valid email address",
+                          },
+                        })}
                       />
                       {errors.email && (
                         <p className="text-red-400 mt-1 text-sm font-medium">
-                          {errors.email}
+                          {errors.email.message}
                         </p>
                       )}
                     </div>
@@ -211,31 +127,31 @@ export default function Contact() {
                   <div>
                     <Input
                       type="text"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleInputChange}
                       placeholder="Subject"
                       className="glass-input text-white placeholder:text-gray-400 focus:glass-input transition-all duration-300 py-6"
+                      {...register("subject", {
+                        required: "Subject is required",
+                      })}
                     />
                     {errors.subject && (
                       <p className="text-red-400 mt-1 text-sm font-medium">
-                        {errors.subject}
+                        {errors.subject.message}
                       </p>
                     )}
                   </div>
 
                   <div>
                     <Textarea
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
                       rows={8}
                       placeholder="Your Message"
                       className="glass-input text-white placeholder:text-gray-400 focus:glass-input resize-none transition-all duration-300"
+                      {...register("message", {
+                        required: "Message is required",
+                      })}
                     />
                     {errors.message && (
                       <p className="text-red-400 mt-1 text-sm font-medium">
-                        {errors.message}
+                        {errors.message.message}
                       </p>
                     )}
                   </div>
