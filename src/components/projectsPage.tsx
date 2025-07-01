@@ -63,7 +63,7 @@ export default function ProjectsPage() {
         <Link to="/#projects">
           <Button
             variant="ghost"
-            className="glass-card text-white hover:text-cyan-300 rounded-full transition-all duration-300"
+            className=" mb-5 md:mb-0 glass-card text-white hover:text-cyan-300 rounded-full transition-all duration-300"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Home

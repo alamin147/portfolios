@@ -36,7 +36,7 @@ export default function Navbar() {
         <div className="flex-shrink-0">
         <a
           href="#home"
-          className="text-2xl font-bold bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent"
+          className="text-2xl font-bold bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent ms-5 md:ms-0"
         >
           Al Amin
         </a>
@@ -63,7 +63,7 @@ export default function Navbar() {
         <div className="md:hidden">
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="glass-card hover:glass-card-hover p-2 rounded-md text-white hover:text-sky-400 transition-all duration-300"
+            className="me-3 md:me-0 glass-card hover:glass-card-hover p-2 rounded-md text-white hover:text-sky-400 transition-all duration-300"
           >
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
