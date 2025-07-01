@@ -15,13 +15,13 @@ export default function Navbar() {
   }, [])
 
   const navItems = [
-    { name: "Home", href: "#home" },
-    { name: "Projects", href: "#projects" },
-    { name: "Skills", href: "#skills" },
-    { name: "CP Profiles", href: "#cp-profiles" },
-    { name: "Blog", href: "#blogs" },
-    { name: "Education", href: "#education" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", href: "/#home" },
+    { name: "Projects", href: "/#projects" },
+    { name: "Skills", href: "/#skills" },
+    { name: "CP Profiles", href: "/#cp-profiles" },
+    { name: "Blog", href: "/#blogs" },
+    { name: "Education", href: "/#education" },
+    { name: "Contact", href: "/#contact" },
   ]
 
   return (
