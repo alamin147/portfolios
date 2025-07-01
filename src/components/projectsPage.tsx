@@ -143,10 +143,10 @@ export default function ProjectsPage() {
                         >
                           <Button
                             size="sm"
-                            className="glass-button text-white hover:scale-105 rounded-full transition-all duration-300"
+                            className="cursor-pointer glass-button text-white hover:scale-105 rounded-full transition-all duration-300"
                           >
                             <ExternalLink className="h-4 w-4 mr-2" />
-                            Live Demo
+                            Live URL
                           </Button>
                         </a>
                         <a
