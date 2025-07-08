@@ -9,7 +9,8 @@ import SectionTitle from "./section-title";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { Toast } from "./custom/toast";
+import { toast } from "react-toastify";
+import { ContactSuccessToast, ContactErrorToast, ContactSendingToast } from "./custom-toast";
 
 type TInputs = {
   name: string;
@@ -33,19 +34,59 @@ export default function Contact() {
   const { ref: contactsRef, isVisible: contactsVisible } = useScrollAnimation();
 
   const onSubmit = async (data: TInputs) => {
+    // Show sending toast
+    const sendingToastId = toast(<ContactSendingToast />, {
+      position: "top-right",
+      autoClose: false,
+      hideProgressBar: true,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: false,
+      className: "custom-toast contact-sending-toast",
+    });
+
     try {
       const response = await axios.post(url, data);
+
+      // Dismiss the sending toast
+      toast.dismiss(sendingToastId);
+
       reset();
+
       if (response.data.success == true) {
-        Toast({
-          message: "Email sent to Al Amin. Thanks for reaching out",
-          success: true,
+        toast(<ContactSuccessToast />, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          className: "custom-toast contact-success-toast",
         });
       } else {
-        Toast({ message: "Email counld not sent. Try again", success: false });
+        toast(<ContactErrorToast />, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          className: "custom-toast contact-error-toast",
+        });
       }
     } catch (error) {
-      Toast({ message: "Email counld not sent. Try again", success: false });
+      // Dismiss the sending toast
+      toast.dismiss(sendingToastId);
+
+      toast(<ContactErrorToast />, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        className: "custom-toast contact-error-toast",
+      });
     }
   };
 
