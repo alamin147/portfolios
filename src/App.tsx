@@ -11,6 +11,7 @@ import Navbar from "@/components/navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProjectsPage from "./components/projectsPage";
 import ProjectDetailsPage from "./components/project-details";
+import BlogDetailsWrapper from "./components/blog-details-wrapper";
 
 function App() {
   return (
@@ -66,6 +67,16 @@ function App() {
                   <>
                     <Navbar />
                     <ProjectDetailsPage />
+                    <Footer />
+                  </>
+                }
+              />
+              <Route
+                path="/blog/:id"
+                element={
+                  <>
+                    <Navbar />
+                    <BlogDetailsWrapper />
                     <Footer />
                   </>
                 }

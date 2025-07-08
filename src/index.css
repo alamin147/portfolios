@@ -640,3 +640,314 @@ html {
   }
 }
 
+/* Blog Details Page Styles */
+.blog-content {
+  line-height: 1.8;
+}
+
+.blog-content h1, .blog-content h2, .blog-content h3 {
+  color: #fff;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.blog-content h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.blog-content h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  border-bottom: 2px solid rgba(8, 145, 178, 0.3);
+  padding-bottom: 0.5rem;
+}
+
+.blog-content h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #38bdf8;
+}
+
+.blog-content p {
+  margin-bottom: 1.5rem;
+  color: #d1d5db;
+}
+
+.blog-content ul, .blog-content ol {
+  margin-bottom: 1.5rem;
+  padding-left: 2rem;
+  color: #d1d5db;
+}
+
+.blog-content li {
+  margin-bottom: 0.5rem;
+}
+
+.blog-content blockquote {
+  border-left: 4px solid rgba(8, 145, 178, 0.5);
+  padding-left: 1rem;
+  margin: 2rem 0;
+  background: rgba(8, 145, 178, 0.1);
+  border-radius: 0 0.5rem 0.5rem 0;
+  font-style: italic;
+}
+
+.blog-content code {
+  background: rgba(8, 145, 178, 0.1);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-family: 'Courier New', monospace;
+  color: #38bdf8;
+}
+
+.blog-content pre {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  border: 1px solid rgba(8, 145, 178, 0.2);
+}
+
+.blog-content pre code {
+  background: none;
+  padding: 0;
+  color: #e5e7eb;
+}
+
+.blog-content strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+.blog-content em {
+  color: #38bdf8;
+  font-style: italic;
+}
+
+.blog-content a {
+  color: #38bdf8;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.blog-content a:hover {
+  color: #0ea5e9;
+}
+
+/* Reading Progress Animation */
+.reading-progress {
+  transform-origin: left;
+  animation: progress-fill 0.3s ease-out;
+}
+
+@keyframes progress-fill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* Floating Action Buttons */
+.floating-action-btn {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(8, 145, 178, 0.15);
+  border: 1px solid rgba(8, 145, 178, 0.3);
+  box-shadow: 0 8px 32px rgba(8, 145, 178, 0.2);
+  transition: all 0.3s ease;
+}
+
+.floating-action-btn:hover {
+  background: rgba(8, 145, 178, 0.25);
+  box-shadow: 0 12px 40px rgba(8, 145, 178, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Engagement Buttons */
+.engagement-btn {
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.engagement-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+.engagement-btn.liked {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: rgb(248, 113, 113);
+}
+
+.engagement-btn.liked:hover {
+  background: rgba(239, 68, 68, 0.25);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+/* Responsive Improvements */
+@media (max-width: 768px) {
+  .blog-content h1 {
+    font-size: 2rem;
+  }
+
+  .blog-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .blog-content h3 {
+    font-size: 1.25rem;
+  }
+
+  .blog-content pre {
+    padding: 1rem;
+    font-size: 0.875rem;
+  }
+
+  .floating-action-btn {
+    padding: 0.75rem;
+  }
+}
+
+/* Smooth scroll behavior for anchor links */
+.blog-content a[href^="#"] {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar for blog content */
+.blog-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.blog-content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.blog-content::-webkit-scrollbar-thumb {
+  background: rgba(8, 145, 178, 0.3);
+  border-radius: 4px;
+}
+
+.blog-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(8, 145, 178, 0.5);
+}
+
+/* Custom Toast Styles */
+.custom-toast {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.custom-toast .Toastify__toast-body {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.custom-toast .Toastify__close-button {
+  display: none !important;
+}
+
+/* Toast Container Styling */
+.Toastify__toast-container {
+  font-family: inherit;
+}
+
+.Toastify__toast {
+  border-radius: 1rem;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.Toastify__toast--success {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.Toastify__toast--error {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.Toastify__toast--info {
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.Toastify__progress-bar {
+  background: linear-gradient(90deg, #0891b2, #06b6d4);
+}
+
+/* Animation for toast appearance */
+.Toastify__toast-enter {
+  animation: slideInRight 0.3s ease-out;
+}
+
+.Toastify__toast-exit {
+  animation: slideOutRight 0.3s ease-in;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Contact Form Toast Enhancements */
+.contact-success-toast {
+  background: rgba(34, 197, 94, 0.15) !important;
+  border: 1px solid rgba(34, 197, 94, 0.3) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.contact-error-toast {
+  background: rgba(239, 68, 68, 0.15) !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.contact-sending-toast {
+  background: rgba(59, 130, 246, 0.15) !important;
+  border: 1px solid rgba(59, 130, 246, 0.3) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Enhanced loading animation for contact form */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(8, 145, 178, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(8, 145, 178, 0.6);
+  }
+}
+
+.sending-animation {
+  animation: pulse-glow 2s infinite;
+}
