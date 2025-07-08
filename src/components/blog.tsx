@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Clock, X, Calendar, ArrowRight } from "lucide-react";
+import { Clock, Calendar, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 import SectionTitle from "./section-title";
@@ -21,9 +22,8 @@ export default function Blog() {
   const { ref: featuredRef, isVisible: featuredVisible } = useScrollAnimation();
   const { ref: gridRef, isVisible: gridVisible } = useScrollAnimation();
   const [allBlog, setAllBlog] = useState<BlogPost[]>([]);
-  const [selectedBlog, setSelectedBlog] = useState<BlogPost | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [featuredBlog, setFeaturedBlog]: any = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_SERVER_URL}/blog`, {
@@ -40,18 +40,6 @@ export default function Blog() {
         setFeaturedBlog(featured);
       });
   }, []);
-
-  const openModal = (blog: BlogPost) => {
-    setSelectedBlog(blog);
-    setIsModalOpen(true);
-    document.body.style.overflow = "hidden";
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedBlog(null);
-    document.body.style.overflow = "auto";
-  };
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -142,6 +130,11 @@ export default function Blog() {
                   </div>
 
                   <Button
+                    onClick={() => {
+                      if (featuredBlog?._id) {
+                        navigate(`/blog/${featuredBlog._id}`);
+                      }
+                    }}
                     className="cursor-pointer flex items-center justify-center gap-2 px-8 py-6 rounded-full text-white text-lg font-semibold
                 bg-cyan-500/20 border border-white/10 backdrop-blur-xl
                     shadow-[0_4px_16px_rgba(8,145,178,0.25)] transition-all duration-200
@@ -174,7 +167,11 @@ export default function Blog() {
                 style={{
                   transitionDelay: gridVisible ? `${100}ms` : "0ms",
                 }}
-                onClick={() => openModal(blog)}
+                onClick={() => {
+                  if (blog._id) {
+                    navigate(`/blog/${blog._id}`);
+                  }
+                }}
               >
                 <div className="relative h-48 overflow-hidden">
                   <img
@@ -212,64 +209,6 @@ export default function Blog() {
               </div>
             ))}
         </div>
-
-        {/* Blog Modal */}
-        {isModalOpen && selectedBlog && (
-          <div
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-            onClick={closeModal}
-          >
-            <div
-              className="relative glass-card rounded-3xl shadow-2xl overflow-hidden w-full max-w-4xl max-h-[90vh] flex flex-col"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                onClick={closeModal}
-                className="absolute top-6 right-6 z-20 glass-button text-white rounded-full w-12 h-12 flex items-center justify-center hover:scale-105 transition-all duration-300"
-              >
-                <X className="h-6 w-6" />
-              </button>
-
-              <div className="relative h-80 overflow-hidden">
-                <img
-                  src={selectedBlog.imgUrl || "/placeholder.svg"}
-                  alt={selectedBlog.title}
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                <div className="absolute bottom-6 left-6 right-6">
-                  <div className="flex items-center space-x-4 mb-4">
-                    <span className="glass-button text-white px-4 py-2 rounded-full text-sm font-medium">
-                      {selectedBlog.category}
-                    </span>
-                  </div>
-                  <h1 className="text-4xl font-bold text-white">
-                    {selectedBlog.title}
-                  </h1>
-                </div>
-              </div>
-
-              <div className="flex-1 p-8 overflow-y-auto">
-                <div className="flex items-center gap-6 mb-8 text-gray-300 text-sm border-b border-sky-500/20 pb-6">
-                  <div className="flex items-center">
-                    <Calendar className="h-4 w-4 mr-2" />
-                    <span>{formatDate(selectedBlog.time)}</span>
-                  </div>
-                  <div className="flex items-center">
-                    <Clock className="h-4 w-4 mr-2" />
-                    <span>{getTimeAgo(selectedBlog.time)}</span>
-                  </div>
-                </div>
-
-                <div className="prose prose-invert max-w-none">
-                  <p className="text-gray-300 text-lg leading-relaxed whitespace-pre-line">
-                    {selectedBlog.des}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </section>
   );
