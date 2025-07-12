@@ -2,7 +2,7 @@ import { Download, Github, Linkedin, Mail } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 import CustomBtn from "./custom-button";
 import "../App.css";
-import resume from "@/assets/Alamin_Resume_Backend.pdf";
+import resume from "@/assets/Al_Amin_fullstack_Resume.pdf";
 export default function Hero() {
   const { ref: heroRef, isVisible: heroVisible } = useScrollAnimation();
   const { ref: statsRef, isVisible: statsVisible } = useScrollAnimation();
@@ -67,7 +67,7 @@ export default function Hero() {
               <a
                 href={resume}
                 target="_black"
-                download="Alamin_Resume_Backend.pdf"
+                download="Alamin Fullstack Resume.pdf"
               >
                 <CustomBtn
                   children={<Download className="mr-2 h-5 w-5" />}
