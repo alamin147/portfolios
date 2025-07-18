@@ -15,12 +15,7 @@ import {
 import { Button } from "./ui/button";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 import { toast } from "react-toastify";
-import {
-  ShareToast,
-  ShareSuccessToast,
-  LikeToast,
-  UnlikeToast,
-} from "./custom-toast";
+import { ShareToast, ShareSuccessToast, LikeToast } from "./custom-toast";
 
 type BlogPost = {
   _id: string;
@@ -34,8 +29,8 @@ type BlogPost = {
   author?: string;
   readTime?: string;
   tags?: string[];
-  views?: number;
   likes?: number;
+  loves?: number;
   comments?: number;
 };
 
@@ -58,6 +53,7 @@ export default function BlogDetailsPage({
   const navigate = useNavigate();
   const [relatedBlogs, setRelatedBlogs] = useState<BlogPost[]>([]);
   const [isLiked, setIsLiked] = useState(false);
+  const [isLoved, setIsLoved] = useState(false);
   const [readingProgress, setReadingProgress] = useState(0);
   const [isSharing, setIsSharing] = useState(false);
   const [comments, setComments] = useState<Comment[]>([]);
@@ -67,10 +63,21 @@ export default function BlogDetailsPage({
   }>({ name: "", comment: "" });
   const [isLoadingComments, setIsLoadingComments] = useState(false);
   const [isPostingComment, setIsPostingComment] = useState(false);
+  const [likesCount, setLikesCount] = useState(blog.likes || 0);
+  const [lovesCount, setLovesCount] = useState(blog.loves || 0);
 
   const { ref: heroRef, isVisible: heroVisible } = useScrollAnimation();
   const { ref: contentRef, isVisible: contentVisible } = useScrollAnimation();
   const { ref: relatedRef, isVisible: relatedVisible } = useScrollAnimation();
+
+  // Check if user has liked/loved this blog on component mount
+  useEffect(() => {
+    const likedBlogs = JSON.parse(localStorage.getItem("likedBlogs") || "[]");
+    const lovedBlogs = JSON.parse(localStorage.getItem("lovedBlogs") || "[]");
+
+    setIsLiked(likedBlogs.includes(blog._id));
+    setIsLoved(lovedBlogs.includes(blog._id));
+  }, [blog._id]);
 
   // Fetch comments when component mounts
   useEffect(() => {
@@ -190,27 +197,119 @@ export default function BlogDetailsPage({
     }
   };
 
-  const handleLike = () => {
-    setIsLiked(!isLiked);
-    if (isLiked) {
-      toast(<UnlikeToast />, {
+  const handleLike = async () => {
+    const likedBlogs = JSON.parse(localStorage.getItem("likedBlogs") || "[]");
+    const hasLiked = likedBlogs.includes(blog._id);
+
+    if (hasLiked) {
+      toast.info("You have already liked this blog!", {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
-        className: "custom-toast",
       });
-    } else {
-      toast(<LikeToast />, {
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_SERVER_URL}/blog/like/${blog._id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.ok) {
+        const result = await response.json();
+        setIsLiked(true);
+        setLikesCount(result.likes);
+
+        // Update local storage
+        const updatedLikedBlogs = [...likedBlogs, blog._id];
+        localStorage.setItem("likedBlogs", JSON.stringify(updatedLikedBlogs));
+
+        toast(<LikeToast />, {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          className: "custom-toast",
+        });
+      }
+    } catch (error) {
+      console.error("Error liking blog:", error);
+      toast.error("Failed to like blog. Please try again.", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    }
+  };
+
+  const handleLove = async () => {
+    const lovedBlogs = JSON.parse(localStorage.getItem("lovedBlogs") || "[]");
+    const hasLoved = lovedBlogs.includes(blog._id);
+
+    if (hasLoved) {
+      toast.info("You have already loved this blog!", {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
-        className: "custom-toast",
+      });
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_SERVER_URL}/blog/love/${blog._id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.ok) {
+        const result = await response.json();
+        setIsLoved(true);
+        setLovesCount(result.loves);
+
+        // Update local storage
+        const updatedLovedBlogs = [...lovedBlogs, blog._id];
+        localStorage.setItem("lovedBlogs", JSON.stringify(updatedLovedBlogs));
+
+        toast.success("❤️ You loved this blog!", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      }
+    } catch (error) {
+      console.error("Error loving blog:", error);
+      toast.error("Failed to love blog. Please try again.", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
       });
     }
   };
@@ -439,24 +538,33 @@ export default function BlogDetailsPage({
                     onClick={handleLike}
                     className={`flex items-center space-x-2 p-3 rounded-full transition-all duration-300 ${
                       isLiked
+                        ? "bg-blue-500/20 text-blue-400 hover:bg-blue-500/30"
+                        : "glass-button text-gray-300 hover:text-blue-400"
+                    }`}
+                  >
+                    <ThumbsUp
+                      className={`h-5 w-5 ${isLiked ? "fill-current" : ""}`}
+                    />
+                    <span>{likesCount}</span>
+                  </button>
+
+                  <button
+                    onClick={handleLove}
+                    className={`flex items-center space-x-2 p-3 rounded-full transition-all duration-300 ${
+                      isLoved
                         ? "bg-red-500/20 text-red-400 hover:bg-red-500/30"
                         : "glass-button text-gray-300 hover:text-red-400"
                     }`}
                   >
                     <Heart
-                      className={`h-5 w-5 ${isLiked ? "fill-current" : ""}`}
+                      className={`h-5 w-5 ${isLoved ? "fill-current" : ""}`}
                     />
-                    <span>{(blog.likes || 0) + (isLiked ? 1 : 0)}</span>
+                    <span>{lovesCount}</span>
                   </button>
 
                   <div className="flex items-center space-x-2 glass-button p-3 rounded-full text-gray-300">
                     <MessageCircle className="h-5 w-5" />
                     <span>{comments?.length || 0}</span>
-                  </div>
-
-                  <div className="flex items-center space-x-2 glass-button p-3 rounded-full text-gray-300">
-                    <ThumbsUp className="h-5 w-5" />
-                    <span>{blog.views || 0}</span>
                   </div>
                 </div>
 
