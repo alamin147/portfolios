@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
@@ -13,7 +13,6 @@ import {
   ThumbsUp,
 } from "lucide-react";
 import { Button } from "./ui/button";
-import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 import { toast } from "react-toastify";
 import { ShareToast, ShareSuccessToast, LikeToast } from "./custom-toast";
 
@@ -46,6 +45,38 @@ type Comment = {
   createdAt: string;
 };
 
+// Custom safe scroll animation hook
+const useSafeScrollAnimation = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "50px",
+      }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, []);
+
+  return { ref, isVisible };
+};
+
 export default function BlogDetailsPage({
   blog,
   allBlogs,
@@ -54,7 +85,6 @@ export default function BlogDetailsPage({
   const [relatedBlogs, setRelatedBlogs] = useState<BlogPost[]>([]);
   const [isLiked, setIsLiked] = useState(false);
   const [isLoved, setIsLoved] = useState(false);
-  const [readingProgress, setReadingProgress] = useState(0);
   const [isSharing, setIsSharing] = useState(false);
   const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState<{
@@ -66,9 +96,19 @@ export default function BlogDetailsPage({
   const [likesCount, setLikesCount] = useState(blog.likes || 0);
   const [lovesCount, setLovesCount] = useState(blog.loves || 0);
 
-  const { ref: heroRef, isVisible: heroVisible } = useScrollAnimation();
-  const { ref: contentRef, isVisible: contentVisible } = useScrollAnimation();
-  const { ref: relatedRef, isVisible: relatedVisible } = useScrollAnimation();
+  // Safe scroll animations
+  const { ref: heroRef, isVisible: heroVisible } = useSafeScrollAnimation();
+  const { ref: contentRef, isVisible: contentVisible } =
+    useSafeScrollAnimation();
+  const { ref: commentsRef, isVisible: commentsVisible } =
+    useSafeScrollAnimation();
+  const { ref: relatedRef, isVisible: relatedVisible } =
+    useSafeScrollAnimation();
+
+  // Remove useScrollAnimation temporarily to fix scroll issue
+  // const { ref: heroRef, isVisible: heroVisible } = useScrollAnimation();
+  // const { ref: contentRef, isVisible: contentVisible } = useScrollAnimation();
+  // const { ref: relatedRef, isVisible: relatedVisible } = useScrollAnimation();
 
   // Check if user has liked/loved this blog on component mount
   useEffect(() => {
@@ -114,22 +154,13 @@ export default function BlogDetailsPage({
   useEffect(() => {
     // Simply show all other blogs except the current one, maximum 3
     const otherBlogs = allBlogs.filter((b) => b._id !== blog._id).slice(0, 3);
-
     setRelatedBlogs(otherBlogs);
   }, [blog, allBlogs]);
 
+  // Immediate scroll reset without any delays
   useEffect(() => {
-    const handleScroll = () => {
-      const scrolled = window.scrollY;
-      const maxHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
-      const progress = (scrolled / maxHeight) * 100;
-      setReadingProgress(progress);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [blog._id]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -389,14 +420,6 @@ export default function BlogDetailsPage({
 
   return (
     <div className="min-h-screen relative">
-      {/* Reading Progress Bar */}
-      <div className="fixed top-0 left-0 w-full h-1 bg-gray-800 z-50">
-        <div
-          className="h-full bg-gradient-to-r from-sky-400 to-cyan-400 transition-all duration-300 reading-progress"
-          style={{ width: `${readingProgress}%` }}
-        />
-      </div>
-
       {/* Back Button */}
       <Button
         onClick={() => navigate("/")}
@@ -420,10 +443,12 @@ export default function BlogDetailsPage({
         )}
       </Button>
 
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Hero Section with animations */}
+      <section
+        ref={heroRef as any}
+        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      >
         <div
-          ref={heroRef as any}
           className={`container mx-auto px-4 py-20 relative z-10 transition-all duration-1000 ${
             heroVisible
               ? "opacity-100 translate-y-0"
@@ -488,7 +513,7 @@ export default function BlogDetailsPage({
         </div>
       </section>
 
-      {/* Content Section */}
+      {/* Content Section with animations */}
       <section className="pb-16 px-4 relative">
         <div
           ref={contentRef as any}
@@ -547,7 +572,6 @@ export default function BlogDetailsPage({
                     />
                     <span>{likesCount}</span>
                   </button>
-
                   <button
                     onClick={handleLove}
                     className={`flex items-center space-x-2 p-3 rounded-full transition-all duration-300 ${
@@ -587,9 +611,16 @@ export default function BlogDetailsPage({
         </div>
       </section>
 
-      {/* Comments Section */}
+      {/* Comments Section with animations */}
       <section className="py-16 px-4 relative">
-        <div className="container mx-auto max-w-4xl">
+        <div
+          ref={commentsRef as any}
+          className={`container mx-auto max-w-4xl transition-all duration-1000 delay-500 ${
+            commentsVisible
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-8"
+          }`}
+        >
           <div className="glass-card rounded-3xl p-8 md:p-12">
             <div className="flex items-center gap-3 mb-8">
               <MessageCircle className="h-6 w-6 text-sky-400" />
@@ -660,10 +691,15 @@ export default function BlogDetailsPage({
                   </p>
                 </div>
               ) : (
-                comments?.map((comment) => (
+                comments?.map((comment, index) => (
                   <div
                     key={comment._id}
-                    className="flex gap-4 p-4 bg-gray-800/30 rounded-xl"
+                    className={`flex gap-4 p-4 bg-gray-800/30 rounded-xl transition-all duration-500 ${
+                      commentsVisible
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-4"
+                    }`}
+                    style={{ transitionDelay: `${index * 100}ms` }}
                   >
                     <div className="w-12 h-12 bg-sky-500 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
                       {getInitials(comment.name)}
@@ -689,11 +725,11 @@ export default function BlogDetailsPage({
         </div>
       </section>
 
-      {/* Related Articles */}
+      {/* Related Articles with animations */}
       <section className="py-16 px-4 relative">
         <div
           ref={relatedRef as any}
-          className={`container mx-auto max-w-6xl transition-all duration-1000 delay-500 ${
+          className={`container mx-auto max-w-6xl transition-all duration-1000 delay-700 ${
             relatedVisible
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-8"
@@ -712,10 +748,12 @@ export default function BlogDetailsPage({
               {relatedBlogs?.map((relatedBlog, index) => (
                 <div
                   key={relatedBlog._id}
-                  className="group glass-card rounded-2xl overflow-hidden hover:glass-card-hover transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-sky-500/20 cursor-pointer"
-                  style={{
-                    transitionDelay: `${index * 100}ms`,
-                  }}
+                  className={`group glass-card rounded-2xl overflow-hidden hover:glass-card-hover transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-sky-500/20 cursor-pointer ${
+                    relatedVisible
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-8"
+                  }`}
+                  style={{ transitionDelay: `${(index + 1) * 200}ms` }}
                   onClick={() => navigate(`/blog/${relatedBlog._id}`)}
                 >
                   <div className="relative h-48 overflow-hidden">
