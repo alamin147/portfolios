@@ -152,7 +152,7 @@ const ProjectDetails = () => {
                   <div className="group overflow-hidden rounded-xl shadow-lg shadow-cyan-800/20 border border-cyan-500/10 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-700/30 backdrop-blur-sm">
                     <img
                       src={project?.imgUrl1}
-                      width={400}
+                      width={300}
                       height={300}
                       alt="Project Image 1"
                       className="aspect-[4/3] w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
