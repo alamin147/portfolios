@@ -44,6 +44,13 @@ interface BlogDetailsPageProps {
   allBlogs: BlogPost[];
 }
 
+type Comment = {
+  _id: string;
+  name: string;
+  comment: string;
+  createdAt: string;
+};
+
 export default function BlogDetailsPage({
   blog,
   allBlogs,
@@ -53,10 +60,49 @@ export default function BlogDetailsPage({
   const [isLiked, setIsLiked] = useState(false);
   const [readingProgress, setReadingProgress] = useState(0);
   const [isSharing, setIsSharing] = useState(false);
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [newComment, setNewComment] = useState<{
+    name: string;
+    comment: string;
+  }>({ name: "", comment: "" });
+  const [isLoadingComments, setIsLoadingComments] = useState(false);
+  const [isPostingComment, setIsPostingComment] = useState(false);
 
   const { ref: heroRef, isVisible: heroVisible } = useScrollAnimation();
   const { ref: contentRef, isVisible: contentVisible } = useScrollAnimation();
   const { ref: relatedRef, isVisible: relatedVisible } = useScrollAnimation();
+
+  // Fetch comments when component mounts
+  useEffect(() => {
+    const fetchComments = async () => {
+      setIsLoadingComments(true);
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_SERVER_URL}/blog/comments/${blog._id}`
+        );
+        if (response.ok) {
+          const result = await response.json();
+          setComments(result.comments || []);
+        }
+      } catch (error) {
+        console.error("Error fetching comments:", error);
+        toast.error("Failed to load comments", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      } finally {
+        setIsLoadingComments(false);
+      }
+    };
+
+    if (blog._id) {
+      fetchComments();
+    }
+  }, [blog._id]);
 
   useEffect(() => {
     // Simply show all other blogs except the current one, maximum 3
@@ -167,6 +213,79 @@ export default function BlogDetailsPage({
         className: "custom-toast",
       });
     }
+  };
+
+  const handleAddComment = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newComment.comment.trim()) return;
+
+    setIsPostingComment(true);
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_SERVER_URL}/blog/comments/${blog._id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: newComment.name.trim() || "Anonymous",
+            comment: newComment.comment.trim(),
+          }),
+        }
+      );
+
+      if (response.ok) {
+        const result = await response.json();
+        setComments([result.comment, ...comments]);
+        setNewComment({ name: "", comment: "" });
+
+        toast.success("Comment added successfully!", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      } else {
+        throw new Error("Failed to post comment");
+      }
+    } catch (error) {
+      console.error("Error posting comment:", error);
+      toast.error("Failed to post comment. Please try again.", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    } finally {
+      setIsPostingComment(false);
+    }
+  };
+
+  const getInitials = (name: string) => {
+    const names = name.split(" ");
+    if (names.length === 1) return names[0].charAt(0).toUpperCase();
+    return `${names[0].charAt(0).toUpperCase()}${names[1]
+      .charAt(0)
+      .toUpperCase()}`;
+  };
+
+  const formatCommentTime = (createdAt: string) => {
+    const date = new Date(createdAt);
+    const now = new Date();
+    const diffTime = Math.abs(now.getTime() - date.getTime());
+    const diffMinutes = Math.floor(diffTime / (1000 * 60));
+    const diffHours = Math.floor(diffTime / (1000 * 60 * 60));
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffMinutes < 1) return "Just now";
+    if (diffMinutes < 60) return `${diffMinutes}m ago`;
+    if (diffHours < 24) return `${diffHours}h ago`;
+    return `${diffDays}d ago`;
   };
 
   return (
@@ -296,11 +415,11 @@ export default function BlogDetailsPage({
             </div>
 
             {/* Tags */}
-            {blog.tags && blog.tags.length > 0 && (
+            {blog?.tags && blog?.tags?.length > 0 && (
               <div className="mt-12 pt-8 border-t border-sky-500/20">
                 <h3 className="text-white text-lg font-semibold mb-4">Tags</h3>
                 <div className="flex flex-wrap gap-2">
-                  {blog.tags.map((tag, index) => (
+                  {blog?.tags?.map((tag, index) => (
                     <span
                       key={index}
                       className="glass-button text-sky-300 px-3 py-1 rounded-full text-sm"
@@ -332,7 +451,7 @@ export default function BlogDetailsPage({
 
                   <div className="flex items-center space-x-2 glass-button p-3 rounded-full text-gray-300">
                     <MessageCircle className="h-5 w-5" />
-                    <span>{blog.comments || 0}</span>
+                    <span>{comments?.length || 0}</span>
                   </div>
 
                   <div className="flex items-center space-x-2 glass-button p-3 rounded-full text-gray-300">
@@ -360,6 +479,108 @@ export default function BlogDetailsPage({
         </div>
       </section>
 
+      {/* Comments Section */}
+      <section className="py-16 px-4 relative">
+        <div className="container mx-auto max-w-4xl">
+          <div className="glass-card rounded-3xl p-8 md:p-12">
+            <div className="flex items-center gap-3 mb-8">
+              <MessageCircle className="h-6 w-6 text-sky-400" />
+              <h2 className="text-2xl font-bold text-white">Comments</h2>
+            </div>
+
+            {/* Add Comment Form */}
+            <form onSubmit={handleAddComment} className="mb-12">
+              <div className="space-y-4">
+                <input
+                  type="text"
+                  placeholder="Enter your name (optional)"
+                  value={newComment.name}
+                  onChange={(e) =>
+                    setNewComment({ ...newComment, name: e.target.value })
+                  }
+                  className="w-full max-w-xs px-4 py-2.5 rounded-lg bg-gray-800/50 border border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:border-sky-400 transition-colors"
+                  disabled={isPostingComment}
+                />
+                <div className="flex gap-3">
+                  <textarea
+                    placeholder="Share your thoughts..."
+                    value={newComment.comment}
+                    onChange={(e) =>
+                      setNewComment({ ...newComment, comment: e.target.value })
+                    }
+                    className="flex-1 px-4 py-3 rounded-lg bg-gray-800/50 border border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:border-sky-400 transition-colors resize-none"
+                    rows={3}
+                    required
+                    disabled={isPostingComment}
+                  />
+                  <button
+                    type="submit"
+                    disabled={isPostingComment || !newComment.comment.trim()}
+                    className={`px-6 py-3 bg-sky-500 hover:bg-sky-600 text-white rounded-lg transition-colors font-medium self-start ${
+                      isPostingComment || !newComment.comment.trim()
+                        ? "opacity-50 cursor-not-allowed"
+                        : ""
+                    }`}
+                  >
+                    {isPostingComment ? (
+                      <div className="flex items-center gap-2">
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                        Posting...
+                      </div>
+                    ) : (
+                      "Post"
+                    )}
+                  </button>
+                </div>
+              </div>
+            </form>
+
+            {/* Comments List */}
+            <div className="space-y-6">
+              {isLoadingComments ? (
+                <div className="text-center py-12">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-sky-400 mx-auto mb-4"></div>
+                  <p className="text-gray-400">Loading comments...</p>
+                </div>
+              ) : comments.length === 0 ? (
+                <div className="text-center py-12">
+                  <div className="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <MessageCircle className="h-8 w-8 text-gray-500" />
+                  </div>
+                  <p className="text-gray-400">
+                    No comments yet. Be the first to share your thoughts!
+                  </p>
+                </div>
+              ) : (
+                comments?.map((comment) => (
+                  <div
+                    key={comment._id}
+                    className="flex gap-4 p-4 bg-gray-800/30 rounded-xl"
+                  >
+                    <div className="w-12 h-12 bg-sky-500 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                      {getInitials(comment.name)}
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <h4 className="text-white font-semibold">
+                          {comment.name}
+                        </h4>
+                        <span className="text-gray-400 text-sm">
+                          {formatCommentTime(comment.createdAt)}
+                        </span>
+                      </div>
+                      <p className="text-gray-300 leading-relaxed">
+                        {comment.comment}
+                      </p>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Related Articles */}
       <section className="py-16 px-4 relative">
         <div
@@ -380,7 +601,7 @@ export default function BlogDetailsPage({
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {relatedBlogs.map((relatedBlog, index) => (
+              {relatedBlogs?.map((relatedBlog, index) => (
                 <div
                   key={relatedBlog._id}
                   className="group glass-card rounded-2xl overflow-hidden hover:glass-card-hover transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-sky-500/20 cursor-pointer"
