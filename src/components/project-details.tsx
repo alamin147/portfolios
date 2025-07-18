@@ -16,9 +16,8 @@ export type InputFields = {
   imgUrl3: string;
   live: string;
   github: string;
-  tech1: string;
-  tech2: string;
-  tech3: string;
+  tech: string[];
+    no: number;
 };
 const ProjectDetails = () => {
   const { id } = useParams();
@@ -124,21 +123,14 @@ const ProjectDetails = () => {
                     Technologies Used
                   </h2>
                   <div className="flex flex-wrap gap-3">
-                    {project?.tech1 && (
-                      <span className="px-4 py-2 bg-cyan-900/40 text-cyan-200 border border-cyan-400/20 backdrop-blur-md rounded-full text-sm font-medium shadow-sm">
-                        {project.tech1}
+                    {project?.tech?.map((technology, index) => (
+                      <span
+                        key={index}
+                        className="px-4 py-2 bg-cyan-900/40 text-cyan-200 border border-cyan-400/20 backdrop-blur-md rounded-full text-sm font-medium shadow-sm"
+                      >
+                        {technology}
                       </span>
-                    )}
-                    {project?.tech2 && (
-                      <span className="px-4 py-2 bg-cyan-900/40 text-cyan-200 border border-cyan-400/20 backdrop-blur-md rounded-full text-sm font-medium shadow-sm">
-                        {project.tech2}
-                      </span>
-                    )}
-                    {project?.tech3 && (
-                      <span className="px-4 py-2 bg-cyan-900/40 text-cyan-200 border border-cyan-400/20 backdrop-blur-md rounded-full text-sm font-medium shadow-sm">
-                        {project.tech3}
-                      </span>
-                    )}
+                    ))}
                   </div>
                 </div>
               </div>

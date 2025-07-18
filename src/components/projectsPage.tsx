@@ -11,15 +11,14 @@ type Project = {
   title: string;
   des: string;
   shortDes: string;
-  tech1: string;
-  tech2: string;
-  tech3: string;
   live: string;
   imgUrl: string;
   imgUrl1: string;
   imgUrl2: string;
   imgUrl3: string;
   github: string;
+  tech: string[];
+    no: number;
 };
 
 export default function ProjectsPage() {
@@ -42,7 +41,9 @@ export default function ProjectsPage() {
     })
       .then((res) => res.json())
       .then((result) => {
-        setProjects(result);
+        // Sort projects by 'no' field in ascending order
+        const sortedProjects = result.sort((a: Project, b: Project) => a.no - b.no);
+        setProjects(sortedProjects);
         setLoading(false);
       })
       .catch((error) => {
@@ -212,21 +213,14 @@ export default function ProjectsPage() {
 
                       {/* Technologies */}
                       <div className="flex flex-wrap gap-2">
-                        {project.tech1 && (
-                          <span className="px-3 py-1 text-xs glass-button text-sky-300 rounded-full hover:scale-105 transition-all duration-300">
-                            {project.tech1}
+                        {project.tech.slice(0, 3).map((technology, techIndex) => (
+                          <span
+                            key={techIndex}
+                            className="px-3 py-1 text-xs glass-button text-sky-300 rounded-full hover:scale-105 transition-all duration-300"
+                          >
+                            {technology}
                           </span>
-                        )}
-                        {project.tech2 && (
-                          <span className="px-3 py-1 text-xs glass-button text-sky-300 rounded-full hover:scale-105 transition-all duration-300">
-                            {project.tech2}
-                          </span>
-                        )}
-                        {project.tech3 && (
-                          <span className="px-3 py-1 text-xs glass-button text-sky-300 rounded-full hover:scale-105 transition-all duration-300">
-                            {project.tech3}
-                          </span>
-                        )}
+                        ))}
                       </div>
                     </div>
                   </div>

@@ -185,7 +185,9 @@ export default function Projects() {
     })
       .then((res) => res.json())
       .then((result) => {
-        setProject(result);
+        // Sort by 'no' field and take only first 6 projects
+        const sortedProjects = result.sort((a: Project, b: Project) => a.no - b.no).slice(0, 6);
+        setProject(sortedProjects);
         setLoading(false);
       })
       .catch((error) => {
@@ -199,15 +201,14 @@ export default function Projects() {
     title: string;
     des: string;
     shortDes: string;
-    tech1: string;
-    tech2: string;
-    tech3: string;
+    tech:[string];
     live: string;
     imgUrl: string;
     imgUrl1: string;
     imgUrl2: string;
     imgUrl3: string;
     github: string;
+    no:number;
   };
 
   return (
@@ -318,21 +319,14 @@ export default function Projects() {
                     {project.shortDes}
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    {project.tech1 && (
-                      <span className="px-3 py-1 text-xs glass-button text-sky-300 rounded-full hover:scale-105 transition-all duration-300">
-                        {project.tech1}
+                    {project.tech.slice(0, 3).map((technology, techIndex) => (
+                      <span
+                        key={techIndex}
+                        className="px-3 py-1 text-xs glass-button text-sky-300 rounded-full hover:scale-105 transition-all duration-300"
+                      >
+                        {technology}
                       </span>
-                    )}
-                    {project.tech2 && (
-                      <span className="px-3 py-1 text-xs glass-button text-sky-300 rounded-full hover:scale-105 transition-all duration-300">
-                        {project.tech2}
-                      </span>
-                    )}
-                    {project.tech3 && (
-                      <span className="px-3 py-1 text-xs glass-button text-sky-300 rounded-full hover:scale-105 transition-all duration-300">
-                        {project.tech3}
-                      </span>
-                    )}
+                    ))}
                   </div>
                 </div>
               </div>
