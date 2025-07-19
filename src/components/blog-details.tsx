@@ -533,8 +533,7 @@ export default function BlogDetailsPage({
 
             {/* Main Content */}
             <div className="prose prose-lg prose-invert max-w-none blog-content">
-              <div className="text-gray-300 leading-relaxed whitespace-pre-line text-lg">
-                {blog.des}
+              <div className="text-gray-300 leading-relaxed whitespace-pre-line text-lg" dangerouslySetInnerHTML={{ __html: blog.des }}>
               </div>
             </div>
 
