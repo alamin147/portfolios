@@ -691,12 +691,12 @@ export default function BlogDetailsPage({
             {/* Comments List */}
             <div className="space-y-6">
               {isLoadingComments ? (
-                <div className="text-center py-12">
+                <div className="text-center py-2">
                   <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-sky-400 mx-auto mb-4"></div>
                   <p className="text-gray-400">Loading comments...</p>
                 </div>
               ) : comments.length === 0 ? (
-                <div className="text-center py-12">
+                <div className="text-center py-2">
                   <div className="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
                     <MessageCircle className="h-8 w-8 text-gray-500" />
                   </div>
