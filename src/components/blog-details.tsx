@@ -532,9 +532,24 @@ export default function BlogDetailsPage({
             </div>
 
             {/* Main Content */}
-            <div className="prose prose-lg prose-invert max-w-none blog-content">
-              <div className="text-gray-300 leading-relaxed whitespace-pre-line text-lg" dangerouslySetInnerHTML={{ __html: blog.des }}>
-              </div>
+            <div className="prose prose-lg prose-invert max-w-none">
+              <div
+                className="quill-content [&>h1]:text-3xl [&>h1]:font-bold [&>h1]:text-white [&>h1]:mb-6 [&>h1]:mt-8
+               [&>h2]:text-2xl [&>h2]:font-bold [&>h2]:text-white [&>h2]:mb-4 [&>h2]:mt-6
+               [&>h3]:text-xl [&>h3]:font-semibold [&>h3]:text-white [&>h3]:mb-3 [&>h3]:mt-5
+               [&>p]:text-gray-300 [&>p]:mb-4 [&>p]:leading-relaxed
+               [&>ul]:list-disc [&>ul]:list-inside [&>ul]:mb-4 [&>ul]:text-gray-300 [&>ul]:space-y-2
+               [&>ol]:list-decimal [&>ol]:list-inside [&>ol]:mb-4 [&>ol]:text-gray-300 [&>ol]:space-y-2
+               [&>li]:text-gray-300 [&>li]:leading-relaxed
+               [&>blockquote]:border-l-4 [&>blockquote]:border-sky-500 [&>blockquote]:pl-4 [&>blockquote]:py-2 [&>blockquote]:mb-4 [&>blockquote]:bg-gray-800/30 [&>blockquote]:rounded-r-lg [&>blockquote]:italic [&>blockquote]:text-gray-300
+               [&>pre]:bg-gray-900 [&>pre]:rounded-lg [&>pre]:p-4 [&>pre]:mb-4 [&>pre]:overflow-x-auto [&>pre]:text-gray-300
+               [&_code]:bg-gray-800 [&_code]:text-sky-300 [&_code]:px-2 [&_code]:py-1 [&_code]:rounded [&_code]:text-sm [&_code]:font-mono
+               [&>pre>code]:bg-transparent [&>pre>code]:text-gray-200 [&>pre>code]:px-0 [&>pre>code]:py-0 [&>pre>code]:rounded-none
+               [&>strong]:font-bold [&>strong]:text-white
+               [&>em]:italic [&>em]:text-gray-300
+               [&_a]:text-sky-400 [&_a]:hover:text-sky-300 [&_a]:underline"
+                dangerouslySetInnerHTML={{ __html: blog.des }}
+              />
             </div>
 
             {/* Tags */}
