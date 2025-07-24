@@ -15,6 +15,7 @@ type BlogPost = {
   time: string;
   shortDes: string;
   featured?: boolean;
+  no: number;
 };
 
 export default function Blog() {
@@ -169,12 +170,14 @@ export default function Blog() {
         >
           {allBlog
             ?.filter((blog) => !blog.featured)
+            .sort((a, b) => a.no - b.no)
+            .slice(0, 3)
             .map((blog) => (
               <div
                 key={blog._id}
-                className="group glass-card rounded-2xl overflow-hidden hover:glass-card-hover transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-sky-500/20 cursor-pointer"
+                className="group glass-card rounded-2xl overflow-hidden hover:glass-card-hover transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-sky-500/20 cursor-pointer flex flex-col"
                 style={{
-                  transitionDelay: gridVisible ? `${100}ms` : "0ms",
+                  transitionDelay: gridVisible ? `${1 * 100}ms` : "0ms",
                 }}
                 onClick={() => {
                   if (blog._id) {
@@ -196,15 +199,15 @@ export default function Blog() {
                   </div>
                 </div>
 
-                <div className="p-6">
+                <div className="p-6 flex flex-col flex-1">
                   <h3 className="text-xl font-bold text-white mb-3 group-hover:text-sky-300 transition-colors duration-300 line-clamp-2">
                     {blog.title}
                   </h3>
-                  <p className="text-gray-300 text-sm mb-4 line-clamp-3">
-                    {blog.shortDes}
+                  <p className="text-gray-300 text-sm mb-4 line-clamp-3 flex-1">
+                    {blog.shortDes.length > 145 ? `${blog.shortDes.slice(0, 145)}...` : blog.shortDes}
                   </p>
 
-                  <div className="flex items-center justify-between text-sm text-gray-400">
+                  <div className="flex items-center justify-between text-sm text-gray-400 mt-auto">
                     <div className="flex items-center">
                       <Clock className="h-4 w-4 mr-1" />
                       <span>{getTimeAgo(blog.time)}</span>
@@ -218,6 +221,19 @@ export default function Blog() {
               </div>
             ))}
         </div>
+
+        {/* View All Blogs Button */}
+        {allBlog?.filter((blog) => !blog.featured).sort((a, b) => a.no - b.no).length > 3 && (
+          <div className="text-center mt-12">
+             <Button
+              onClick={() => navigate("/blogs")}
+            className="cursor-pointer gap-2 px-8 py-6 rounded-full text-white text-lg font-semibold bg-cyan-500/20 border border-white/10 backdrop-blur-xl shadow-[0_4px_16px_rgba(8,145,178,0.25)] transition-all duration-300 hover:bg-cyan-500/30 hover:shadow-[0_10px_25px_rgba(8,145,178,0.4)] hover:scale-105"
+          >
+             View All Blogs
+              <ArrowRight className="ml-2 h-5 w-5" />
+          </Button>
+          </div>
+        )}
       </div>
     </section>
   );
