@@ -293,7 +293,7 @@ export default function Projects() {
                     >
                       <Button
                         size="sm"
-                        className="cursor-pointer glass-button text-white hover:scale-105 rounded-full transition-all duration-300"
+                        className="cursor-pointer glass-button text-white hover:scale-105 rounded-full transition-all duration-300 bg:cyan-500/20 border border-white/10 backdrop-blur-xl shadow-[0_4px_16px_rgba(8,145,178,0.25)] hover:bg-cyan-500/30 hover:shadow-[0_10px_25px_rgba(8,145,178,0.4)]"
                       >
                         <ExternalLink className="h-4 w-4 mr-2" />
                         Live Demo
