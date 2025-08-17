@@ -127,7 +127,7 @@ export default function Skills() {
           }`}
         >
           <SectionTitle
-            title="Skils"
+            title="Skills"
             desc="Tools, technologies, and languages I've mastered and currently work with."
           />
         </div>

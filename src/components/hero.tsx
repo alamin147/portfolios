@@ -150,8 +150,8 @@ export default function Hero() {
         >
           {[
             { number: "20+", label: "Projects Completed" },
-            { number: "2+", label: "Years Experience" },
-            { number: "950+", label: "Problems Solved" },
+            { number: "2.5+", label: "Years Experience" },
+            { number: "1000+", label: "Problems Solved" },
             { number: "10+", label: "Technologies" },
           ].map((stat, index) => (
             <div
