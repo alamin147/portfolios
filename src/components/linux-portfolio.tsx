@@ -24,9 +24,11 @@ export default function LinuxPortfolio() {
     "root@alamin:~# ls -la /skills",
     "drwxr-xr-x  2 root root 4096 Aug 31 2025 .",
     "drwxr-x--- 15 root root 4096 Aug 31 2025 ..",
-    "-rwxr-xr-x  1 root root  666 Aug 31 2025 pentesting",
+    "-rwxr-xr-x  1 root root  666 Aug 31 2025 Linux Command Line",
+    "-rwxr-xr-x  1 root root  6636 Aug 31 2025 Shell Scripting",
+    "-rwxr-xr-x  1 root root  2336 Aug 31 2025 Git-Github",
     "-rwxr-xr-x  1 root root  777 Aug 31 2025 system_admin",
-    "-rwxr-xr-x  1 root root  888 Aug 31 2025 automation",
+    "-rwxr-xr-x  1 root root  888 Aug 31 2025 System Configuration/Customization",
     "root@alamin:~# cat /etc/passwd | grep hacker",
     "hacker:x:1337:1337:Elite Hacker:/home/hacker:/bin/bash",
     "root@alamin:~# echo 'Welcome to the terminal...'",
@@ -67,7 +69,7 @@ export default function LinuxPortfolio() {
 
     switch (trimmedCommand) {
       case "ls":
-        response = "achievements.txt  blog/  projects/  skills.sh  about.md  contact.sh";
+        response = "about.sh  image.sh  contact.sh  skills.sh   blog/  projects/ ";
         break;
       case "whoami":
         response = "Al Amin - Linux Enthusiast & Code Assassin\nUID: 1337\nSpecialty: Fullstack Engineer";
@@ -76,60 +78,62 @@ export default function LinuxPortfolio() {
       case "./skills.sh":
         response = `#!/bin/bash
 echo "=== Technical Arsenal ==="
-echo "• Neovim Configuration: Expert"
-echo "• Shell Scripting: Advanced"
-echo "• Web Scraping: Advanced"
 echo "• Linux Command Line: Expert"
+echo "• Git & Version Control: Advanced";
+echo "• Shell Scripting: Advanced"
+echo "• Neovim Configuration: Expert"
 echo "• Python Automation: Intermediate"
-echo "• Git & Version Control: Advanced"
-echo "=== System Administration ==="
-echo "• Server Management"
-echo "• Network Configuration"
-echo "• Security Hardening"`;
+echo "• Web Scraping: Advanced"`
         break;
       case "about":
-      case "cat about.md":
-        response = `# Al Amin - System Administrator
+        case "about.sh":
+        case "./about.sh":
+        response = `# Al Amin
 
 A passionate Linux enthusiast who thrives in the command line environment.
-Specializing in system administration, automation, and security research.
+Specializing in system administration, automation.
+echo "=== Contact Information ==="
+echo "Name: Al Amin"
+echo "Email: alamin.14780@gmail.com"
+echo "Phone: (+880) 1322332323"
+echo "Location: Dhaka, Bangladesh"
 
 ## Current Focus:
 - Advanced Linux system administration
-- Security research and penetration testing
 - Automation and scripting
 - Open source contributions`;
         break;
       case "projects":
       case "ls projects/":
-        response = `network-scanner/     system-hardening/    log-analysis/
-container-security/  ghost-shell/         neural-ids/
-crypto-vault/       automation-scripts/   monitoring-tools/`;
+        response = `- visual-file-management-system`;
         break;
       case "ls blog/":
       case "blog":
-        response = `digital-forensics.md    zero-day-hunting.md
-kernel-exploitation.md  backdoor-analysis.md`;
+        response = `No blog articles available at the moment.`;
         break;
       case "help":
         response = `Available commands:
 ls              - List directory contents
 whoami          - Display user information
 skills.sh       - Show technical skills
-about           - Display about information
+about.sh        - Display about information
 projects        - List project directories
 blog            - List blog articles
-contact.sh      - Open secure communication
+contact.sh      - Open secure communication (Email)
 image.sh        - Display user profile image
-history         - Show command history
 clear           - Clear terminal screen
 date            - Show current date
 uptime          - Show system uptime
 ps              - Show running processes
 help            - Show this help message`;
         break;
-      case "history":
-        response = commandHistory.map((cmd, i) => `${i + 1}  ${cmd}`).join("\n");
+      case "contact.sh":
+      case "./contact.sh":
+      case "contact":
+        response = `#!/bin/bash
+
+echo "Opening secure communication channel..."`
+        setTimeout(() => setIsContactModalOpen(true), 1000);
         break;
       case "date":
         response = new Date().toString();
@@ -150,7 +154,7 @@ Users logged in: 1 (alamin)`;
       case "./image.sh":
         response = `#!/bin/bash
 echo "Loading user profile image..."
-echo ""
+
 
 
 
@@ -201,7 +205,6 @@ echo ""
 **--===+=+*+===++++++++++*+++++++++++*+=++*#%#*+    +=+@@@@@@#*=+%*@@%%@
 ==+++====-+=----=++++++++++++++++++*@%%%%%%%%%*=    @%@@@@@@@@@@@@@@@%#
 
-echo ""
 echo "Profile loaded successfully - Al Amin"
 echo "Image format: ASCII Art"`;
         break;
@@ -316,34 +319,34 @@ Try 'help' to see available commands`;
                   </div>
                   <span className="ml-4 text-gray-400">Terminal - alamin</span>
                 </div>
-                {isIntroComplete && (
-                  <div className="text-xs text-gray-500 font-mono">
-                    Type 'help' for commands
-                  </div>
-                )}
               </div>
               <div ref={terminalRef} className="p-4 h-80 overflow-y-auto cursor-text" onClick={() => inputRef.current?.focus()}>
                 <pre className="text-green-400 text-sm whitespace-pre-wrap font-mono leading-relaxed">
                   {terminalText}
                   {isIntroComplete && (
-                    <div className="inline-flex items-center">
+                    <span className="inline-flex items-center">
                       <input
                         ref={inputRef}
                         type="text"
                         value={currentCommand}
                         onChange={(e) => setCurrentCommand(e.target.value)}
                         onKeyDown={handleKeyPress}
-                        className="bg-transparent border-none outline-none text-green-400 font-mono text-sm caret-green-400"
-                        style={{ width: `${Math.max(currentCommand.length + 1, 2)}ch` }}
+                        className="bg-transparent border-none outline-none text-green-400 font-mono text-sm caret-transparent p-0 m-0"
+                        style={{ width: `${Math.max(currentCommand.length, 0)}ch` }}
                         autoFocus
                         spellCheck={false}
                       />
                       <span className="animate-pulse text-green-400">█</span>
-                    </div>
+                    </span>
                   )}
                   {!isIntroComplete && <span className="animate-pulse">█</span>}
                 </pre>
               </div>
+              {isIntroComplete && (
+                <div className="px-4 py-2 bg-gray-900 border-t border-gray-700 text-xs text-gray-400 font-mono">
+                  💡 Tip: Type 'ls' or 'help' to explore the terminal
+                </div>
+              )}
             </div>
           </div>
         </section>
