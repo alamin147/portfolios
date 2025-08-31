@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Terminal, Code, BookOpen, Star } from "lucide-react";
 import { DiLinux } from "react-icons/di";
+import { motion } from "framer-motion";
 import LinuxNavbar from "./linux-navbar";
 import LinuxContactModal from "./linux-contact-modal";
 import BlogDetailsModal from "./blog-details-modal";
@@ -21,6 +22,8 @@ export default function LinuxPortfolio() {
   const [isIntroComplete, setIsIntroComplete] = useState(false);
   const [currentCommand, setCurrentCommand] = useState("");
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
+  const [showCat, setShowCat] = useState(false);
+  const [catAnimationPhase, setCatAnimationPhase] = useState("walking"); // "walking" or "sitting"
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
 
@@ -49,11 +52,13 @@ export default function LinuxPortfolio() {
       } else if (!isIntroComplete) {
         setIsIntroComplete(true);
         setTerminalText(prev => prev + "root@alamin:~# ");
+        // Show cat after terminal intro is complete
+        setTimeout(() => setShowCat(true), 2000);
       }
     }, 500);
 
     return () => clearInterval(timer);
-  }, [currentIndex, isIntroComplete]);
+  }, [currentIndex, isIntroComplete, showCat]);
 
   // Focus input when intro is complete
   useEffect(() => {
@@ -388,6 +393,49 @@ Try 'help' to see available commands`;
             </div>
           </div>
         </section>
+
+        {/* Cat Animation */}
+        {showCat && (
+          <div className="fixed bottom-20 left-0 z-20 pointer-events-none">
+            <motion.div
+              initial={{ x: -200, opacity: 0 }}
+              animate={{
+                x: catAnimationPhase === "walking" ? window.innerWidth * 0.4 : window.innerWidth * 0.4,
+                opacity: 1
+              }}
+              transition={{
+                duration: catAnimationPhase === "walking" ? 4 : 0.5,
+                ease: "easeInOut"
+              }}
+              onAnimationComplete={() => {
+                if (catAnimationPhase === "walking") {
+                  setCatAnimationPhase("sitting");
+                }
+              }}
+              className="relative"
+            >
+              <img
+                src="/cat-walking.gif"
+                alt="Walking cat"
+                className="w-20 h-16 object-contain"
+                style={{
+                  filter: "sepia(1) hue-rotate(90deg) saturate(2) brightness(1.2)",
+                  transform: catAnimationPhase === "sitting" ? "scaleX(-1)" : "none"
+                }}
+              />
+              {catAnimationPhase === "sitting" && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                  className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-900 border border-green-400 rounded px-2 py-1 text-xs text-green-400 whitespace-nowrap"
+                >
+                  sudo cat enjoys the terminal
+                </motion.div>
+              )}
+            </motion.div>
+          </div>
+        )}
 
         {/* Skills Section */}
         <section className="container mx-auto px-6 py-20">
