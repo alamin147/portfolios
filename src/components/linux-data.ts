@@ -70,29 +70,11 @@ export const showcaseProjects = [
 
 export const hackingProjects = [
   {
-    title: "Network Scanner Pro",
+    title: "Visual File System Explorer",
     description:
-      "Advanced network reconnaissance tool with stealth capabilities",
-    tech: ["Python", "Nmap", "Scapy"],
-    status: "Active",
-  },
-  {
-    title: "System Hardening Suite",
-    description: "Automated Linux system security hardening framework",
-    tech: ["Bash", "Ansible", "Security"],
-    status: "Deployed",
-  },
-  {
-    title: "Log Analysis Engine",
-    description: "Real-time log monitoring and threat detection system",
-    tech: ["Python", "ELK Stack", "ML"],
-    status: "Monitoring",
-  },
-  {
-    title: "Container Security Audit",
-    description: "Docker and Kubernetes security assessment toolkit",
-    tech: ["Docker", "K8s", "Security"],
-    status: "Scanning",
+      "Modern project management and file system visualization tool with drag-and-drop canvas interface. Features real-time collaboration, MongoDB persistence, and integrated Monaco code editor.",
+    tech: ["React", "Node.js", "MongoDB", "TypeScript", "React Flow"],
+    status: "Production",
   },
 ];
 
