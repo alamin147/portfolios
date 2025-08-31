@@ -1,2 +1,5 @@
-router dom, redux, hook form
-blog page, project page
+(self)achivement,
+blog,
+projects
+showoff/showcase
+curr activity

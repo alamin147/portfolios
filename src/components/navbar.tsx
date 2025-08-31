@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { DiLinux } from "react-icons/di";
+import { Link } from "react-router-dom";
 import CommonTooltip from "./common-tooltip";
 
 export default function Navbar() {
@@ -26,7 +27,7 @@ export default function Navbar() {
     { name: "Contact", href: "/#contact" },
     {
       name: DiLinux,
-      href: "/#contact",
+      href: "/linux",
       isIcon: true,
       tooltip: "Travel to my other side",
     },
@@ -56,7 +57,19 @@ export default function Navbar() {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
               {navItems.map((item: any) => {
-                const linkElement = (
+                const linkElement = item.href === "/linux" ? (
+                  <Link
+                    key={item.name.toString()}
+                    to={item.href}
+                    className="text-white hover:text-sky-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300"
+                  >
+                    {item.isIcon ? (
+                      <item.name className="h-6 w-6 inline mb-1" />
+                    ) : (
+                      item.name
+                    )}
+                  </Link>
+                ) : (
                   <a
                     key={item.name.toString()}
                     href={item.href}
@@ -103,16 +116,41 @@ export default function Navbar() {
         {isOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 glass-card rounded-lg mt-2">
-              {navItems.map((item: any) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="text-white hover:text-sky-400 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item.name}
-                </a>
-              ))}
+              {navItems.map((item: any) =>
+                item.href === "/linux" ? (
+                  <Link
+                    key={item.name.toString()}
+                    to={item.href}
+                    className="text-white hover:text-sky-400 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item.isIcon ? (
+                      <span className="flex items-center">
+                        <item.name className="h-5 w-5 mr-2" />
+                        Linux Portfolio
+                      </span>
+                    ) : (
+                      item.name
+                    )}
+                  </Link>
+                ) : (
+                  <a
+                    key={item.name.toString()}
+                    href={item.href}
+                    className="text-white hover:text-sky-400 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item.isIcon ? (
+                      <span className="flex items-center">
+                        <item.name className="h-5 w-5 mr-2" />
+                        Linux Portfolio
+                      </span>
+                    ) : (
+                      item.name
+                    )}
+                  </a>
+                )
+              )}
             </div>
           </div>
         )}

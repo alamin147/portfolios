@@ -8,6 +8,7 @@ import Education from "@/components/education";
 import Contact from "@/components/contact";
 import { FloatingElements } from "@/components/floating-elements";
 import Navbar from "@/components/navbar";
+import LinuxPortfolio from "@/components/linux-portfolio";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProjectsPage from "./components/projectsPage";
 import ProjectDetailsPage from "./components/project-details";
@@ -91,6 +92,10 @@ function App() {
                     <Footer />
                   </>
                 }
+              />
+              <Route
+                path="/linux"
+                element={<LinuxPortfolio />}
               />
             </Routes>
           </Router>
