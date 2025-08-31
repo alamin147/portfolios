@@ -280,7 +280,6 @@ export default function LinuxPortfolio() {
                   <skill.icon className="text-3xl text-red-400 mr-3 group-hover:text-green-400 transition-colors" />
                   <h3 className="text-xl font-bold text-white">{skill.name}</h3>
                 </div>
-
                 <div className="flex items-center justify-between">
                   <span className={`px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider ${
                     skill.status === "Expert" ? "bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg shadow-red-500/25" :
