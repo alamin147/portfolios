@@ -78,6 +78,7 @@ export default function LinuxPortfolio() {
         response = "Al Amin - Linux Enthusiast & Code Assassin\nUID: 1337\nSpecialty: Fullstack Engineer";
         break;
       case "skills.sh":
+      case "skills":
       case "./skills.sh":
         response = `#!/bin/bash
 echo "=== Technical Arsenal ==="
@@ -118,12 +119,12 @@ echo "Location: Dhaka, Bangladesh"
         response = `Available commands:
 ls              - List directory contents
 whoami          - Display user information
-skills.sh       - Show technical skills
+image.sh        - Display user profile image
 about.sh        - Display about information
+skills.sh       - Show technical skills
+contact.sh      - Open secure communication (Email)
 projects        - List project directories
 blog            - List blog articles
-contact.sh      - Open secure communication (Email)
-image.sh        - Display user profile image
 clear           - Clear terminal screen
 date            - Show current date
 uptime          - Show system uptime
@@ -155,6 +156,7 @@ Users logged in: 1 (alamin)`;
         break;
       case "image.sh":
       case "./image.sh":
+      case "image":
         response = `#!/bin/bash
 echo "Loading user profile image..."
 
