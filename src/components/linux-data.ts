@@ -43,28 +43,18 @@ export const techBlogs = [
 
 export const showcaseProjects = [
   {
-    title: "Ghost Shell Framework",
+    title: "My custom Dotfiles",
     description:
-      "Advanced post-exploitation framework with anti-forensics capabilities",
-    features: ["Encrypted C2", "Memory-only execution", "OPSEC-safe"],
-    status: "Active Development",
-    danger: "High",
-  },
-  {
-    title: "Neural Network IDS",
-    description:
-      "AI-powered intrusion detection system trained on custom attack patterns",
-    features: ["ML Detection", "Real-time Analysis", "Custom Rules"],
-    status: "Production Ready",
-    danger: "Medium",
-  },
-  {
-    title: "Cryptographic Vault",
-    description:
-      "Military-grade encrypted storage system with zero-knowledge architecture",
-    features: ["AES-256", "Perfect Forward Secrecy", "Quantum Resistant"],
-    status: "Classified",
-    danger: "Top Secret",
+      "I will be sharing my personal dotfiles repository that includes configurations for Hyprland, Neovim, Zsh and various scripts to enhance productivity and workflow on Linux systems.",
+    features: [
+      "Hyprland Window Manager Config",
+      "Custom Neovim Setup",
+      "Zsh Shell Configuration",
+      "Productivity Scripts",
+      "Automated Installation Scripts",
+    ],
+    status: "Coming Soon",
+    danger: "Low",
   },
 ];
 
