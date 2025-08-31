@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
-import { Terminal, Code, Database, Server, Shield, Eye, BookOpen, Star } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Terminal, Code, BookOpen, Star } from "lucide-react";
 import { DiLinux } from "react-icons/di";
-import { SiKalilinux, SiUbuntu, SiLinuxmint, SiDebian, SiFedora } from "react-icons/si";
 import LinuxNavbar from "./linux-navbar";
 import LinuxContactModal from "./linux-contact-modal";
 import BlogDetailsModal from "./blog-details-modal";
+import { hackingProjects, linuxDistros, showcaseProjects, techBlogs, techSkills } from "./linux-data";
 
 export default function LinuxPortfolio() {
   const [terminalText, setTerminalText] = useState("");
@@ -12,6 +12,11 @@ export default function LinuxPortfolio() {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [isBlogModalOpen, setIsBlogModalOpen] = useState(false);
   const [selectedBlog, setSelectedBlog] = useState(null);
+  const [isIntroComplete, setIsIntroComplete] = useState(false);
+  const [currentCommand, setCurrentCommand] = useState("");
+  const [commandHistory, setCommandHistory] = useState<string[]>([]);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const terminalRef = useRef<HTMLDivElement>(null);
 
   const terminalCommands = [
     "root@alamin:~# whoami",
@@ -33,11 +38,153 @@ export default function LinuxPortfolio() {
       if (currentIndex < terminalCommands.length) {
         setTerminalText(prev => prev + terminalCommands[currentIndex] + "\n");
         setCurrentIndex(prev => prev + 1);
+      } else if (!isIntroComplete) {
+        setIsIntroComplete(true);
+        setTerminalText(prev => prev + "root@alamin:~# ");
       }
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [currentIndex]);
+  }, [currentIndex, isIntroComplete]);
+
+  // Focus input when intro is complete
+  useEffect(() => {
+    if (isIntroComplete && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isIntroComplete]);
+
+  // Auto-scroll terminal to bottom
+  useEffect(() => {
+    if (terminalRef.current) {
+      terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
+    }
+  }, [terminalText]);
+
+  const processCommand = (command: string) => {
+    const trimmedCommand = command.trim().toLowerCase();
+    let response = "";
+
+    switch (trimmedCommand) {
+      case "ls":
+        response = "achievements.txt  blog/  projects/  skills.sh  about.md  contact.sh";
+        break;
+      case "whoami":
+        response = "Al Amin - Linux Enthusiast & Code Assassin\nUID: 1337\nSpecialty: Fullstack Engineer";
+        break;
+      case "skills.sh":
+      case "./skills.sh":
+        response = `#!/bin/bash
+echo "=== Technical Arsenal ==="
+echo "• Neovim Configuration: Expert"
+echo "• Shell Scripting: Advanced"
+echo "• Web Scraping: Advanced"
+echo "• Linux Command Line: Expert"
+echo "• Python Automation: Intermediate"
+echo "• Git & Version Control: Advanced"
+echo "=== System Administration ==="
+echo "• Server Management"
+echo "• Network Configuration"
+echo "• Security Hardening"`;
+        break;
+      case "about":
+      case "cat about.md":
+        response = `# Al Amin - System Administrator
+
+A passionate Linux enthusiast who thrives in the command line environment.
+Specializing in system administration, automation, and security research.
+
+## Current Focus:
+- Advanced Linux system administration
+- Security research and penetration testing
+- Automation and scripting
+- Open source contributions`;
+        break;
+      case "projects":
+      case "ls projects/":
+        response = `network-scanner/     system-hardening/    log-analysis/
+container-security/  ghost-shell/         neural-ids/
+crypto-vault/       automation-scripts/   monitoring-tools/`;
+        break;
+      case "ls blog/":
+      case "blog":
+        response = `digital-forensics.md    zero-day-hunting.md
+kernel-exploitation.md  backdoor-analysis.md`;
+        break;
+      case "contact.sh":
+      case "./contact.sh":
+        response = "Initializing secure communication channel...";
+        setTimeout(() => setIsContactModalOpen(true), 1000);
+        break;
+      case "help":
+        response = `Available commands:
+ls              - List directory contents
+whoami          - Display user information
+skills.sh       - Show technical skills
+about           - Display about information
+projects        - List project directories
+blog            - List blog articles
+contact.sh      - Open secure communication
+history         - Show command history
+clear           - Clear terminal screen
+date            - Show current date
+uptime          - Show system uptime
+ps              - Show running processes
+help            - Show this help message`;
+        break;
+      case "history":
+        response = commandHistory.map((cmd, i) => `${i + 1}  ${cmd}`).join("\n");
+        break;
+      case "date":
+        response = new Date().toString();
+        break;
+      case "uptime":
+        response = `System uptime: ${Math.floor(Date.now() / 1000 / 60)} minutes
+Load average: 0.42, 0.38, 0.33
+Users logged in: 1 (alamin)`;
+        break;
+      case "ps":
+        response = `PID  COMMAND
+1337 portfolio-daemon
+2048 skill-monitor
+4096 project-scanner
+8192 security-audit`;
+        break;
+      case "clear":
+        setTerminalText("root@alamin:~# ");
+        setCommandHistory([]);
+        return;
+      case "":
+        response = "";
+        break;
+      default:
+        response = `bash: ${trimmedCommand}: command not found
+Try 'help' to see available commands`;
+    }
+
+    setCommandHistory(prev => [...prev, command]);
+    setTerminalText(prev => prev + command + "\n" + (response ? response + "\n" : "") + "root@alamin:~# ");
+    setCurrentCommand("");
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      processCommand(currentCommand);
+    } else if (e.key === "ArrowUp" && commandHistory.length > 0) {
+      // Navigate command history with up arrow
+      e.preventDefault();
+      const lastCommand = commandHistory[commandHistory.length - 1];
+      setCurrentCommand(lastCommand);
+    } else if (e.key === "Tab") {
+      // Basic tab completion for common commands
+      e.preventDefault();
+      const availableCommands = ["ls", "whoami", "skills.sh", "about", "projects", "contact.sh", "help", "history", "clear", "date", "uptime", "ps"];
+      const matches = availableCommands.filter(cmd => cmd.startsWith(currentCommand.toLowerCase()));
+      if (matches.length === 1) {
+        setCurrentCommand(matches[0]);
+      }
+    }
+  };
 
   const handleBlogClick = (blog: any) => {
     setSelectedBlog(blog);
@@ -48,106 +195,6 @@ export default function LinuxPortfolio() {
     setIsBlogModalOpen(false);
     setSelectedBlog(null);
   };
-
-  const linuxDistros = [
-      { name: "Fedora", icon: SiFedora, color: "text-blue-400" },
-      { name: "Ubuntu", icon: SiUbuntu, color: "text-orange-400" },
-      { name: "Debian", icon: SiDebian, color: "text-red-500" },
-      { name: "Mint", icon: SiLinuxmint, color: "text-green-300" },
-    { name: "Kali Linux", icon: SiKalilinux, color: "text-red-400" },
-  ];
-
-  const techSkills = [
-    { name: "Neovim", icon: Terminal, status: "Expert" },
-    { name: "Shell Scripting", icon: Code, status: "Advanced" },
-    { name: "Web Scraping", icon: Eye, status: "Advanced" },
-    { name: "Linux Command Line", icon: Server, status: "Expert" },
-    { name: "Python Automation", icon: Database, status: "Intermediate" },
-    { name: "Git & Version Control", icon: Shield, status: "Advanced" },
-  ];
-
-  const hackingProjects = [
-    {
-      title: "Network Scanner Pro",
-      description: "Advanced network reconnaissance tool with stealth capabilities",
-      tech: ["Python", "Nmap", "Scapy"],
-      status: "Active",
-    },
-    {
-      title: "System Hardening Suite",
-      description: "Automated Linux system security hardening framework",
-      tech: ["Bash", "Ansible", "Security"],
-      status: "Deployed",
-    },
-    {
-      title: "Log Analysis Engine",
-      description: "Real-time log monitoring and threat detection system",
-      tech: ["Python", "ELK Stack", "ML"],
-      status: "Monitoring",
-    },
-    {
-      title: "Container Security Audit",
-      description: "Docker and Kubernetes security assessment toolkit",
-      tech: ["Docker", "K8s", "Security"],
-      status: "Scanning",
-    },
-  ];
-
-
-  const techBlogs = [
-    {
-      title: "The Art of Digital Forensics",
-      excerpt: "Deep dive into memory analysis and digital evidence collection techniques",
-      category: "Forensics",
-      readTime: "8 min",
-      status: "Latest",
-    },
-    {
-      title: "Zero-Day Hunting Methodology",
-      excerpt: "My systematic approach to discovering unknown vulnerabilities in the wild",
-      category: "Security Research",
-      readTime: "12 min",
-      status: "Popular",
-    },
-    {
-      title: "Linux Kernel Exploitation 101",
-      excerpt: "Understanding privilege escalation techniques and kernel-level attacks",
-      category: "Exploitation",
-      readTime: "15 min",
-      status: "Technical",
-    },
-    {
-      title: "Building Undetectable Backdoors",
-      excerpt: "Educational analysis of persistence mechanisms and stealth techniques",
-      category: "Red Team",
-      readTime: "10 min",
-      status: "Advanced",
-    },
-  ];
-
-  const showcaseProjects = [
-    {
-      title: "Ghost Shell Framework",
-      description: "Advanced post-exploitation framework with anti-forensics capabilities",
-      features: ["Encrypted C2", "Memory-only execution", "OPSEC-safe"],
-      status: "Active Development",
-      danger: "High",
-    },
-    {
-      title: "Neural Network IDS",
-      description: "AI-powered intrusion detection system trained on custom attack patterns",
-      features: ["ML Detection", "Real-time Analysis", "Custom Rules"],
-      status: "Production Ready",
-      danger: "Medium",
-    },
-    {
-      title: "Cryptographic Vault",
-      description: "Military-grade encrypted storage system with zero-knowledge architecture",
-      features: ["AES-256", "Perfect Forward Secrecy", "Quantum Resistant"],
-      status: "Classified",
-      danger: "Top Secret",
-    },
-  ];
 
   return (
     <div className="min-h-screen bg-black text-green-400 font-mono relative overflow-hidden">
@@ -205,18 +252,41 @@ export default function LinuxPortfolio() {
 
             {/* Terminal */}
             <div className="bg-black border border-green-400 rounded-lg overflow-hidden shadow-2xl">
-              <div className="bg-gray-900 px-4 py-2 flex items-center">
-                <div className="flex space-x-2">
-                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                  <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+              <div className="bg-gray-900 px-4 py-2 flex items-center justify-between">
+                <div className="flex items-center">
+                  <div className="flex space-x-2">
+                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                  </div>
+                  <span className="ml-4 text-gray-400">Terminal - alamin</span>
                 </div>
-                <span className="ml-4 text-gray-400">Terminal - alamin</span>
+                {isIntroComplete && (
+                  <div className="text-xs text-gray-500 font-mono">
+                    Type 'help' for commands
+                  </div>
+                )}
               </div>
-              <div className="p-4 h-80 overflow-y-auto">
-                <pre className="text-green-400 text-sm whitespace-pre-wrap">
+              <div ref={terminalRef} className="p-4 h-80 overflow-y-auto cursor-text" onClick={() => inputRef.current?.focus()}>
+                <pre className="text-green-400 text-sm whitespace-pre-wrap font-mono leading-relaxed">
                   {terminalText}
-                  <span className="animate-pulse">█</span>
+                  {isIntroComplete && (
+                    <div className="inline-flex items-center">
+                      <input
+                        ref={inputRef}
+                        type="text"
+                        value={currentCommand}
+                        onChange={(e) => setCurrentCommand(e.target.value)}
+                        onKeyDown={handleKeyPress}
+                        className="bg-transparent border-none outline-none text-green-400 font-mono text-sm caret-green-400"
+                        style={{ width: `${Math.max(currentCommand.length + 1, 2)}ch` }}
+                        autoFocus
+                        spellCheck={false}
+                      />
+                      <span className="animate-pulse text-green-400">█</span>
+                    </div>
+                  )}
+                  {!isIntroComplete && <span className="animate-pulse">█</span>}
                 </pre>
               </div>
             </div>
@@ -296,38 +366,6 @@ export default function LinuxPortfolio() {
           </div>
         </section>
 
-        {/* Achievements Section */}
-        {/* <section className="container mx-auto px-6 py-20">
-          <h2 className="text-3xl font-bold text-center text-red-400 mb-12">
-            <Trophy className="inline mr-3" />
-            Achievements & Milestones
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {achievements.map((achievement, index) => (
-              <div
-                key={index}
-                className="bg-gray-900 border border-gray-700 rounded-lg p-6 hover:border-red-400 transition-all duration-300 group relative"
-              >
-                <div className="absolute top-4 right-4 text-xs text-green-400 font-mono">
-                  {achievement.year}
-                </div>
-
-                <div className="flex items-start mb-4">
-                  <achievement.icon className="text-3xl text-red-400 mr-4 mt-1 group-hover:text-green-400 transition-colors" />
-                  <div>
-                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-red-400 transition-colors">
-                      {achievement.title}
-                    </h3>
-                    <p className="text-green-300 leading-relaxed">
-                      {achievement.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section> */}
 
         {/* Blog Section */}
         <section className="container mx-auto px-6 py-20">
@@ -424,55 +462,6 @@ export default function LinuxPortfolio() {
           </div>
         </section>
 
-        {/* Current Activities Section */}
-        {/* <section className="container mx-auto px-6 py-20">
-          <h2 className="text-3xl font-bold text-center text-red-400 mb-12">
-            <Activity className="inline mr-3" />
-            Active Operations
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {currentActivities.map((activity, index) => (
-              <div
-                key={index}
-                className="bg-gray-900 border border-gray-700 rounded-lg p-6 hover:border-red-400 transition-all duration-300"
-              >
-                <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-lg font-bold text-white">
-                    {activity.activity}
-                  </h3>
-                  <span className={`px-3 py-1 text-xs font-bold rounded ${
-                    activity.status === "In Progress" ? "bg-yellow-600 text-black" :
-                    activity.status === "Active" ? "bg-green-600 text-white" :
-                    activity.status === "Classified" ? "bg-red-600 text-white" :
-                    "bg-purple-600 text-white"
-                  }`}>
-                    {activity.status}
-                  </span>
-                </div>
-
-                <div className="mb-4">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-green-300 text-sm">Progress</span>
-                    <span className="text-red-400 font-mono text-sm">{activity.completion}%</span>
-                  </div>
-                  <div className="w-full bg-gray-800 rounded-full h-3">
-                    <div
-                      className="bg-gradient-to-r from-red-500 to-green-400 h-3 rounded-full transition-all duration-1000"
-                      style={{ width: `${activity.completion}%` }}
-                    ></div>
-                  </div>
-                </div>
-
-                <div className="text-right">
-                  <span className="text-green-400 font-mono text-sm">
-                    ETA: {activity.timeframe}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section> */}
 
         {/* Quote Section */}
         <section className="container mx-auto px-6 py-20">
