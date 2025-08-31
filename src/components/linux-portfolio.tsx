@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Terminal, Code, BookOpen, Star } from "lucide-react";
 import { DiLinux } from "react-icons/di";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import LinuxNavbar from "./linux-navbar";
 import LinuxContactModal from "./linux-contact-modal";
 import BlogDetailsModal from "./blog-details-modal";
@@ -23,7 +23,7 @@ export default function LinuxPortfolio() {
   const [currentCommand, setCurrentCommand] = useState("");
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [showCat, setShowCat] = useState(false);
-  const [catAnimationPhase, setCatAnimationPhase] = useState("walking"); // "walking" or "sitting"
+//   const [catAnimationPhase, setCatAnimationPhase] = useState("walking"); // "walking" or "sitting"
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
 
