@@ -52,7 +52,7 @@ export default function LinuxNavbar() {
             <div className="hidden md:flex items-center space-x-4">
               <button
                 onClick={() => setIsContactModalOpen(true)}
-                className="text-green-400 hover:text-red-400 transition-colors duration-300 font-mono"
+                className="text-green-400 hover:text-red-400 transition-colors duration-300 font-mono cursor-pointer"
               >
                 ./contact.sh
               </button>

@@ -56,6 +56,8 @@ export const showcaseProjects = [
     tags:["Hyprland","Neovim","Zsh","Dotfiles", "Scripts", "Linux Customization" ],
     status: "Coming Soon",
     danger: "High",
+    githubUrl: "#",
+    liveUrl: "#",
   },
 ];
 
