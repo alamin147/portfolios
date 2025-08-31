@@ -349,6 +349,49 @@ Try 'help' to see available commands`;
                 ))}
               </div>
 
+              {/* Cat Animation */}
+              {showCat && (
+                <div className="mt-8 relative h-20">
+                  <motion.div
+                    initial={{ x: -200, opacity: 0 }}
+                    animate={{
+                      x: catAnimationPhase === "walking" ? 300 : 300,
+                      opacity: 1
+                    }}
+                    transition={{
+                      duration: catAnimationPhase === "walking" ? 6 : 0.5,
+                      ease: "easeInOut"
+                    }}
+                    onAnimationComplete={() => {
+                      if (catAnimationPhase === "walking") {
+                        setCatAnimationPhase("sitting");
+                      }
+                    }}
+                    className="relative"
+                  >
+                    <img
+                      src="/cat-walking.gif"
+                      alt="Walking cat"
+                      className="w-16 h-12 object-contain"
+                      style={{
+                        filter: "sepia(1) hue-rotate(90deg) saturate(2) brightness(1.2)",
+                        transform: catAnimationPhase === "sitting" ? "scaleX(-1)" : "none"
+                      }}
+                    />
+                    {catAnimationPhase === "sitting" && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5 }}
+                        className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-gray-900 border border-green-400 rounded px-2 py-1 text-xs text-green-400 whitespace-nowrap"
+                      >
+                        sudo cat enjoys the terminal
+                      </motion.div>
+                    )}
+                  </motion.div>
+                </div>
+              )}
+
             </div>
 
             {/* Terminal */}
@@ -394,48 +437,7 @@ Try 'help' to see available commands`;
           </div>
         </section>
 
-        {/* Cat Animation */}
-        {showCat && (
-          <div className="fixed bottom-20 left-0 z-20 pointer-events-none">
-            <motion.div
-              initial={{ x: -200, opacity: 0 }}
-              animate={{
-                x: catAnimationPhase === "walking" ? window.innerWidth * 0.4 : window.innerWidth * 0.4,
-                opacity: 1
-              }}
-              transition={{
-                duration: catAnimationPhase === "walking" ? 4 : 0.5,
-                ease: "easeInOut"
-              }}
-              onAnimationComplete={() => {
-                if (catAnimationPhase === "walking") {
-                  setCatAnimationPhase("sitting");
-                }
-              }}
-              className="relative"
-            >
-              <img
-                src="/cat-walking.gif"
-                alt="Walking cat"
-                className="w-20 h-16 object-contain"
-                style={{
-                  filter: "sepia(1) hue-rotate(90deg) saturate(2) brightness(1.2)",
-                  transform: catAnimationPhase === "sitting" ? "scaleX(-1)" : "none"
-                }}
-              />
-              {catAnimationPhase === "sitting" && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
-                  className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-900 border border-green-400 rounded px-2 py-1 text-xs text-green-400 whitespace-nowrap"
-                >
-                  sudo cat enjoys the terminal
-                </motion.div>
-              )}
-            </motion.div>
-          </div>
-        )}
+
 
         {/* Skills Section */}
         <section className="container mx-auto px-6 py-20">
