@@ -28,47 +28,49 @@ export default function LinuxNavbar() {
     >
       <div className="container mx-auto max-w-[calc(80rem-5px)]">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex items-center">
+          {/* Left Side - Logo */}
+          <div className="flex items-center flex-1">
             <Link
               to="/"
               className="flex items-center text-red-400 hover:text-green-400 transition-colors duration-300 ms-5 md:ms-10"
             >
               <ArrowLeft className="h-5 w-5 mr-2" />
-              <span className="text-lg font-bold">Back to My Portfolio</span>
+              <span className="text-lg font-bold">My Professional Portfolio</span>
             </Link>
           </div>
 
           {/* Center Logo */}
-          <div className="flex items-center">
+          <div className="flex items-center justify-center flex-shrink-0">
             <DiLinux className="text-3xl text-red-400 mr-2" />
             <span className="text-xl font-bold text-green-400 font-mono">
               root@alamin
             </span>
           </div>
 
-          {/* Contact Links */}
-          <div className="hidden md:flex items-center space-x-4">
-            <button
-              onClick={() => setIsContactModalOpen(true)}
-              className="text-green-400 hover:text-red-400 transition-colors duration-300 font-mono"
-            >
-              ./contact.sh
-            </button>
-          </div>
+          {/* Right Side - Contact Links */}
+          <div className="flex items-center justify-end flex-1">
+            <div className="hidden md:flex items-center space-x-4">
+              <button
+                onClick={() => setIsContactModalOpen(true)}
+                className="text-green-400 hover:text-red-400 transition-colors duration-300 font-mono"
+              >
+                ./contact.sh
+              </button>
+            </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="me-3 bg-gray-900 border border-green-400 hover:border-red-400 p-2 rounded-md text-green-400 hover:text-red-400 transition-all duration-300"
-            >
-              {isOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
-            </button>
+            {/* Mobile menu button */}
+            <div className="md:hidden">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="me-3 bg-gray-900 border border-green-400 hover:border-red-400 p-2 rounded-md text-green-400 hover:text-red-400 transition-all duration-300"
+              >
+                {isOpen ? (
+                  <X className="h-6 w-6" />
+                ) : (
+                  <Menu className="h-6 w-6" />
+                )}
+              </button>
+            </div>
           </div>
         </div>
 
@@ -82,7 +84,7 @@ export default function LinuxNavbar() {
                 onClick={() => setIsOpen(false)}
               >
                 <ArrowLeft className="h-4 w-4 inline mr-2" />
-                Back to My Portfolio
+                My Professional Portfolio
               </Link>
               <button
                 onClick={() => {
