@@ -111,11 +111,6 @@ crypto-vault/       automation-scripts/   monitoring-tools/`;
         response = `digital-forensics.md    zero-day-hunting.md
 kernel-exploitation.md  backdoor-analysis.md`;
         break;
-      case "contact.sh":
-      case "./contact.sh":
-        response = "Initializing secure communication channel...";
-        setTimeout(() => setIsContactModalOpen(true), 1000);
-        break;
       case "help":
         response = `Available commands:
 ls              - List directory contents
@@ -125,6 +120,7 @@ about           - Display about information
 projects        - List project directories
 blog            - List blog articles
 contact.sh      - Open secure communication
+image.sh        - Display user profile image
 history         - Show command history
 clear           - Clear terminal screen
 date            - Show current date
@@ -149,6 +145,65 @@ Users logged in: 1 (alamin)`;
 2048 skill-monitor
 4096 project-scanner
 8192 security-audit`;
+        break;
+      case "image.sh":
+      case "./image.sh":
+        response = `#!/bin/bash
+echo "Loading user profile image..."
+echo ""
+
+
+
+                                 %%#%######
+                              @%%%%@@@@%%##**
+                             @@@@@@@@@@@@@%%#*+
+                           @@@@@@%#**##%%@@@@%#*
+                          %@@@%*+++==++++++*%@%*
+                          @@@@#*++===========#%#
+                          @@@@*****+======---=#%
+                          @@@%%****###**#%#*==*#
+                          #@@######**#***#*+=+**
+                         %###+++***##=-*=+*+=+##
+                          *%#++++++++==-=====-=*
+                          *#@*****+#%%##====-==+
+                           %@##*#%@@%%##***=-+*
+                            @@%%##*#%##+=+*==**
+                            %@@@%%#*##**++**##
+                         %%@%%@@@@@@@@@%%%%%
+                        =+@@###@@@@@@@@@@%*
+                    =-====+*#**##%%@@@%*=+*=::-=
+                +=-----=++=+*********++=+#*=::-=+------
+            ------=+===-=++-=++**++*+++*%%*+-:-=*-=--=:-
+        =------------=---=+=---====+***#+++-#%--*==-==--::
+     ====--------=--==----=+++=-==-==+**+*++##==*=--====---
+   ====-----==-=---===**##%%#%%#+++**##+=*==++--+=--==+=-==::
+  ====--===----===-:-==-==+++++++++*+*+-+*-=+=-=*--==+*===+-::
+ +===++--=++::----==-:-=-::----------*--*+--+=-=+--+=++++++---:
+++===+++--+*+::-==--==-:-----::::::-=*--*+--==++--===+*#**=---:-
++=====+**==+*=-:-==--==-:------::---*+:-++--=++---+-=*%#*-==---::
+==+++++++*==*#=-:-=+=-==-:-:-----:::==--++==+++=----+*@%*===+==-::
+*--=++****+++%*=-:-=+====------:::::-=--++=+++=-----+#@%%*++=-===--::
+***+--=*****+%%*=::-=+===-----:::::::=--=++**+=--:-=+%@@@%#*++=--==--=+
+****++==---=+#@%*-:::-===-=---:::::--+-=++**+=-----=+%@%%%%%%%*=+==+=--=
++++*+========+#@#+-:::--==-=---::---=*==+++++=------+@@@%@@@%%***++**+=--
+****+=-==--=+=%@@#+--:::-=----------=*+++++=++=----=* %%@@@@%####+==+=-=+-
++++++========*@@@%*=---::---------==+++=++-=+-+=---=*   %%%###*+=----------
++++++=======-%@@@%#+==------------=+++++++-==-:==-==#    %%%%#*+=-----:::::-
++***+++===--+@@@%%#*+=----------===+++++++=+-----=++       %%#*+**++**#*=:::
+=========---+#@@%###*-----::::---=+++*++++++=-==++++       %%##%+===---#@@*-
++++++=----==+#@@@@%%#+---::::::--+++***++++*+======+     =*@@@%+====---*@@@*
+##**+==-----=*@@@@@%%%%#*=::::::-=*****=--=========    ++====---------+@@@@*
+*+++==---::--*%@%%%%%%%%%#+--==+++*****+--========+   *+++++====------#@@@%#
+*#%%%##*+=---+#%%#%%#####*+=+***#***+++*=========+    ++==++==++-===--*@@@@*
+####*====+#*#@%%%%#******++*##**++++=+#*=====++==+    ++==+==+*+=*+=--*@@@@%
++*##+--===+#%%@%***###%%%%##***++++++*%==========   *+*+==++-++=-*=-=#%%@@@%
+#*++*++=-=*%@@#**************+++++++*##===+=====    #+*%%#*+-*+=-++=%%%@@@%
+**--===+=+*+===++++++++++*+++++++++++*+=++*#%#*+    +=+@@@@@@#*=+%*@@%%@
+==+++====-+=----=++++++++++++++++++*@%%%%%%%%%*=    @%@@@@@@@@@@@@@@@%#
+
+echo ""
+echo "Profile loaded successfully - Al Amin"
+echo "Image format: ASCII Art"`;
         break;
       case "clear":
         setTerminalText("root@alamin:~# ");
@@ -178,7 +233,7 @@ Try 'help' to see available commands`;
     } else if (e.key === "Tab") {
       // Basic tab completion for common commands
       e.preventDefault();
-      const availableCommands = ["ls", "whoami", "skills.sh", "about", "projects", "contact.sh", "help", "history", "clear", "date", "uptime", "ps"];
+      const availableCommands = ["ls", "whoami", "skills.sh", "about", "projects", "contact.sh", "image.sh", "help", "history", "clear", "date", "uptime", "ps"];
       const matches = availableCommands.filter(cmd => cmd.startsWith(currentCommand.toLowerCase()));
       if (matches.length === 1) {
         setCurrentCommand(matches[0]);
