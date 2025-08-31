@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { Menu, X, ArrowLeft } from "lucide-react";
 import { DiLinux } from "react-icons/di";
 import { Link } from "react-router-dom";
+import LinuxContactModal from "./linux-contact-modal";
 
 export default function LinuxNavbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,12 +49,12 @@ export default function LinuxNavbar() {
 
           {/* Contact Links */}
           <div className="hidden md:flex items-center space-x-4">
-            <a
-              href="mailto:your-email@example.com"
+            <button
+              onClick={() => setIsContactModalOpen(true)}
               className="text-green-400 hover:text-red-400 transition-colors duration-300 font-mono"
             >
               ./contact.sh
-            </a>
+            </button>
           </div>
 
           {/* Mobile menu button */}
@@ -82,17 +84,25 @@ export default function LinuxNavbar() {
                 <ArrowLeft className="h-4 w-4 inline mr-2" />
                 Back to My Portfolio
               </Link>
-              <a
-                href="mailto:your-email@example.com"
+              <button
+                onClick={() => {
+                  setIsContactModalOpen(true);
+                  setIsOpen(false);
+                }}
                 className="text-green-400 hover:text-red-400 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300"
-                onClick={() => setIsOpen(false)}
               >
                 ./contact.sh
-              </a>
+              </button>
             </div>
           </div>
         )}
       </div>
+
+      {/* Contact Modal */}
+      <LinuxContactModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
+      />
     </nav>
   );
 }

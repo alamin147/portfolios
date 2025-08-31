@@ -3,10 +3,12 @@ import { Terminal, Code, Database, Server, Shield, Eye, Trophy, BookOpen, Star, 
 import { DiLinux } from "react-icons/di";
 import { SiKalilinux, SiUbuntu, SiLinuxmint, SiDebian, SiDocker, SiFedora } from "react-icons/si";
 import LinuxNavbar from "./linux-navbar";
+import LinuxContactModal from "./linux-contact-modal";
 
 export default function LinuxPortfolio() {
   const [terminalText, setTerminalText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   const terminalCommands = [
     "root@alamin:~# whoami",
@@ -43,12 +45,9 @@ export default function LinuxPortfolio() {
   ];
 
   const techSkills = [
-    { name: "Penetration Testing", icon: Shield, level: 95 },
-    { name: "System Administration", icon: Server, level: 90 },
-    { name: "Shell Scripting", icon: Terminal, level: 95 },
-    { name: "Network Security", icon: Eye, level: 85 },
-    { name: "Docker & Containers", icon: SiDocker, level: 88 },
-    { name: "Database Management", icon: Database, level: 82 },
+    { name: "Shell Scripting", icon: Terminal, status: "Expert" },
+    { name: "Docker & Containers", icon: SiDocker, status: "Learning" },
+    { name: "Database Management", icon: Database, status: "Intermediate" },
   ];
 
   const hackingProjects = [
@@ -279,13 +278,17 @@ export default function LinuxPortfolio() {
                   <h3 className="text-xl font-bold text-white">{skill.name}</h3>
                 </div>
 
-                <div className="w-full bg-gray-800 rounded-full h-3 mb-2">
-                  <div
-                    className="bg-gradient-to-r from-red-500 to-green-400 h-3 rounded-full transition-all duration-1000"
-                    style={{ width: `${skill.level}%` }}
-                  ></div>
+                <div className="flex items-center justify-between">
+                  <span className={`px-3 py-1 rounded text-sm font-mono ${
+                    skill.status === "Expert" ? "bg-red-600 text-white border border-red-400" :
+                    skill.status === "Advanced" ? "bg-green-600 text-black border border-green-400" :
+                    skill.status === "Intermediate" ? "bg-orange-600 text-white border border-orange-400" :
+                    "bg-purple-600 text-white border border-purple-400"
+                  }`}>
+                    {skill.status}
+                  </span>
+                  <span className="text-green-400 text-sm font-mono">./skill_level.sh</span>
                 </div>
-                <span className="text-green-300 text-sm">{skill.level}% Mastery</span>
               </div>
             ))}
           </div>
@@ -532,14 +535,23 @@ export default function LinuxPortfolio() {
                 <a href="#" className="text-green-400 hover:text-red-400 transition-colors">
                   LinkedIn
                 </a>
-                <a href="#" className="text-green-400 hover:text-red-400 transition-colors">
+                <button
+                  onClick={() => setIsContactModalOpen(true)}
+                  className="text-green-400 hover:text-red-400 transition-colors"
+                >
                   Email
-                </a>
+                </button>
               </div>
             </div>
           </div>
         </footer>
       </div>
+
+      {/* Contact Modal */}
+      <LinuxContactModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
+      />
     </div>
   );
 }
