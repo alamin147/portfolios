@@ -491,7 +491,7 @@ Try 'help' to see available commands`;
         </section>
 
         {/* Showcase Section */}
-        <section className="hidden container mx-auto px-6 py-20">
+        <section className="container mx-auto px-6 py-20">
           <h2 className="text-3xl font-bold text-center text-red-400 mb-12">
             <Star className="inline mr-3" />
             Elite Showcase
