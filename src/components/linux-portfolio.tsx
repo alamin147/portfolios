@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Terminal, Code, Database, Server, Shield, Eye, Trophy, BookOpen, Star, Activity } from "lucide-react";
 import { DiLinux } from "react-icons/di";
-import { SiKalilinux, SiUbuntu, SiLinuxmint, SiDebian, SiDocker, SiFedora } from "react-icons/si";
+import { SiKalilinux, SiUbuntu, SiLinuxmint, SiDebian, SiFedora } from "react-icons/si";
 import LinuxNavbar from "./linux-navbar";
 import LinuxContactModal from "./linux-contact-modal";
 
@@ -45,9 +45,12 @@ export default function LinuxPortfolio() {
   ];
 
   const techSkills = [
-    { name: "Shell Scripting", icon: Terminal, status: "Expert" },
-    { name: "Docker & Containers", icon: SiDocker, status: "Learning" },
-    { name: "Database Management", icon: Database, status: "Intermediate" },
+    { name: "Neovim", icon: Terminal, status: "Expert" },
+    { name: "Shell Scripting", icon: Code, status: "Advanced" },
+    { name: "Web Scraping", icon: Eye, status: "Advanced" },
+    { name: "Linux Command Line", icon: Server, status: "Expert" },
+    { name: "Python Automation", icon: Database, status: "Intermediate" },
+    { name: "Git & Version Control", icon: Shield, status: "Advanced" },
   ];
 
   const hackingProjects = [
@@ -264,7 +267,7 @@ export default function LinuxPortfolio() {
         <section className="container mx-auto px-6 py-20">
           <h2 className="text-3xl font-bold text-center text-red-400 mb-12">
             <Terminal className="inline mr-3" />
-            Technical Mastery & Skills
+            Tools & Techniques
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -279,15 +282,15 @@ export default function LinuxPortfolio() {
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <span className={`px-3 py-1 rounded text-sm font-mono ${
-                    skill.status === "Expert" ? "bg-red-600 text-white border border-red-400" :
-                    skill.status === "Advanced" ? "bg-green-600 text-black border border-green-400" :
-                    skill.status === "Intermediate" ? "bg-orange-600 text-white border border-orange-400" :
-                    "bg-purple-600 text-white border border-purple-400"
+                  <span className={`px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider ${
+                    skill.status === "Expert" ? "bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg shadow-red-500/25" :
+                    skill.status === "Advanced" ? "bg-gradient-to-r from-green-500 to-green-600 text-white shadow-lg shadow-green-500/25" :
+                    skill.status === "Intermediate" ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg shadow-orange-500/25" :
+                    "bg-gradient-to-r from-purple-500 to-purple-600 text-white shadow-lg shadow-purple-500/25"
                   }`}>
                     {skill.status}
                   </span>
-                  <span className="text-green-400 text-sm font-mono">./skill_level.sh</span>
+                  <span className="text-green-400 text-xs font-mono opacity-70">./check.sh</span>
                 </div>
               </div>
             ))}
