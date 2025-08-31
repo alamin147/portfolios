@@ -319,7 +319,7 @@ Try 'help' to see available commands`;
                   Linux Command Center
                 </h2>
                 <p className="text-green-300 text-lg leading-relaxed">
-                  Where code meets chaos, and systems obey my command. Linux isn't just an operating system, it's the battlefield where I sharpen my skills. Each command is a strike, each script a strategy, as I dive deeper into the void, bending digital realms to my will.
+                  Where code meets chaos, and systems obey my command. Each command is a strike, each script a strategy, as I dive deeper into the void, bending digital realms to my will. <br/>One day Cat will take the world with the power of sudo.
                 </p>
               </div>
 
@@ -343,6 +343,7 @@ Try 'help' to see available commands`;
                   </div>
                 ))}
               </div>
+            
             </div>
 
             {/* Terminal */}
