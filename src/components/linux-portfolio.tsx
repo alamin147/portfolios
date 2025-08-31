@@ -4,6 +4,7 @@ import { DiLinux } from "react-icons/di";
 import LinuxNavbar from "./linux-navbar";
 import LinuxContactModal from "./linux-contact-modal";
 import BlogDetailsModal from "./blog-details-modal";
+import LinuxProjectModal from "./linux-project-modal";
 import { hackingProjects, linuxDistros, showcaseProjects, techBlogs, techSkills } from "./linux-data";
 
 export default function LinuxPortfolio() {
@@ -11,7 +12,9 @@ export default function LinuxPortfolio() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [isBlogModalOpen, setIsBlogModalOpen] = useState(false);
+  const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
   const [selectedBlog, setSelectedBlog] = useState(null);
+  const [selectedProject, setSelectedProject] = useState(null);
   const [isIntroComplete, setIsIntroComplete] = useState(false);
   const [currentCommand, setCurrentCommand] = useState("");
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
@@ -254,6 +257,16 @@ Try 'help' to see available commands`;
     setSelectedBlog(null);
   };
 
+  const handleProjectClick = (project: any) => {
+    setSelectedProject(project);
+    setIsProjectModalOpen(true);
+  };
+
+  const closeProjectModal = () => {
+    setIsProjectModalOpen(false);
+    setSelectedProject(null);
+  };
+
   return (
     <div className="min-h-screen bg-black text-green-400 font-mono relative overflow-hidden">
       <LinuxNavbar />
@@ -395,7 +408,8 @@ Try 'help' to see available commands`;
             {hackingProjects.map((project, index) => (
               <div
                 key={index}
-                className="bg-gray-900 border border-gray-700 rounded-lg p-6 hover:border-red-400 transition-all duration-300 group relative overflow-hidden"
+                className="bg-gray-900 border border-gray-700 rounded-lg p-6 hover:border-red-400 transition-all duration-300 group relative overflow-hidden cursor-pointer"
+                onClick={() => handleProjectClick(project)}
               >
                 <div className="absolute top-0 right-0 bg-red-500 text-black px-3 py-1 text-xs font-bold">
                   {project.status}
@@ -418,6 +432,11 @@ Try 'help' to see available commands`;
                       {tech}
                     </span>
                   ))}
+                </div>
+
+                {/* Click indicator */}
+                <div className="absolute bottom-4 right-4 text-green-500 font-mono text-sm opacity-70 group-hover:opacity-100 transition-opacity">
+                  ./explore.sh →
                 </div>
               </div>
             ))}
@@ -564,6 +583,13 @@ Try 'help' to see available commands`;
         isOpen={isBlogModalOpen}
         onClose={closeBlogModal}
         blog={selectedBlog}
+      />
+
+      {/* Project Details Modal */}
+      <LinuxProjectModal
+        isOpen={isProjectModalOpen}
+        onClose={closeProjectModal}
+        project={selectedProject}
       />
     </div>
   );

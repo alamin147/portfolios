@@ -74,7 +74,7 @@ export const hackingProjects = [
     description:
       "Modern project management and file system visualization tool with drag-and-drop canvas interface. Features real-time collaboration, MongoDB persistence, and integrated Monaco code editor.",
     tech: ["React", "Node.js", "MongoDB", "TypeScript", "React Flow"],
-    status: "Production",
+    status: "Under development",
   },
 ];
 
