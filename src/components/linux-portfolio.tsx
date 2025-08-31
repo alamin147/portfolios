@@ -350,12 +350,12 @@ Try 'help' to see available commands`;
               </div>
 
               {/* Cat Animation */}
-              {showCat && (
+              {/* {showCat && (
                 <div className="mt-8 relative h-20">
                   <motion.div
                     initial={{ x: -200, opacity: 0 }}
                     animate={{
-                      x: catAnimationPhase === "walking" ? 300 : 300,
+                      x: catAnimationPhase === "walking" ? 500 : 500,
                       opacity: 1
                     }}
                     transition={{
@@ -370,6 +370,7 @@ Try 'help' to see available commands`;
                     className="relative"
                   >
                     <img
+                    //   src="/cat-sitting.gif"
                       src="/cat-walking.gif"
                       alt="Walking cat"
                       className="w-16 h-12 object-contain"
@@ -390,7 +391,7 @@ Try 'help' to see available commands`;
                     )}
                   </motion.div>
                 </div>
-              )}
+              )} */}
 
             </div>
 
