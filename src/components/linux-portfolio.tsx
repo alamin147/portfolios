@@ -327,10 +327,19 @@ Try 'help' to see available commands`;
                 {linuxDistros.map((distro, index) => (
                   <div
                     key={index}
-                    className="flex items-center bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 hover:border-red-400 transition-all duration-300"
+                    className="flex items-center bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 hover:border-red-400 transition-all duration-300 relative group"
+                    // title={distro.tooltip}
                   >
                     <distro.icon className={`text-2xl ${distro.color} mr-2`} />
                     <span className="text-white">{distro.name}</span>
+
+                    {/* Custom tooltip */}
+                    {distro.tooltip && (
+                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-black border border-red-400 text-red-400 text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
+                        {distro.tooltip}
+                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-red-400"></div>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>

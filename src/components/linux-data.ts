@@ -72,11 +72,11 @@ export const hackingProjects = [
 ];
 
 export const linuxDistros = [
-  { name: "Fedora", icon: SiFedora, color: "text-blue-400" },
-  { name: "Ubuntu", icon: SiUbuntu, color: "text-orange-400" },
-  { name: "Debian", icon: SiDebian, color: "text-red-500" },
-  { name: "Mint", icon: SiLinuxmint, color: "text-green-300" },
-  { name: "Kali Linux", icon: SiKalilinux, color: "text-red-400" },
+    { name: "Fedora", icon: SiFedora, color: "text-blue-400", tooltip: "My primary Distro" },
+    { name: "Ubuntu", icon: SiUbuntu, color: "text-orange-400", tooltip: "Start of my Linux journey" },
+    { name: "Mint", icon: SiLinuxmint, color: "text-green-300", tooltip: "Used out of curiosity" },
+    { name: "Kali Linux", icon: SiKalilinux, color: "text-red-400", tooltip: "Explored cybersecurity tools in my 1st year" },
+    { name: "Debian", icon: SiDebian, color: "text-red-500", tooltip: "Familiar with" },
 ];
 
 export const techSkills = [
