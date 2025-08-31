@@ -391,7 +391,7 @@ Try 'help' to see available commands`;
             Underground Projects
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className={`grid gap-8 ${hackingProjects.length === 1 ? 'grid-cols-1 max-w-2xl mx-auto' : 'grid-cols-1 md:grid-cols-2'}`}>
             {hackingProjects.map((project, index) => (
               <div
                 key={index}
@@ -426,7 +426,7 @@ Try 'help' to see available commands`;
 
 
         {/* Blog Section */}
-        <section className="container mx-auto px-6 py-20">
+        <section className=" hidden container mx-auto px-6 py-20">
           <h2 className="text-3xl font-bold text-center text-red-400 mb-12">
             <BookOpen className="inline mr-3" />
             Technical Archives
@@ -470,7 +470,7 @@ Try 'help' to see available commands`;
         </section>
 
         {/* Showcase Section */}
-        <section className="container mx-auto px-6 py-20">
+        <section className="hidden container mx-auto px-6 py-20">
           <h2 className="text-3xl font-bold text-center text-red-400 mb-12">
             <Star className="inline mr-3" />
             Elite Showcase
@@ -527,7 +527,7 @@ Try 'help' to see available commands`;
             <blockquote className="text-2xl italic text-green-300 mb-4">
               "In the world of zeros and ones, I am the exception that proves the rule."
             </blockquote>
-            <p className="text-red-400 font-bold">- Al Amin, Linux Specialist</p>
+            <p className="text-red-400 font-bold">- Al Amin</p>
           </div>
         </section>
 
@@ -545,12 +545,6 @@ Try 'help' to see available commands`;
                 <a href="#" className="text-green-400 hover:text-red-400 transition-colors">
                   LinkedIn
                 </a>
-                <button
-                  onClick={() => setIsContactModalOpen(true)}
-                  className="text-green-400 hover:text-red-400 transition-colors"
-                >
-                  Email
-                </button>
               </div>
             </div>
           </div>
