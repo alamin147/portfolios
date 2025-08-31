@@ -53,6 +53,7 @@ export const showcaseProjects = [
       "Productivity Scripts",
       "Automated Installation Scripts",
     ],
+    tags:["Hyprland","Neovim","Zsh","Dotfiles", "Scripts", "Linux Customization" ],
     status: "Coming Soon",
     danger: "Low",
   },
