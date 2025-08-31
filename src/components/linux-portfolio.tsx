@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Terminal, Code, Database, Server, Shield, Eye, Trophy, BookOpen, Star, Activity } from "lucide-react";
 import { DiLinux } from "react-icons/di";
-import { SiKalilinux, SiUbuntu, SiArchlinux, SiDebian, SiDocker } from "react-icons/si";
+import { SiKalilinux, SiUbuntu, SiLinuxmint, SiDebian, SiDocker, SiFedora } from "react-icons/si";
 import LinuxNavbar from "./linux-navbar";
 
 export default function LinuxPortfolio() {
@@ -9,18 +9,18 @@ export default function LinuxPortfolio() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const terminalCommands = [
-    "root@darkside:~# whoami",
-    "Al Amin - Linux Wizard & Code Assassin",
-    "root@darkside:~# ls -la /skills",
+    "root@alamin:~# whoami",
+    "Al Amin - Linux Enth & Code Assassin",
+    "root@alamin:~# ls -la /skills",
     "drwxr-xr-x  2 root root 4096 Aug 31 2025 .",
     "drwxr-x--- 15 root root 4096 Aug 31 2025 ..",
     "-rwxr-xr-x  1 root root  666 Aug 31 2025 pentesting",
     "-rwxr-xr-x  1 root root  777 Aug 31 2025 system_admin",
     "-rwxr-xr-x  1 root root  888 Aug 31 2025 automation",
-    "root@darkside:~# cat /etc/passwd | grep hacker",
+    "root@alamin:~# cat /etc/passwd | grep hacker",
     "hacker:x:1337:1337:Elite Hacker:/home/hacker:/bin/bash",
-    "root@darkside:~# echo 'Welcome to the dark side...'",
-    "Welcome to the dark side...",
+    "root@alamin:~# echo 'Welcome to the terminal...'",
+    "Welcome to the terminal...",
   ];
 
   useEffect(() => {
@@ -35,13 +35,14 @@ export default function LinuxPortfolio() {
   }, [currentIndex]);
 
   const linuxDistros = [
+      { name: "Fedora", icon: SiFedora, color: "text-blue-400" },
+      { name: "Ubuntu", icon: SiUbuntu, color: "text-orange-400" },
+      { name: "Debian", icon: SiDebian, color: "text-red-500" },
+      { name: "Mint", icon: SiLinuxmint, color: "text-red-500" },
     { name: "Kali Linux", icon: SiKalilinux, color: "text-red-400" },
-    { name: "Ubuntu", icon: SiUbuntu, color: "text-orange-400" },
-    { name: "Arch", icon: SiArchlinux, color: "text-blue-400" },
-    { name: "Debian", icon: SiDebian, color: "text-red-500" },
   ];
 
-  const darkSkills = [
+  const techSkills = [
     { name: "Penetration Testing", icon: Shield, level: 95 },
     { name: "System Administration", icon: Server, level: 90 },
     { name: "Shell Scripting", icon: Terminal, level: 95 },
@@ -104,7 +105,7 @@ export default function LinuxPortfolio() {
     },
   ];
 
-  const darkBlogs = [
+  const techBlogs = [
     {
       title: "The Art of Digital Forensics",
       excerpt: "Deep dive into memory analysis and digital evidence collection techniques",
@@ -210,22 +211,20 @@ export default function LinuxPortfolio() {
                 <DiLinux className="text-6xl text-red-400 mr-4" />
                 <div>
                   <h1 className="text-4xl font-bold text-red-400 mb-2">
-                    root@darkside:~#
+                    root@alamin:~#
                   </h1>
                   <p className="text-xl text-green-300">
-                    ./execute_evil_mode.sh
+                    ./execute_recreate_world.sh
                   </p>
                 </div>
               </div>
 
               <div className="mb-8">
                 <h2 className="text-3xl font-bold text-white mb-4">
-                  Welcome to the Dark Side
+                  Linux Command Center
                 </h2>
                 <p className="text-green-300 text-lg leading-relaxed">
-                  Where code meets chaos, and systems bend to my will.
-                  Linux isn't just an OS - it's a weapon of choice for those
-                  who dare to explore the depths of digital realms.
+                  Where code meets chaos, and systems obey my command. Linux isn't just an operating system, it's the battlefield where I sharpen my skills. Each command is a strike, each script a strategy, as I dive deeper into the void, bending digital realms to my will.
                 </p>
               </div>
 
@@ -250,7 +249,7 @@ export default function LinuxPortfolio() {
                   <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
                   <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                 </div>
-                <span className="ml-4 text-gray-400">Terminal - darkside</span>
+                <span className="ml-4 text-gray-400">Terminal - alamin</span>
               </div>
               <div className="p-4 h-80 overflow-y-auto">
                 <pre className="text-green-400 text-sm whitespace-pre-wrap">
@@ -266,11 +265,11 @@ export default function LinuxPortfolio() {
         <section className="container mx-auto px-6 py-20">
           <h2 className="text-3xl font-bold text-center text-red-400 mb-12">
             <Terminal className="inline mr-3" />
-            Dark Arts & Technical Mastery
+            Technical Mastery & Skills
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {darkSkills.map((skill, index) => (
+            {techSkills.map((skill, index) => (
               <div
                 key={index}
                 className="bg-gray-900 border border-gray-700 rounded-lg p-6 hover:border-red-400 transition-all duration-300 group"
@@ -336,7 +335,7 @@ export default function LinuxPortfolio() {
         <section className="container mx-auto px-6 py-20">
           <h2 className="text-3xl font-bold text-center text-red-400 mb-12">
             <Trophy className="inline mr-3" />
-            Dark Achievements
+            Achievements & Milestones
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -369,11 +368,11 @@ export default function LinuxPortfolio() {
         <section className="container mx-auto px-6 py-20">
           <h2 className="text-3xl font-bold text-center text-red-400 mb-12">
             <BookOpen className="inline mr-3" />
-            Dark Archives
+            Technical Archives
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {darkBlogs.map((blog, index) => (
+            {techBlogs.map((blog, index) => (
               <div
                 key={index}
                 className="bg-gray-900 border border-gray-700 rounded-lg p-6 hover:border-red-400 transition-all duration-300 group cursor-pointer"
@@ -515,7 +514,7 @@ export default function LinuxPortfolio() {
             <blockquote className="text-2xl italic text-green-300 mb-4">
               "In the world of zeros and ones, I am the exception that proves the rule."
             </blockquote>
-            <p className="text-red-400 font-bold">- The Dark Side of Al Amin</p>
+            <p className="text-red-400 font-bold">- Al Amin, Linux Specialist</p>
           </div>
         </section>
 
@@ -524,7 +523,7 @@ export default function LinuxPortfolio() {
           <div className="container mx-auto px-6">
             <div className="text-center">
               <p className="text-gray-400 mb-4">
-                root@darkside:~# echo "Contact the shadows..."
+                root@alamin:~# echo "Contact the shadows..."
               </p>
               <div className="flex justify-center space-x-6">
                 <a href="#" className="text-green-400 hover:text-red-400 transition-colors">

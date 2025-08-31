@@ -41,7 +41,7 @@ export default function LinuxNavbar() {
           <div className="flex items-center">
             <DiLinux className="text-3xl text-red-400 mr-2" />
             <span className="text-xl font-bold text-green-400 font-mono">
-              root@darkside
+              root@alamin
             </span>
           </div>
 
