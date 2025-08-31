@@ -80,7 +80,7 @@ export default function Hero() {
                   {
                     name: "LinkedIn",
                     icon: Linkedin,
-                    href: "https://www.linkedin.com/in/alamin-developer/",
+                    href: "https://www.linkedin.com/in/alamin27",
                     color: "hover:bg-sky-600/20",
                   },
                   {

@@ -276,7 +276,7 @@ export default function Contact() {
               </h4>
               <div className="flex space-x-4 justify-center lg:justify-start">
                 <a
-                  href="https://www.linkedin.com/in/alamin-developer/"
+                  href="https://www.linkedin.com/in/alamin27"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-3 rounded-full glass-card hover:glass-card-hover hover:scale-110 transition-all duration-300 group"

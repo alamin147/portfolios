@@ -539,10 +539,12 @@ Try 'help' to see available commands`;
                 root@alamin:~# echo "Contact the shadows..."
               </p>
               <div className="flex justify-center space-x-6">
-                <a href="#" className="text-green-400 hover:text-red-400 transition-colors">
+                <a href="https://github.com/alamin147"
+                  target="_blank" className="text-green-400 hover:text-red-400 transition-colors">
                   GitHub
                 </a>
-                <a href="#" className="text-green-400 hover:text-red-400 transition-colors">
+                <a href="https://www.linkedin.com/in/alamin27"
+                  target="_blank" className="text-green-400 hover:text-red-400 transition-colors">
                   LinkedIn
                 </a>
               </div>
