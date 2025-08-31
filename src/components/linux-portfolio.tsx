@@ -348,7 +348,7 @@ Try 'help' to see available commands`;
                   </div>
                 ))}
               </div>
-            
+
             </div>
 
             {/* Terminal */}
