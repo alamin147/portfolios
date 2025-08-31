@@ -497,18 +497,19 @@ Try 'help' to see available commands`;
             Elite Showcase
           </h2>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className={`grid gap-8 ${showcaseProjects.length === 1 ? 'grid-cols-1 max-w-2xl mx-auto' : 'grid-cols-1 lg:grid-cols-3'}`}>
             {showcaseProjects.map((project, index) => (
               <div
                 key={index}
-                className="bg-gray-900 border border-gray-700 rounded-lg p-6 hover:border-red-400 transition-all duration-300 group relative overflow-hidden"
+                className="bg-gray-900 border border-gray-700 rounded-lg p-6 hover:border-red-400 transition-all duration-300 group relative overflow-hidden cursor-pointer"
+                onClick={() => handleProjectClick(project)}
               >
                 <div className={`absolute top-0 right-0 px-3 py-1 text-xs font-bold ${
-                  project.danger === "High" ? "bg-red-600 text-white" :
+                  project.danger === "High" ? "bg-red-600 text-black" :
                   project.danger === "Medium" ? "bg-yellow-600 text-black" :
-                  "bg-purple-600 text-white"
+                  "bg-purple-600 text-black"
                 }`}>
-                  {project.danger}
+                  {project.status}
                 </div>
 
                 <h3 className="text-xl font-bold text-white mb-3 group-hover:text-red-400 transition-colors">
@@ -519,21 +520,30 @@ Try 'help' to see available commands`;
                   {project.description}
                 </p>
 
-                <div className="mb-4">
-                  <h4 className="text-sm font-bold text-red-400 mb-2">Key Features:</h4>
-                  <ul className="space-y-1">
-                    {project.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="text-green-300 text-sm">
-                        <span className="text-red-400 mr-2">▸</span>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                {/* Tags Section */}
+                {project.tags && (
+                  <div className="mb-4">
+                    <div className="flex flex-wrap gap-2">
+                      {project.tags.map((tag: string, tagIndex: number) => (
+                        <span
+                          key={tagIndex}
+                          className="bg-black border border-green-400 text-green-400 px-3 py-1 rounded text-sm hover:bg-green-400 hover:text-black transition-all duration-300"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
-                <div className="text-center">
-                  <span className="bg-black border border-green-400 text-green-400 px-4 py-2 rounded font-mono text-sm">
-                    {project.status}
+                <div className="flex items-center justify-between">
+                  <span className="px-4 py-2">
+                    {/* {project.status} */}
+                  </span>
+
+                  {/* Click indicator */}
+                  <span className="text-green-400 font-mono text-sm opacity-70 group-hover:opacity-100 transition-opacity">
+                    ./explore.sh →
                   </span>
                 </div>
               </div>
