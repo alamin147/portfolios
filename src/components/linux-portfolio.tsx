@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
-import { Terminal, Code, Database, Server, Shield, Eye, BookOpen, Star, Activity } from "lucide-react";
+import { Terminal, Code, Database, Server, Shield, Eye, BookOpen, Star } from "lucide-react";
 import { DiLinux } from "react-icons/di";
 import { SiKalilinux, SiUbuntu, SiLinuxmint, SiDebian, SiFedora } from "react-icons/si";
 import LinuxNavbar from "./linux-navbar";
 import LinuxContactModal from "./linux-contact-modal";
+import BlogDetailsModal from "./blog-details-modal";
 
 export default function LinuxPortfolio() {
   const [terminalText, setTerminalText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [isBlogModalOpen, setIsBlogModalOpen] = useState(false);
+  const [selectedBlog, setSelectedBlog] = useState(null);
 
   const terminalCommands = [
     "root@alamin:~# whoami",
@@ -36,11 +39,21 @@ export default function LinuxPortfolio() {
     return () => clearInterval(timer);
   }, [currentIndex]);
 
+  const handleBlogClick = (blog: any) => {
+    setSelectedBlog(blog);
+    setIsBlogModalOpen(true);
+  };
+
+  const closeBlogModal = () => {
+    setIsBlogModalOpen(false);
+    setSelectedBlog(null);
+  };
+
   const linuxDistros = [
       { name: "Fedora", icon: SiFedora, color: "text-blue-400" },
       { name: "Ubuntu", icon: SiUbuntu, color: "text-orange-400" },
       { name: "Debian", icon: SiDebian, color: "text-red-500" },
-      { name: "Mint", icon: SiLinuxmint, color: "text-red-500" },
+      { name: "Mint", icon: SiLinuxmint, color: "text-green-300" },
     { name: "Kali Linux", icon: SiKalilinux, color: "text-red-400" },
   ];
 
@@ -133,33 +146,6 @@ export default function LinuxPortfolio() {
       features: ["AES-256", "Perfect Forward Secrecy", "Quantum Resistant"],
       status: "Classified",
       danger: "Top Secret",
-    },
-  ];
-
-  const currentActivities = [
-    {
-      activity: "Reverse Engineering Advanced Malware",
-      status: "In Progress",
-      completion: 75,
-      timeframe: "2 weeks",
-    },
-    {
-      activity: "Building Custom Linux Distro",
-      status: "Active",
-      completion: 60,
-      timeframe: "1 month",
-    },
-    {
-      activity: "Red Team Assessment Campaign",
-      status: "Classified",
-      completion: 90,
-      timeframe: "3 days",
-    },
-    {
-      activity: "Zero-Day Research Project",
-      status: "Confidential",
-      completion: 45,
-      timeframe: "6 weeks",
     },
   ];
 
@@ -355,6 +341,7 @@ export default function LinuxPortfolio() {
               <div
                 key={index}
                 className="bg-gray-900 border border-gray-700 rounded-lg p-6 hover:border-red-400 transition-all duration-300 group cursor-pointer"
+                onClick={() => handleBlogClick(blog)}
               >
                 <div className="flex justify-between items-start mb-3">
                   <span className="bg-red-500 text-black px-3 py-1 text-xs font-bold rounded">
@@ -438,7 +425,7 @@ export default function LinuxPortfolio() {
         </section>
 
         {/* Current Activities Section */}
-        <section className="container mx-auto px-6 py-20">
+        {/* <section className="container mx-auto px-6 py-20">
           <h2 className="text-3xl font-bold text-center text-red-400 mb-12">
             <Activity className="inline mr-3" />
             Active Operations
@@ -485,7 +472,7 @@ export default function LinuxPortfolio() {
               </div>
             ))}
           </div>
-        </section>
+        </section> */}
 
         {/* Quote Section */}
         <section className="container mx-auto px-6 py-20">
@@ -527,6 +514,13 @@ export default function LinuxPortfolio() {
       <LinuxContactModal
         isOpen={isContactModalOpen}
         onClose={() => setIsContactModalOpen(false)}
+      />
+
+      {/* Blog Details Modal */}
+      <BlogDetailsModal
+        isOpen={isBlogModalOpen}
+        onClose={closeBlogModal}
+        blog={selectedBlog}
       />
     </div>
   );
