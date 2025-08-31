@@ -20,7 +20,7 @@ export default function LinuxPortfolio() {
 
   const terminalCommands = [
     "root@alamin:~# whoami",
-    "Al Amin - Linux Enth & Code Assassin",
+    "Al Amin - Fullstack Engineer & Linux Enthusiast ",
     "root@alamin:~# ls -la /skills",
     "drwxr-xr-x  2 root root 4096 Aug 31 2025 .",
     "drwxr-x--- 15 root root 4096 Aug 31 2025 ..",
@@ -42,7 +42,7 @@ export default function LinuxPortfolio() {
         setIsIntroComplete(true);
         setTerminalText(prev => prev + "root@alamin:~# ");
       }
-    }, 1000);
+    }, 500);
 
     return () => clearInterval(timer);
   }, [currentIndex, isIntroComplete]);
