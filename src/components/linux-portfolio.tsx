@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Terminal, Code, Database, Server, Shield, Eye, Trophy, BookOpen, Star, Activity } from "lucide-react";
+import { Terminal, Code, Database, Server, Shield, Eye, BookOpen, Star, Activity } from "lucide-react";
 import { DiLinux } from "react-icons/di";
 import { SiKalilinux, SiUbuntu, SiLinuxmint, SiDebian, SiFedora } from "react-icons/si";
 import LinuxNavbar from "./linux-navbar";
@@ -80,32 +80,6 @@ export default function LinuxPortfolio() {
     },
   ];
 
-  const achievements = [
-    {
-      title: "Linux Server Whisperer",
-      description: "Successfully managed 500+ production servers without a single critical outage",
-      icon: Trophy,
-      year: "2024",
-    },
-    {
-      title: "Security Vulnerability Hunter",
-      description: "Discovered and responsibly disclosed 15+ critical security vulnerabilities",
-      icon: Shield,
-      year: "2023-2024",
-    },
-    {
-      title: "Automation Architect",
-      description: "Reduced manual deployment time by 95% through custom automation scripts",
-      icon: Terminal,
-      year: "2024",
-    },
-    {
-      title: "Open Source Contributor",
-      description: "Contributed to 20+ Linux and security-focused open source projects",
-      icon: Code,
-      year: "2022-2024",
-    },
-  ];
 
   const techBlogs = [
     {
@@ -337,7 +311,7 @@ export default function LinuxPortfolio() {
         </section>
 
         {/* Achievements Section */}
-        <section className="container mx-auto px-6 py-20">
+        {/* <section className="container mx-auto px-6 py-20">
           <h2 className="text-3xl font-bold text-center text-red-400 mb-12">
             <Trophy className="inline mr-3" />
             Achievements & Milestones
@@ -367,7 +341,7 @@ export default function LinuxPortfolio() {
               </div>
             ))}
           </div>
-        </section>
+        </section> */}
 
         {/* Blog Section */}
         <section className="container mx-auto px-6 py-20">
