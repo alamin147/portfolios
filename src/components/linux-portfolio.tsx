@@ -580,7 +580,7 @@ Try 'help' to see available commands`;
               >
                 <div className={`absolute top-0 right-0 px-3 py-1 text-xs font-bold ${
                   project.danger === "High" ? "bg-red-600 text-black" :
-                  project.danger === "Medium" ? "bg-yellow-600 text-black" :
+                  project.danger === "Medium" ? "bg-green-600 text-black" :
                   "bg-purple-600 text-black"
                 }`}>
                   {project.status}

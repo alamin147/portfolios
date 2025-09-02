@@ -45,7 +45,7 @@ export const showcaseProjects = [
   {
     title: "My custom Dotfiles",
     description:
-      "I will be sharing my personal dotfiles repository that includes configurations for Hyprland, Neovim, Zsh and various scripts to enhance productivity and workflow on Linux systems.",
+      "I have shared my personal dotfiles repository that includes configurations for Hyprland, Neovim, Zsh and various scripts to enhance productivity and workflow on Linux systems.",
     features: [
       "Hyprland Window Manager Config",
       "Custom Neovim Setup",
@@ -54,9 +54,9 @@ export const showcaseProjects = [
       "Automated Installation Scripts",
     ],
     tags:["Hyprland","Neovim","Zsh","Dotfiles", "Scripts", "Linux Customization" ],
-    status: "Coming Soon",
-    danger: "High",
-    githubUrl: "#",
+    status: "Published",
+    danger: "Medium",
+    githubUrl: "https://github.com/alamin147/my-hyprland-dotfiles",
     liveUrl: "#",
   },
 ];
