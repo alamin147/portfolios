@@ -167,8 +167,8 @@
 
 .cp-profile-card:hover .cp-profile-content {
   background: rgba(51, 65, 85, 0.9);
-  border-color: rgba(56, 189, 248, 0.6);
-  box-shadow: 0 25px 50px -12px rgba(56, 189, 248, 0.4);
+  border-color: var(--card-color);
+  box-shadow: 0 25px 50px -12px color-mix(in srgb, var(--card-color) 40%, transparent);
 }
 
 .cp-profile-header {
@@ -250,7 +250,7 @@
 }
 
 .cp-profile-card:hover .cp-profile-details h3 {
-  color: #7dd3fc;
+  color: var(--card-color);
 }
 
 .cp-profile-details p {
@@ -285,8 +285,8 @@
 }
 
 .cp-profile-link-button:hover {
-  background: rgba(56, 189, 248, 0.2);
-  border-color: rgba(56, 189, 248, 0.5);
+  background: color-mix(in srgb, var(--card-color) 20%, transparent);
+  border-color: var(--card-color);
   transform: scale(1.1);
 }
 

@@ -84,7 +84,8 @@ export default function CPProfiles() {
               className="cp-profile-card"
               style={{
                 transitionDelay: profilesVisible ? `${100}ms` : "0ms",
-              }}
+                "--card-color": profile?.color || "#56, 189, 248",
+              } as React.CSSProperties & { "--card-color": string }}
             >
               {/* Glow Effect */}
               <div
