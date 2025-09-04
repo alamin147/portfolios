@@ -116,11 +116,11 @@ export default function Skills() {
   ];
 
   return (
-    <section id="skills" className="py-20 px-4">
-      <div className="container mx-auto max-w-4/5">
+    <section id="skills" className="py-12 sm:py-16 md:py-20 px-2 sm:px-4 lg:px-6">
+      <div className="container mx-auto max-w-7xl">
         <div
           ref={headerRef as any}
-          className={`text-center mb-16 transition-all duration-1000 ${
+          className={`text-center mb-10 sm:mb-12 md:mb-16 transition-all duration-1000 ${
             headerVisible
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-8"
@@ -134,7 +134,7 @@ export default function Skills() {
 
         <div
           ref={skillsRef as any}
-          className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-4 sm:gap-6 transition-all duration-1000 delay-100 ${
+          className={`grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-3 sm:gap-4 md:gap-6 transition-all duration-1000 delay-100 ${
             skillsVisible
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-8"
@@ -143,7 +143,7 @@ export default function Skills() {
           {skills.map((skill, index) => (
             <div
               key={index}
-              className={`group glass-card hover:glass-card-hover rounded-2xl p-6 text-center transition-all duration-200 hover:scale-105 flex flex-col justify-center items-center min-h-[140px] ${skill.color} relative overflow-hidden`}
+              className={`group glass-card hover:glass-card-hover rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 text-center transition-all duration-200 hover:scale-105 flex flex-col justify-center items-center min-h-[100px] xs:min-h-[120px] sm:min-h-[140px] ${skill.color} relative overflow-hidden`}
               style={{
                 transitionDelay: skillsVisible ? `${50}ms` : "0ms",
               }}
@@ -155,10 +155,10 @@ export default function Skills() {
               }}
             >
               <div className="relative z-10 flex flex-col items-center justify-center">
-                <div className="text-4xl sm:text-5xl mb-4 text-white transition-all duration-100 group-hover:scale-110 flex items-center justify-center">
+                <div className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-3 md:mb-4 text-white transition-all duration-100 group-hover:scale-110 flex items-center justify-center">
                   {skill.icon}
                 </div>
-                <p className="text-sm sm:text-base text-gray-100 font-medium group-hover:text-white transition-colors duration-300 text-center">
+                <p className="text-xs xs:text-sm sm:text-base text-gray-100 font-medium group-hover:text-white transition-colors duration-300 text-center leading-tight">
                   {skill.name}
                 </p>
               </div>
