@@ -74,7 +74,7 @@ export default function Footer() {
             {/* Bottom */}
             <div className="border-t border-sky-500/20 pt-4 sm:pt-6 lg:pt-8 flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-4">
               <p className="text-gray-400 text-xs sm:text-sm flex items-center order-2 sm:order-1">
-                Made with ❤️ by Al Amin
+                Made by Al Amin
               </p>
               <p className="text-gray-400 text-xs sm:text-sm order-1 sm:order-2">
                 © {new Date().getFullYear()} All rights reserved.

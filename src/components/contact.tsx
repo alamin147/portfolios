@@ -307,14 +307,14 @@ const ContactInfo = ({
   color: string;
 }) => (
   <div
-    className="bg-gray-700/40  border border-white/10 backdrop-blur-xl
+    className="bg-gray-700/40 border border-white/10 backdrop-blur-xl
                     transition-all duration-300
                     hover:g-cyan-500/30 hover:shadow-[0_10px_25px_rgba(8,145,178,0.4)] hover:scale-105
-                    rounded-2xl p-5 group"
+                    rounded-xl sm:rounded-2xl p-3 sm:p-5 group"
   >
-    <div className="flex items-center">
+    <div className="flex items-center min-w-0">
       <div
-        className={`flex-shrink-0 p-3 rounded-xl ${
+        className={`flex-shrink-0 p-2 sm:p-3 rounded-lg sm:rounded-xl ${
           typeof color === "string" && color.includes("from-")
             ? `bg-gradient-to-r ${color}`
             : ""
@@ -322,11 +322,11 @@ const ContactInfo = ({
       >
         {icon}
       </div>
-      <div className="ml-5">
-        <h4 className="mb-1 text-lg font-bold text-white group-hover:text-sky-300 transition-colors duration-300">
+      <div className="ml-4 sm:ml-5 min-w-0 flex-1">
+        <h4 className="mb-1 text-sm sm:text-lg font-bold text-white group-hover:text-sky-300 transition-colors duration-300">
           {title}
         </h4>
-        <p className="text-base text-gray-300">{description}</p>
+        <p className="text-sm sm:text-base text-gray-300 break-words overflow-wrap-anywhere">{description}</p>
       </div>
     </div>
   </div>

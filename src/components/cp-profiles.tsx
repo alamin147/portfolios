@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ExternalLink, Trophy, Target, Award, TrendingUp } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
-import SectionTitle from "./section-title";
+
 
 type CPProfile = {
   platform?: string;
@@ -68,10 +68,22 @@ export default function CPProfiles() {
               : "opacity-0 translate-y-8"
           }`}
         >
-          <SectionTitle
-            title="Competitive Programming"
-            desc="Explore my competitive programming journey across various platforms where I solve algorithmic challenges and participate in coding contests."
-          />
+
+ <div className="relative group mx-auto w-full max-w-md sm:max-w-xl lg:max-w-4xl px-4 sm:px-6 lg:px-0">
+      <div className="absolute -inset-2 sm:-inset-4 bg-gradient-to-r from-sky-600/20 to-emerald-600/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+      <div className="glass-card hover:glass-card-hover rounded-2xl sm:rounded-3xl p-6 sm:p-10 lg:p-12 hover:shadow-sky-500/20 shadow-2xl transition-all duration-500">
+        <h2 className="text-xl sm:text-4xl md:text-6xl font-bold bg-gradient-to-r from-white via-sky-200 to-emerald-200 bg-clip-text text-transparent mb-3 sm:mb-5 leading-tight py-1 sm:py-2">
+          Competitive Programming
+        </h2>
+
+        <div className="w-16 sm:w-20 lg:w-24 h-1 bg-gradient-to-r from-sky-500 to-emerald-500 mx-auto rounded-full mb-4" />
+
+        <p className="text-gray-300 text-base sm:text-lg md:text-xl max-w-prose sm:max-w-2xl lg:max-w-3xl mx-auto leading-relaxed">
+          Explore my competitive programming journey across various platforms where I solve algorithmic challenges and participate in coding contests.
+        </p>
+      </div>
+    </div>
         </div>
 
         {/* Profiles Grid */}
@@ -88,7 +100,7 @@ export default function CPProfiles() {
               key={index}
               className="group relative"
               style={{
-                transitionDelay: profilesVisible ? `${index * 100}ms` : "0ms",
+                transitionDelay: profilesVisible ? `${100}ms` : "0ms",
               }}
             >
               {/* Glow Effect */}
