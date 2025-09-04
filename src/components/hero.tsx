@@ -1,11 +1,12 @@
 import { Download, Github, Linkedin, Mail } from "lucide-react";
+import { SiLeetcode, SiCodeforces, SiCodechef } from "react-icons/si";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 import CustomBtn from "./custom-button";
 import "../App.css";
+import Stats from "./stats/Stats";
 
 export default function Hero() {
   const { ref: heroRef, isVisible: heroVisible } = useScrollAnimation();
-  const { ref: statsRef, isVisible: statsVisible } = useScrollAnimation();
 
   return (
     <section
@@ -82,18 +83,42 @@ export default function Hero() {
                     icon: Linkedin,
                     href: "https://www.linkedin.com/in/alamin27",
                     color: "hover:bg-sky-600/20",
+                    iconColor: "group-hover:text-blue-500",
                   },
                   {
                     name: "GitHub",
                     icon: Github,
                     href: "https://github.com/alamin147",
                     color: "hover:bg-gray-700/20",
+                    iconColor: "group-hover:text-gray-400",
+                  },
+                  {
+                    name: "LeetCode",
+                    icon: SiLeetcode,
+                    href: "https://leetcode.com/u/alamin14",
+                    color: "hover:bg-orange-600/20",
+                    iconColor: "group-hover:text-orange-500",
+                  },
+                  {
+                    name: "Codeforces",
+                    icon: SiCodeforces,
+                    href: "https://codeforces.com/profile/alamin147",
+                    color: "hover:bg-blue-600/20",
+                    iconColor: "group-hover:text-blue-400",
+                  },
+                  {
+                    name: "CodeChef",
+                    icon: SiCodechef,
+                    href: "https://www.codechef.com/users/alamin14780",
+                    color: "hover:bg-amber-600/20",
+                    iconColor: "group-hover:text-amber-500",
                   },
                   {
                     name: "mail",
                     icon: Mail,
                     href: "/#contact",
                     color: "hover:bg-emerald-600/20",
+                    iconColor: "group-hover:text-emerald-400",
                   },
                 ].map((social, index) => (
                   <a
@@ -104,7 +129,7 @@ export default function Hero() {
                     <div
                       className={`glass-card ${social.color} rounded-full p-4 hover:scale-110 transition-all duration-300 cursor-pointer group `}
                     >
-                      <social.icon className="h-6 w-6 text-white group-hover:scale-110 transition-transform duration-300" />
+                      <social.icon className={`h-6 w-6 text-white ${social.iconColor} group-hover:scale-110 transition-all duration-300`} />
                     </div>
                   </a>
                 ))}
@@ -139,35 +164,7 @@ export default function Hero() {
             </div>
           </div>
         </div>
-
-        <div
-          ref={statsRef as any}
-          className={`mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 transition-all duration-1000 delay-300 ${
-            statsVisible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-8"
-          }`}
-        >
-          {[
-            { number: "20+", label: "Projects Completed" },
-            { number: "2.5+", label: "Years Experience" },
-            { number: "1000+", label: "Problems Solved" },
-            { number: "10+", label: "Technologies" },
-          ].map((stat, index) => (
-            <div
-              key={index}
-              className="glass-card hover:glass-card-hover rounded-2xl p-6 text-center transition-all duration-300 group hover:scale-105 relative overflow-hidden"
-              style={{ transitionDelay: `${100}ms` }}
-            >
-              <div className="relative z-10">
-                <div className="text-3xl font-bold bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">
-                  {stat.number}
-                </div>
-                <div className="text-gray-300 text-sm mt-2">{stat.label}</div>
-              </div>
-            </div>
-          ))}
-        </div>
+        <Stats/>
       </div>
     </section>
   );

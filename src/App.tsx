@@ -43,9 +43,9 @@ function App() {
                   <div className="relative z-10">
                     <Navbar />
                     <Hero />
+                    <CPProfiles />
                     <Projects />
                     <Skills />
-                    <CPProfiles />
                     <Blog />
                     <Education />
                     <Contact />
