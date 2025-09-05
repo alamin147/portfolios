@@ -6,9 +6,9 @@ const ContactIcons = () => {
   return (
       <div className="mt-4 md:mt-7 flex flex-col sm:flex-row flex-wrap items-center gap-2 sm:gap-3 justify-center lg:justify-start">
               <a
-                href={"/Al_Amin_fullstack_Resume.pdf"}
-                target="_black"
-                download="Alamin Fullstack Resume"
+                href={import.meta.env.VITE_RESUME_URL}
+                target="_blank"
+                download="Alamin_Fullstack_Resume.pdf"
                 className="flex justify-center sm:w-auto"
               >
                 <CustomBtn
