@@ -4,15 +4,15 @@ import CustomBtn from "../custom-button";
 
 const ContactIcons = () => {
   return (
-      <div className="mt-4 md:mt-7 flex flex-col sm:flex-row flex-wrap items-center gap-2 sm:gap-3 justify-center lg:justify-start">
+      <div className="mt-3 md:mt-6 flex flex-col sm:flex-row flex-wrap items-center gap-2 sm:gap-3 justify-center lg:justify-start">
               <a
                 href={import.meta.env.VITE_RESUME_URL}
                 target="_blank"
                 download="Alamin_Fullstack_Resume.pdf"
-                className="flex justify-center sm:w-auto"
+                className="flex justify-center sm:w-auto scale-90 sm:scale-100"
               >
                 <CustomBtn
-                  children={<Download className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />}
+                  children={<Download className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4 lg:h-5 lg:w-5" />}
                   title="Download Resume"
                 />
               </a>
