@@ -21,23 +21,23 @@ export default function Hero() {
           }`}
         >
           {/* Text Content */}
-          <div className="text-center lg:text-left space-y-6 sm:space-y-8 order-2 lg:order-1">
-            <div className="glass-card hover:glass-card-hover transition-all duration-500 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 shadow-2xl relative overflow-hidden">
-              <div className="relative z-10">
-                <span className="inline-block px-4 sm:px-6 py-2 sm:py-3 glass-button rounded-full text-sky-300 text-xs sm:text-sm font-medium mb-4 sm:mb-6 hover:scale-105 transition-all duration-300">
+          <div className="text-center lg:text-left space-y-3 sm:space-y-4 order-2 lg:order-1">
+            <div className="glass-card hover:glass-card-hover transition-all duration-500 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-2xl relative overflow-hidden">
+              <div className="relative z-10 space-y-3 sm:space-y-4">
+                <span className="inline-block px-4 sm:px-6 py-2 sm:py-3 glass-button rounded-full text-sky-300 text-xs sm:text-sm font-medium hover:scale-105 transition-all duration-300">
                   Hi, I'm Al Amin ✨
                 </span>
 
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent leading-tight">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent leading-tight">
                   Fullstack
                   <span className="block bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent">
                     Developer
                   </span>
                 </h1>
 
-                <div className="w-16 sm:w-20 h-1 bg-gradient-to-r from-sky-500 to-emerald-500 my-4 sm:my-6 mx-auto lg:mx-0 rounded-full"></div>
+                <div className="w-12 sm:w-16 h-0.5 sm:h-1 bg-gradient-to-r from-sky-500 to-emerald-500 mx-auto lg:mx-0 rounded-full"></div>
 
-                <p className="text-sm sm:text-base lg:text-lg text-gray-300 leading-relaxed max-w-2xl">
+                <p className="text-xs sm:text-sm lg:text-base text-gray-300 leading-relaxed max-w-3xl mx-auto lg:mx-0">
                   I am currently studying computer science and engineering.
                   Passionate about
                   <span className="text-sky-400 font-semibold"> coding </span>
@@ -56,15 +56,13 @@ export default function Hero() {
                   in software development. I enjoy turning ideas into clean,
                   working code.
                   <br className="hidden sm:block" />
-                  <span className="block mt-2 sm:mt-0 sm:inline">
+                  <span className="block mt-1 sm:mt-0 sm:inline">
                     Always building, always growing. Let's connect and make
-                    something awesome! .
+                    something awesome!
                   </span>
                 </p>
               </div>
             </div>
-
-
           </div>
 
           {/* Profile Image */}
