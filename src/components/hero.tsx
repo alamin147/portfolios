@@ -76,7 +76,7 @@ export default function Hero() {
                 <img
                   src="/alamin-removebg-preview.png"
                   alt="Al Amin's profile"
-                  className="rounded-full object-cover w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 xl:w-[400px] xl:h-[400px]"
+                  className="rounded-full object-cover w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-[450px] lg:h-[450px] xl:w-[500px] xl:h-[500px] 2xl:w-[550px] 2xl:h-[550px]"
                 />
               </div>
 
