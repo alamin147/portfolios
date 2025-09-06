@@ -127,7 +127,7 @@ export default function Navbar() {
                     {item.isIcon ? (
                       <span className="flex items-center">
                         <item.name className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
-                        Linux Portfolio
+
                       </span>
                     ) : (
                       item.name
@@ -143,7 +143,7 @@ export default function Navbar() {
                     {item.isIcon ? (
                       <span className="flex items-center">
                         <item.name className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
-                        Linux Portfolio
+                        
                       </span>
                     ) : (
                       item.name

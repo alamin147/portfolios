@@ -5,13 +5,14 @@ import { Textarea } from "@/components/ui/textarea";
 import "@/components/css/contact.css";
 import { Mail, MapPin, Phone, Send } from "lucide-react";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
+import { SiLeetcode, SiCodeforces, SiCodechef, SiHackerrank } from "react-icons/si";
 import SectionTitle from "./section-title";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { ContactSuccessToast, ContactErrorToast, ContactSendingToast } from "./custom-toast";
-import { contactInfo } from "../data/contact-data";
+import { contactInfo, socialLinks } from "../data/contact-data";
 
 type TInputs = {
   name: string;
@@ -33,6 +34,26 @@ export default function Contact() {
   const { ref: contactFormRef, isVisible: contactVisible } =
     useScrollAnimation();
   const { ref: contactsRef, isVisible: contactsVisible } = useScrollAnimation();
+
+  // Map social links to their icons
+  const getSocialIcon = (socialName: string) => {
+    switch (socialName) {
+      case "LinkedIn":
+        return <FaLinkedin className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-sky-400" />;
+      case "GitHub":
+        return <FaGithub className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-gray-400" />;
+      case "LeetCode":
+        return <SiLeetcode className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-orange-400" />;
+      case "Codeforces":
+        return <SiCodeforces className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-blue-400" />;
+      case "CodeChef":
+        return <SiCodechef className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-amber-400" />;
+      case "Hackerrank":
+        return <SiHackerrank className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-green-400" />;
+      default:
+        return <FaGithub className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-gray-400" />;
+    }
+  };
 
   const onSubmit = async (data: TInputs) => {
     // Show sending toast
@@ -269,23 +290,18 @@ export default function Contact() {
               <h4 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent">
                 Connect with me
               </h4>
-              <div className="flex space-x-3 sm:space-x-4 justify-center lg:justify-start">
-                <a
-                  href={contactInfo.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 sm:p-3 rounded-full glass-card hover:glass-card-hover hover:scale-110 transition-all duration-300 group"
-                >
-                  <FaLinkedin className="w-4 h-4 sm:w-5 sm:h-5 text-sky-400 group-hover:text-white" />
-                </a>
-                <a
-                  href={contactInfo.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 sm:p-3 rounded-full glass-card hover:glass-card-hover hover:scale-110 transition-all duration-300 group"
-                >
-                  <FaGithub className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 group-hover:text-white" />
-                </a>
+              <div className="flex flex-wrap gap-3 sm:gap-4 justify-center lg:justify-start">
+                {socialLinks.map((social, index) => (
+                  <a
+                    key={index}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2.5 sm:p-3 rounded-full glass-card hover:glass-card-hover hover:scale-110 transition-all duration-300 group"
+                  >
+                    {getSocialIcon(social.name)}
+                  </a>
+                ))}
               </div>
             </div>
           </div>
