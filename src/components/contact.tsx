@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { ContactSuccessToast, ContactErrorToast, ContactSendingToast } from "./custom-toast";
+import { contactInfo } from "../data/contact-data";
 
 type TInputs = {
   name: string;
@@ -246,19 +247,19 @@ export default function Contact() {
               <ContactInfo
                 icon={<MapPin className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6" />}
                 title="Address"
-                description="Dhaka, Bangladesh"
+                description={contactInfo.address}
                 color="from-sky-500 to-sky-600"
               />
               <ContactInfo
                 icon={<Phone className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6" />}
                 title="Phone Number"
-                description="+8801322332323"
+                description={contactInfo.phone}
                 color="from-sky-500 to-sky-600"
               />
               <ContactInfo
                 icon={<Mail className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6" />}
                 title="Email Address"
-                description="alamin.14780@gmail.com"
+                description={contactInfo.email}
                 color="from-sky-500 to-sky-600"
               />
             </div>
@@ -270,7 +271,7 @@ export default function Contact() {
               </h4>
               <div className="flex space-x-3 sm:space-x-4 justify-center lg:justify-start">
                 <a
-                  href="https://www.linkedin.com/in/alamin27"
+                  href={contactInfo.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2.5 sm:p-3 rounded-full glass-card hover:glass-card-hover hover:scale-110 transition-all duration-300 group"
@@ -278,7 +279,7 @@ export default function Contact() {
                   <FaLinkedin className="w-4 h-4 sm:w-5 sm:h-5 text-sky-400 group-hover:text-white" />
                 </a>
                 <a
-                  href="https://github.com/alamin147"
+                  href={contactInfo.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2.5 sm:p-3 rounded-full glass-card hover:glass-card-hover hover:scale-110 transition-all duration-300 group"

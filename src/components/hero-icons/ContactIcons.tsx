@@ -1,8 +1,37 @@
 import { Download, Github, Linkedin } from "lucide-react";
-import { SiLeetcode, SiCodeforces, SiCodechef } from "react-icons/si";
+import { SiLeetcode, SiCodeforces, SiCodechef, SiHackerrank } from "react-icons/si";
 import CustomBtn from "../custom-button";
+import { socialLinks } from "../../data/contact-data";
 
 const ContactIcons = () => {
+  // Map social links to include their icons
+  const socialLinksWithIcons = socialLinks.map((social) => {
+    let icon;
+    switch (social.name) {
+      case "LinkedIn":
+        icon = Linkedin;
+        break;
+      case "GitHub":
+        icon = Github;
+        break;
+      case "LeetCode":
+        icon = SiLeetcode;
+        break;
+      case "Codeforces":
+        icon = SiCodeforces;
+        break;
+      case "CodeChef":
+        icon = SiCodechef;
+        break;
+      case "Hackerrank":
+        icon = SiHackerrank;
+        break;
+      default:
+        icon = Github; // fallback
+    }
+    return { ...social, icon };
+  });
+
   return (
       <div className="mt-3 md:mt-6 flex flex-col sm:flex-row flex-wrap items-center gap-2 sm:gap-3 justify-center lg:justify-start">
               <a
@@ -18,50 +47,7 @@ const ContactIcons = () => {
               </a>
 
               <div className="flex items-center gap-2 sm:gap-3 justify-center lg:justify-start flex-wrap sm:flex-nowrap">
-              {[
-                {
-                  name: "LinkedIn",
-                  icon: Linkedin,
-                  href: "https://www.linkedin.com/in/alamin27",
-                  color: "hover:bg-sky-600/20",
-                  iconColor: "group-hover:text-blue-500",
-                },
-                {
-                  name: "GitHub",
-                  icon: Github,
-                  href: "https://github.com/alamin147",
-                  color: "hover:bg-gray-700/20",
-                  iconColor: "group-hover:text-gray-400",
-                },
-                {
-                  name: "LeetCode",
-                  icon: SiLeetcode,
-                  href: "https://leetcode.com/u/alamin14",
-                  color: "hover:bg-orange-600/20",
-                  iconColor: "group-hover:text-orange-500",
-                },
-                {
-                  name: "Codeforces",
-                  icon: SiCodeforces,
-                  href: "https://codeforces.com/profile/alamin147",
-                  color: "hover:bg-blue-600/20",
-                  iconColor: "group-hover:text-blue-400",
-                },
-                {
-                  name: "CodeChef",
-                  icon: SiCodechef,
-                  href: "https://www.codechef.com/users/alamin14780",
-                  color: "hover:bg-amber-600/20",
-                  iconColor: "group-hover:text-amber-500",
-                },
-                // {
-                //   name: "mail",
-                //   icon: Mail,
-                //   href: "/#contact",
-                //   color: "hover:bg-emerald-600/20",
-                //   iconColor: "group-hover:text-emerald-400",
-                // },
-              ].map((social, index) => (
+              {socialLinksWithIcons.map((social, index) => (
                 <a
                   href={social.href}
                   target={social.name == "mail" ? "" : "_blank"}
