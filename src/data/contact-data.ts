@@ -44,4 +44,6 @@ export const contactInfo = {
   address: "Dhaka, Bangladesh",
   linkedin: "https://www.linkedin.com/in/alamin27",
   github: "https://github.com/alamin147",
+  resumeUrl: import.meta.env.VITE_RESUME_URL,
+  cvUrl: import.meta.env.VITE_CV_URL || import.meta.env.VITE_RESUME_URL, // fallback to resume if CV not set
 };

@@ -1,9 +1,36 @@
 import { Download, Github, Linkedin } from "lucide-react";
 import { SiLeetcode, SiCodeforces, SiCodechef, SiHackerrank } from "react-icons/si";
 import CustomBtn from "../custom-button";
-import { socialLinks } from "../../data/contact-data";
+import { Button } from "@/components/ui/button";
+import { socialLinks, contactInfo } from "../../data/contact-data";
+import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const ContactIcons = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleDownload = (type: 'resume' | 'cv') => {
+    const url = type === 'resume' ? contactInfo.resumeUrl : contactInfo.cvUrl;
+    const fileName = type === 'resume' ? 'Alamin_Fullstack_Resume.pdf' : 'Alamin_CV.pdf';
+
+    if (url) {
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = fileName;
+      link.target = '_blank';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    setIsOpen(false);
+  };
   // Map social links to include their icons
   const socialLinksWithIcons = socialLinks.map((social) => {
     let icon;
@@ -34,17 +61,47 @@ const ContactIcons = () => {
 
   return (
       <div className="mt-3 md:mt-6 flex flex-col sm:flex-row flex-wrap items-center gap-2 sm:gap-3 justify-center lg:justify-start">
-              <a
-                href={import.meta.env.VITE_RESUME_URL}
-                target="_blank"
-                download="Alamin_Fullstack_Resume.pdf"
-                className="flex justify-center sm:w-auto scale-90 sm:scale-100"
-              >
-                <CustomBtn
-                  children={<Download className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4 lg:h-5 lg:w-5" />}
-                  title="Download Resume"
-                />
-              </a>
+              <Dialog open={isOpen} onOpenChange={setIsOpen}>
+                <DialogTrigger asChild>
+                  <div className="flex justify-center sm:w-auto scale-90 sm:scale-100">
+                    <CustomBtn
+                      children={<Download className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4 lg:h-5 lg:w-5" />}
+                      title="Download Resume/CV"
+                    />
+                  </div>
+                </DialogTrigger>
+                <DialogContent className="glass-card hover:glass-card-hover border border-white/10 backdrop-blur-xl max-w-sm mx-auto">
+                  <DialogHeader>
+                    <DialogTitle className="text-center text-lg sm:text-xl font-bold bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent mb-2">
+                      Choose Download Option
+                    </DialogTitle>
+                  </DialogHeader>
+                  <div className="flex flex-col gap-3 pt-2">
+                    <div onClick={() => handleDownload('resume')} className="cursor-pointer">
+                      <Button
+                        className="cursor-pointer flex items-center justify-center gap-2 px-8 py-6 rounded-full text-white text-lg font-semibold
+                                  bg-cyan-500/20 border border-white/10 backdrop-blur-xl
+                                  shadow-[0_4px_16px_rgba(8,145,178,0.25)] transition-all duration-300
+                                  hover:bg-cyan-500/30 hover:shadow-[0_10px_25px_rgba(8,145,178,0.4)] hover:scale-105 w-full"
+                      >
+                        <Download className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4 lg:h-5 lg:w-5" />
+                        Download Resume
+                      </Button>
+                    </div>
+                    <div onClick={() => handleDownload('cv')} className="cursor-pointer">
+                      <Button
+                        className="cursor-pointer flex items-center justify-center gap-2 px-8 py-6 rounded-full text-white text-lg font-semibold
+                                  bg-cyan-500/20 border border-white/10 backdrop-blur-xl
+                                  shadow-[0_4px_16px_rgba(8,145,178,0.25)] transition-all duration-300
+                                  hover:bg-cyan-500/30 hover:shadow-[0_10px_25px_rgba(8,145,178,0.4)] hover:scale-105 w-full"
+                      >
+                        <Download className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4 lg:h-5 lg:w-5" />
+                        Download CV
+                      </Button>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
 
               <div className="flex items-center gap-2 sm:gap-3 justify-center lg:justify-start flex-wrap sm:flex-nowrap">
               {socialLinksWithIcons.map((social, index) => (
