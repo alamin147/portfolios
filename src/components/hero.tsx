@@ -2,6 +2,7 @@ import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 import "../App.css";
 import Stats from "./stats/Stats";
 import ContactIcons from "./hero-icons/ContactIcons";
+import {SquareTerminal} from "lucide-react";
 
 export default function Hero() {
   const { ref: heroRef, isVisible: heroVisible } = useScrollAnimation();
@@ -25,7 +26,7 @@ export default function Hero() {
             <div className="glass-card hover:glass-card-hover transition-all duration-500 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-2xl relative overflow-hidden">
               <div className="relative z-10 space-y-3 sm:space-y-4">
                 <span className="inline-block px-4 sm:px-6 py-2 sm:py-3 glass-button rounded-full text-sky-300 text-xs sm:text-sm font-medium hover:scale-105 transition-all duration-300">
-                  Hi, I'm Al Amin ✨
+                  Hi, I'm Al Amin
                 </span>
 
                 <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent leading-tight">
@@ -85,7 +86,7 @@ export default function Hero() {
                 <span className="text-lg sm:text-2xl">💻</span>
               </div>
               <div className="absolute -bottom-2 -left-2 sm:-bottom-4 sm:-left-4 glass-card rounded-full p-2 sm:p-3 animate-float animation-delay-2000 hover:glass-card-hover transition-all duration-300">
-                <span className="text-lg sm:text-2xl">🚀</span>
+                <span className="text-lg sm:text-2xl text-white "><SquareTerminal size={28}/></span>
               </div>
             </div>
           </div>
