@@ -54,7 +54,7 @@ const ContactIcons = () => {
         icon = SiHackerrank;
         break;
       default:
-        icon = Github; // fallback
+        icon = Github;
     }
     return { ...social, icon };
   });
@@ -70,7 +70,7 @@ const ContactIcons = () => {
                     />
                   </div>
                 </DialogTrigger>
-                <DialogContent className="glass-card hover:glass-card-hover border border-white/10 backdrop-blur-xl max-w-sm mx-auto">
+                <DialogContent className="glass-card hover:glass-card-hover border border-white/10 backdrop-blur-xl max-w-sm mx-auto [&>button]:text-white [&>button]:cursor-pointer [&>button]:hover:text-gray-300">
                   <DialogHeader>
                     <DialogTitle className="text-center text-lg sm:text-xl font-bold bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent mb-2">
                       Choose Download Option
