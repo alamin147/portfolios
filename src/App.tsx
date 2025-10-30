@@ -16,11 +16,15 @@ import ProjectDetailsPage from "./components/project-details";
 import BlogDetailsWrapper from "./components/blog-details-wrapper";
 import BlogsPage from "./components/blogsPage";
 import BackgroundStars from "./components/background-stars";
+import MouseTrail from "./components/mouse-trail";
 
 function App() {
   return (
     <>
       <div className="min-h-screen relative">
+        {/* Mouse trail effect */}
+        <MouseTrail />
+
         {/* Floating interactive elements */}
         <FloatingElements />
 

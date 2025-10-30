@@ -1,10 +1,6 @@
 # TO implement
-Interactive Elements:
 
-Mouse trail effects with glowing particles that match your theme
-Floating elements that respond to mouse movement or scroll
-Interactive skill bubbles that expand with details on hover
-3D card flips for project showcases
+
 Fun Loading States:
 
 Custom loading animations using your initials
