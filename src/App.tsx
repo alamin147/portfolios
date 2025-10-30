@@ -5,7 +5,7 @@ import Footer from "@/components/footer";
 import CPProfiles from "@/components/cp-profiles";
 import Blog from "@/components/blog";
 import Education from "@/components/education";
-import Certificates from "@/components/certificates";
+// import Certificates from "@/components/certificates";
 import Contact from "@/components/contact";
 import { FloatingElements } from "@/components/floating-elements";
 import Navbar from "@/components/navbar";
@@ -17,10 +17,29 @@ import BlogDetailsWrapper from "./components/blog-details-wrapper";
 import BlogsPage from "./components/blogsPage";
 import BackgroundStars from "./components/background-stars";
 import MouseTrail from "./components/mouse-trail";
+import InitialLoader from "./components/initial-loader";
+import { useState, useEffect } from "react";
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Set overflow to hidden when loading
+    if (loading) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [loading]);
+
   return (
     <>
+      {loading && (
+        <InitialLoader
+          duration={2500}
+          onComplete={() => setLoading(false)}
+        />
+      )}
       <div className="min-h-screen relative">
         {/* Mouse trail effect */}
         <MouseTrail />
