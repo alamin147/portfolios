@@ -1,30 +1,21 @@
 # TO implement
 
-
-Easter Eggs:
-catch the egg game hidden in the portfolio
-Code snippet puzzles that visitors can solve
-
-
 Creative Navigation:
 Space theme navigation where sections are like planets
-Terminal-style command interface alternative navigation
-Timeline-based navigation with fun animations
-Retro game-style menu options
 
 Dynamic Elements:
 Live coding examples that visitors can edit
 Real-time GitHub activity visualization
 Interactive resume timeline
 Dynamic word cloud of skills/technologies
-Personalization:
 
+Personalization:
 Theme customizer with color palette selection
 Background music toggle with your favorite coding playlist
 Visitor's name in custom welcome message
 Time-of-day based greetings and themes
-Unique Project Showcases:
 
+Unique Project Showcases:
 3D carousel for project navigation
 Interactive project demos embedded in cards
 Before/after sliders for design projects

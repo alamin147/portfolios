@@ -19,18 +19,22 @@ import BackgroundStars from "./components/background-stars";
 import MouseTrail from "./components/mouse-trail";
 import InitialLoader from "./components/initial-loader";
 import { useState, useEffect } from "react";
+import { EasterEggsProvider } from "./context/easter-eggs-context";
+import SpaceCatcherGame from "./components/easter-eggs/space-catcher-game";
+// Import only the space catcher game
+import { useEasterEggs } from "./context/easter-eggs-context";
 
-function App() {
+const AppContent = () => {
+  const { isGameActive, updateGameScore, deactivateGame } = useEasterEggs();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Set overflow to hidden when loading
-    if (loading) {
+    if (loading || isGameActive) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'auto';
     }
-  }, [loading]);
+  }, [loading, isGameActive]);
 
   return (
     <>
@@ -40,16 +44,16 @@ function App() {
           onComplete={() => setLoading(false)}
         />
       )}
+      <SpaceCatcherGame
+        isActive={isGameActive}
+        onScoreChange={updateGameScore}
+        onClose={deactivateGame}
+      />
       <div className="min-h-screen relative">
-        {/* Mouse trail effect */}
+        {/* Rest of your app content */}
         <MouseTrail />
-
-        {/* Floating interactive elements */}
         <FloatingElements />
-
         <BackgroundStars />
-
-        {/* Content */}
         <div className="relative z-10">
           <Router>
             <Routes>
@@ -62,7 +66,6 @@ function App() {
                     <CPProfiles />
                     <Projects />
                     <Skills />
-                    {/* <Certificates /> */}
                     <Blog />
                     <Education />
                     <Contact />
@@ -119,6 +122,14 @@ function App() {
         </div>
       </div>
     </>
+  );
+};
+
+function App() {
+  return (
+    <EasterEggsProvider>
+      <AppContent />
+    </EasterEggsProvider>
   );
 }
 
