@@ -5,6 +5,7 @@ import Footer from "@/components/footer";
 import CPProfiles from "@/components/cp-profiles";
 import Blog from "@/components/blog";
 import Education from "@/components/education";
+import NotFound from "@/components/not-found";
 // import Certificates from "@/components/certificates";
 import Contact from "@/components/contact";
 import { FloatingElements } from "@/components/floating-elements";
@@ -116,6 +117,10 @@ const AppContent = () => {
               <Route
                 path="/linux"
                 element={<LinuxPortfolio />}
+              />
+              <Route
+                path="*"
+                element={<NotFound />}
               />
             </Routes>
           </Router>

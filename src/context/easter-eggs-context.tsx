@@ -31,7 +31,7 @@ export const EasterEggsProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   }, [gameScore]);
 
   useEffect(() => {
-    const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+    const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft'];
 
     const handleKeyDown = (e: KeyboardEvent) => {
       const newKonami = [...konami, e.key];
