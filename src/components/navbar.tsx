@@ -22,6 +22,7 @@ export default function Navbar() {
     { name: "CP Profiles", href: "/#cp-profiles" },
     { name: "Projects", href: "/#projects" },
     { name: "Skills", href: "/#skills" },
+    // { name: "Certificates", href: "/#certificates" },
     { name: "Blog", href: "/#blogs" },
     { name: "Education", href: "/#education" },
     { name: "Contact", href: "/#contact" },
@@ -143,7 +144,7 @@ export default function Navbar() {
                     {item.isIcon ? (
                       <span className="flex items-center">
                         <item.name className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
-                        
+
                       </span>
                     ) : (
                       item.name

@@ -5,6 +5,7 @@ import Footer from "@/components/footer";
 import CPProfiles from "@/components/cp-profiles";
 import Blog from "@/components/blog";
 import Education from "@/components/education";
+import Certificates from "@/components/certificates";
 import Contact from "@/components/contact";
 import { FloatingElements } from "@/components/floating-elements";
 import Navbar from "@/components/navbar";
@@ -46,6 +47,7 @@ function App() {
                     <CPProfiles />
                     <Projects />
                     <Skills />
+                    {/* <Certificates /> */}
                     <Blog />
                     <Education />
                     <Contact />
