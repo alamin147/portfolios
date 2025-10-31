@@ -6,7 +6,6 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import type { Planet } from "@/data/planets-data";
-import { X } from "lucide-react";
 
 interface PlanetModalProps {
   planet: Planet | null;
@@ -19,21 +18,12 @@ export function PlanetModal({ planet, isOpen, onClose }: PlanetModalProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-5xl p-0 overflow-hidden bg-transparent border-none">
+      <DialogContent className="max-w-5xl p-0 overflow-hidden bg-transparent border-none [&>button]:absolute [&>button]:top-4 [&>button]:right-4 [&>button]:z-50 [&>button]:rounded-full [&>button]:bg-slate-900/80 [&>button]:backdrop-blur-sm [&>button]:border [&>button]:border-cyan-500/30 [&>button]:p-2 [&>button]:transition-all [&>button]:duration-300 hover:[&>button]:border-cyan-500/60 hover:[&>button]:bg-slate-800/90 hover:[&>button]:scale-110 hover:[&>button]:rotate-90 [&>button>svg]:text-cyan-400 hover:[&>button>svg]:text-cyan-300">
         <div className="relative glass-card border border-cyan-500/30 overflow-hidden">
           {/* Animated background */}
           <div className="absolute inset-0 opacity-20">
             <div className="absolute inset-0 bg-linear-to-br from-cyan-500/20 via-purple-500/20 to-pink-500/20 animate-gradient-slow" />
           </div>
-
-          {/* Close button */}
-          <button
-            onClick={onClose}
-            className="absolute top-4 right-4 z-50 p-2 rounded-full glass-card hover:glass-card-hover transition-all duration-300 group"
-            aria-label="Close modal"
-          >
-            <X className="w-5 h-5 text-cyan-400 group-hover:text-cyan-300 group-hover:rotate-90 transition-all duration-300" />
-          </button>
 
           <div className="relative grid md:grid-cols-2 gap-0 min-h-[600px]">
             {/* Left side - 3D Planet View */}
