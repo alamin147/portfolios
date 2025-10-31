@@ -23,7 +23,7 @@ export function FloatingPlanets() {
   const positions = [
     { top: "100px", right: "5%", delay: "0s" },      // Jupiter - Hero section
     { top: "1200px", left: "5%", delay: "2s" },      // Saturn - Projects section
-    { top: "2400px", right: "5%", delay: "4s" },     // Neptune - Skills/Blog section
+    { top: "2300px", right: "5%", delay: "4s" },     // Neptune - Skills/Blog section
     { top: "3600px", left: "5%", delay: "6s" },      // Mars - Contact/Footer section
   ];
 

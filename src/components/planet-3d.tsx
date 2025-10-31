@@ -181,7 +181,6 @@ export function Planet3D({ planet }: Planet3DProps) {
     <div className="w-full h-full relative">
       {/* Instruction text */}
       <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 text-cyan-400/60 text-sm animate-pulse pointer-events-none">
-        {/* 🖱️ Drag to rotate • Scroll to zoom */}
       </div>
 
       <Canvas

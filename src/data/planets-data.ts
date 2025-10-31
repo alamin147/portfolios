@@ -17,28 +17,28 @@ export interface Planet {
 
 export const planetsData: Planet[] = [
   {
-    id: "jupiter",
-    name: "Jupiter",
-    title: "The Gas Giant",
-    description: "The largest planet in our solar system, known for its Great Red Spot and massive size.",
+    id: "profile",
+    name: "About Me",
+    title: "Interactive Profile Sphere",
+    description: "Discover who I am through an interactive 3D visualization showcasing my skills, passions, and journey as a developer.",
     details: [
-      "Jupiter is the fifth planet from the Sun and the largest in the Solar System.",
-      "It is a gas giant with a mass more than two and a half times that of all the other planets combined.",
-      "Jupiter is primarily composed of hydrogen with a quarter of its mass being helium.",
-      "The Great Red Spot is a persistent anticyclonic storm, 22° south of Jupiter's equator."
+      "I'm Al Amin, a Computer Science and Engineering student passionate about fullstack development.",
+      "I love coding, building innovative solutions, and exploring new technologies.",
+      "With experience in programming competitions and team collaboration, I thrive in diverse environments.",
+      "I specialize in backend architecture, full-stack applications, and turning ideas into clean, working code."
     ],
-    color: "#d4a574",
-    gradient: "linear-gradient(135deg, #d4a574 0%, #c89968 50%, #b8865c 100%)",
+    color: "#06d6a0",
+    gradient: "linear-gradient(135deg, #06d6a0 0%, #10b981 50%, #059669 100%)",
     size: "80px",
     orbitDuration: "20s",
     facts: [
-      { label: "Diameter", value: "139,820 km" },
-      { label: "Mass", value: "1.898 × 10²⁷ kg" },
-      { label: "Moons", value: "95 confirmed" },
-      { label: "Orbit Period", value: "11.86 years" },
-      { label: "Day Length", value: "9.93 hours" }
+      { label: "Role", value: "Fullstack Developer" },
+      { label: "Education", value: "CSE Student" },
+      { label: "Passion", value: "Coding & Building" },
+      { label: "Experience", value: "CP & Team Projects" },
+      { label: "Focus", value: "Backend Architecture" }
     ],
-    icon: "🪐"
+    icon: ""
   },
   {
     id: "saturn",

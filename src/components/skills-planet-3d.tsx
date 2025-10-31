@@ -292,7 +292,6 @@ export function SkillsPlanet3D() {
     <div className="w-full h-full relative">
       {/* Instruction text */}
       <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 text-cyan-400/60 text-sm animate-pulse pointer-events-none">
-        {/* 🖱️ Drag to explore • Scroll to zoom • 💻 Skills Planet */}
       </div>
 
       <Canvas

@@ -8,6 +8,7 @@ import {
 import type { Planet } from "@/data/planets-data";
 import { Planet3D } from "./planet-3d";
 import { SkillsPlanet3D } from "./skills-planet-3d";
+import { ProfilePlanet3D } from "./profile-planet-3d";
 
 interface PlanetModalProps {
   planet: Planet | null;
@@ -18,31 +19,35 @@ interface PlanetModalProps {
 export function PlanetModal({ planet, isOpen, onClose }: PlanetModalProps) {
   if (!planet) return null;
 
-  // Check if this is the Skills Planet to render full-width modal
-  const isSkillsPlanet = planet.id === "skills";
+  // Check if this is the Skills or Profile Planet to render full-width modal
+  const isFullWidthPlanet = planet.id === "skills" || planet.id === "profile";
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className={`${isSkillsPlanet ? 'max-w-7xl' : 'max-w-5xl'} p-0 overflow-hidden bg-transparent border-none [&>button]:absolute [&>button]:top-4 [&>button]:right-4 [&>button]:z-50 [&>button]:rounded-full [&>button]:bg-slate-900/80 [&>button]:backdrop-blur-sm [&>button]:border [&>button]:border-cyan-500/30 [&>button]:p-2 [&>button]:transition-all [&>button]:duration-300 hover:[&>button]:border-cyan-500/60 hover:[&>button]:bg-slate-800/90 hover:[&>button]:scale-110 hover:[&>button]:rotate-90 [&>button>svg]:text-cyan-400 hover:[&>button>svg]:text-cyan-300`}>
+      <DialogContent className={`${isFullWidthPlanet ? 'max-w-7xl' : 'max-w-5xl'} p-0 overflow-hidden bg-transparent border-none [&>button]:absolute [&>button]:top-4 [&>button]:right-4 [&>button]:z-50 [&>button]:rounded-full [&>button]:bg-slate-900/80 [&>button]:backdrop-blur-sm [&>button]:border [&>button]:border-cyan-500/30 [&>button]:p-2 [&>button]:transition-all [&>button]:duration-300 hover:[&>button]:border-cyan-500/60 hover:[&>button]:bg-slate-800/90 hover:[&>button]:scale-110 hover:[&>button]:rotate-90 [&>button>svg]:text-cyan-400 hover:[&>button>svg]:text-cyan-300`}>
         <div className="relative glass-card border border-cyan-500/30 overflow-hidden">
           {/* Animated background */}
           <div className="absolute inset-0 opacity-20">
             <div className="absolute inset-0 bg-linear-to-br from-cyan-500/20 via-purple-500/20 to-pink-500/20 animate-gradient-slow" />
           </div>
 
-          {isSkillsPlanet ? (
-            // Full-width 3D model for Skills Planet
+          {isFullWidthPlanet ? (
+            // Full-width 3D model for Skills or Profile Planet
             <div className="relative min-h-[700px]">
               <div className="relative flex flex-col items-center justify-center p-8 bg-linear-to-br from-slate-900/50 to-slate-800/30">
-                {/* Three.js 3D Skills Planet Canvas - Full Size */}
+                {/* Three.js 3D Planet Canvas - Full Size */}
                 <div className="w-full h-[600px] relative">
-                  <SkillsPlanet3D />
+                  {planet.id === "skills" ? (
+                    <SkillsPlanet3D />
+                  ) : planet.id === "profile" ? (
+                    <ProfilePlanet3D />
+                  ) : null}
                 </div>
 
                 {/* Planet name with icon */}
                 <div className="text-center mt-6">
                   <div className="text-6xl mb-2 animate-bounce-slow">
-                    {/* {planet.icon} */}
+                    {planet.icon}
                   </div>
                   <h3 className="text-4xl font-bold text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-purple-400 mb-2">
                     {planet.name}
@@ -140,14 +145,16 @@ export function PlanetModal({ planet, isOpen, onClose }: PlanetModalProps) {
                         Did you know?
                       </h5>
                       <p className="text-sm text-purple-100/70">
-                        {planet.id === "jupiter" &&
-                          "Jupiter's magnetic field is 14 times stronger than Earth's!"}
+                        {planet.id === "profile" &&
+                          "Each node represents a unique aspect of my journey - from education to passion for building innovative solutions!"}
                         {planet.id === "saturn" &&
                           "Saturn is the only planet that could float in water!"}
                         {planet.id === "neptune" &&
                           "Neptune has the fastest winds in the solar system, reaching 2,100 km/h!"}
                         {planet.id === "skills" &&
                           "Each skill node is positioned using the Fibonacci sphere algorithm for perfect distribution!"}
+                        {planet.id === "jupiter" &&
+                          "Jupiter's magnetic field is 14 times stronger than Earth's!"}
                         {planet.id === "mars" &&
                           "A day on Mars is only 37 minutes longer than a day on Earth!"}
                       </p>
