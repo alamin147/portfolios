@@ -41,28 +41,28 @@ export const planetsData: Planet[] = [
     icon: ""
   },
   {
-    id: "saturn",
-    name: "Saturn",
-    title: "The Ringed Beauty",
-    description: "Famous for its spectacular ring system, Saturn is the second-largest planet in our solar system.",
+    id: "cp",
+    name: "CP Universe",
+    title: "Competitive Programming Sphere",
+    description: "Explore my competitive programming journey across platforms like Codeforces, LeetCode, CodeChef, and HackerRank.",
     details: [
-      "Saturn is the sixth planet from the Sun and the second-largest in the Solar System.",
-      "It is a gas giant with an average radius about nine times that of Earth.",
-      "Saturn is named after the Roman god of wealth and agriculture.",
-      "Its rings are made of ice and rock, extending up to 282,000 km from the planet."
+      "I actively participate in competitive programming contests on multiple platforms.",
+      "Each node represents a platform, skill, or achievement in my CP journey.",
+      "From algorithm mastery to problem-solving expertise, see my progression.",
+      "The golden rings symbolize achievements and continuous improvement in competitive coding."
     ],
-    color: "#f4d47c",
-    gradient: "linear-gradient(135deg, #f4d47c 0%, #e8c870 50%, #dbb864 100%)",
+    color: "#f59e0b",
+    gradient: "linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #d97706 100%)",
     size: "75px",
     orbitDuration: "25s",
     facts: [
-      { label: "Diameter", value: "116,460 km" },
-      { label: "Mass", value: "5.683 × 10²⁶ kg" },
-      { label: "Moons", value: "146 confirmed" },
-      { label: "Orbit Period", value: "29.46 years" },
-      { label: "Day Length", value: "10.66 hours" }
+      { label: "Platforms", value: "Codeforces, LeetCode, CodeChef" },
+      { label: "Focus", value: "Algorithms & Data Structures" },
+      { label: "Strength", value: "Problem Solving" },
+      { label: "Skills", value: "Fast Coding, Optimization" },
+      { label: "Contests", value: "Regular Participation" }
     ],
-    icon: "💫"
+    icon: ""
   },
   {
     id: "neptune",
