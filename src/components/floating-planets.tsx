@@ -47,7 +47,7 @@ export function FloatingPlanets() {
             <div className="relative group">
               {/* Planet */}
               <div
-                className="planet-floating relative transition-all duration-700 hover:scale-150 group-hover:animate-none"
+                className="planet-floating relative transition-all duration-700 hover:scale-150"
                 style={{
                   width: planet.size,
                   height: planet.size,
