@@ -3,7 +3,7 @@ import "../App.css";
 import Stats from "./stats/Stats";
 import ContactIcons from "./hero-icons/ContactIcons";
 import {SquareTerminal} from "lucide-react";
-
+import { AiOutlineLaptop } from "react-icons/ai";
 export default function Hero() {
   const { ref: heroRef, isVisible: heroVisible } = useScrollAnimation();
 
@@ -82,11 +82,12 @@ export default function Hero() {
               </div>
 
               {/* Enhanced Floating elements */}
-              <div className="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 glass-card rounded-full p-2 sm:p-3 animate-float hover:glass-card-hover transition-all duration-300">
-                <span className="text-lg sm:text-2xl">💻</span>
+              <div className="absolute top-12 -right-2 sm:top-20 sm:-right-4 glass-card rounded-full p-2 sm:p-3 animate-float hover:glass-card-hover transition-all duration-300">
+                {/* <span className="text-lg sm:text-2xl">💻</span> */}
+                <AiOutlineLaptop size={25} color="white"/>
               </div>
-              <div className="absolute -bottom-2 -left-2 sm:-bottom-4 sm:-left-4 glass-card rounded-full p-2 sm:p-3 animate-float animation-delay-2000 hover:glass-card-hover transition-all duration-300">
-                <span className="text-lg sm:text-2xl text-white "><SquareTerminal size={28}/></span>
+              <div className="absolute -bottom-6 -left-6 sm:bottom-6 sm:-left-6 glass-card rounded-full p-2 sm:p-3 animate-float animation-delay-2000 hover:glass-card-hover transition-all duration-300">
+                <span className="text-lg sm:text-2xl  text-white "><SquareTerminal  size={26}/></span>
               </div>
             </div>
           </div>
