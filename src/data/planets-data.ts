@@ -89,27 +89,27 @@ export const planetsData: Planet[] = [
     icon: "🌀"
   },
   {
-    id: "mars",
-    name: "Mars",
-    title: "The Red Planet",
-    description: "Known as the Red Planet due to iron oxide on its surface, Mars is a prime candidate for future human exploration.",
+    id: "skills",
+    name: "Skills Planet",
+    title: "Interactive Technology Sphere",
+    description: "Explore my technical skills in an interactive 3D universe where each node represents a technology I've mastered.",
     details: [
-      "Mars is the fourth planet from the Sun and the second-smallest planet in the Solar System.",
-      "It is often referred to as the 'Red Planet' because of its reddish appearance.",
-      "Mars has two small moons, Phobos and Deimos, which are irregular in shape.",
-      "The planet has the largest volcano in the solar system, Olympus Mons, which is about 22 km high."
+      "This Skills Planet showcases all the technologies and programming languages I work with.",
+      "Each skill is represented as a glowing node connected in a spherical network.",
+      "The visualization represents the interconnected nature of modern web development.",
+      "Drag, rotate, and zoom to explore different skills and see how they relate to each other."
     ],
-    color: "#dc6846",
-    gradient: "linear-gradient(135deg, #dc6846 0%, #cf5f3e 50%, #c25636 100%)",
+    color: "#00d4ff",
+    gradient: "linear-gradient(135deg, #00d4ff 0%, #0099cc 50%, #006699 100%)",
     size: "65px",
     orbitDuration: "18s",
     facts: [
-      { label: "Diameter", value: "6,779 km" },
-      { label: "Mass", value: "6.417 × 10²³ kg" },
-      { label: "Moons", value: "2 (Phobos & Deimos)" },
-      { label: "Orbit Period", value: "687 days" },
-      { label: "Day Length", value: "24.62 hours" }
+      { label: "Languages", value: "5+ Programming Languages" },
+      { label: "Frameworks", value: "React, Express, Node.js" },
+      { label: "Databases", value: "MongoDB, PostgreSQL" },
+      { label: "Styling", value: "Tailwind CSS, CSS3" },
+      { label: "Tools", value: "Redux, Prisma, Mongoose" }
     ],
-    icon: "🔴"
+    icon: ""
   }
 ];
