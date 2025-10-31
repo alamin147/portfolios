@@ -997,16 +997,16 @@ html {
 /* Planet Animations */
 @keyframes planet-float {
   0%, 100% {
-    transform: translateY(0px) translateX(0px);
+    transform: translateY(0px) translateX(0px) rotate(0deg);
   }
   25% {
-    transform: translateY(-20px) translateX(10px);
+    transform: translateY(-15px) translateX(8px) rotate(2deg);
   }
   50% {
-    transform: translateY(-10px) translateX(-10px);
+    transform: translateY(-8px) translateX(-8px) rotate(-2deg);
   }
   75% {
-    transform: translateY(-25px) translateX(5px);
+    transform: translateY(-18px) translateX(4px) rotate(1deg);
   }
 }
 
@@ -1093,7 +1093,13 @@ html {
 }
 
 .planet-floating {
-  animation: planet-float 6s ease-in-out infinite;
+  animation: planet-float 8s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Smooth transitions for planets */
+.planet-floating * {
+  will-change: transform, opacity;
 }
 
 .animate-rotate {
@@ -1159,4 +1165,46 @@ html {
 
 .planet-3d {
   transform-style: preserve-3d;
+}
+
+/* Responsive planet sizing */
+@media (max-width: 768px) {
+  .planet-floating {
+    animation: planet-float 10s ease-in-out infinite;
+  }
+
+  /* Reduce hover scale on tablets to prevent overflow */
+  .planet-floating:hover,
+  .group:hover .planet-floating {
+    transform: scale(1.2) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .planet-floating {
+    animation: planet-float 12s ease-in-out infinite;
+    opacity: 0.7;
+  }
+
+  /* Further reduce hover scale on mobile */
+  .planet-floating:hover,
+  .group:hover .planet-floating {
+    transform: scale(1.1) !important;
+  }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .planet-floating {
+    animation: none;
+  }
+
+  .animate-rotate,
+  .animate-rotate-slow,
+  .animate-spin-slow,
+  .animate-spin-reverse,
+  .animate-pulse-slow,
+  .animate-pulse-glow {
+    animation: none;
+  }
 }

@@ -29,7 +29,7 @@ export const planetsData: Planet[] = [
     ],
     color: "#d4a574",
     gradient: "linear-gradient(135deg, #d4a574 0%, #c89968 50%, #b8865c 100%)",
-    size: "120px",
+    size: "80px",
     orbitDuration: "20s",
     facts: [
       { label: "Diameter", value: "139,820 km" },
@@ -53,7 +53,7 @@ export const planetsData: Planet[] = [
     ],
     color: "#f4d47c",
     gradient: "linear-gradient(135deg, #f4d47c 0%, #e8c870 50%, #dbb864 100%)",
-    size: "110px",
+    size: "75px",
     orbitDuration: "25s",
     facts: [
       { label: "Diameter", value: "116,460 km" },
@@ -77,7 +77,7 @@ export const planetsData: Planet[] = [
     ],
     color: "#4272d7",
     gradient: "linear-gradient(135deg, #4272d7 0%, #3a66c9 50%, #325abb 100%)",
-    size: "100px",
+    size: "70px",
     orbitDuration: "30s",
     facts: [
       { label: "Diameter", value: "49,244 km" },
@@ -101,7 +101,7 @@ export const planetsData: Planet[] = [
     ],
     color: "#dc6846",
     gradient: "linear-gradient(135deg, #dc6846 0%, #cf5f3e 50%, #c25636 100%)",
-    size: "90px",
+    size: "65px",
     orbitDuration: "18s",
     facts: [
       { label: "Diameter", value: "6,779 km" },
