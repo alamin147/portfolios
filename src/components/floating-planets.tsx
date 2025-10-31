@@ -181,14 +181,11 @@ export function FloatingPlanets() {
                         {planet.name}
                       </div>
                       <div className="text-xs text-cyan-300/80 font-medium flex items-center gap-1 justify-center">
-                        <span className="animate-pulse">✨</span>
                         Click to explore
-                        <span className="animate-pulse">✨</span>
                       </div>
                     </div>
                   </div>
                 </div>
-
                 {/* Multiple pulsing ring effects */}
                 <div
                   className="absolute inset-0 rounded-full animate-ping-slow opacity-0 group-hover:opacity-30"

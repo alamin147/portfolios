@@ -6,6 +6,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import type { Planet } from "@/data/planets-data";
+import { Planet3D } from "./planet-3d";
 
 interface PlanetModalProps {
   planet: Planet | null;
@@ -26,80 +27,18 @@ export function PlanetModal({ planet, isOpen, onClose }: PlanetModalProps) {
           </div>
 
           <div className="relative grid md:grid-cols-2 gap-0 min-h-[600px]">
-            {/* Left side - 3D Planet View */}
-            <div className="relative flex items-center justify-center p-8 bg-linear-to-br from-slate-900/50 to-slate-800/30 border-r border-cyan-500/20">
-              <div className="relative">
-                {/* Planet with 3D effect */}
-                <div className="planet-3d-container relative">
-                  <div
-                    className="planet-3d w-64 h-64 rounded-full animate-float-slow relative overflow-hidden"
-                    style={{
-                      background: planet.gradient,
-                      boxShadow: `0 0 60px ${planet.color}40, inset -20px -20px 40px rgba(0,0,0,0.3), inset 20px 20px 40px rgba(255,255,255,0.1)`,
-                    }}
-                  >
-                    {/* Rotating surface effect */}
-                    <div
-                      className="absolute inset-0 opacity-30 animate-rotate-slow"
-                      style={{
-                        background: `repeating-linear-gradient(
-                          90deg,
-                          transparent,
-                          transparent 20px,
-                          rgba(255,255,255,0.1) 20px,
-                          rgba(255,255,255,0.1) 40px
-                        )`,
-                      }}
-                    />
+            {/* Left side - Real Three.js 3D Planet */}
+            <div className="relative flex flex-col items-center justify-center p-8 bg-linear-to-br from-slate-900/50 to-slate-800/30 border-r border-cyan-500/20">
+              {/* Three.js 3D Planet Canvas */}
+              <div className="w-full h-[400px] relative">
+                <Planet3D planet={planet} />
+              </div>
 
-                    {/* Glow effect */}
-                    <div
-                      className="absolute -inset-4 rounded-full blur-2xl opacity-50 animate-pulse-slow"
-                      style={{ background: planet.color }}
-                    />
-
-                    {/* Shine effect */}
-                    <div className="absolute top-8 left-8 w-24 h-24 bg-white/20 rounded-full blur-3xl" />
-                  </div>
-
-                  {/* Rings for Saturn */}
-                  {planet.id === "saturn" && (
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-32 pointer-events-none">
-                      <div
-                        className="absolute inset-0 rounded-full opacity-70 animate-float"
-                        style={{
-                          background: `linear-gradient(90deg, transparent 35%, ${planet.color}60 50%, transparent 65%)`,
-                          transform: "rotateX(75deg)",
-                          boxShadow: `0 0 20px ${planet.color}40`,
-                        }}
-                      />
-                    </div>
-                  )}
-
-                  {/* Orbiting particles */}
-                  <div className="absolute inset-0 animate-spin-slow">
-                    <div
-                      className="absolute top-0 left-1/2 w-2 h-2 rounded-full blur-sm"
-                      style={{ background: planet.color }}
-                    />
-                  </div>
-                  <div className="absolute inset-0 animate-spin-reverse">
-                    <div
-                      className="absolute bottom-0 right-1/2 w-1.5 h-1.5 rounded-full blur-sm"
-                      style={{ background: planet.color }}
-                    />
-                  </div>
-                </div>
-
-                {/* Planet name with icon */}
-                <div className="text-center mt-8">
-                  <div className="text-6xl mb-2 animate-bounce-slow">
-                    {planet.icon}
-                  </div>
-                  <h3 className="text-3xl font-bold text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-purple-400">
-                    {planet.name}
-                  </h3>
-                </div>
+              {/* Planet name with icon */}
+              <div className="text-center mt-8">
+                <h3 className="text-3xl font-bold text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-purple-400">
+                  {planet.name}
+                </h3>
               </div>
             </div>
 
@@ -118,7 +57,7 @@ export function PlanetModal({ planet, isOpen, onClose }: PlanetModalProps) {
               <div className="space-y-6">
                 <div className="space-y-3">
                   <h4 className="text-xl font-semibold text-cyan-300 flex items-center gap-2">
-                    <span className="text-2xl">📖</span>
+                    {/* <span className="text-2xl">📖</span> */}
                     About {planet.name}
                   </h4>
                   <div className="space-y-2">
@@ -136,7 +75,7 @@ export function PlanetModal({ planet, isOpen, onClose }: PlanetModalProps) {
                 {/* Facts Grid */}
                 <div className="space-y-3">
                   <h4 className="text-xl font-semibold text-cyan-300 flex items-center gap-2">
-                    <span className="text-2xl">📊</span>
+                    {/* <span className="text-2xl">📊</span> */}
                     Key Facts
                   </h4>
                   <div className="grid grid-cols-2 gap-3">
@@ -159,7 +98,7 @@ export function PlanetModal({ planet, isOpen, onClose }: PlanetModalProps) {
                 {/* Fun fact banner */}
                 <div className="glass-card-hover p-4 rounded-lg border border-purple-500/30 bg-linear-to-r from-purple-500/10 to-pink-500/10">
                   <div className="flex items-start gap-3">
-                    <span className="text-2xl">✨</span>
+                    {/* <span className="text-2xl">✨</span> */}
                     <div>
                       <h5 className="text-sm font-semibold text-purple-300 mb-1">
                         Did you know?
