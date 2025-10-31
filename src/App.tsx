@@ -9,6 +9,7 @@ import NotFound from "@/components/not-found";
 // import Certificates from "@/components/certificates";
 import Contact from "@/components/contact";
 import { FloatingElements } from "@/components/floating-elements";
+import { FloatingPlanets } from "@/components/floating-planets";
 import Navbar from "@/components/navbar";
 import LinuxPortfolio from "@/components/linux-portfolio";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -54,6 +55,7 @@ const AppContent = () => {
         {/* Rest of your app content */}
         <MouseTrail />
         <FloatingElements />
+        <FloatingPlanets />
         <BackgroundStars />
         <div className="relative z-10">
           <Router>
