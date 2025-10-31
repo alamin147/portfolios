@@ -10,6 +10,7 @@ import { Planet3D } from "./planet-3d";
 import { SkillsPlanet3D } from "./skills-planet-3d";
 import { ProfilePlanet3D } from "./profile-planet-3d";
 import CPPlanet3D from "./cp-planet-3d";
+import ProjectsPlanet3D from "./projects-planet-3d";
 
 interface PlanetModalProps {
   planet: Planet | null;
@@ -21,7 +22,7 @@ export function PlanetModal({ planet, isOpen, onClose }: PlanetModalProps) {
   if (!planet) return null;
 
   // Check if this is an interactive planet to render full-width modal
-  const isFullWidthPlanet = planet.id === "skills" || planet.id === "profile" || planet.id === "cp";
+  const isFullWidthPlanet = planet.id === "skills" || planet.id === "profile" || planet.id === "cp" || planet.id === "projects";
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -44,6 +45,8 @@ export function PlanetModal({ planet, isOpen, onClose }: PlanetModalProps) {
                     <ProfilePlanet3D />
                   ) : planet.id === "cp" ? (
                     <CPPlanet3D />
+                  ) : planet.id === "projects" ? (
+                    <ProjectsPlanet3D />
                   ) : null}
                 </div>
 
@@ -152,6 +155,8 @@ export function PlanetModal({ planet, isOpen, onClose }: PlanetModalProps) {
                           "Each node represents a unique aspect of my journey - from education to passion for building innovative solutions!"}
                         {planet.id === "cp" &&
                           "The golden rings symbolize achievements and continuous growth in competitive programming!"}
+                        {planet.id === "projects" &&
+                          "Click any project node to instantly launch the live demo and explore the application in action!"}
                         {planet.id === "neptune" &&
                           "Neptune has the fastest winds in the solar system, reaching 2,100 km/h!"}
                         {planet.id === "skills" &&

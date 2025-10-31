@@ -65,28 +65,28 @@ export const planetsData: Planet[] = [
     icon: ""
   },
   {
-    id: "neptune",
-    name: "Neptune",
-    title: "The Ice Giant",
-    description: "The windiest planet in our solar system, Neptune is known for its deep blue color and extreme weather.",
+    id: "projects",
+    name: "Projects Universe",
+    title: "Interactive Projects Sphere",
+    description: "Explore my portfolio of web applications, interactive experiences, and innovative solutions in a 3D universe.",
     details: [
-      "Neptune is the eighth and farthest known planet from the Sun in the Solar System.",
-      "It is the fourth-largest planet by diameter and the third-most-massive.",
-      "Neptune is 17 times the mass of Earth and slightly more massive than Uranus.",
-      "The planet's atmosphere is composed primarily of hydrogen and helium with traces of methane."
+      "Each node represents a project I've built - from full-stack web applications to creative experiments.",
+      "Click on any project node to visit the live demo and explore the actual application.",
+      "The blue sphere symbolizes the vast universe of possibilities in web development.",
+      "Projects span various technologies including React, Node.js, TypeScript, and modern web frameworks."
     ],
     color: "#4272d7",
     gradient: "linear-gradient(135deg, #4272d7 0%, #3a66c9 50%, #325abb 100%)",
     size: "70px",
     orbitDuration: "30s",
     facts: [
-      { label: "Diameter", value: "49,244 km" },
-      { label: "Mass", value: "1.024 × 10²⁶ kg" },
-      { label: "Moons", value: "16 confirmed" },
-      { label: "Orbit Period", value: "164.79 years" },
-      { label: "Day Length", value: "16.11 hours" }
+      { label: "Total Projects", value: "12+ Live Projects" },
+      { label: "Technologies", value: "React, Node.js, Express" },
+      { label: "Focus", value: "Full-Stack Development" },
+      { label: "Type", value: "Web Applications & APIs" },
+      { label: "Features", value: "Interactive & Responsive" }
     ],
-    icon: "🌀"
+    icon: ""
   },
   {
     id: "skills",
