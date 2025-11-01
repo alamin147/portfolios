@@ -618,9 +618,9 @@ export default function FooterPlanet3D() {
       </div>
 
       {/* Node count */}
-      <div className="absolute top-4 right-8 z-10 text-orange-400/60 text-xs font-semibold pointer-events-none backdrop-blur-sm bg-black/40 px-3 py-1.5 rounded-full border border-orange-500/30">
+      {/* <div className="absolute top-4 right-8 z-10 text-orange-400/60 text-xs font-semibold pointer-events-none backdrop-blur-sm bg-black/40 px-3 py-1.5 rounded-full border border-orange-500/30">
         {nodes.length - 1} Links
-      </div>
+      </div> */}
 
       <Canvas
         camera={{ position: [0, 0, 10], fov: 50 }}
