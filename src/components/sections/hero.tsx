@@ -68,16 +68,16 @@ export default function Hero() {
 
           {/* Profile Image */}
           <div className="flex justify-center lg:justify-end order-1 lg:order-2">
-            <div className="relative group">
+            <div className="relative group hero-image-container">
               {/* Enhanced Glowing background */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-sky-600 to-emerald-600 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+              <div className="absolute -inset-1 hero-image-glow-bg rounded-full"></div>
 
               {/* Enhanced Glass frame */}
-              <div className="relative glass-card rounded-full p-2 shadow-2xl hover:glass-card-hover transition-all duration-500 glow-animation">
+              <div className="relative hero-image-frame rounded-full p-2 shadow-2xl glow-animation">
                 <img
                   src="/alamin-removebg-preview.png"
                   alt="Al Amin's profile"
-                  className="rounded-full object-cover w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-[450px] lg:h-[450px] xl:w-[500px] xl:h-[500px] 2xl:w-[550px] 2xl:h-[550px]"
+                  className="rounded-full object-cover w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-[450px] lg:h-[450px] xl:w-[500px] xl:h-[500px] 2xl:w-[550px] 2xl:h-[550px] transition-transform duration-500"
                 />
               </div>
 
