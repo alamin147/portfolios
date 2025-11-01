@@ -13,6 +13,7 @@ import CPPlanet3D from "./cp-planet-3d";
 import ProjectsPlanet3D from "./projects-planet-3d";
 import BlogPlanet3D from "./blog-planet-3d";
 import EducationPlanet3D from "./education-planet-3d";
+import ContactPlanet3D from "./contact-planet-3d";
 
 interface PlanetModalProps {
   planet: Planet | null;
@@ -24,7 +25,7 @@ export function PlanetModal({ planet, isOpen, onClose }: PlanetModalProps) {
   if (!planet) return null;
 
   // Check if this is an interactive planet to render full-width modal
-  const isFullWidthPlanet = planet.id === "skills" || planet.id === "profile" || planet.id === "cp" || planet.id === "projects" || planet.id === "blog" || planet.id === "education";
+  const isFullWidthPlanet = planet.id === "skills" || planet.id === "profile" || planet.id === "cp" || planet.id === "projects" || planet.id === "blog" || planet.id === "education" || planet.id === "contact";
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -53,6 +54,8 @@ export function PlanetModal({ planet, isOpen, onClose }: PlanetModalProps) {
                     <BlogPlanet3D />
                   ) : planet.id === "education" ? (
                     <EducationPlanet3D />
+                  ) : planet.id === "contact" ? (
+                    <ContactPlanet3D />
                   ) : null}
                 </div>
 
@@ -167,6 +170,8 @@ export function PlanetModal({ planet, isOpen, onClose }: PlanetModalProps) {
                           "Click any blog node to dive into articles about web development, programming, and tech insights!"}
                         {planet.id === "education" &&
                           "Each achievement node represents a milestone in the learning journey - from degrees to certifications and beyond!"}
+                        {planet.id === "contact" &&
+                          "Click any node to instantly connect - email, phone, or social media. All ways to reach me in one interactive sphere!"}
                         {planet.id === "neptune" &&
                           "Neptune has the fastest winds in the solar system, reaching 2,100 km/h!"}
                         {planet.id === "skills" &&
