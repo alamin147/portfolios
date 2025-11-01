@@ -56,7 +56,6 @@ const AppContent = () => {
         {/* Rest of your app content */}
         <MouseTrail />
         <FloatingElements />
-        <FloatingPlanets />
         <BackgroundStars />
         <div className="relative z-10">
           <Router>
@@ -70,6 +69,8 @@ const AppContent = () => {
                       description="Full Stack Developer specializing in React, Node.js, Express, MongoDB, PostgreSQL, TypeScript, Prisma, and Tailwind CSS. Explore my portfolio of projects, skills, and competitive programming profiles."
                       url="https://alamin-portfolio-site.vercel.app/"
                     />
+                    {/* Floating Planets only on homepage */}
+                    <FloatingPlanets />
                     <Navbar />
                     <Hero />
                     <CPProfiles />
