@@ -14,6 +14,7 @@ import ProjectsPlanet3D from "./projects-planet-3d";
 import BlogPlanet3D from "./blog-planet-3d";
 import EducationPlanet3D from "./education-planet-3d";
 import ContactPlanet3D from "./contact-planet-3d";
+import FooterPlanet3D from "./footer-planet-3d";
 
 interface PlanetModalProps {
   planet: Planet | null;
@@ -25,7 +26,7 @@ export function PlanetModal({ planet, isOpen, onClose }: PlanetModalProps) {
   if (!planet) return null;
 
   // Check if this is an interactive planet to render full-width modal
-  const isFullWidthPlanet = planet.id === "skills" || planet.id === "profile" || planet.id === "cp" || planet.id === "projects" || planet.id === "blog" || planet.id === "education" || planet.id === "contact";
+  const isFullWidthPlanet = planet.id === "skills" || planet.id === "profile" || planet.id === "cp" || planet.id === "projects" || planet.id === "blog" || planet.id === "education" || planet.id === "contact" || planet.id === "social";
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -56,6 +57,8 @@ export function PlanetModal({ planet, isOpen, onClose }: PlanetModalProps) {
                     <EducationPlanet3D />
                   ) : planet.id === "contact" ? (
                     <ContactPlanet3D />
+                  ) : planet.id === "social" ? (
+                    <FooterPlanet3D />
                   ) : null}
                 </div>
 
@@ -172,6 +175,8 @@ export function PlanetModal({ planet, isOpen, onClose }: PlanetModalProps) {
                           "Each achievement node represents a milestone in the learning journey - from degrees to certifications and beyond!"}
                         {planet.id === "contact" &&
                           "Click any node to instantly connect - email, phone, or social media. All ways to reach me in one interactive sphere!"}
+                        {planet.id === "social" &&
+                          "Navigate my portfolio, explore my services, and connect socially - everything in one place! Click any node to interact."}
                         {planet.id === "neptune" &&
                           "Neptune has the fastest winds in the solar system, reaching 2,100 km/h!"}
                         {planet.id === "skills" &&
