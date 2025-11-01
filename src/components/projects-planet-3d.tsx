@@ -336,7 +336,7 @@ function ProjectNode({ node, index }: { node: ProjectNode; index: number }) {
             ))}
           </div>
           <div className="text-blue-400 text-xs font-semibold animate-pulse">
-            🚀 Click to visit
+            Click to visit
           </div>
         </div>
       </Html>

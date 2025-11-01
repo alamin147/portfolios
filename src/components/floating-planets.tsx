@@ -21,10 +21,14 @@ export function FloatingPlanets() {
   // Planets stay in place on the page as you scroll
   // Increased margins to prevent horizontal overflow
   const positions = [
-    { top: "100px", right: "5%", delay: "0s" },      // Jupiter - Hero section
-    { top: "1200px", left: "5%", delay: "2s" },      // Saturn - Projects section
-    { top: "2300px", right: "5%", delay: "4s" },     // Neptune - Skills/Blog section
-    { top: "3600px", left: "5%", delay: "6s" },      // Mars - Contact/Footer section
+    { top: "100px", right: "5%", delay: "0s" },      // 1. Profile - Hero section
+    { top: "1200px", left: "5%", delay: "2s" },      // 2. CP - CP section
+    { top: "2300px", right: "5%", delay: "4s" },     // 3. Projects - Project section
+    { top: "3600px", left: "5%", delay: "6s" },      // 4. Skills - Skill section
+    { top: "4800px", right: "5%", delay: "8s" },     // 5. Blog section
+    { top: "6000px", left: "5%", delay: "10s" },     // 6. Education section
+    { top: "7200px", right: "5%", delay: "12s" },    // 7. Contact section
+    { top: "8400px", left: "5%", delay: "14s" },     // 8. Footer section
   ];
 
   return (
