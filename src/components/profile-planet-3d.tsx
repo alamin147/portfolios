@@ -165,8 +165,10 @@ function ProfileNode({ node, index }: { node: ProfileNode; index: number }) {
           pointerEvents: "none",
           userSelect: "none",
         }}
+        transform
+        occlude
       >
-        <div className="flex flex-col items-center gap-1 transition-all duration-300 hover:scale-110">
+        <div className="flex flex-col items-center gap-1">
           <div
             className="text-2xl p-2 rounded-lg backdrop-blur-sm shadow-lg"
             style={{
@@ -174,6 +176,7 @@ function ProfileNode({ node, index }: { node: ProfileNode; index: number }) {
               backgroundColor: "rgba(0,0,0,0.7)",
               border: `2px solid ${node.color}60`,
               boxShadow: `0 0 15px ${node.color}40`,
+              willChange: "auto",
             }}
           >
             {node.icon}
@@ -184,6 +187,7 @@ function ProfileNode({ node, index }: { node: ProfileNode; index: number }) {
               color: node.color,
               backgroundColor: "rgba(0,0,0,0.8)",
               border: `1px solid ${node.color}50`,
+              willChange: "auto",
             }}
           >
             {node.name}
@@ -193,6 +197,7 @@ function ProfileNode({ node, index }: { node: ProfileNode; index: number }) {
             style={{
               color: node.color,
               backgroundColor: "rgba(0,0,0,0.6)",
+              willChange: "auto",
             }}
           >
             {node.category}
@@ -385,7 +390,16 @@ export function ProfilePlanet3D() {
       <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 text-emerald-400/60 text-sm animate-pulse pointer-events-none">
       </div>
 
-      <Canvas camera={{ position: [0, 0, 7], fov: 50 }} className="w-full h-full">
+      <Canvas
+        camera={{ position: [0, 0, 7], fov: 50 }}
+        className="w-full h-full"
+        gl={{
+          antialias: true,
+          alpha: true,
+          preserveDrawingBuffer: false,
+        }}
+        style={{ pointerEvents: "auto" }}
+      >
         {/* Lighting */}
         <ambientLight intensity={0.5} />
         <directionalLight position={[5, 5, 5]} intensity={1.2} />
