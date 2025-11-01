@@ -11,6 +11,7 @@ import { SkillsPlanet3D } from "./skills-planet-3d";
 import { ProfilePlanet3D } from "./profile-planet-3d";
 import CPPlanet3D from "./cp-planet-3d";
 import ProjectsPlanet3D from "./projects-planet-3d";
+import BlogPlanet3D from "./blog-planet-3d";
 
 interface PlanetModalProps {
   planet: Planet | null;
@@ -22,7 +23,7 @@ export function PlanetModal({ planet, isOpen, onClose }: PlanetModalProps) {
   if (!planet) return null;
 
   // Check if this is an interactive planet to render full-width modal
-  const isFullWidthPlanet = planet.id === "skills" || planet.id === "profile" || planet.id === "cp" || planet.id === "projects";
+  const isFullWidthPlanet = planet.id === "skills" || planet.id === "profile" || planet.id === "cp" || planet.id === "projects" || planet.id === "blog";
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -47,6 +48,8 @@ export function PlanetModal({ planet, isOpen, onClose }: PlanetModalProps) {
                     <CPPlanet3D />
                   ) : planet.id === "projects" ? (
                     <ProjectsPlanet3D />
+                  ) : planet.id === "blog" ? (
+                    <BlogPlanet3D />
                   ) : null}
                 </div>
 
@@ -157,6 +160,8 @@ export function PlanetModal({ planet, isOpen, onClose }: PlanetModalProps) {
                           "The golden rings symbolize achievements and continuous growth in competitive programming!"}
                         {planet.id === "projects" &&
                           "Click any project node to instantly launch the live demo and explore the application in action!"}
+                        {planet.id === "blog" &&
+                          "Click any blog node to dive into articles about web development, programming, and tech insights!"}
                         {planet.id === "neptune" &&
                           "Neptune has the fastest winds in the solar system, reaching 2,100 km/h!"}
                         {planet.id === "skills" &&
