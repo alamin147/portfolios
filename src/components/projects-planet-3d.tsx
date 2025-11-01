@@ -244,7 +244,6 @@ function ProjectNode({ node, index }: { node: ProjectNode; index: number }) {
     if (groupRef.current) {
       const time = state.clock.elapsedTime;
       groupRef.current.position.y = y + Math.sin(time * 0.5 + index) * 0.1;
-      groupRef.current.rotation.y += 0.01;
     }
 
     if (meshRef.current) {
@@ -318,11 +317,18 @@ function ProjectNode({ node, index }: { node: ProjectNode; index: number }) {
         style={{
           transition: "all 0.2s",
           opacity: hovered ? 1 : 0,
-          transform: `scale(${hovered ? 1 : 0.5})`,
           pointerEvents: "none",
+          userSelect: "none",
         }}
+        zIndexRange={[100, 0]}
       >
-        <div className="bg-gray-900/95 backdrop-blur-md px-4 py-3 rounded-xl border border-blue-500/30 shadow-2xl min-w-[200px]">
+        <div
+          className="bg-gray-900/95 backdrop-blur-md px-4 py-3 rounded-xl border border-blue-500/30 shadow-2xl min-w-[200px]"
+          style={{
+            willChange: "auto",
+            transform: hovered ? "scale(1)" : "scale(0.5)",
+          }}
+        >
           <div className="text-white font-bold text-sm mb-1 line-clamp-2">{node.title}</div>
           <div className="text-gray-300 text-xs mb-2 line-clamp-2">{node.shortDes}</div>
           <div className="flex flex-wrap gap-1 mb-2">
@@ -348,9 +354,13 @@ function ProjectNode({ node, index }: { node: ProjectNode; index: number }) {
         distanceFactor={8}
         style={{
           pointerEvents: "none",
+          userSelect: "none",
         }}
       >
-        <div className="text-white/70 text-[10px] font-semibold text-center whitespace-nowrap bg-black/40 backdrop-blur-sm px-2 py-0.5 rounded-full border border-white/10">
+        <div
+          className="text-white/70 text-[10px] font-semibold text-center whitespace-nowrap bg-black/40 backdrop-blur-sm px-2 py-0.5 rounded-full border border-white/10"
+          style={{ willChange: "auto" }}
+        >
           {node.title.length > 20 ? node.title.substring(0, 20) + "..." : node.title}
         </div>
       </Html>
@@ -437,8 +447,13 @@ export default function ProjectsPlanet3D() {
 
 
       <Canvas
-        camera={{ position: [0, 0, 7], fov: 50 }}
+        camera={{ position: [0, 0, 10], fov: 50 }}
         className="w-full h-full"
+        gl={{
+          antialias: true,
+          alpha: true,
+          preserveDrawingBuffer: false,
+        }}
         style={{ pointerEvents: "auto" }}
       >
         {/* Lighting */}
@@ -476,8 +491,8 @@ export default function ProjectsPlanet3D() {
         <OrbitControls
           enableZoom={true}
           enablePan={false}
-          minDistance={4}
-          maxDistance={13}
+          minDistance={6}
+          maxDistance={16}
           autoRotate={true}
           autoRotateSpeed={0.4}
           rotateSpeed={0.6}

@@ -117,14 +117,17 @@ function SkillNode({ skill, index }: { skill: SkillNode; index: number }) {
           pointerEvents: "none",
           userSelect: "none",
         }}
+        transform
+        occlude
       >
-        <div className="flex flex-col items-center gap-1 transition-all duration-300 hover:scale-110">
+        <div className="flex flex-col items-center gap-1">
           <div
             className="text-2xl p-2 rounded-lg backdrop-blur-sm"
             style={{
               color: skill.color,
               backgroundColor: "rgba(0,0,0,0.6)",
               border: `1px solid ${skill.color}40`,
+              willChange: "auto",
             }}
           >
             {skill.icon}
@@ -135,6 +138,7 @@ function SkillNode({ skill, index }: { skill: SkillNode; index: number }) {
               color: skill.color,
               backgroundColor: "rgba(0,0,0,0.7)",
               border: `1px solid ${skill.color}40`,
+              willChange: "auto",
             }}
           >
             {skill.name}
@@ -295,8 +299,14 @@ export function SkillsPlanet3D() {
       </div>
 
       <Canvas
-        camera={{ position: [0, 0, 7], fov: 50 }}
+        camera={{ position: [0, 0, 10], fov: 50 }}
         className="w-full h-full"
+        gl={{
+          antialias: true,
+          alpha: true,
+          preserveDrawingBuffer: false,
+        }}
+        style={{ pointerEvents: "auto" }}
       >
         {/* Lighting */}
         <ambientLight intensity={0.4} />
@@ -322,8 +332,8 @@ export function SkillsPlanet3D() {
         <OrbitControls
           enableZoom={true}
           enablePan={false}
-          minDistance={4}
-          maxDistance={12}
+          minDistance={6}
+          maxDistance={16}
           autoRotate={true}
           autoRotateSpeed={0.5}
           rotateSpeed={0.6}

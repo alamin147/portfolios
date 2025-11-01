@@ -391,7 +391,7 @@ export function ProfilePlanet3D() {
       </div>
 
       <Canvas
-        camera={{ position: [0, 0, 7], fov: 50 }}
+        camera={{ position: [0, 0, 10], fov: 50 }}
         className="w-full h-full"
         gl={{
           antialias: true,
@@ -431,8 +431,8 @@ export function ProfilePlanet3D() {
         <OrbitControls
           enableZoom={true}
           enablePan={false}
-          minDistance={4}
-          maxDistance={13}
+          minDistance={6}
+          maxDistance={16}
           autoRotate={true}
           autoRotateSpeed={0.3}
           rotateSpeed={0.5}

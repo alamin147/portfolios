@@ -121,19 +121,20 @@ function CPNode({ node, index }: { node: CPNode; index: number }) {
         center
         distanceFactor={8}
         style={{
-          pointerEvents: "auto",
+          pointerEvents: "none",
           cursor: "pointer",
         }}
-        onClick={handleClick}
+        zIndexRange={[100, 0]}
       >
-        <div className="flex flex-col items-center gap-1.5 transition-all duration-300 hover:scale-110">
+        <div className="flex flex-col items-center gap-1.5">
           {/* Platform Logo */}
           <div
-            className="w-16 h-16 p-3 rounded-xl backdrop-blur-md shadow-2xl transition-all duration-300 hover:shadow-3xl"
+            className="w-16 h-16 p-3 rounded-xl backdrop-blur-md shadow-2xl"
             style={{
               backgroundColor: "rgba(0,0,0,0.85)",
               border: `2px solid ${node.color}80`,
               boxShadow: `0 0 25px ${node.color}60`,
+              willChange: "auto",
             }}
           >
             <img
@@ -151,6 +152,7 @@ function CPNode({ node, index }: { node: CPNode; index: number }) {
               backgroundColor: "rgba(0,0,0,0.9)",
               border: `2px solid ${node.color}70`,
               boxShadow: `0 0 15px ${node.color}40`,
+              willChange: "auto",
             }}
           >
             {node.platform}
@@ -163,6 +165,7 @@ function CPNode({ node, index }: { node: CPNode; index: number }) {
               color: "#ffffff",
               backgroundColor: "rgba(0,0,0,0.75)",
               border: `1px solid ${node.color}50`,
+              willChange: "auto",
             }}
           >
             @{node.username}
@@ -178,6 +181,7 @@ function CPNode({ node, index }: { node: CPNode; index: number }) {
                     color: node.color,
                     backgroundColor: "rgba(0,0,0,0.8)",
                     border: `1px solid ${node.color}40`,
+                    willChange: "auto",
                   }}
                 >
                   ⭐ {node.rating}
@@ -190,6 +194,7 @@ function CPNode({ node, index }: { node: CPNode; index: number }) {
                     color: node.color,
                     backgroundColor: "rgba(0,0,0,0.8)",
                     border: `1px solid ${node.color}40`,
+                    willChange: "auto",
                   }}
                 >
                   ✓ {node.solved}
@@ -482,8 +487,13 @@ export default function CPPlanet3D() {
 
 
       <Canvas
-        camera={{ position: [0, 0, 7], fov: 50 }}
+        camera={{ position: [0, 0, 12], fov: 50 }}
         className="w-full h-full"
+        gl={{
+          antialias: true,
+          alpha: true,
+          preserveDrawingBuffer: false,
+        }}
         style={{ pointerEvents: "auto" }}
       >
         {/* Lighting */}
@@ -521,8 +531,8 @@ export default function CPPlanet3D() {
         <OrbitControls
           enableZoom={true}
           enablePan={false}
-          minDistance={4}
-          maxDistance={13}
+          minDistance={8}
+          maxDistance={18}
           autoRotate={true}
           autoRotateSpeed={0.4}
           rotateSpeed={0.6}
