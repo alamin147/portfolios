@@ -4,8 +4,12 @@ import Stats from "@/components/stats/Stats";
 import ContactIcons from "@/components/hero-icons/ContactIcons";
 import {SquareTerminal} from "lucide-react";
 import { AiOutlineLaptop } from "react-icons/ai";
+import { useState } from "react";
+import Profile3DModal from "./profile-3d-modal";
+
 export default function Hero() {
   const { ref: heroRef, isVisible: heroVisible } = useScrollAnimation();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <section
@@ -68,7 +72,7 @@ export default function Hero() {
 
           {/* Profile Image */}
           <div className="flex justify-center lg:justify-end order-1 lg:order-2">
-            <div className="relative group hero-image-container">
+            <div className="relative group hero-image-container cursor-pointer" onClick={() => setIsModalOpen(true)}>
               {/* Enhanced Glowing background */}
               <div className="absolute -inset-1 hero-image-glow-bg rounded-full"></div>
 
@@ -79,6 +83,19 @@ export default function Hero() {
                   alt="Al Amin's profile"
                   className="rounded-full object-cover w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-[450px] lg:h-[450px] xl:w-[500px] xl:h-[500px] 2xl:w-[550px] 2xl:h-[550px] transition-transform duration-500"
                 />
+
+                {/* Hover Tooltip - Small and Elegant in Center */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-100 scale-95">
+                  <div className="px-4 py-2 rounded-full border-2 border-sky-400 backdrop-blur-xl" style={{
+                    background: "rgba(8, 145, 178, 0.25)",
+                    boxShadow: "0 4px 20px rgba(8, 145, 178, 0.5), inset 0 0 20px rgba(8, 145, 178, 0.2)"
+                  }}>
+                    <div className="text-sm font-semibold text-white whitespace-nowrap flex items-center gap-2">
+                      
+                      View in 3D
+                    </div>
+                  </div>
+                </div>
               </div>
 
               {/* Enhanced Floating elements */}
@@ -96,6 +113,12 @@ export default function Hero() {
           <ContactIcons/>
         <Stats/>
       </div>
+
+      {/* 3D Profile Modal */}
+      <Profile3DModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </section>
   );
 }
