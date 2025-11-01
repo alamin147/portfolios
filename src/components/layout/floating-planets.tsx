@@ -59,18 +59,19 @@ export function FloatingPlanets() {
                   animationDuration: planet.orbitDuration,
                 }}
               >
-                  {/* Outer glow ring */}
+                  {/* Outer glow ring - always visible with pulse */}
                   <div
-                    className="absolute -inset-4 rounded-full opacity-40 group-hover:opacity-80 transition-all duration-700 animate-pulse-slow"
+                    className="absolute -inset-4 rounded-full opacity-100 transition-all duration-700 animate-pulse-slow"
                     style={{
-                      background: `radial-gradient(circle, ${planet.color}40 0%, transparent 70%)`,
+                      background: `radial-gradient(circle, ${planet.color}90 0%, transparent 70%)`,
                       filter: "blur(20px)",
+                      animationDuration: "4s",
                     }}
                   />
 
                   {/* Main planet sphere */}
                   <div
-                    className="w-full h-full rounded-full relative overflow-hidden cursor-pointer shadow-2xl transition-all duration-700 group-hover:shadow-[0_0_80px_rgba(6,182,212,0.6)]"
+                    className="w-full h-full rounded-full relative overflow-hidden cursor-pointer transition-all duration-700 shadow-[0_0_80px_rgba(6,182,212,0.6)]"
                     style={{
                       background: planet.gradient,
                       boxShadow: `
@@ -109,8 +110,11 @@ export function FloatingPlanets() {
 
                     {/* Enhanced glow effect */}
                     <div
-                      className="absolute -inset-3 rounded-full blur-2xl opacity-0 group-hover:opacity-90 transition-opacity duration-700 animate-pulse-glow"
-                      style={{ background: planet.color }}
+                      className="absolute -inset-3 rounded-full blur-2xl opacity-90 transition-opacity duration-700 animate-pulse-glow"
+                      style={{
+                        background: planet.color,
+                        animationDuration: "4s",
+                      }}
                     />
 
                     {/* Primary shine highlight */}
@@ -139,7 +143,7 @@ export function FloatingPlanets() {
                     >
                       {/* Main ring */}
                       <div
-                        className="absolute inset-0 rounded-full opacity-70 transition-all duration-700 group-hover:opacity-90"
+                        className="absolute inset-0 rounded-full opacity-90 transition-all duration-700"
                         style={{
                           background: `linear-gradient(90deg,
                             transparent 25%,
@@ -167,43 +171,34 @@ export function FloatingPlanets() {
                       />
                     </div>
                   )}
-
-                  {/* Orbit line - visible on hover */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-500">
-                    <div
-                      className="absolute inset-[-50%] border rounded-full animate-spin-slow"
-                      style={{ borderColor: `${planet.color}40` }}
-                    />
-                  </div>
                 </div>
 
-                {/* Enhanced Planet Label - shows on hover */}
-                <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:translate-y-2 pointer-events-none whitespace-nowrap z-50">
-                  <div className="glass-card px-5 py-3 rounded-2xl border-2 border-cyan-400/40 shadow-lg backdrop-blur-xl bg-linear-to-br from-slate-900/90 to-slate-800/90">
+                {/* Enhanced Planet Label - always visible with pulse animation */}
+                <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 opacity-100 transition-all duration-500 transform pointer-events-none whitespace-nowrap z-50 animate-pulse-slow" style={{ animationDuration: "4s" }}>
+                  <div className="glass-card px-5 py-3 rounded-2xl border-2 border-cyan-400/80 backdrop-blur-xl bg-linear-to-br from-slate-900/95 to-slate-800/95 shadow-[0_0_30px_rgba(6,182,212,0.4)]">
                     <div className="text-center">
                       <div className="text-3xl mb-2 animate-bounce-slow">{planet.icon}</div>
                       <div className="text-base font-bold text-transparent bg-clip-text bg-linear-to-r from-cyan-300 to-purple-300 mb-1">
                         {planet.name}
                       </div>
-                      <div className="text-xs text-cyan-300/80 font-medium flex items-center gap-1 justify-center">
-                        Click to explore
+                      <div className="text-xs text-cyan-300/90 font-medium flex items-center gap-1 justify-center animate-pulse">Click to explore
                       </div>
                     </div>
                   </div>
                 </div>
                 {/* Multiple pulsing ring effects */}
                 <div
-                  className="absolute inset-0 rounded-full animate-ping-slow opacity-0 group-hover:opacity-30"
+                  className="absolute inset-0 rounded-full animate-ping-slow opacity-30"
                   style={{
                     background: planet.color,
                     animationDuration: "2s",
                   }}
                 />
                 <div
-                  className="absolute inset-[-10%] rounded-full animate-ping-slow opacity-0 group-hover:opacity-20"
+                  className="absolute inset-[-10%] rounded-full animate-ping-slow opacity-20"
                   style={{
                     background: planet.color,
-                    animationDuration: "3s",
+                    animationDuration: "5s",
                     animationDelay: "0.5s",
                   }}
                 />
