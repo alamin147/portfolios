@@ -27,9 +27,8 @@ export default function Navbar() {
     { name: "Education", href: "/#education" },
     { name: "Contact", href: "/#contact" },
     {
-      name: DiLinux,
+      name: "Terminal",
       href: "/linux",
-      isIcon: true,
       tooltip: "Travel to my other side",
     },
   ];
