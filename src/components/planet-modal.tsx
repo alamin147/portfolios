@@ -30,7 +30,7 @@ export function PlanetModal({ planet, isOpen, onClose }: PlanetModalProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className={`${isFullWidthPlanet ? 'max-w-7xl' : 'max-w-5xl'} p-0 overflow-hidden bg-transparent border-none [&>button]:absolute [&>button]:top-4 [&>button]:right-4 [&>button]:z-50 [&>button]:rounded-full [&>button]:bg-slate-900/80 [&>button]:backdrop-blur-sm [&>button]:border [&>button]:border-cyan-500/30 [&>button]:p-2 [&>button]:transition-all [&>button]:duration-300 hover:[&>button]:border-cyan-500/60 hover:[&>button]:bg-slate-800/90 hover:[&>button]:scale-110 hover:[&>button]:rotate-90 [&>button>svg]:text-cyan-400 hover:[&>button>svg]:text-cyan-300`}>
+      <DialogContent className={`${isFullWidthPlanet ? 'max-w-[95vw] md:max-w-7xl' : 'max-w-[95vw] md:max-w-5xl'} max-h-[90vh] overflow-y-auto p-0 overflow-hidden bg-transparent border-none [&>button]:absolute [&>button]:top-2 [&>button]:right-2 md:[&>button]:top-4 md:[&>button]:right-4 [&>button]:z-50 [&>button]:rounded-full [&>button]:bg-slate-900/80 [&>button]:backdrop-blur-sm [&>button]:border [&>button]:border-cyan-500/30 [&>button]:p-1.5 md:[&>button]:p-2 [&>button]:transition-all [&>button]:duration-300 hover:[&>button]:border-cyan-500/60 hover:[&>button]:bg-slate-800/90 hover:[&>button]:scale-110 hover:[&>button]:rotate-90 [&>button>svg]:text-cyan-400 hover:[&>button>svg]:text-cyan-300`}>
         <div className="relative glass-card border border-cyan-500/30 overflow-hidden">
           {/* Animated background */}
           <div className="absolute inset-0 opacity-20">
@@ -39,10 +39,10 @@ export function PlanetModal({ planet, isOpen, onClose }: PlanetModalProps) {
 
           {isFullWidthPlanet ? (
             // Full-width 3D model for Skills or Profile Planet
-            <div className="relative min-h-[700px]">
-              <div className="relative flex flex-col items-center justify-center p-8 bg-linear-to-br from-slate-900/50 to-slate-800/30">
+            <div className="relative min-h-[400px] md:min-h-[700px]">
+              <div className="relative flex flex-col items-center justify-center p-4 md:p-8 bg-linear-to-br from-slate-900/50 to-slate-800/30">
                 {/* Three.js 3D Planet Canvas - Full Size */}
-                <div className="w-full h-[600px] relative">
+                <div className="w-full h-[400px] md:h-[600px] relative">
                   {planet.id === "skills" ? (
                     <SkillsPlanet3D />
                   ) : planet.id === "profile" ? (
@@ -63,14 +63,14 @@ export function PlanetModal({ planet, isOpen, onClose }: PlanetModalProps) {
                 </div>
 
                 {/* Planet name with icon */}
-                <div className="text-center mt-6">
-                  <div className="text-6xl mb-2 animate-bounce-slow">
+                <div className="text-center mt-4 md:mt-6">
+                  <div className="text-4xl md:text-6xl mb-2 animate-bounce-slow">
                     {planet.icon}
                   </div>
-                  <h3 className="text-4xl font-bold text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-purple-400 mb-2">
+                  <h3 className="text-2xl md:text-4xl font-bold text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-purple-400 mb-2 px-2">
                     {planet.name}
                   </h3>
-                  <p className="text-cyan-300/70 text-lg">
+                  <p className="text-cyan-300/70 text-sm md:text-lg px-4">
                     {planet.title}
                   </p>
                 </div>
