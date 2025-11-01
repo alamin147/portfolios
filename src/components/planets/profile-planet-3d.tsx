@@ -10,7 +10,6 @@ import {
   FaLaptopCode,
   FaTrophy,
   FaRocket,
-  FaHeart,
   FaUsers,
   FaCoffee,
   FaBrain,
@@ -74,12 +73,6 @@ const profileData = [
     icon: <FaRocket />,
     color: "#f97316",
     // category: "Mindset",
-  },
-  {
-    name: "Loves Building",
-    icon: <FaHeart />,
-    color: "#ef4444",
-    // category: "Passion",
   },
   {
     name: "Tech Explorer",
