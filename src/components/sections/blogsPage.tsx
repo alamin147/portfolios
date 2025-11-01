@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Clock, ArrowRight, Search, Tag } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
-import { Button } from "./ui/button";
-import SectionTitle from "./section-title";
+import { Button } from "@/components/ui/button";
+import { SectionTitle } from "@/components/shared";
 
 type BlogPost = {
   _id: string;

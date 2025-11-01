@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { DiLinux } from "react-icons/di";
 import { Link } from "react-router-dom";
-import CommonTooltip from "./common-tooltip";
+import { CommonTooltip } from "@/components/shared";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);

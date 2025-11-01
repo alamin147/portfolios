@@ -1,7 +1,7 @@
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
-import "../App.css";
-import Stats from "./stats/Stats";
-import ContactIcons from "./hero-icons/ContactIcons";
+import "@/App.css";
+import Stats from "@/components/stats/Stats";
+import ContactIcons from "@/components/hero-icons/ContactIcons";
 import {SquareTerminal} from "lucide-react";
 import { AiOutlineLaptop } from "react-icons/ai";
 export default function Hero() {

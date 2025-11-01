@@ -12,9 +12,9 @@ import {
   MessageCircle,
   ThumbsUp,
 } from "lucide-react";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import { toast } from "react-toastify";
-import { ShareToast, ShareSuccessToast, LikeToast } from "./custom-toast";
+import { ShareToast, ShareSuccessToast, LikeToast } from "@/components/shared";
 
 type BlogPost = {
   _id: string;

@@ -2,11 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { Terminal, Code, BookOpen, Star } from "lucide-react";
 import { DiLinux } from "react-icons/di";
 // import { motion } from "framer-motion";
-import LinuxNavbar from "./linux-navbar";
-import LinuxContactModal from "./linux-contact-modal";
-import BlogDetailsModal from "./blog-details-modal";
-import LinuxProjectModal from "./linux-project-modal";
-import LinuxShowcaseModal from "./linux-showcase-modal";
+import { LinuxNavbar, LinuxContactModal, LinuxProjectModal, LinuxShowcaseModal } from "@/components/features";
+import BlogDetailsModal from "@/components/sections/blog-details-modal";
 import { hackingProjects, linuxDistros, showcaseProjects, techBlogs, techSkills } from "./linux-data";
 
 export default function LinuxPortfolio() {

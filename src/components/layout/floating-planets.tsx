@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { planetsData } from "@/data/planets-data";
 import type { Planet } from "@/data/planets-data";
-import { PlanetModal } from "./planet-modal";
+import { PlanetModal } from "@/components/planets";
 
 export function FloatingPlanets() {
   const [selectedPlanet, setSelectedPlanet] = useState<Planet | null>(null);

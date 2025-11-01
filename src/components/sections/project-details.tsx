@@ -2,7 +2,7 @@ import { FaGithub } from "react-icons/fa";
 import { IoIosLink } from "react-icons/io";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowUp, X, Search } from "lucide-react";
 
 export type InputFields = {

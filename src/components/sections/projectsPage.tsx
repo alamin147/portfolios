@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, ArrowLeft, Layers } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
-import SectionTitle from "@/components/section-title";
+import { SectionTitle } from "@/components/shared";
 import { Link } from "react-router-dom";
 import { Skeleton } from "@/components/ui/skeleton";
 

@@ -7,7 +7,7 @@ import {
   Users,
 } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
-import SectionTitle from "./section-title";
+import { SectionTitle } from "@/components/shared";
 
 const educationData = [
   {

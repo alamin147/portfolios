@@ -1,8 +1,8 @@
 import { Download, Github, Linkedin } from "lucide-react";
 import { SiLeetcode, SiCodeforces, SiCodechef, SiHackerrank } from "react-icons/si";
-import CustomBtn from "../custom-button";
+import CustomBtn from "@/components/shared/custom-button";
 import { Button } from "@/components/ui/button";
-import { socialLinks, contactInfo } from "../../data/contact-data";
+import { socialLinks, contactInfo } from "@/data/contact-data";
 import { useState } from "react";
 import {
   Dialog,

@@ -1,31 +1,46 @@
-import Hero from "@/components/hero";
-import Projects from "@/components/projects";
-import Skills from "@/components/skills";
-import Footer from "@/components/footer";
-import CPProfiles from "@/components/cp-profiles";
-import Blog from "@/components/blog";
-import Education from "@/components/education";
-import NotFound from "@/components/not-found";
-// import Certificates from "@/components/certificates";
-import Contact from "@/components/contact";
-import { FloatingElements } from "@/components/floating-elements";
-import { FloatingPlanets } from "@/components/floating-planets";
-import Navbar from "@/components/navbar";
-import LinuxPortfolio from "@/components/linux-portfolio";
+// Sections
+import {
+  Hero,
+  Projects,
+  Skills,
+  Blog,
+  Education,
+  Contact,
+  CPProfiles,
+  ProjectsPage,
+  ProjectDetailsPage,
+  BlogDetailsWrapper,
+  BlogsPage
+} from "@/components/sections";
+
+// Layout
+import {
+  Navbar,
+  Footer,
+  FloatingElements,
+  FloatingPlanets,
+  BackgroundStars,
+  MouseTrail,
+  InitialLoader
+} from "@/components/layout";
+
+// Features
+import { LinuxPortfolio } from "@/components/features";
+
+// Shared
+import { NotFound, SEO } from "@/components/shared";
+
+// Router
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import ProjectsPage from "./components/projectsPage";
-import ProjectDetailsPage from "./components/project-details";
-import BlogDetailsWrapper from "./components/blog-details-wrapper";
-import BlogsPage from "./components/blogsPage";
-import BackgroundStars from "./components/background-stars";
-import MouseTrail from "./components/mouse-trail";
-import InitialLoader from "./components/initial-loader";
+
+// React
 import { useState, useEffect } from "react";
-import { EasterEggsProvider } from "./context/easter-eggs-context";
+
+// Context
+import { EasterEggsProvider, useEasterEggs } from "./context/easter-eggs-context";
+
+// Easter Eggs
 import SpaceCatcherGame from "./components/easter-eggs/space-catcher-game";
-// Import only the space catcher game
-import { useEasterEggs } from "./context/easter-eggs-context";
-import { SEO } from "@/components/seo";
 
 const AppContent = () => {
   const { isGameActive, updateGameScore, deactivateGame } = useEasterEggs();

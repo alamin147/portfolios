@@ -16,7 +16,7 @@ import {
   SiPrisma,
 } from "react-icons/si";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
-import SectionTitle from "./section-title";
+import { SectionTitle } from "@/components/shared";
 
 export default function Skills() {
   const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();

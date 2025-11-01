@@ -1,6 +1,6 @@
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 import { useState } from "react";
-import EasterEggsModal from "./easter-eggs-modal";
+import { EasterEggsModal } from "@/components/shared";
 
 export default function Footer() {
   const { ref: footerRef, isVisible: footerVisible } = useScrollAnimation();

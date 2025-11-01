@@ -3,8 +3,8 @@ import { Clock, Calendar, ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
-import SectionTitle from "./section-title";
-import { Button } from "./ui/button";
+import { SectionTitle } from "@/components/shared";
+import { Button } from "@/components/ui/button";
 
 type BlogPost = {
   _id: string;

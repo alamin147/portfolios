@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Button } from './ui/button';
+import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
-import FallingStarGame from './game/falling-star-game';
-import { useToast } from '../hooks/use-toast';
+import FallingStarGame from '@/components/game/falling-star-game';
+import { useToast } from '@/hooks/use-toast';
 import { IoGameController } from "react-icons/io5";
 const NotFound: React.FC = () => {
   const navigate = useNavigate();

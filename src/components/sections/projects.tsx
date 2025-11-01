@@ -164,7 +164,7 @@
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
-import SectionTitle from "./section-title";
+import { SectionTitle } from "@/components/shared";
 import { useEffect, useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 

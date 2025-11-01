@@ -3,7 +3,7 @@ import { X, Terminal, Send } from "lucide-react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { ContactSuccessToast, ContactErrorToast, ContactSendingToast } from "./custom-toast";
+import { ContactSuccessToast, ContactErrorToast, ContactSendingToast } from "@/components/shared";
 
 type TInputs = {
   name: string;
@@ -129,7 +129,7 @@ export default function LinuxContactModal({ isOpen, onClose }: LinuxContactModal
           <div className="mb-6">
             <p className="text-green-300 mb-2">root@alamin:~# ./contact.sh --secure</p>
             <p className="text-gray-400 text-sm mb-4">Initializing secure communication channel...</p>
-           
+
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">

@@ -6,13 +6,13 @@ import "@/components/css/contact.css";
 import { Mail, MapPin, Phone, Send } from "lucide-react";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { SiLeetcode, SiCodeforces, SiCodechef, SiHackerrank } from "react-icons/si";
-import SectionTitle from "./section-title";
+import { SectionTitle } from "@/components/shared";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { ContactSuccessToast, ContactErrorToast, ContactSendingToast } from "./custom-toast";
-import { contactInfo, socialLinks } from "../data/contact-data";
+import { ContactSuccessToast, ContactErrorToast, ContactSendingToast } from "@/components/shared";
+import { contactInfo, socialLinks } from "@/data/contact-data";
 
 type TInputs = {
   name: string;
