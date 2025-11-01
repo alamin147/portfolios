@@ -19,7 +19,7 @@ export function FloatingPlanets() {
 
   // Scattered positions using pixel values to appear at different sections
   // Planets stay in place on the page as you scroll
-  // Increased margins to prevent horizontal overflow
+  // Responsive positioning: hide on mobile (< 768px) to maintain responsiveness
   const positions = [
     { top: "100px", right: "5%", delay: "0s" },      // 1. Profile - Hero section
     { top: "1200px", left: "5%", delay: "2s" },      // 2. CP - CP section
@@ -34,12 +34,13 @@ export function FloatingPlanets() {
   return (
     <>
       {/* Floating Planets - positioned absolutely so they stay on the page */}
+      {/* Hidden on mobile (< md: 768px) to maintain responsiveness */}
       {planetsData.map((planet, index) => {
         const position = positions[index];
         return (
           <div
             key={planet.id}
-            className="absolute pointer-events-auto cursor-pointer z-40"
+            className="hidden md:block absolute pointer-events-auto cursor-pointer z-40"
             style={{
               top: position.top,
               left: position.left,
