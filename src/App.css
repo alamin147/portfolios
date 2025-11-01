@@ -20,3 +20,34 @@
 .glow-animation {
   animation: glow 1s ease-in-out infinite;
 }
+
+/* Hero Image Specific Styles - Isolated to prevent glitching */
+.hero-image-frame {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: all 0.5s ease;
+}
+
+.hero-image-frame:hover {
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(8, 145, 178, 0.3);
+  box-shadow: 0 12px 45px rgba(0, 0, 0, 0.4),
+              0 0 40px rgba(8, 145, 178, 0.4);
+}
+
+.hero-image-glow-bg {
+  background: linear-gradient(to right, rgb(8 145 178), rgb(5 150 105)) !important;
+  filter: blur(1px);
+  opacity: 0.75;
+  transition: all 0.6s ease;
+}
+
+.hero-image-container:hover .hero-image-glow-bg {
+  opacity: 1;
+  filter: blur(2px);
+}
