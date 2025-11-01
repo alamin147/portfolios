@@ -62,6 +62,9 @@ export default function Navbar() {
                     key={item.name.toString()}
                     to={item.href}
                     className="text-white hover:text-sky-400 px-2 lg:px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300"
+                    onClick={() => {
+                      setTimeout(() => window.scrollTo(0, 0), 0);
+                    }}
                   >
                     {item.isIcon ? (
                       <item.name className="h-5 w-5 lg:h-6 lg:w-6 inline mb-1" />
@@ -122,7 +125,10 @@ export default function Navbar() {
                     key={item.name.toString()}
                     to={item.href}
                     className="text-white hover:text-sky-400 block px-3 py-2 rounded-md text-sm sm:text-base font-medium transition-colors duration-300"
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => {
+                      setIsOpen(false);
+                      setTimeout(() => window.scrollTo(0, 0), 0);
+                    }}
                   >
                     {item.isIcon ? (
                       <span className="flex items-center">
