@@ -25,6 +25,7 @@ import { EasterEggsProvider } from "./context/easter-eggs-context";
 import SpaceCatcherGame from "./components/easter-eggs/space-catcher-game";
 // Import only the space catcher game
 import { useEasterEggs } from "./context/easter-eggs-context";
+import { SEO } from "@/components/seo";
 
 const AppContent = () => {
   const { isGameActive, updateGameScore, deactivateGame } = useEasterEggs();
@@ -64,6 +65,11 @@ const AppContent = () => {
                 path="/"
                 element={
                   <div className="relative z-10">
+                    <SEO
+                      title="Al Amin - Full Stack Developer Portfolio"
+                      description="Full Stack Developer specializing in React, Node.js, Express, MongoDB, PostgreSQL, TypeScript, Prisma, and Tailwind CSS. Explore my portfolio of projects, skills, and competitive programming profiles."
+                      url="https://alamin-portfolio-site.vercel.app/"
+                    />
                     <Navbar />
                     <Hero />
                     <CPProfiles />
@@ -80,6 +86,11 @@ const AppContent = () => {
                 path="/projects"
                 element={
                   <>
+                    <SEO
+                      title="Projects - Al Amin | Full Stack Developer"
+                      description="Browse through my portfolio of full-stack web development projects featuring React, Node.js, Express, MongoDB, PostgreSQL, TypeScript, Next.js, Prisma, and Tailwind CSS."
+                      url="https://alamin-portfolio-site.vercel.app/projects"
+                    />
                     <Navbar />
                     <ProjectsPage />
                     <Footer />
@@ -90,6 +101,11 @@ const AppContent = () => {
                 path="/blogs"
                 element={
                   <>
+                    <SEO
+                      title="Blog - Al Amin | Web Development & Tech Insights"
+                      description="Read my latest articles on web development, programming tutorials, and technology insights. Learn about React, Node.js, Express, MongoDB, PostgreSQL, TypeScript, and modern development practices."
+                      url="https://alamin-portfolio-site.vercel.app/blogs"
+                    />
                     <Navbar />
                     <BlogsPage />
                     <Footer />
@@ -100,6 +116,11 @@ const AppContent = () => {
                 path="/projects/:id"
                 element={
                   <>
+                    <SEO
+                      title="Project Details - Al Amin Portfolio"
+                      description="Detailed overview of my full-stack development project including technologies used, features, and live demo."
+                      url="https://alamin-portfolio-site.vercel.app/projects"
+                    />
                     <Navbar />
                     <ProjectDetailsPage />
                     <Footer />
@@ -110,6 +131,11 @@ const AppContent = () => {
                 path="/blog/:id"
                 element={
                   <>
+                    <SEO
+                      title="Blog Post - Al Amin"
+                      description="Read this insightful article about web development, programming, and technology."
+                      url="https://alamin-portfolio-site.vercel.app/blog"
+                    />
                     <Navbar />
                     <BlogDetailsWrapper />
                     <Footer />
@@ -118,11 +144,29 @@ const AppContent = () => {
               />
               <Route
                 path="/linux"
-                element={<LinuxPortfolio />}
+                element={
+                  <>
+                    <SEO
+                      title="Linux Theme - Al Amin Portfolio"
+                      description="Experience my portfolio with a unique Linux terminal-inspired interface."
+                      url="https://alamin-portfolio-site.vercel.app/linux"
+                    />
+                    <LinuxPortfolio />
+                  </>
+                }
               />
               <Route
                 path="*"
-                element={<NotFound />}
+                element={
+                  <>
+                    <SEO
+                      title="404 - Page Not Found | Al Amin Portfolio"
+                      description="The page you are looking for does not exist. Return to the homepage to explore Al Amin's portfolio."
+                      url="https://alamin-portfolio-site.vercel.app/"
+                    />
+                    <NotFound />
+                  </>
+                }
               />
             </Routes>
           </Router>
