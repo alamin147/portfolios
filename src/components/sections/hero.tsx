@@ -10,7 +10,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center px-2 sm:px-4 lg:px-6 py-16 sm:py-20"
+      className="flex items-center justify-center px-2 sm:px-4 lg:px-6 py-16 sm:py-20"
     >
       <div className="container mx-auto max-w-7xl">
         <div
