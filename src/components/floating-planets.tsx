@@ -27,8 +27,8 @@ export function FloatingPlanets() {
     { top: "3600px", left: "5%", delay: "6s" },      // 4. Skills - Skill section
     { top: "4800px", right: "5%", delay: "8s" },     // 5. Blog section
     { top: "6000px", left: "5%", delay: "10s" },     // 6. Education section
-    { top: "7200px", right: "5%", delay: "12s" },    // 7. Contact section
-    { top: "8400px", left: "5%", delay: "14s" },     // 8. Footer section
+    { top: "7750px", right: "5%", delay: "12s" },    // 7. Contact section
+    { top: "8850px", left: "5%", delay: "14s" },     // 8. Footer section
   ];
 
   return (
