@@ -12,6 +12,7 @@ import { ProfilePlanet3D } from "./profile-planet-3d";
 import CPPlanet3D from "./cp-planet-3d";
 import ProjectsPlanet3D from "./projects-planet-3d";
 import BlogPlanet3D from "./blog-planet-3d";
+import EducationPlanet3D from "./education-planet-3d";
 
 interface PlanetModalProps {
   planet: Planet | null;
@@ -23,7 +24,7 @@ export function PlanetModal({ planet, isOpen, onClose }: PlanetModalProps) {
   if (!planet) return null;
 
   // Check if this is an interactive planet to render full-width modal
-  const isFullWidthPlanet = planet.id === "skills" || planet.id === "profile" || planet.id === "cp" || planet.id === "projects" || planet.id === "blog";
+  const isFullWidthPlanet = planet.id === "skills" || planet.id === "profile" || planet.id === "cp" || planet.id === "projects" || planet.id === "blog" || planet.id === "education";
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -50,6 +51,8 @@ export function PlanetModal({ planet, isOpen, onClose }: PlanetModalProps) {
                     <ProjectsPlanet3D />
                   ) : planet.id === "blog" ? (
                     <BlogPlanet3D />
+                  ) : planet.id === "education" ? (
+                    <EducationPlanet3D />
                   ) : null}
                 </div>
 
@@ -162,6 +165,8 @@ export function PlanetModal({ planet, isOpen, onClose }: PlanetModalProps) {
                           "Click any project node to instantly launch the live demo and explore the application in action!"}
                         {planet.id === "blog" &&
                           "Click any blog node to dive into articles about web development, programming, and tech insights!"}
+                        {planet.id === "education" &&
+                          "Each achievement node represents a milestone in the learning journey - from degrees to certifications and beyond!"}
                         {planet.id === "neptune" &&
                           "Neptune has the fastest winds in the solar system, reaching 2,100 km/h!"}
                         {planet.id === "skills" &&
