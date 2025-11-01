@@ -87,13 +87,15 @@ const AppContent = () => {
                     {/* Floating Planets only on homepage */}
                     <FloatingPlanets />
                     <Navbar />
-                    <Hero />
-                    <CPProfiles />
-                    <Projects />
-                    <Skills />
-                    <Blog />
-                    <Education />
-                    <Contact />
+                    <main id="main-content" role="main">
+                      <Hero />
+                      <CPProfiles />
+                      <Projects />
+                      <Skills />
+                      <Blog />
+                      <Education />
+                      <Contact />
+                    </main>
                     <Footer />
                   </div>
                 }

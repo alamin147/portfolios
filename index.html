@@ -1,18 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-786EB2WCSV"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <!-- Content Security Policy for XSS Protection -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+        font-src 'self' https://fonts.gstatic.com data:;
+        img-src 'self' data: https: blob:;
+        connect-src 'self' https://admin-server-portfolio.vercel.app https://www.google-analytics.com https://analytics.google.com;
+        frame-src 'self' https://www.google.com;
+        object-src 'none';
+        base-uri 'self';
+        form-action 'self' https://admin-server-portfolio.vercel.app;
+        frame-ancestors 'self';
+        upgrade-insecure-requests;
+      "
+    />
 
-  gtag('config', 'G-786EB2WCSV');
-</script>
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <!-- Preconnect to external domains for better performance -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <link rel="preconnect" href="https://www.google-analytics.com" crossorigin />
+    <link rel="preconnect" href="https://admin-server-portfolio.vercel.app" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+
+    <!-- Google tag (gtag.js) - Async loading -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-786EB2WCSV"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-786EB2WCSV');
+    </script>
+
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/logo.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Al Amin | Fullstack Developer Portfolio</title>
     <meta name="google-site-verification" content="eav9XmUcCBjMUumdaL5Q8Ie3VNupyhlIk-S_vGgPwD4" />
     <meta
@@ -58,11 +91,44 @@
     <meta property="twitter:image" content="/alamin.jpg" />
 
     <!-- SEO improvements -->
-    <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#2a015e" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="theme-color" content="#2a015e" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#0891b2" media="(prefers-color-scheme: light)" />
     <link rel="canonical" href="https://alamin-portfolio-site.vercel.app/" />
+
+    <!-- Manifest for PWA -->
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Accessibility: Skip to main content -->
+    <style>
+      .skip-to-main {
+        position: absolute;
+        left: -9999px;
+        z-index: 999;
+        padding: 1em;
+        background-color: #0891b2;
+        color: white;
+        text-decoration: none;
+      }
+      .skip-to-main:focus {
+        left: 50%;
+        transform: translateX(-50%);
+        top: 0;
+      }
+    </style>
   </head>
   <body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-to-main">Skip to main content</a>
+
+    <!-- Add noscript fallback -->
+    <noscript>
+      <div style="padding: 2rem; text-align: center; background: #fef3c7; color: #92400e;">
+        <h1>JavaScript Required</h1>
+        <p>This portfolio requires JavaScript to display interactive 3D elements and dynamic content. Please enable JavaScript in your browser settings.</p>
+      </div>
+    </noscript>
+
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
