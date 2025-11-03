@@ -300,111 +300,25 @@ Try 'help' to see available commands`;
 
       {/* Content */}
       <div className="relative z-10 pt-20">
-        {/* Hero Section */}
+        {/* Hero Section - Terminal Only */}
         <section className="container mx-auto px-6 py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="flex items-center mb-4">
-                <DiLinux className="text-6xl text-red-400 mr-4" />
-                <div>
-                  <h1 className="text-4xl font-bold text-red-400 mb-2">
-                    root@alamin:~#
-                  </h1>
-                  <p className="text-xl text-green-300">
-                    ./execute_recreate_world.sh
-                  </p>
-                </div>
-              </div>
-
-              <div className="mb-8">
-                <h2 className="text-3xl font-bold text-white mb-4">
-                  Linux Command Center
-                </h2>
-                <p className="text-green-300 text-lg leading-relaxed">
-                  Where code meets chaos, and systems obey my command. Each command is a strike, each script a strategy, as I dive deeper into the void, bending digital realms to my will. <br/>One day Cat will take the world with the power of sudo.
-                </p>
-              </div>
-
-              <div className="flex flex-wrap gap-4">
-                {linuxDistros.map((distro, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 hover:border-red-400 transition-all duration-300 relative group"
-                    // title={distro.tooltip}
-                  >
-                    <distro.icon className={`text-2xl ${distro.color} mr-2`} />
-                    <span className="text-white">{distro.name}</span>
-
-                    {/* Custom tooltip */}
-                    {distro.tooltip && (
-                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-black border border-red-400 text-red-400 text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
-                        {distro.tooltip}
-                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-red-400"></div>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-
-              {/* Cat Animation */}
-              {/* {showCat && (
-                <div className="mt-8 relative h-20">
-                  <motion.div
-                    initial={{ x: -200, opacity: 0 }}
-                    animate={{
-                      x: catAnimationPhase === "walking" ? 500 : 500,
-                      opacity: 1
-                    }}
-                    transition={{
-                      duration: catAnimationPhase === "walking" ? 6 : 0.5,
-                      ease: "easeInOut"
-                    }}
-                    onAnimationComplete={() => {
-                      if (catAnimationPhase === "walking") {
-                        setCatAnimationPhase("sitting");
-                      }
-                    }}
-                    className="relative"
-                  >
-                    <img
-                    //   src="/cat-sitting.gif"
-                      src="/cat-walking.gif"
-                      alt="Walking cat"
-                      className="w-16 h-12 object-contain"
-                      style={{
-                        filter: "sepia(1) hue-rotate(90deg) saturate(2) brightness(1.2)",
-                        transform: catAnimationPhase === "sitting" ? "scaleX(-1)" : "none"
-                      }}
-                    />
-                    {catAnimationPhase === "sitting" && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.5 }}
-                        className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-gray-900 border border-green-400 rounded px-2 py-1 text-xs text-green-400 whitespace-nowrap"
-                      >
-                        sudo cat enjoys the terminal
-                      </motion.div>
-                    )}
-                  </motion.div>
-                </div>
-              )} */}
-
-            </div>
-
-            {/* Terminal */}
-            <div className="bg-black border border-green-400 rounded-lg overflow-hidden shadow-2xl">
-              <div className="bg-gray-900 px-4 py-2 flex items-center justify-between">
+          {/* Terminal */}
+          <div className="max-w-7xl mx-auto">
+            <div className="bg-black border-2 border-green-400 rounded-lg overflow-hidden shadow-2xl hover:shadow-green-400/50 transition-all duration-300 hover:border-red-400 relative group terminal-interactive-glow">
+              <div className="bg-gray-900 px-4 py-3 flex items-center justify-between border-b border-gray-700">
                 <div className="flex items-center">
-                  <div className="flex space-x-2">
-                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                  </div>
-                  <span className="ml-4 text-gray-400">Terminal - alamin</span>
+                  <span className="text-gray-400 font-mono">Terminal - alamin</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Terminal className="w-4 h-4 text-green-400 animate-pulse" />
+                  <span className="text-green-400 text-xs font-mono">LIVE</span>
                 </div>
               </div>
-              <div ref={terminalRef} className="p-4 h-80 overflow-y-auto cursor-text" onClick={() => inputRef.current?.focus()}>
+              <div
+                ref={terminalRef}
+                className="p-6 h-[600px] overflow-y-auto cursor-text hover:bg-gray-950/50 transition-colors"
+                onClick={() => inputRef.current?.focus()}
+              >
                 <pre className="text-green-400 text-sm whitespace-pre-wrap font-mono leading-relaxed">
                   {terminalText}
                   {isIntroComplete && (
@@ -427,10 +341,62 @@ Try 'help' to see available commands`;
                 </pre>
               </div>
               {isIntroComplete && (
-                <div className="px-4 py-2 bg-gray-900 border-t border-gray-700 text-xs text-gray-400 font-mono">
-                  💡 Tip: Type 'ls' or 'help' to explore the terminal
+                <div className="px-6 py-3 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 border-t-2 border-green-400/30">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="text-yellow-400 text-lg animate-pulse">💡</span>
+                      <span className="text-green-300 text-sm font-mono font-bold">
+                        TRY: <span className="text-white bg-gray-800 px-2 py-1 rounded">ls</span> or <span className="text-white bg-gray-800 px-2 py-1 rounded">help</span> to explore
+                      </span>
+                    </div>
+                    <span className="text-red-400 text-xs font-mono animate-pulse">← Click & Type!</span>
+                  </div>
                 </div>
               )}
+            </div>
+          </div>
+
+          {/* Intro Content Below Terminal */}
+          <div className="mt-12 max-w-7xl mx-auto text-center">
+            <div className="flex items-center justify-center mb-6">
+              <DiLinux className="text-6xl text-red-400 mr-4" />
+              <div>
+                <h1 className="text-4xl font-bold text-red-400 mb-2">
+                  root@alamin:~#
+                </h1>
+                <p className="text-xl text-green-300">
+                  ./execute_recreate_world.sh
+                </p>
+              </div>
+            </div>
+
+            <div className="mb-8">
+              <h2 className="text-3xl font-bold text-white mb-4">
+                Linux Command Center
+              </h2>
+              <p className="text-green-300 text-lg leading-relaxed max-w-3xl mx-auto">
+                Where code meets chaos, and systems obey my command. Each command is a strike, each script a strategy, as I dive deeper into the void, bending digital realms to my will. One day Cat will take the world with the power of sudo.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-3 justify-center">
+              {linuxDistros.map((distro, index) => (
+                <div
+                  key={index}
+                  className="flex items-center bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 hover:border-red-400 hover:scale-105 transition-all duration-300 relative group"
+                >
+                  <distro.icon className={`text-2xl ${distro.color} mr-2`} />
+                  <span className="text-white font-mono">{distro.name}</span>
+
+                  {/* Custom tooltip */}
+                  {distro.tooltip && (
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-black border border-red-400 text-red-400 text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
+                      {distro.tooltip}
+                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-red-400"></div>
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
         </section>
