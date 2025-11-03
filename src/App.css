@@ -144,3 +144,20 @@
 .animate-fade-in {
   animation: animate-fade-in 0.3s ease-out;
 }
+
+/* Linux Terminal Interactive Styles */
+@keyframes terminalPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.3),
+                0 0 40px rgba(34, 197, 94, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(34, 197, 94, 0.5),
+                0 0 60px rgba(34, 197, 94, 0.3),
+                0 0 80px rgba(34, 197, 94, 0.2);
+  }
+}
+
+.terminal-interactive-glow:hover {
+  animation: terminalPulse 2s ease-in-out infinite;
+}
