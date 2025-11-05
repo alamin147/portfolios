@@ -1208,3 +1208,213 @@ html {
     animation: none;
   }
 }
+
+/* ==================== LIGHT MODE - NAVBAR ONLY ==================== */
+
+/* Navbar background in light mode - match hero section */
+:root:not(.dark) nav {
+  background: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: none;
+}
+
+:root:not(.dark) nav.glass-card {
+  background: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Logo gradient in light mode */
+:root:not(.dark) nav .bg-gradient-to-r.from-sky-400.to-emerald-400 {
+  background: linear-gradient(to right, #0891b2, #10b981);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Navbar links in light mode */
+:root:not(.dark) nav a {
+  color: #0f172a !important;
+}
+
+:root:not(.dark) nav a:hover {
+  color: #0891b2 !important;
+}
+
+/* Mobile menu button glass card in light mode */
+:root:not(.dark) nav .glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(8, 145, 178, 0.2);
+  box-shadow: 0 4px 16px rgba(8, 145, 178, 0.1);
+}
+
+:root:not(.dark) nav .glass-card:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(8, 145, 178, 0.3);
+  box-shadow: 0 6px 20px rgba(8, 145, 178, 0.15);
+}
+
+/* Mobile menu button icon in light mode */
+:root:not(.dark) nav button {
+  color: #0f172a !important;
+}
+
+:root:not(.dark) nav button:hover {
+  color: #0891b2 !important;
+}
+
+/* Mobile dropdown menu in light mode */
+:root:not(.dark) nav .md\:hidden > div > div.glass-card {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(8, 145, 178, 0.2);
+  box-shadow: 0 10px 30px rgba(8, 145, 178, 0.15);
+}
+
+/* ==================== LIGHT MODE - HERO SECTION ONLY ==================== */
+
+/* Hero section background - match navbar style */
+:root:not(.dark) #home {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Hero greeting badge */
+:root:not(.dark) #home .glass-button {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(203, 213, 225, 0.5);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.03);
+  color: #0891b2 !important;
+}
+
+:root:not(.dark) #home .text-sky-300 {
+  color: #0891b2 !important;
+}
+
+/* Hero main title gradient - light mode */
+:root:not(.dark) #home .bg-gradient-to-r.from-white.to-gray-300 {
+  background: linear-gradient(to right, #0f172a, #475569);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Hero "Developer" text gradient */
+:root:not(.dark) #home .bg-gradient-to-r.from-sky-400.to-emerald-400 {
+  background: linear-gradient(to right, #0891b2, #10b981);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Hero description text */
+:root:not(.dark) #home .text-gray-300 {
+  color: #475569 !important;
+}
+
+/* Hero text highlights */
+:root:not(.dark) #home .text-sky-400 {
+  color: #0891b2 !important;
+}
+
+:root:not(.dark) #home .text-emerald-400 {
+  color: #10b981 !important;
+}
+
+/* Hero glass card */
+:root:not(.dark) #home .glass-card {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(203, 213, 225, 0.3);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06), 0 2px 8px rgba(15, 23, 42, 0.04) !important;
+}
+
+:root:not(.dark) #home .glass-card:hover {
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(203, 213, 225, 0.3);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08), 0 4px 12px rgba(15, 23, 42, 0.06) !important;
+}
+
+/* Hero image frame - light mode - remove padding and border */
+:root:not(.dark) .hero-image-frame {
+  background: transparent !important;
+  border: none;
+  padding: 0 !important;
+  box-shadow: 0 10px 40px rgba(15, 23, 42, 0.1), 0 5px 20px rgba(15, 23, 42, 0.08);
+}
+
+:root:not(.dark) .hero-image-frame:hover {
+  background: transparent !important;
+  border: none;
+  box-shadow: 0 15px 50px rgba(15, 23, 42, 0.12),
+              0 8px 30px rgba(15, 23, 42, 0.1);
+}/* Hero image glow background - light mode - remove blue glow */
+:root:not(.dark) .hero-image-glow-bg {
+  background: linear-gradient(to right, rgba(203, 213, 225, 0.4), rgba(148, 163, 184, 0.4)) !important;
+  opacity: 0.3;
+}
+
+:root:not(.dark) .hero-image-container:hover .hero-image-glow-bg {
+  opacity: 0.5;
+}
+
+/* Hero floating elements - light mode */
+:root:not(.dark) #home .glass-card.rounded-full {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(203, 213, 225, 0.6);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08), 0 4px 12px rgba(15, 23, 42, 0.05);
+}
+
+:root:not(.dark) #home .glass-card.rounded-full:hover {
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.1), 0 6px 18px rgba(15, 23, 42, 0.08);
+}
+
+/* Hero floating icon colors */
+:root:not(.dark) #home .glass-card.rounded-full svg {
+  color: #0891b2 !important;
+}
+
+/* Hero hover tooltip - light mode */
+:root:not(.dark) .hero-image-container .group-hover\:opacity-100 > div {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 2px solid rgba(148, 163, 184, 0.5) !important;
+  box-shadow: 0 6px 24px rgba(15, 23, 42, 0.1), 0 4px 12px rgba(15, 23, 42, 0.08) !important;
+}
+
+:root:not(.dark) .hero-image-container .text-white {
+  color: #0f172a !important;
+}
+
+/* Hero gradient divider - stays vibrant */
+:root:not(.dark) #home .bg-gradient-to-r.from-sky-500.to-emerald-500 {
+  background: linear-gradient(to right, #0891b2, #10b981);
+}
+
+/* Hero download button - light mode */
+:root:not(.dark) #home button {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(8, 145, 178, 0.3) !important;
+  color: #0891b2 !important;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08), 0 2px 6px rgba(8, 145, 178, 0.1) !important;
+}
+
+:root:not(.dark) #home button:hover {
+  background: rgba(255, 255, 255, 1) !important;
+  border: 1px solid rgba(8, 145, 178, 0.5) !important;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.1), 0 4px 12px rgba(8, 145, 178, 0.2) !important;
+}
+
+:root:not(.dark) #home button svg {
+  color: #0891b2 !important;
+}
+
+/* ==================== LIGHT MODE - BACKGROUND ENHANCEMENT ==================== */
+
+/* Ensure smooth background in light mode */
+:root:not(.dark) body {
+  background: transparent;
+}
+
+/* Light mode overall page background - cool blue tones */
+:root:not(.dark) {
+  background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 25%, #f0f9ff 50%, #e0f2fe 75%, #dbeafe 100%);
+}
