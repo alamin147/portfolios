@@ -8,3 +8,4 @@ export { SEO } from './seo';
 export { CustomToast, ShareToast, ShareSuccessToast, LikeToast, UnlikeToast, ContactSuccessToast, ContactErrorToast, ContactSendingToast } from './custom-toast';
 export { default as EasterEggsModal } from './easter-eggs-modal';
 export { default as Certificates } from './certificates';
+export { default as ThemeToggle } from './theme-toggle';
