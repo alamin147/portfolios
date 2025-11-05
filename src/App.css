@@ -161,3 +161,11 @@
 .terminal-interactive-glow:hover {
   animation: terminalPulse 2s ease-in-out infinite;
 }
+
+/* ==================== LIGHT MODE - HERO ANIMATIONS ==================== */
+
+/* Disable glow animation in light mode - no blinking */
+:root:not(.dark) .glow-animation {
+  animation: none;
+  box-shadow: none;
+}
