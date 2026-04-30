@@ -347,14 +347,14 @@ function CPConnectionNetwork({ nodes }: { nodes: CPNode[] }) {
 }
 
 // Code particles floating around
-function CodeParticles() {
+function CodeParticles({ isDarkMode }: { isDarkMode: boolean }) {
   const particlesRef = useRef<THREE.Points>(null);
 
   const particleGeometry = useMemo(() => {
     const geometry = new THREE.BufferGeometry();
-    const positions = new Float32Array(600 * 3);
+    const positions = new Float32Array(700 * 3);
 
-    for (let i = 0; i < 600; i++) {
+    for (let i = 0; i < 700; i++) {
       const i3 = i * 3;
       const radius = 3.5 + Math.random() * 2;
       const theta = Math.random() * Math.PI * 2;
@@ -379,10 +379,10 @@ function CodeParticles() {
   return (
     <points ref={particlesRef} geometry={particleGeometry}>
       <pointsMaterial
-        size={0.03}
-        color="#f59e0b"
+        size={isDarkMode ? 0.03 : 0.045}
+        color={isDarkMode ? "#f59e0b" : "#b45309"}
         transparent
-        opacity={0.8}
+        opacity={isDarkMode ? 0.8 : 0.95}
         sizeAttenuation
       />
     </points>
@@ -417,6 +417,9 @@ function AchievementRings() {
 export default function CPPlanet3D() {
   const [profiles, setProfiles] = useState<CPProfile[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(() =>
+    document.documentElement.classList.contains("dark")
+  );
 
   useEffect(() => {
     const fetchProfiles = async () => {
@@ -434,6 +437,14 @@ export default function CPPlanet3D() {
     };
 
     fetchProfiles();
+  }, []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const updateTheme = () => setIsDarkMode(root.classList.contains("dark"));
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(root, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
   }, []);
 
   const generateNodes = useCallback((): CPNode[] => {
@@ -525,7 +536,7 @@ export default function CPPlanet3D() {
         ))}
 
         {/* Code particles */}
-        <CodeParticles />
+        <CodeParticles isDarkMode={isDarkMode} />
 
         {/* OrbitControls */}
         <OrbitControls
