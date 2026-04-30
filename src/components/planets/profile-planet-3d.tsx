@@ -1,4 +1,4 @@
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Html, Sphere, Line } from "@react-three/drei";
 import * as THREE from "three";
@@ -324,14 +324,14 @@ function ConnectionNetwork({ nodes }: { nodes: ProfileNode[] }) {
 }
 
 // Energy particles orbiting
-function EnergyParticles() {
+function EnergyParticles({ isDarkMode }: { isDarkMode: boolean }) {
   const particlesRef = useRef<THREE.Points>(null);
 
   const particleGeometry = useMemo(() => {
     const geometry = new THREE.BufferGeometry();
-    const positions = new Float32Array(800 * 3);
+    const positions = new Float32Array(700 * 3);
 
-    for (let i = 0; i < 800; i++) {
+    for (let i = 0; i < 700; i++) {
       const i3 = i * 3;
       const radius = 3 + Math.random() * 2.5;
       const theta = Math.random() * Math.PI * 2;
@@ -356,10 +356,10 @@ function EnergyParticles() {
   return (
     <points ref={particlesRef} geometry={particleGeometry}>
       <pointsMaterial
-        size={0.025}
-        color="#06d6a0"
+        size={isDarkMode ? 0.025 : 0.04}
+        color={isDarkMode ? "#06d6a0" : "#0f766e"}
         transparent
-        opacity={0.7}
+        opacity={isDarkMode ? 0.7 : 0.9}
         sizeAttenuation
       />
     </points>
@@ -368,6 +368,9 @@ function EnergyParticles() {
 
 // Main Profile Planet Component
 export function ProfilePlanet3D() {
+  const [isDarkMode, setIsDarkMode] = useState(() =>
+    document.documentElement.classList.contains("dark")
+  );
   // Distribute profile nodes on sphere
   const nodes:any = useMemo(() => {
     const positions = fibonacciSphere(profileData.length, 2.8);
@@ -375,6 +378,14 @@ export function ProfilePlanet3D() {
       ...node,
       position: positions[index],
     }));
+  }, []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const updateTheme = () => setIsDarkMode(root.classList.contains("dark"));
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(root, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -418,7 +429,7 @@ export function ProfilePlanet3D() {
         ))}
 
         {/* Energy particles */}
-        <EnergyParticles />
+        <EnergyParticles isDarkMode={isDarkMode} />
 
         {/* OrbitControls */}
         <OrbitControls
