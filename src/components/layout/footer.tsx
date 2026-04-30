@@ -24,7 +24,7 @@ export default function Footer() {
                 <h3 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent mb-3 sm:mb-4">
                   Al Amin
                 </h3>
-                <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
+                <p className="text-slate-600 dark:text-gray-300 text-xs sm:text-sm leading-relaxed">
                   Passionate fullstack developer creating digital experiences
                   that make a difference. Always learning, always growing,
                   always innovating.
@@ -42,7 +42,7 @@ export default function Footer() {
                       <li key={index}>
                         <a
                           href={`#${link.toLowerCase()}`}
-                          className="text-gray-300 hover:text-sky-400 transition-colors duration-200 text-xs sm:text-sm inline-block transform hover:translate-x-1"
+                          className="text-slate-600 dark:text-gray-300 hover:text-sky-400 transition-colors duration-200 text-xs sm:text-sm inline-block transform hover:translate-x-1"
                         >
                           {link}
                         </a>
@@ -64,7 +64,7 @@ export default function Footer() {
                   ].map((service, index) => (
                     <li
                       key={index}
-                      className="text-gray-300 text-xs sm:text-sm flex items-center"
+                      className="text-slate-600 dark:text-gray-300 text-xs sm:text-sm flex items-center"
                     >
                       <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gradient-to-r from-sky-400 to-emerald-400 rounded-full mr-2 sm:mr-3 flex-shrink-0"></div>
                       <span className="line-clamp-1">{service}</span>
@@ -76,12 +76,12 @@ export default function Footer() {
 
             {/* Bottom */}
             <div className="border-t border-sky-500/20 pt-4 sm:pt-6 lg:pt-8 flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-4">
-              <p className="text-gray-400 text-xs sm:text-sm flex items-center order-2 sm:order-1">
+              <p className="text-slate-500 dark:text-gray-400 text-xs sm:text-sm flex items-center order-2 sm:order-1">
                  © {new Date().getFullYear()} All rights reserved.
               </p>
                <p
                 onClick={() => setShowEasterEggs(true)}
-                className="text-gray-400 text-xs sm:text-sm order-1 sm:order-2 hover:text-sky-400 transition-colors duration-300 cursor-pointer flex items-center gap-2"
+                className="text-slate-500 dark:text-gray-400 text-xs sm:text-sm order-1 sm:order-2 hover:text-sky-400 transition-colors duration-300 cursor-pointer flex items-center gap-2"
               >
                 <span className="text-yellow-400">💡</span>Click
                 <span className="text-sky-400">
@@ -89,7 +89,7 @@ export default function Footer() {
                     </span>
                  to discover easter eggs!
               </p>
-              <p className="text-gray-400/70 text-xs sm:text-sm flex items-center gap-2">
+              <p className="text-slate-500/80 dark:text-gray-400/70 text-xs sm:text-sm flex items-center gap-2">
               Made by Al Amin
               </p>
             </div>
