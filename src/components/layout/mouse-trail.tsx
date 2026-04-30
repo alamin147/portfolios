@@ -1,9 +1,12 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const MouseTrail = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
   const circleRef = useRef({ x: 0, y: 0 });
+  const [isDarkMode, setIsDarkMode] = useState(
+    () => document.documentElement.classList.contains("dark")
+  );
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -19,6 +22,14 @@ const MouseTrail = () => {
     };
     resize();
     window.addEventListener('resize', resize);
+
+    // Track theme changes so cursor stays visible in both themes
+    const root = document.documentElement;
+    const updateTheme = () => {
+      setIsDarkMode(root.classList.contains("dark"));
+    };
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(root, { attributes: true, attributeFilter: ["class"] });
 
     // Track mouse position
     const onMouseMove = (e: MouseEvent) => {
@@ -56,23 +67,44 @@ const MouseTrail = () => {
       circleRef.current.x += (mouseRef.current.x - circleRef.current.x) * ease;
       circleRef.current.y += (mouseRef.current.y - circleRef.current.y) * ease;
 
-      // Draw larger glowing circle
+      const dark = root.classList.contains("dark");
+      const glowRadius = dark ? 40 : 36;
+      const coreRadius = dark ? 15 : 12;
+      const innerGlowStart = dark ? 0 : 6;
+
+      // Draw glowing circle with higher contrast in light mode
       const gradient = ctx.createRadialGradient(
         circleRef.current.x,
         circleRef.current.y,
-        0,
+        innerGlowStart,
         circleRef.current.x,
         circleRef.current.y,
-        40  // Increased glow radius from 20 to 40
+        glowRadius
       );
-      gradient.addColorStop(0, 'rgba(64, 224, 208, 0.9)');  // Slightly more opaque core
-      gradient.addColorStop(0.4, 'rgba(64, 224, 208, 0.4)'); // Adjusted middle
-      gradient.addColorStop(1, 'rgba(64, 224, 208, 0)');    // Transparent edge
+      if (dark) {
+        gradient.addColorStop(0, "rgba(64, 224, 208, 0.9)");
+        gradient.addColorStop(0.4, "rgba(64, 224, 208, 0.4)");
+        gradient.addColorStop(1, "rgba(64, 224, 208, 0)");
+      } else {
+        gradient.addColorStop(0, "rgba(255, 255, 255, 0)");
+        gradient.addColorStop(0.28, "rgba(186, 230, 253, 0.1)");
+        gradient.addColorStop(0.55, "rgba(56, 189, 248, 0.24)");
+        gradient.addColorStop(1, "rgba(56, 189, 248, 0)");
+      }
 
       ctx.beginPath();
-      ctx.arc(circleRef.current.x, circleRef.current.y, 15, 0, Math.PI * 2);  // Increased circle size from 10 to 15
+      ctx.arc(circleRef.current.x, circleRef.current.y, coreRadius, 0, Math.PI * 2);
       ctx.fillStyle = gradient;
       ctx.fill();
+
+      // In light mode, add a soft ring so trail remains visible
+      if (!dark) {
+        ctx.beginPath();
+        ctx.arc(circleRef.current.x, circleRef.current.y, coreRadius, 0, Math.PI * 2);
+        ctx.strokeStyle = "rgba(14, 165, 233, 0.42)";
+        ctx.lineWidth = 2.6;
+        ctx.stroke();
+      }
 
       requestAnimationFrame(animate);
     };
@@ -80,6 +112,7 @@ const MouseTrail = () => {
     animate();
 
     return () => {
+      observer.disconnect();
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('mouseleave', onMouseLeave);
@@ -91,7 +124,7 @@ const MouseTrail = () => {
       ref={canvasRef}
       className="hidden md:block fixed inset-0 pointer-events-none z-50"
       style={{
-        mixBlendMode: 'screen',
+        mixBlendMode: isDarkMode ? "screen" : "normal",
       }}
     />
   );
