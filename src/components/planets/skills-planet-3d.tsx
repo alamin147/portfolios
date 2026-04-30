@@ -1,4 +1,4 @@
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Html, Sphere, Line } from "@react-three/drei";
 import * as THREE from "three";
@@ -239,14 +239,14 @@ function ConnectionLines({ skills }: { skills: SkillNode[] }) {
 }
 
 // Rotating particles
-function Particles() {
+function Particles({ isDarkMode }: { isDarkMode: boolean }) {
   const particlesRef = useRef<THREE.Points>(null);
 
   const particleGeometry = useMemo(() => {
     const geometry = new THREE.BufferGeometry();
-    const positions = new Float32Array(500 * 3);
+    const positions = new Float32Array(700 * 3);
 
-    for (let i = 0; i < 500; i++) {
+    for (let i = 0; i < 700; i++) {
       const i3 = i * 3;
       const radius = 3 + Math.random() * 2;
       const theta = Math.random() * Math.PI * 2;
@@ -271,10 +271,10 @@ function Particles() {
   return (
     <points ref={particlesRef} geometry={particleGeometry}>
       <pointsMaterial
-        size={0.02}
-        color="#00d4ff"
+        size={isDarkMode ? 0.02 : 0.03}
+        color={isDarkMode ? "#00d4ff" : "#0284c7"}
         transparent
-        opacity={0.6}
+        opacity={isDarkMode ? 0.6 : 0.88}
         sizeAttenuation
       />
     </points>
@@ -283,6 +283,9 @@ function Particles() {
 
 // Main Skills Planet Component
 export function SkillsPlanet3D() {
+  const [isDarkMode, setIsDarkMode] = useState(() =>
+    document.documentElement.classList.contains("dark")
+  );
   // Distribute skills on sphere
   const skills: SkillNode[] = useMemo(() => {
     const positions = fibonacciSphere(skillsData.length, 2.5);
@@ -290,6 +293,14 @@ export function SkillsPlanet3D() {
       ...skill,
       position: positions[index],
     }));
+  }, []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const updateTheme = () => setIsDarkMode(root.classList.contains("dark"));
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(root, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -326,7 +337,7 @@ export function SkillsPlanet3D() {
         ))}
 
         {/* Floating particles */}
-        <Particles />
+        <Particles isDarkMode={isDarkMode} />
 
         {/* OrbitControls */}
         <OrbitControls
