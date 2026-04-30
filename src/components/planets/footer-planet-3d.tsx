@@ -1,4 +1,4 @@
-import { useRef, useMemo, useState } from "react";
+import { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Line, Html } from "@react-three/drei";
 import * as THREE from "three";
@@ -373,11 +373,11 @@ function FooterConnectionNetwork({ nodes }: { nodes: FooterNode[] }) {
 }
 
 // Floating particles
-function FloatingParticles() {
+function FloatingParticles({ isDarkMode }: { isDarkMode: boolean }) {
   const particlesRef = useRef<THREE.Points>(null);
 
   const particles = useMemo(() => {
-    const count = 100;
+    const count = 140;
     const positions = new Float32Array(count * 3);
 
     for (let i = 0; i < count; i++) {
@@ -412,10 +412,10 @@ function FloatingParticles() {
         />
       </bufferGeometry>
       <pointsMaterial
-        size={0.05}
-        color="#f97316"
+        size={isDarkMode ? 0.05 : 0.06}
+        color={isDarkMode ? "#f97316" : "#c2410c"}
         transparent
-        opacity={0.6}
+        opacity={isDarkMode ? 0.6 : 0.88}
         sizeAttenuation
       />
     </points>
@@ -606,8 +606,19 @@ function FooterNode({ node, index }: { node: FooterNode; index: number }) {
 
 // Main component
 export default function FooterPlanet3D() {
+  const [isDarkMode, setIsDarkMode] = useState(() =>
+    document.documentElement.classList.contains("dark")
+  );
   const nodes: FooterNode[] = useMemo(() => {
     return createFooterNodes();
+  }, []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const updateTheme = () => setIsDarkMode(root.classList.contains("dark"));
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(root, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -661,7 +672,7 @@ export default function FooterPlanet3D() {
         ))}
 
         {/* Floating particles */}
-        <FloatingParticles />
+        <FloatingParticles isDarkMode={isDarkMode} />
 
         {/* OrbitControls */}
         <OrbitControls
