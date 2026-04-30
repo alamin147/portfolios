@@ -1,4 +1,4 @@
-import { useRef, useMemo, useState } from "react";
+import { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Line, Html } from "@react-three/drei";
 import * as THREE from "three";
@@ -310,11 +310,11 @@ function EducationConnectionNetwork({ nodes }: { nodes: EducationNode[] }) {
 }
 
 // Floating particles
-function FloatingParticles() {
+function FloatingParticles({ isDarkMode }: { isDarkMode: boolean }) {
   const particlesRef = useRef<THREE.Points>(null);
 
   const particles = useMemo(() => {
-    const count = 100;
+    const count = 140;
     const positions = new Float32Array(count * 3);
 
     for (let i = 0; i < count; i++) {
@@ -349,10 +349,10 @@ function FloatingParticles() {
         />
       </bufferGeometry>
       <pointsMaterial
-        size={0.05}
-        color="#ec4899"
+        size={isDarkMode ? 0.05 : 0.06}
+        color={isDarkMode ? "#ec4899" : "#be185d"}
         transparent
-        opacity={0.6}
+        opacity={isDarkMode ? 0.6 : 0.88}
         sizeAttenuation
       />
     </points>
@@ -534,6 +534,9 @@ function EducationNode({ node, index }: { node: EducationNode; index: number }) 
 
 // Main component
 export default function EducationPlanet3D() {
+  const [isDarkMode, setIsDarkMode] = useState(() =>
+    document.documentElement.classList.contains("dark")
+  );
   const nodes: EducationNode[] = useMemo(() => {
     const educationNodes = createEducationNodes();
     const positions = generateFibonacciSphere(educationNodes.length, 3.5);
@@ -541,6 +544,14 @@ export default function EducationPlanet3D() {
       ...item,
       position: positions[i],
     }));
+  }, []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const updateTheme = () => setIsDarkMode(root.classList.contains("dark"));
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(root, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -594,7 +605,7 @@ export default function EducationPlanet3D() {
         ))}
 
         {/* Floating particles */}
-        <FloatingParticles />
+        <FloatingParticles isDarkMode={isDarkMode} />
 
         {/* OrbitControls */}
         <OrbitControls
