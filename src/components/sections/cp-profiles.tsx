@@ -73,13 +73,13 @@ export default function CPProfiles() {
       <div className="absolute -inset-2 sm:-inset-4 bg-gradient-to-r from-sky-600/20 to-emerald-600/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
       <div className="glass-card hover:glass-card-hover rounded-2xl sm:rounded-3xl p-6 sm:p-10 lg:p-12 hover:shadow-sky-500/20 shadow-2xl transition-all duration-500">
-        <h2 className="text-xl sm:text-4xl md:text-6xl font-bold bg-gradient-to-r from-white via-sky-200 to-emerald-200 bg-clip-text text-transparent mb-3 sm:mb-5 leading-tight py-1 sm:py-2">
+        <h2 className="text-xl sm:text-4xl md:text-6xl font-bold bg-gradient-to-r from-slate-900 via-sky-700 to-emerald-700 dark:from-white dark:via-sky-200 dark:to-emerald-200 bg-clip-text text-transparent mb-3 sm:mb-5 leading-tight py-1 sm:py-2">
           Competitive Programming
         </h2>
 
         <div className="w-16 sm:w-20 lg:w-24 h-1 bg-gradient-to-r from-sky-500 to-emerald-500 mx-auto rounded-full mb-4" />
 
-        <p className="text-gray-300 text-base sm:text-lg md:text-xl max-w-prose sm:max-w-2xl lg:max-w-3xl mx-auto leading-relaxed">
+        <p className="text-slate-600 dark:text-gray-300 text-base sm:text-lg md:text-xl max-w-prose sm:max-w-2xl lg:max-w-3xl mx-auto leading-relaxed">
           Explore my competitive programming journey across various platforms where I solve algorithmic challenges and participate in coding contests.
         </p>
       </div>
@@ -148,10 +148,10 @@ export default function CPProfiles() {
                       </div>
 
                       <div className="min-w-0 flex-1">
-                        <h3 className="text-xs sm:text-lg lg:text-xl font-bold text-white mb-0 sm:mb-1 group-hover:text-sky-300 transition-colors duration-300 truncate">
+                        <h3 className="text-xs sm:text-lg lg:text-xl font-bold text-slate-900 dark:text-white mb-0 sm:mb-1 group-hover:text-sky-300 transition-colors duration-300 truncate">
                           {profile?.platform}
                         </h3>
-                        <p className="text-xs sm:text-sm text-gray-400 truncate leading-tight">
+                        <p className="text-xs sm:text-sm text-slate-500 dark:text-gray-400 truncate leading-tight">
                           @{profile?.username}
                         </p>
                       </div>
@@ -167,7 +167,7 @@ export default function CPProfiles() {
                         boxShadow: `0 0 20px ${profile?.color || '#0ea5e9'}20`,
                       }}
                     >
-                      <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 lg:h-5 lg:w-5 text-gray-300 hover:text-white" />
+                      <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 lg:h-5 lg:w-5 text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white" />
                     </a>
                   </div>
 
@@ -181,11 +181,11 @@ export default function CPProfiles() {
                           </div>
                           <span className="text-xs text-sky-400 font-medium">Rate</span>
                         </div>
-                        <div className="text-xs sm:text-sm lg:text-base font-bold text-white leading-tight truncate max-w-full">
+                        <div className="text-xs sm:text-sm lg:text-base font-bold text-slate-900 dark:text-white leading-tight truncate max-w-full">
                           {profile.rating}
                         </div>
                         {profile?.highestRating && (
-                          <div className="text-xs text-gray-400 hidden lg:block truncate">
+                          <div className="text-xs text-slate-500 dark:text-gray-400 hidden lg:block truncate">
                             Max: {profile.highestRating}
                           </div>
                         )}
@@ -200,7 +200,7 @@ export default function CPProfiles() {
                           </div>
                           <span className="text-xs text-emerald-400 font-medium">Solved</span>
                         </div>
-                        <div className="text-xs sm:text-sm lg:text-base font-bold text-white leading-tight truncate max-w-full">
+                        <div className="text-xs sm:text-sm lg:text-base font-bold text-slate-900 dark:text-white leading-tight truncate max-w-full">
                           {profile.solved}
                         </div>
                       </div>
@@ -214,7 +214,7 @@ export default function CPProfiles() {
                           </div>
                           <span className="text-xs text-purple-400 font-medium">Rank</span>
                         </div>
-                        <div className="text-xs sm:text-sm lg:text-base font-bold text-white leading-tight truncate max-w-full">
+                        <div className="text-xs sm:text-sm lg:text-base font-bold text-slate-900 dark:text-white leading-tight truncate max-w-full">
                           {profile.rank}
                         </div>
                       </div>
