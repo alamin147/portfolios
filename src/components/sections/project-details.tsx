@@ -48,7 +48,7 @@ const ProjectDetails = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-background text-white">
+      <div className="project-details-page min-h-screen bg-background text-slate-900 dark:text-white">
         <div className="container mx-auto px-4">
           <div className="flex flex-col">
             <section className="w-full py-12 md:py-24 lg:py-32 animate-fade-in">
