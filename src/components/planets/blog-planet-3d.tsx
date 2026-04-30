@@ -182,11 +182,11 @@ function BlogConnectionNetwork({ nodes }: { nodes: BlogNode[] }) {
 }
 
 // Floating particles
-function FloatingParticles() {
+function FloatingParticles({ isDarkMode }: { isDarkMode: boolean }) {
   const particlesRef = useRef<THREE.Points>(null);
 
   const particles = useMemo(() => {
-    const count = 100;
+    const count = 140;
     const positions = new Float32Array(count * 3);
 
     for (let i = 0; i < count; i++) {
@@ -221,10 +221,10 @@ function FloatingParticles() {
         />
       </bufferGeometry>
       <pointsMaterial
-        size={0.05}
-        color="#a855f7"
+        size={isDarkMode ? 0.05 : 0.06}
+        color={isDarkMode ? "#a855f7" : "#6d28d9"}
         transparent
-        opacity={0.6}
+        opacity={isDarkMode ? 0.6 : 0.88}
         sizeAttenuation
       />
     </points>
@@ -375,6 +375,9 @@ export default function BlogPlanet3D() {
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isDarkMode, setIsDarkMode] = useState(() =>
+    document.documentElement.classList.contains("dark")
+  );
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_SERVER_URL}/blog`, {
@@ -397,6 +400,14 @@ export default function BlogPlanet3D() {
         setError(err.message);
         setLoading(false);
       });
+  }, []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const updateTheme = () => setIsDarkMode(root.classList.contains("dark"));
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(root, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
   }, []);
 
   const nodes: BlogNode[] = useMemo(() => {
@@ -489,7 +500,7 @@ export default function BlogPlanet3D() {
         ))}
 
         {/* Floating particles */}
-        <FloatingParticles />
+        <FloatingParticles isDarkMode={isDarkMode} />
 
         {/* OrbitControls */}
         <OrbitControls
