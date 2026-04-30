@@ -291,7 +291,7 @@ export default function Projects() {
                     >
                       <Button
                         size="sm"
-                        className="cursor-pointer glass-button text-white hover:scale-105 rounded-full transition-all duration-300 bg-cyan-500/20 border border-white/10 backdrop-blur-xl shadow-[0_4px_16px_rgba(8,145,178,0.25)] hover:bg-cyan-500/30 hover:shadow-[0_10px_25px_rgba(8,145,178,0.4)] text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2"
+                        className="cursor-pointer glass-button text-slate-900 dark:text-white hover:scale-105 rounded-full transition-all duration-300 bg-cyan-500/20 border border-cyan-500/20 dark:border-white/10 backdrop-blur-xl shadow-[0_4px_16px_rgba(8,145,178,0.25)] hover:bg-cyan-500/30 hover:shadow-[0_10px_25px_rgba(8,145,178,0.4)] text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2"
                       >
                         <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                         <span className="hidden xs:inline">Live Demo</span>
@@ -302,7 +302,7 @@ export default function Projects() {
                       <Button
                         size="sm"
                         variant="outline"
-                        className="cursor-pointer glass-card text-white hover:text-cyan-100 rounded-full transition-all duration-300 text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2"
+                        className="cursor-pointer glass-card text-slate-900 dark:text-white hover:text-cyan-700 dark:hover:text-cyan-100 rounded-full transition-all duration-300 text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2"
                       >
                         <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                         Details
@@ -311,10 +311,10 @@ export default function Projects() {
                   </div>
                 </div>
                 <div className="p-4 sm:p-6 relative z-10">
-                  <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 group-hover:text-sky-300 transition-colors duration-300 line-clamp-2">
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-2 sm:mb-3 group-hover:text-sky-300 transition-colors duration-300 line-clamp-2">
                     {project.title}
                   </h3>
-                  <p className="text-gray-300 text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed line-clamp-3">
+                  <p className="text-slate-600 dark:text-gray-300 text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed line-clamp-3">
                     {project.shortDes}
                   </p>
                   <div className="flex flex-wrap gap-1 sm:gap-2">
@@ -336,7 +336,7 @@ export default function Projects() {
       <div className="text-center mt-8 sm:mt-12">
         <a href="/projects">
           <Button
-            className="cursor-pointer gap-2 px-6 sm:px-8 py-4 sm:py-6 rounded-full text-white text-base sm:text-lg font-semibold bg-cyan-500/20 border border-white/10 backdrop-blur-xl shadow-[0_4px_16px_rgba(8,145,178,0.25)] transition-all duration-300 hover:bg-cyan-500/30 hover:shadow-[0_10px_25px_rgba(8,145,178,0.4)] hover:scale-105"
+            className="cursor-pointer gap-2 px-6 sm:px-8 py-4 sm:py-6 rounded-full text-sky-700 dark:text-white text-base sm:text-lg font-semibold bg-white/90 dark:bg-cyan-500/20 border border-sky-200 dark:border-white/10 backdrop-blur-xl shadow-[0_4px_16px_rgba(8,145,178,0.18)] transition-all duration-300 hover:bg-white dark:hover:bg-cyan-500/30 hover:text-sky-800 dark:hover:text-white hover:shadow-[0_10px_25px_rgba(8,145,178,0.3)] hover:scale-105"
           >
             View All Projects
           </Button>
