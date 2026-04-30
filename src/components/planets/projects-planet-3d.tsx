@@ -183,11 +183,11 @@ function ProjectConnectionNetwork({ nodes }: { nodes: ProjectNode[] }) {
 }
 
 // Floating code particles
-function CodeParticles() {
+function CodeParticles({ isDarkMode }: { isDarkMode: boolean }) {
   const particlesRef = useRef<THREE.Points>(null);
 
   const particles = useMemo(() => {
-    const count = 100;
+    const count = 140;
     const positions = new Float32Array(count * 3);
 
     for (let i = 0; i < count; i++) {
@@ -222,10 +222,10 @@ function CodeParticles() {
         />
       </bufferGeometry>
       <pointsMaterial
-        size={0.05}
-        color="#4272d7"
+        size={isDarkMode ? 0.05 : 0.06}
+        color={isDarkMode ? "#4272d7" : "#1d4ed8"}
         transparent
-        opacity={0.6}
+        opacity={isDarkMode ? 0.6 : 0.88}
         sizeAttenuation
       />
     </points>
@@ -373,6 +373,9 @@ export default function ProjectsPlanet3D() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isDarkMode, setIsDarkMode] = useState(() =>
+    document.documentElement.classList.contains("dark")
+  );
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_SERVER_URL}/project`, {
@@ -395,6 +398,14 @@ export default function ProjectsPlanet3D() {
         setError(err.message);
         setLoading(false);
       });
+  }, []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const updateTheme = () => setIsDarkMode(root.classList.contains("dark"));
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(root, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
   }, []);
 
   const nodes: ProjectNode[] = useMemo(() => {
@@ -485,7 +496,7 @@ export default function ProjectsPlanet3D() {
         ))}
 
         {/* Code particles */}
-        <CodeParticles />
+        <CodeParticles isDarkMode={isDarkMode} />
 
         {/* OrbitControls */}
         <OrbitControls
