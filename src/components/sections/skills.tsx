@@ -155,10 +155,10 @@ export default function Skills() {
               }}
             >
               <div className="relative z-10 flex flex-col items-center justify-center">
-                <div className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-3 md:mb-4 text-white transition-all duration-100 group-hover:scale-110 flex items-center justify-center">
+                <div className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-3 md:mb-4 text-slate-800 dark:text-white transition-all duration-100 group-hover:scale-110 flex items-center justify-center">
                   {skill.icon}
                 </div>
-                <p className="text-xs xs:text-sm sm:text-base text-gray-100 font-medium group-hover:text-white transition-colors duration-300 text-center leading-tight">
+                <p className="text-xs xs:text-sm sm:text-base text-slate-700 dark:text-gray-100 font-medium group-hover:text-slate-900 dark:group-hover:text-white transition-colors duration-300 text-center leading-tight">
                   {skill.name}
                 </p>
               </div>
