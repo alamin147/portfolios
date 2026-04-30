@@ -1,4 +1,4 @@
-import { useRef, useMemo, useState } from "react";
+import { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Line, Html } from "@react-three/drei";
 import * as THREE from "three";
@@ -312,11 +312,11 @@ function ContactConnectionNetwork({ nodes }: { nodes: ContactNode[] }) {
 }
 
 // Floating particles
-function FloatingParticles() {
+function FloatingParticles({ isDarkMode }: { isDarkMode: boolean }) {
   const particlesRef = useRef<THREE.Points>(null);
 
   const particles = useMemo(() => {
-    const count = 80;
+    const count = 140;
     const positions = new Float32Array(count * 3);
 
     for (let i = 0; i < count; i++) {
@@ -351,10 +351,10 @@ function FloatingParticles() {
         />
       </bufferGeometry>
       <pointsMaterial
-        size={0.05}
-        color="#14b8a6"
+        size={isDarkMode ? 0.05 : 0.06}
+        color={isDarkMode ? "#14b8a6" : "#0f766e"}
         transparent
-        opacity={0.6}
+        opacity={isDarkMode ? 0.6 : 0.88}
         sizeAttenuation
       />
     </points>
@@ -527,8 +527,19 @@ function ContactNode({ node, index }: { node: ContactNode; index: number }) {
 
 // Main component
 export default function ContactPlanet3D() {
+  const [isDarkMode, setIsDarkMode] = useState(() =>
+    document.documentElement.classList.contains("dark")
+  );
   const nodes: ContactNode[] = useMemo(() => {
     return createContactNodes();
+  }, []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const updateTheme = () => setIsDarkMode(root.classList.contains("dark"));
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(root, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -582,7 +593,7 @@ export default function ContactPlanet3D() {
         ))}
 
         {/* Floating particles */}
-        <FloatingParticles />
+        <FloatingParticles isDarkMode={isDarkMode} />
 
         {/* OrbitControls */}
         <OrbitControls
