@@ -174,7 +174,7 @@ export function FloatingPlanets() {
                 </div>
 
                 {/* Enhanced Planet Label - always visible with pulse animation */}
-                <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 opacity-100 transition-all duration-500 transform pointer-events-none whitespace-nowrap z-50 animate-pulse-slow" style={{ animationDuration: "4s" }}>
+                <div className="planet-floating-label absolute -bottom-16 left-1/2 -translate-x-1/2 opacity-100 transition-all duration-500 transform pointer-events-none whitespace-nowrap z-50 animate-pulse-slow" style={{ animationDuration: "4s" }}>
                   <div className="glass-card px-5 py-3 rounded-2xl border-2 border-cyan-400/80 backdrop-blur-xl bg-linear-to-br from-slate-900/95 to-slate-800/95 shadow-[0_0_30px_rgba(6,182,212,0.4)]">
                     <div className="text-center">
                       <div className="text-3xl mb-2 animate-bounce-slow">{planet.icon}</div>
