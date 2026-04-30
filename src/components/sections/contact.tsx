@@ -39,19 +39,19 @@ export default function Contact() {
   const getSocialIcon = (socialName: string) => {
     switch (socialName) {
       case "LinkedIn":
-        return <FaLinkedin className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-sky-400" />;
+        return <FaLinkedin className="w-4 h-4 sm:w-5 sm:h-5 text-slate-800 dark:text-white group-hover:text-sky-400" />;
       case "GitHub":
-        return <FaGithub className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-gray-400" />;
+        return <FaGithub className="w-4 h-4 sm:w-5 sm:h-5 text-slate-800 dark:text-white group-hover:text-gray-400" />;
       case "LeetCode":
-        return <SiLeetcode className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-orange-400" />;
+        return <SiLeetcode className="w-4 h-4 sm:w-5 sm:h-5 text-slate-800 dark:text-white group-hover:text-orange-400" />;
       case "Codeforces":
-        return <SiCodeforces className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-blue-400" />;
+        return <SiCodeforces className="w-4 h-4 sm:w-5 sm:h-5 text-slate-800 dark:text-white group-hover:text-blue-400" />;
       case "CodeChef":
-        return <SiCodechef className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-amber-400" />;
+        return <SiCodechef className="w-4 h-4 sm:w-5 sm:h-5 text-slate-800 dark:text-white group-hover:text-amber-400" />;
       case "Hackerrank":
-        return <SiHackerrank className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-green-400" />;
+        return <SiHackerrank className="w-4 h-4 sm:w-5 sm:h-5 text-slate-800 dark:text-white group-hover:text-green-400" />;
       default:
-        return <FaGithub className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-gray-400" />;
+        return <FaGithub className="w-4 h-4 sm:w-5 sm:h-5 text-slate-800 dark:text-white group-hover:text-gray-400" />;
     }
   };
 
@@ -143,7 +143,7 @@ export default function Contact() {
                 <h3 className="text-center text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent mb-2">
                   Get In Touch
                 </h3>
-                <p className="mb-6 sm:mb-8 text-center text-gray-300 text-sm sm:text-base">
+                <p className="mb-6 sm:mb-8 text-center text-slate-600 dark:text-gray-300 text-sm sm:text-base">
                   Have a project in mind? Let's collaborate and build something
                   amazing together.
                 </p>
@@ -154,7 +154,7 @@ export default function Contact() {
                       <Input
                         type="text"
                         placeholder="Your Name"
-                        className="glass-input text-white placeholder:text-gray-400 focus:glass-input transition-all duration-300 py-4 sm:py-6 text-sm sm:text-base"
+                        className="glass-input text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-gray-400 focus:glass-input transition-all duration-300 py-4 sm:py-6 text-sm sm:text-base"
                         {...register("name", { required: "Name is required" })}
                       />
                       {errors.name && (
@@ -168,7 +168,7 @@ export default function Contact() {
                       <Input
                         type="email"
                         placeholder="Your Email"
-                        className="glass-input text-white placeholder:text-gray-400 focus:glass-input transition-all duration-300 py-4 sm:py-6 text-sm sm:text-base"
+                        className="glass-input text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-gray-400 focus:glass-input transition-all duration-300 py-4 sm:py-6 text-sm sm:text-base"
                         {...register("email", {
                           required: "Email is required",
                           pattern: {
@@ -190,7 +190,7 @@ export default function Contact() {
                     <Input
                       type="text"
                       placeholder="Subject"
-                      className="glass-input text-white placeholder:text-gray-400 focus:glass-input transition-all duration-300 py-4 sm:py-6 text-sm sm:text-base"
+                      className="glass-input text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-gray-400 focus:glass-input transition-all duration-300 py-4 sm:py-6 text-sm sm:text-base"
                       {...register("subject", {
                         required: "Subject is required",
                       })}
@@ -206,7 +206,7 @@ export default function Contact() {
                     <Textarea
                       rows={6}
                       placeholder="Your Message"
-                      className="glass-input text-white placeholder:text-gray-400 focus:glass-input resize-none transition-all duration-300 text-sm sm:text-base"
+                      className="glass-input text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-gray-400 focus:glass-input resize-none transition-all duration-300 text-sm sm:text-base"
                       {...register("message", {
                         required: "Message is required",
                       })}
@@ -220,7 +220,7 @@ export default function Contact() {
 
                   <div className="flex justify-center pt-2 sm:pt-4">
                     <Button
-                      className="cursor-pointer flex items-center justify-center gap-2 px-4 sm:px-6 lg:px-8 py-3 sm:py-4 lg:py-6 rounded-full text-white text-sm sm:text-base lg:text-lg font-semibold bg-cyan-500/20 border border-white/10 backdrop-blur-xl shadow-[0_4px_16px_rgba(8,145,178,0.25)] transition-all duration-300 hover:bg-cyan-500/30 hover:shadow-[0_10px_25px_rgba(8,145,178,0.4)] hover:scale-105 w-full sm:w-auto"
+                      className="cursor-pointer flex items-center justify-center gap-2 px-4 sm:px-6 lg:px-8 py-3 sm:py-4 lg:py-6 rounded-full text-slate-900 dark:text-white text-sm sm:text-base lg:text-lg font-semibold bg-cyan-500/20 border border-cyan-500/20 dark:border-white/10 backdrop-blur-xl shadow-[0_4px_16px_rgba(8,145,178,0.25)] transition-all duration-300 hover:bg-cyan-500/30 hover:shadow-[0_10px_25px_rgba(8,145,178,0.4)] hover:scale-105 w-full sm:w-auto"
                       type="submit"
                       disabled={isSubmitting}
                     >
@@ -256,7 +256,7 @@ export default function Contact() {
                 <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent mb-3 sm:mb-4">
                   Contact Information
                 </h3>
-                <p className="text-gray-300 text-sm sm:text-base">
+                <p className="text-slate-600 dark:text-gray-300 text-sm sm:text-base">
                   Feel free to reach out through any of these channels. I'm
                   looking forward to hearing from you!
                 </p>
@@ -324,7 +324,7 @@ const ContactInfo = ({
   color: string;
 }) => (
   <div
-    className="bg-gray-700/40 border border-white/10 backdrop-blur-xl
+    className="bg-white/70 dark:bg-gray-700/40 border border-slate-300/50 dark:border-white/10 backdrop-blur-xl
                     transition-all duration-300
                     hover:g-cyan-500/30 hover:shadow-[0_10px_25px_rgba(8,145,178,0.4)] hover:scale-105
                     rounded-xl sm:rounded-2xl p-3 sm:p-5 group"
@@ -340,10 +340,10 @@ const ContactInfo = ({
         {icon}
       </div>
       <div className="ml-4 sm:ml-5 min-w-0 flex-1">
-        <h4 className="mb-1 text-sm sm:text-lg font-bold text-white group-hover:text-sky-300 transition-colors duration-300">
+        <h4 className="mb-1 text-sm sm:text-lg font-bold text-slate-900 dark:text-white group-hover:text-sky-300 transition-colors duration-300">
           {title}
         </h4>
-        <p className="text-sm sm:text-base text-gray-300 break-words overflow-wrap-anywhere">{description}</p>
+        <p className="text-sm sm:text-base text-slate-600 dark:text-gray-300 break-words overflow-wrap-anywhere">{description}</p>
       </div>
     </div>
   </div>
