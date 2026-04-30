@@ -109,7 +109,7 @@ export default function Blog() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent"></div>
                   <div className="absolute top-3 sm:top-4 lg:top-6 left-3 sm:left-4 lg:left-6">
-                    <span className="glass-button text-white px-2 sm:px-3 lg:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-medium">
+                    <span className="glass-button text-slate-900 dark:text-white px-2 sm:px-3 lg:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-medium">
                       ⭐ Featured
                     </span>
                   </div>
@@ -122,16 +122,16 @@ export default function Blog() {
                     </span>
                   </div>
 
-                  <h3 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-white mb-3 sm:mb-4 group-hover:text-sky-300 transition-colors duration-300 line-clamp-3">
+                  <h3 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4 group-hover:text-sky-300 transition-colors duration-300 line-clamp-3">
                     {featuredBlog?.title}
                   </h3>
 
-                  <p className="text-gray-300 text-sm sm:text-base lg:text-lg mb-4 sm:mb-6 leading-relaxed line-clamp-4">
+                  <p className="text-slate-600 dark:text-gray-300 text-sm sm:text-base lg:text-lg mb-4 sm:mb-6 leading-relaxed line-clamp-4">
                     {featuredBlog?.shortDes}
                   </p>
 
                   <div className="flex items-center justify-between mb-4 sm:mb-6">
-                    <div className="flex items-center space-x-2 sm:space-x-4 text-xs sm:text-sm text-gray-400">
+                    <div className="flex items-center space-x-2 sm:space-x-4 text-xs sm:text-sm text-slate-500 dark:text-gray-400">
                       <div className="flex items-center">
                         <Calendar className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
                         {formatDate(featuredBlog?.time)}
@@ -145,7 +145,7 @@ export default function Blog() {
                         navigate(`/blog/${featuredBlog._id}`);
                       }
                     }}
-                    className="cursor-pointer flex items-center justify-center gap-2 px-4 sm:px-6 lg:px-8 py-3 sm:py-4 lg:py-6 rounded-full text-white text-sm sm:text-base lg:text-lg font-semibold bg-cyan-500/20 border border-white/10 backdrop-blur-xl shadow-[0_4px_16px_rgba(8,145,178,0.25)] transition-all duration-200 hover:bg-cyan-500/30 hover:shadow-[0_10px_25px_rgba(8,145,178,0.4)] hover:scale-105"
+                    className="cursor-pointer flex items-center justify-center gap-2 px-4 sm:px-6 lg:px-8 py-3 sm:py-4 lg:py-6 rounded-full text-slate-900 dark:text-white text-sm sm:text-base lg:text-lg font-semibold bg-cyan-500/20 border border-cyan-500/20 dark:border-white/10 backdrop-blur-xl shadow-[0_4px_16px_rgba(8,145,178,0.25)] transition-all duration-200 hover:bg-cyan-500/30 hover:shadow-[0_10px_25px_rgba(8,145,178,0.4)] hover:scale-105"
                   >
                     Read Full Article
                     <ArrowRight className="ml-1 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4" />
@@ -190,21 +190,21 @@ export default function Blog() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                   <div className="absolute top-3 sm:top-4 left-3 sm:left-4">
-                    <span className="glass-button text-white px-2 sm:px-3 py-1 rounded-full text-xs font-medium">
+                    <span className="glass-button text-slate-900 dark:text-white px-2 sm:px-3 py-1 rounded-full text-xs font-medium">
                       {blog.category}
                     </span>
                   </div>
                 </div>
 
                 <div className="p-4 sm:p-6 flex flex-col flex-1">
-                  <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 group-hover:text-sky-300 transition-colors duration-300 line-clamp-2">
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-2 sm:mb-3 group-hover:text-sky-300 transition-colors duration-300 line-clamp-2">
                     {blog.title}
                   </h3>
-                  <p className="text-gray-300 text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-3 flex-1">
+                  <p className="text-slate-600 dark:text-gray-300 text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-3 flex-1">
                     {blog.shortDes.length > 145 ? `${blog.shortDes.slice(0, 145)}...` : blog.shortDes}
                   </p>
 
-                  <div className="flex items-center justify-between text-xs sm:text-sm text-gray-400 mt-auto">
+                  <div className="flex items-center justify-between text-xs sm:text-sm text-slate-500 dark:text-gray-400 mt-auto">
                     <div className="flex items-center">
                       <Clock className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
                       <span>{getTimeAgo(blog.time)}</span>
@@ -224,7 +224,7 @@ export default function Blog() {
           <div className="text-center mt-8 sm:mt-12">
              <Button
               onClick={() => navigate("/blogs")}
-            className="cursor-pointer gap-2 px-4 sm:px-6 lg:px-8 py-3 sm:py-4 lg:py-6 rounded-full text-white text-sm sm:text-base lg:text-lg font-semibold bg-cyan-500/20 border border-white/10 backdrop-blur-xl shadow-[0_4px_16px_rgba(8,145,178,0.25)] transition-all duration-300 hover:bg-cyan-500/30 hover:shadow-[0_10px_25px_rgba(8,145,178,0.4)] hover:scale-105"
+            className="cursor-pointer gap-2 px-4 sm:px-6 lg:px-8 py-3 sm:py-4 lg:py-6 rounded-full text-slate-900 dark:text-white text-sm sm:text-base lg:text-lg font-semibold bg-cyan-500/20 border border-cyan-500/20 dark:border-white/10 backdrop-blur-xl shadow-[0_4px_16px_rgba(8,145,178,0.25)] transition-all duration-300 hover:bg-cyan-500/30 hover:shadow-[0_10px_25px_rgba(8,145,178,0.4)] hover:scale-105"
           >
              View All Blogs
               <ArrowRight className="ml-1 sm:ml-2 h-4 w-4 sm:h-5 sm:w-5" />
