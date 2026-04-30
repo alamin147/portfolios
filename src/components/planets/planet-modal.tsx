@@ -30,7 +30,7 @@ export function PlanetModal({ planet, isOpen, onClose }: PlanetModalProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className={`${isFullWidthPlanet ? 'max-w-[95vw] md:max-w-7xl' : 'max-w-[95vw] md:max-w-5xl'} max-h-[90vh] overflow-y-auto p-0 overflow-hidden bg-transparent border-none [&>button]:absolute [&>button]:top-2 [&>button]:right-2 md:[&>button]:top-4 md:[&>button]:right-4 [&>button]:z-50 [&>button]:rounded-full [&>button]:bg-slate-900/80 [&>button]:backdrop-blur-sm [&>button]:border [&>button]:border-cyan-500/30 [&>button]:p-1.5 md:[&>button]:p-2 [&>button]:transition-all [&>button]:duration-300 hover:[&>button]:border-cyan-500/60 hover:[&>button]:bg-slate-800/90 hover:[&>button]:scale-110 hover:[&>button]:rotate-90 [&>button>svg]:text-cyan-400 hover:[&>button>svg]:text-cyan-300`}>
+      <DialogContent className={`planet-modal-content ${isFullWidthPlanet ? 'max-w-[95vw] md:max-w-7xl' : 'max-w-[95vw] md:max-w-5xl'} max-h-[90vh] overflow-y-auto p-0 overflow-hidden bg-transparent border-none [&>button]:absolute [&>button]:top-2 [&>button]:right-2 md:[&>button]:top-4 md:[&>button]:right-4 [&>button]:z-50 [&>button]:rounded-full [&>button]:bg-slate-900/80 [&>button]:backdrop-blur-sm [&>button]:border [&>button]:border-cyan-500/30 [&>button]:p-1.5 md:[&>button]:p-2 [&>button]:transition-all [&>button]:duration-300 hover:[&>button]:border-cyan-500/60 hover:[&>button]:bg-slate-800/90 hover:[&>button]:scale-110 hover:[&>button]:rotate-90 [&>button>svg]:text-cyan-400 hover:[&>button>svg]:text-cyan-300`}>
         <div className="relative glass-card border border-cyan-500/30 overflow-hidden">
           {/* Animated background */}
           <div className="absolute inset-0 opacity-20">
