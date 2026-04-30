@@ -113,7 +113,7 @@ export default function Education() {
                           </div>
                         </div>
                         <div className="text-left sm:text-right">
-                          <div className="glass-button text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium">
+                        <div className="glass-button text-slate-900 dark:text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium">
                             <Calendar className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 inline" />
                             {edu.period}
                           </div>
@@ -121,19 +121,19 @@ export default function Education() {
                       </div>
 
                       <div className="mb-2">
-                        <span className="text-gray-300 text-sm sm:text-base lg:text-lg">
+                        <span className="text-slate-600 dark:text-gray-300 text-sm sm:text-base lg:text-lg">
                           {edu.degree}
                         </span>
                       </div>
-                      <h3 className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold text-white mb-3 group-hover:text-sky-200 transition-colors duration-300 line-clamp-2">
+                      <h3 className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-sky-200 transition-colors duration-300 line-clamp-2">
                         {edu.major}
                       </h3>
 
                       <div className="space-y-2">
-                        <div className="text-white font-medium text-sm sm:text-base lg:text-lg line-clamp-2">
+                        <div className="text-slate-900 dark:text-white font-medium text-sm sm:text-base lg:text-lg line-clamp-2">
                           {edu.institution}
                         </div>
-                        <div className="flex items-center text-gray-300 text-xs sm:text-sm">
+                        <div className="flex items-center text-slate-600 dark:text-gray-300 text-xs sm:text-sm">
                           <MapPin className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 text-sky-400 flex-shrink-0" />
                           <span className="line-clamp-1">{edu.location}</span>
                         </div>
@@ -142,13 +142,13 @@ export default function Education() {
 
                     {/* Card Body */}
                     <div className="p-4 sm:p-6">
-                      <p className="text-gray-300 mb-4 sm:mb-6 leading-relaxed text-xs sm:text-sm lg:text-base line-clamp-4">
+                      <p className="text-slate-600 dark:text-gray-300 mb-4 sm:mb-6 leading-relaxed text-xs sm:text-sm lg:text-base line-clamp-4">
                         {edu.description}
                       </p>
 
                       {/* Highlights */}
                       <div className="mb-4 sm:mb-6">
-                        <h4 className="text-white font-semibold mb-2 sm:mb-3 flex items-center text-sm sm:text-base">
+                        <h4 className="text-slate-900 dark:text-white font-semibold mb-2 sm:mb-3 flex items-center text-sm sm:text-base">
                           <Users className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 text-sky-400" />
                           Key Subjects
                         </h4>
@@ -156,7 +156,7 @@ export default function Education() {
                           {edu.highlights.map((highlight, i) => (
                             <span
                               key={i}
-                              className="glass-button text-gray-300 px-2 sm:px-3 py-1 rounded-full text-xs hover:scale-105 transition-all duration-300"
+                              className="glass-button text-slate-700 dark:text-gray-300 px-2 sm:px-3 py-1 rounded-full text-xs hover:scale-105 transition-all duration-300"
                             >
                               {highlight}
                             </span>
@@ -169,7 +169,7 @@ export default function Education() {
                         <div className="glass-card rounded-xl sm:rounded-2xl p-3 sm:p-4">
                           <div className="flex items-center mb-2 sm:mb-3">
                             <Medal className="h-4 w-4 sm:h-5 sm:w-5 text-emerald-400 mr-1 sm:mr-2" />
-                            <span className="text-white font-semibold text-sm sm:text-base">
+                            <span className="text-slate-900 dark:text-white font-semibold text-sm sm:text-base">
                               Achievements
                             </span>
                           </div>
@@ -177,7 +177,7 @@ export default function Education() {
                             {edu.achievements.map((achievement, i) => (
                               <li
                                 key={i}
-                                className="text-gray-300 text-xs sm:text-sm flex items-start"
+                                className="text-slate-600 dark:text-gray-300 text-xs sm:text-sm flex items-start"
                               >
                                 <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gradient-to-r from-sky-400 to-emerald-500 rounded-full mt-1.5 sm:mt-2 mr-2 sm:mr-3 flex-shrink-0"></div>
                                 <span className="line-clamp-2">{achievement}</span>
