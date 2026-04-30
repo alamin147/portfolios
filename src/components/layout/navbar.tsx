@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
-import { CommonTooltip } from "@/components/shared";
+import { CommonTooltip, ThemeToggle } from "@/components/shared";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -98,6 +98,7 @@ export default function Navbar() {
 
           {/* Theme Toggle and Mobile Menu Button */}
           <div className="flex items-center space-x-2 sm:space-x-4">
+            <ThemeToggle />
             {/* Mobile menu button */}
             <div className="md:hidden">
               <button
