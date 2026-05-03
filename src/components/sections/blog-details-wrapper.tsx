@@ -59,10 +59,13 @@ export default function BlogDetailsWrapper() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="glass-card rounded-2xl p-8 flex items-center space-x-4">
+      <div
+        id="blog-detail-page"
+        className="min-h-screen flex items-center justify-center bg-background px-4"
+      >
+        <div className="glass-card rounded-2xl p-8 flex items-center space-x-4 shadow-lg">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-sky-500"></div>
-          <p className="text-white text-lg">Loading blog post...</p>
+          <p className="text-foreground text-lg">Loading blog post...</p>
         </div>
       </div>
     );
@@ -70,13 +73,16 @@ export default function BlogDetailsWrapper() {
 
   if (!blog) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="glass-card rounded-2xl p-8 text-center">
-          <h2 className="text-2xl font-bold text-white mb-4">Blog Not Found</h2>
-          <p className="text-gray-300 mb-6">The blog post you're looking for doesn't exist.</p>
+      <div
+        id="blog-detail-page"
+        className="min-h-screen flex items-center justify-center bg-background px-4"
+      >
+        <div className="glass-card rounded-2xl p-8 text-center max-w-md shadow-lg">
+          <h2 className="text-2xl font-bold text-foreground mb-4">Blog Not Found</h2>
+          <p className="text-muted-foreground mb-6">The blog post you're looking for doesn't exist.</p>
           <button
             onClick={() => navigate('/')}
-            className="glass-button px-6 py-3 rounded-full text-white hover:scale-105 transition-all duration-300"
+            className="glass-button px-6 py-3 rounded-full text-foreground hover:scale-105 transition-all duration-300"
           >
             Return Home
           </button>
