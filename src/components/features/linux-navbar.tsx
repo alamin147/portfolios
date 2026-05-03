@@ -3,6 +3,7 @@ import { Menu, X, ArrowLeft } from "lucide-react";
 import { DiLinux } from "react-icons/di";
 import { Link } from "react-router-dom";
 import LinuxContactModal from "./linux-contact-modal";
+import { ThemeToggle } from "@/components/shared";
 
 export default function LinuxNavbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +23,7 @@ export default function LinuxNavbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-black/90 backdrop-blur-md border-b border-green-400/20"
+          ? "bg-white/90 backdrop-blur-md border-b border-emerald-300/50 shadow-sm dark:bg-black/90 dark:border-green-400/20 dark:shadow-none"
           : "bg-transparent"
       }`}
     >
@@ -32,27 +33,28 @@ export default function LinuxNavbar() {
           <div className="flex items-center flex-1">
             <Link
               to="/"
-              className="flex items-center text-red-400 hover:text-green-400 transition-colors duration-300 ms-5 md:ms-10"
+              className="flex items-center text-red-600 hover:text-emerald-700 transition-colors duration-300 ms-5 md:ms-10 dark:text-red-400 dark:hover:text-green-400"
             >
               <ArrowLeft className="h-5 w-5 mr-2" />
-              <span className="text-lg font-bold">My Professional Portfolio</span>
+              <span className="text-lg font-bold text-slate-900 dark:text-inherit">My Professional Portfolio</span>
             </Link>
           </div>
 
           {/* Center Logo */}
           <div className="flex items-center justify-center flex-shrink-0">
-            <DiLinux className="text-3xl text-red-400 mr-2" />
-            <span className="text-xl font-bold text-green-400 font-mono">
+            <DiLinux className="text-3xl text-red-600 mr-2 dark:text-red-400" />
+            <span className="text-xl font-bold text-emerald-700 font-mono dark:text-green-400">
               root@alamin
             </span>
           </div>
 
-          {/* Right Side - Contact Links */}
-          <div className="flex items-center justify-end flex-1">
-            <div className="hidden md:flex items-center space-x-4">
+          {/* Right Side — theme + contact + mobile menu */}
+          <div className="flex items-center justify-end flex-1 gap-2 sm:gap-3 pe-2 md:pe-4">
+            <ThemeToggle />
+            <div className="hidden md:flex items-center">
               <button
                 onClick={() => setIsContactModalOpen(true)}
-                className="text-green-400 hover:text-red-400 transition-colors duration-300 font-mono cursor-pointer"
+                className="text-emerald-700 hover:text-red-600 transition-colors duration-300 font-mono cursor-pointer dark:text-green-400 dark:hover:text-red-400"
               >
                 ./contact.sh
               </button>
@@ -61,8 +63,9 @@ export default function LinuxNavbar() {
             {/* Mobile menu button */}
             <div className="md:hidden">
               <button
+                type="button"
                 onClick={() => setIsOpen(!isOpen)}
-                className="me-3 bg-gray-900 border border-green-400 hover:border-red-400 p-2 rounded-md text-green-400 hover:text-red-400 transition-all duration-300"
+                className="bg-white border border-emerald-500 hover:border-red-500 p-2 rounded-md text-emerald-700 hover:text-red-600 transition-all duration-300 shadow-sm dark:bg-gray-900 dark:border-green-400 dark:hover:border-red-400 dark:text-green-400 dark:hover:text-red-400"
               >
                 {isOpen ? (
                   <X className="h-6 w-6" />
@@ -77,10 +80,10 @@ export default function LinuxNavbar() {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-black border border-green-400 rounded-lg mt-2">
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-white border border-emerald-400 rounded-lg mt-2 shadow-md dark:bg-black dark:border-green-400 dark:shadow-none">
               <Link
                 to="/"
-                className="text-red-400 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300"
+                className="text-red-600 hover:text-emerald-700 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 dark:text-red-400 dark:hover:text-green-400"
                 onClick={() => setIsOpen(false)}
               >
                 <ArrowLeft className="h-4 w-4 inline mr-2" />
@@ -91,7 +94,7 @@ export default function LinuxNavbar() {
                   setIsContactModalOpen(true);
                   setIsOpen(false);
                 }}
-                className="text-green-400 hover:text-red-400 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300"
+                className="text-emerald-700 hover:text-red-600 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 dark:text-green-400 dark:hover:text-red-400"
               >
                 ./contact.sh
               </button>
