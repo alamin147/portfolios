@@ -1951,3 +1951,271 @@ html {
   box-shadow: 0 14px 34px rgba(8, 145, 178, 0.16) !important;
 }
 
+/* ==================== LIGHT MODE - PROJECT GALLERY PAGE (/projects) ==================== */
+
+:root:not(.dark) #project-gallery-page {
+  background:
+    radial-gradient(circle at 12% 18%, rgba(14, 165, 233, 0.2) 0%, rgba(14, 165, 233, 0) 34%),
+    radial-gradient(circle at 85% 20%, rgba(16, 185, 129, 0.17) 0%, rgba(16, 185, 129, 0) 38%),
+    radial-gradient(circle at 50% 100%, rgba(56, 189, 248, 0.12) 0%, rgba(56, 189, 248, 0) 48%),
+    linear-gradient(135deg, #ffffff 0%, #f0f9ff 42%, #ecfeff 100%);
+}
+
+:root:not(.dark) #project-gallery-page .glass-card {
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(125, 211, 252, 0.24);
+  box-shadow:
+    0 16px 36px rgba(8, 145, 178, 0.08),
+    0 8px 20px rgba(15, 23, 42, 0.06) !important;
+}
+
+:root:not(.dark) #project-gallery-page .glass-card:hover,
+:root:not(.dark) #project-gallery-page .hover\:glass-card-hover:hover {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(56, 189, 248, 0.32);
+  box-shadow:
+    0 20px 42px rgba(8, 145, 178, 0.12),
+    0 10px 24px rgba(15, 23, 42, 0.08) !important;
+}
+
+:root:not(.dark) #project-gallery-page .p-6 h3 {
+  color: #0f172a !important;
+}
+
+:root:not(.dark) #project-gallery-page .container > a:first-of-type .text-white {
+  color: #0f172a !important;
+}
+
+:root:not(.dark) #project-gallery-page .bg-gradient-to-t.from-black\/70 {
+  background: linear-gradient(to top, rgba(15, 23, 42, 0.35), rgba(15, 23, 42, 0.02));
+}
+
+:root:not(.dark) #project-gallery-page .p-6 .text-gray-300 {
+  color: #64748b !important;
+}
+
+:root:not(.dark) #project-gallery-page .glass-card.rounded-full .text-gray-300 {
+  color: #64748b !important;
+}
+
+:root:not(.dark) #project-gallery-page .glass-card.rounded-full .glass-button.text-white {
+  color: #0f172a !important;
+}
+
+:root:not(.dark) #project-gallery-page .glass-button:not(.text-white) {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(8, 145, 178, 0.25);
+}
+
+:root:not(.dark) #project-gallery-page .text-sky-300 {
+  color: #0284c7 !important;
+}
+
+/* ==================== LIGHT MODE - ALL BLOGS PAGE (/blogs) ==================== */
+
+:root:not(.dark) #blogs-list-page {
+  background:
+    radial-gradient(circle at 12% 18%, rgba(14, 165, 233, 0.2) 0%, rgba(14, 165, 233, 0) 34%),
+    radial-gradient(circle at 85% 20%, rgba(16, 185, 129, 0.17) 0%, rgba(16, 185, 129, 0) 38%),
+    radial-gradient(circle at 50% 100%, rgba(56, 189, 248, 0.12) 0%, rgba(56, 189, 248, 0) 48%),
+    linear-gradient(135deg, #ffffff 0%, #f0f9ff 42%, #ecfeff 100%);
+}
+
+:root:not(.dark) #blogs-list-page .glass-card {
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(125, 211, 252, 0.24);
+  box-shadow:
+    0 16px 36px rgba(8, 145, 178, 0.08),
+    0 8px 20px rgba(15, 23, 42, 0.06) !important;
+}
+
+:root:not(.dark) #blogs-list-page .glass-card:hover,
+:root:not(.dark) #blogs-list-page .hover\:glass-card-hover:hover {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(56, 189, 248, 0.32);
+}
+
+:root:not(.dark) #blogs-list-page .p-6 h3 {
+  color: #0f172a !important;
+}
+
+:root:not(.dark) #blogs-list-page .container > a:first-of-type .text-white {
+  color: #0f172a !important;
+}
+
+:root:not(.dark) #blogs-list-page .p-6 .text-gray-300,
+:root:not(.dark) #blogs-list-page .p-6 .text-gray-400 {
+  color: #64748b !important;
+}
+
+:root:not(.dark) #blogs-list-page .text-center .text-white {
+  color: #0f172a !important;
+}
+
+:root:not(.dark) #blogs-list-page .text-center .text-gray-400 {
+  color: #64748b !important;
+}
+
+:root:not(.dark) #blogs-list-page .glass-button {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(8, 145, 178, 0.25);
+  color: #0284c7 !important;
+}
+
+:root:not(.dark) #blogs-list-page .text-sky-400 {
+  color: #0284c7 !important;
+}
+
+:root:not(.dark) #blogs-list-page .bg-gray-700,
+:root:not(.dark) #blogs-list-page .bg-gray-800 {
+  background-color: #e2e8f0 !important;
+}
+
+:root:not(.dark) #blogs-list-page .text-gray-500 {
+  color: #64748b !important;
+}
+
+/* ==================== LIGHT MODE - SINGLE BLOG PAGE (/blog/:id) ==================== */
+
+:root:not(.dark) #blog-detail-page {
+  background:
+    radial-gradient(circle at 10% 12%, rgba(14, 165, 233, 0.18) 0%, rgba(14, 165, 233, 0) 34%),
+    radial-gradient(circle at 90% 10%, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0) 36%),
+    linear-gradient(140deg, #ffffff 0%, #f0f9ff 46%, #ecfeff 100%);
+}
+
+:root:not(.dark) #blog-detail-page .glass-card {
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(125, 211, 252, 0.28);
+  box-shadow:
+    0 16px 36px rgba(8, 145, 178, 0.09),
+    0 8px 20px rgba(15, 23, 42, 0.06) !important;
+}
+
+:root:not(.dark) #blog-detail-page .glass-card:hover,
+:root:not(.dark) #blog-detail-page .hover\:glass-card-hover:hover {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(56, 189, 248, 0.36);
+}
+
+:root:not(.dark) #blog-detail-page .blog-detail-hero .text-white,
+:root:not(.dark) #blog-detail-page .blog-detail-hero h1,
+:root:not(.dark) #blog-detail-page .blog-detail-hero .text-gray-300 {
+  color: #ffffff !important;
+}
+
+:root:not(.dark) #blog-detail-page .text-white {
+  color: #0f172a !important;
+}
+
+:root:not(.dark) #blog-detail-page .blog-detail-hero .text-white {
+  color: #ffffff !important;
+}
+
+:root:not(.dark) #blog-detail-page .text-gray-300,
+:root:not(.dark) #blog-detail-page .text-gray-400 {
+  color: #64748b !important;
+}
+
+:root:not(.dark) #blog-detail-page .blog-detail-hero .text-gray-300 {
+  color: rgba(226, 232, 240, 0.95) !important;
+}
+
+:root:not(.dark) #blog-detail-page .floating-action-btn {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(8, 145, 178, 0.35);
+  box-shadow: 0 8px 28px rgba(8, 145, 178, 0.15);
+}
+
+:root:not(.dark) #blog-detail-page .floating-action-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  border-color: rgba(8, 145, 178, 0.5);
+}
+
+:root:not(.dark) #blog-detail-page .floating-action-btn svg {
+  color: #0369a1 !important;
+}
+
+:root:not(.dark) #blog-detail-page .floating-action-btn .border-white {
+  border-color: #0369a1 !important;
+}
+
+:root:not(.dark) #blog-detail-page .glass-button {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(8, 145, 178, 0.3);
+  color: #0369a1 !important;
+}
+
+:root:not(.dark) #blog-detail-page .prose-invert {
+  --tw-prose-body: #475569;
+  --tw-prose-headings: #0f172a;
+}
+
+:root:not(.dark) #blog-detail-page .quill-content > h1,
+:root:not(.dark) #blog-detail-page .quill-content > h2,
+:root:not(.dark) #blog-detail-page .quill-content > h3,
+:root:not(.dark) #blog-detail-page .quill-content strong {
+  color: #0f172a !important;
+}
+
+:root:not(.dark) #blog-detail-page .quill-content > p,
+:root:not(.dark) #blog-detail-page .quill-content > ul,
+:root:not(.dark) #blog-detail-page .quill-content > ol,
+:root:not(.dark) #blog-detail-page .quill-content li {
+  color: #475569 !important;
+}
+
+:root:not(.dark) #blog-detail-page .quill-content > blockquote {
+  background: rgba(241, 245, 249, 0.9) !important;
+  border-left-color: #0ea5e9 !important;
+  color: #475569 !important;
+}
+
+:root:not(.dark) #blog-detail-page .quill-content > pre {
+  background: #f1f5f9 !important;
+  color: #334155 !important;
+}
+
+:root:not(.dark) #blog-detail-page .quill-content code {
+  background: #e2e8f0 !important;
+  color: #0369a1 !important;
+}
+
+:root:not(.dark) #blog-detail-page .quill-content pre code {
+  background: transparent !important;
+  color: #1e293b !important;
+}
+
+:root:not(.dark) #blog-detail-page .quill-content a {
+  color: #0284c7 !important;
+}
+
+:root:not(.dark) #blog-detail-page .border-sky-500\/20 {
+  border-color: rgba(14, 165, 233, 0.25) !important;
+}
+
+:root:not(.dark) #blog-detail-page .bg-gray-800\/30,
+:root:not(.dark) #blog-detail-page .bg-gray-800\/50 {
+  background: rgba(241, 245, 249, 0.95) !important;
+}
+
+:root:not(.dark) #blog-detail-page .border-gray-700 {
+  border-color: #cbd5e1 !important;
+}
+
+:root:not(.dark) #blog-detail-page input,
+:root:not(.dark) #blog-detail-page textarea {
+  color: #0f172a !important;
+}
+
+:root:not(.dark) #blog-detail-page input::placeholder,
+:root:not(.dark) #blog-detail-page textarea::placeholder {
+  color: #64748b !important;
+}
+
+:root:not(.dark) #blog-detail-page .blog-tag-pill.glass-button {
+  color: #0e7490 !important;
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-color: rgba(14, 116, 144, 0.4) !important;
+}
+
