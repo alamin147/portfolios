@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import { X, Terminal, Send } from "lucide-react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -100,11 +101,12 @@ export default function LinuxContactModal({ isOpen, onClose }: LinuxContactModal
 
   if (!isOpen) return null;
 
-  return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-black border border-green-400 rounded-lg w-full max-w-2xl max-h-[90vh] overflow-hidden shadow-2xl">
+  /* Portal avoids clipping: fixed descendants inside <nav> with backdrop-blur use the nav as their containing block */
+  return createPortal(
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm dark:bg-black/80">
+      <div className="flex max-h-[min(90dvh,90vh)] w-full max-w-2xl flex-col overflow-hidden rounded-lg border border-emerald-600 bg-black shadow-2xl dark:border-green-400">
         {/* Terminal Header */}
-        <div className="bg-gray-900 px-4 py-3 flex items-center justify-between border-b border-green-400/30">
+        <div className="flex shrink-0 items-center justify-between border-b border-green-400/30 bg-gray-900 px-4 py-3">
           <div className="flex items-center space-x-3">
             <div className="flex space-x-2">
               <div className="w-3 h-3 bg-red-500 rounded-full"></div>
@@ -117,6 +119,7 @@ export default function LinuxContactModal({ isOpen, onClose }: LinuxContactModal
             </div>
           </div>
           <button
+            type="button"
             onClick={onClose}
             className="text-red-400 hover:text-red-300 transition-colors"
           >
@@ -125,7 +128,7 @@ export default function LinuxContactModal({ isOpen, onClose }: LinuxContactModal
         </div>
 
         {/* Terminal Content */}
-        <div className="p-6 bg-black text-green-400 font-mono max-h-[80vh] overflow-y-auto">
+        <div className="min-h-0 flex-1 overflow-y-auto bg-black p-6 font-mono text-green-400">
           <div className="mb-6">
             <p className="text-green-300 mb-2">root@alamin:~# ./contact.sh --secure</p>
             <p className="text-gray-400 text-sm mb-4">Initializing secure communication channel...</p>
@@ -242,6 +245,7 @@ export default function LinuxContactModal({ isOpen, onClose }: LinuxContactModal
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
