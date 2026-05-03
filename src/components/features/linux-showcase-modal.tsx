@@ -25,13 +25,13 @@ export default function LinuxShowcaseModal({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-gray-900 border border-red-400 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/55 backdrop-blur-sm p-4 dark:bg-black/80">
+      <div className="bg-white border border-red-500 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl dark:bg-gray-900 dark:border-red-400">
         {/* Header */}
-        <div className="border-b border-gray-700 p-6 flex items-center justify-between">
-          <div className="flex items-center">
-            <Terminal className="text-red-400 mr-3" size={24} />
-            <h2 className="text-2xl font-bold text-white">{project.title}</h2>
+        <div className="border-b border-slate-200 p-6 flex items-center justify-between gap-4 flex-wrap dark:border-gray-700">
+          <div className="flex items-center flex-wrap gap-2">
+            <Terminal className="text-red-600 mr-3 shrink-0 dark:text-red-400" size={24} />
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">{project.title}</h2>
             {/* <span
               className={`ml-4 px-3 py-1 text-xs font-bold rounded ${
                 showcaseDetails.dangerLevel === "High"
@@ -43,13 +43,14 @@ export default function LinuxShowcaseModal({
             >
               {showcaseDetails.dangerLevel}
             </span> */}
-            <span className="ml-2 bg-gray-700 text-green-400 px-3 py-1 text-xs font-bold rounded">
+            <span className="ml-2 bg-slate-200 text-emerald-800 px-3 py-1 text-xs font-bold rounded dark:bg-gray-700 dark:text-green-400">
               {showcaseDetails.showcaseType}
             </span>
           </div>
           <button
+            type="button"
             onClick={onClose}
-            className="text-gray-400 hover:text-red-400 transition-colors p-2"
+            className="text-slate-500 hover:text-red-600 transition-colors p-2 rounded-lg hover:bg-slate-100 dark:text-gray-400 dark:hover:text-red-400 dark:hover:bg-transparent"
           >
             <X size={24} />
           </button>
@@ -59,11 +60,11 @@ export default function LinuxShowcaseModal({
         <div className="p-6 space-y-6">
           {/* Description */}
           <div>
-            <h3 className="text-lg font-bold text-red-400 mb-3 flex items-center">
+            <h3 className="text-lg font-bold text-red-600 mb-3 flex items-center dark:text-red-400">
               <Code className="mr-2" size={18} />
               Elite Overview
             </h3>
-            <p className="text-green-300 leading-relaxed">
+            <p className="text-emerald-900 leading-relaxed dark:text-green-300">
               {showcaseDetails.fullDescription}
             </p>
           </div>
@@ -71,25 +72,21 @@ export default function LinuxShowcaseModal({
           {/* Links */}
           <div className="flex flex-wrap gap-4">
             {showcaseDetails.githubUrl == "#" ? (
-              <a
-                href={"#"}
-                rel="noopener noreferrer"
-                className="flex items-center bg-black border border-green-400 text-green-400 px-4 py-2 rounded hover:bg-green-400 hover:text-black transition-all duration-300"
+              <span
+                className="flex items-center bg-slate-100 border border-slate-300 text-slate-600 px-4 py-2 rounded cursor-not-allowed dark:bg-black dark:border-green-400 dark:text-green-500"
               >
                 <Github className="mr-2" size={18} />
-                {showcaseDetails.githubUrl === "#"
-                  ? "Coming Soon"
-                  : "View Source Code"}
-              </a>
+                Coming Soon
+              </span>
             ) : (
               <a
                 href={showcaseDetails.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center bg-black border border-green-400 text-green-400 px-4 py-2 rounded hover:bg-green-400 hover:text-black transition-all duration-300"
+                className="flex items-center bg-emerald-50 border border-emerald-600 text-emerald-900 px-4 py-2 rounded hover:bg-emerald-600 hover:text-white transition-all duration-300 dark:bg-black dark:border-green-400 dark:text-green-400 dark:hover:bg-green-400 dark:hover:text-black"
               >
                 <Github className="mr-2" size={18} />
-                   "View Source Code"
+                View Source Code
               </a>
             )}
             {showcaseDetails.liveUrl !== "#" && (
@@ -107,15 +104,15 @@ export default function LinuxShowcaseModal({
 
           {/* Features */}
           <div>
-            <h3 className="text-lg font-bold text-red-400 mb-3">
+            <h3 className="text-lg font-bold text-red-600 mb-3 dark:text-red-400">
               ⚡ Elite Features
             </h3>
             <div className="space-y-2">
               {showcaseDetails.features.map(
                 (feature: string, index: number) => (
                   <div key={index} className="flex items-start">
-                    <span className="text-red-400 mr-3 mt-1">▸</span>
-                    <span className="text-green-300 flex-1">{feature}</span>
+                    <span className="text-red-600 mr-3 mt-1 dark:text-red-400">▸</span>
+                    <span className="text-emerald-900 flex-1 dark:text-green-300">{feature}</span>
                   </div>
                 )
               )}
@@ -124,14 +121,14 @@ export default function LinuxShowcaseModal({
 
           {/* Tech Stack */}
           <div>
-            <h3 className="text-lg font-bold text-red-400 mb-3">
+            <h3 className="text-lg font-bold text-red-600 mb-3 dark:text-red-400">
               Tags
             </h3>
             <div className="flex flex-wrap gap-2">
               {showcaseDetails.techStack.map((tech: string, index: number) => (
                 <span
                   key={index}
-                  className="bg-black border border-green-400 text-green-400 px-3 py-1 rounded text-sm hover:bg-green-400 hover:text-black transition-all duration-300"
+                  className="bg-emerald-50 border border-emerald-600 text-emerald-900 px-3 py-1 rounded text-sm hover:bg-emerald-600 hover:text-white transition-all duration-300 dark:bg-black dark:border-green-400 dark:text-green-400 dark:hover:bg-green-400 dark:hover:text-black"
                 >
                   {tech}
                 </span>
@@ -141,8 +138,8 @@ export default function LinuxShowcaseModal({
         </div>
 
         {/* Footer */}
-        <div className="border-t border-gray-700 p-4 text-center">
-          <p className="text-gray-400 text-sm font-mono">
+        <div className="border-t border-slate-200 p-4 text-center dark:border-gray-700">
+          <p className="text-slate-600 text-sm font-mono dark:text-gray-400">
             ./elite_showcase_explored.sh - Status: '{project.status}'
           </p>
         </div>
