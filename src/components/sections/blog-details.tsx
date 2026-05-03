@@ -428,7 +428,7 @@ export default function BlogDetailsPage({
   };
 
   return (
-    <div className="min-h-screen relative">
+    <div id="blog-detail-page" className="min-h-screen relative bg-background">
       {/* Back Button */}
       <Button
         onClick={() => navigate("/")}
@@ -455,7 +455,7 @@ export default function BlogDetailsPage({
       {/* Hero Section with animations */}
       <section
         ref={heroRef as any}
-        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+        className="blog-detail-hero relative min-h-screen flex items-center justify-center overflow-hidden"
       >
         <div
           className={`container mx-auto px-4 py-20 relative z-10 transition-all duration-1000 ${
@@ -474,10 +474,10 @@ export default function BlogDetailsPage({
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-                {/* Category Badge */}
+                {/* Category Badge — high contrast in light & dark */}
                 <div className="absolute top-6 left-6">
-                  <span className="glass-button text-white px-4 py-2 rounded-full text-sm font-medium flex items-center">
-                    <Tag className="h-4 w-4 mr-2" />
+                  <span className="inline-flex items-center rounded-full px-4 py-2 text-sm font-medium bg-white/95 text-slate-900 shadow-md ring-1 ring-slate-900/10 backdrop-blur-sm dark:bg-white/15 dark:text-white dark:ring-white/25">
+                    <Tag className="h-4 w-4 mr-2 shrink-0 text-cyan-700 dark:text-cyan-200" />
                     {blog.category}
                   </span>
                 </div>
@@ -485,7 +485,7 @@ export default function BlogDetailsPage({
                 {/* Featured Badge */}
                 {blog.featured && (
                   <div className="absolute top-6 right-6">
-                    <span className="glass-button text-yellow-300 px-4 py-2 rounded-full text-sm font-medium">
+                    <span className="inline-flex items-center rounded-full px-4 py-2 text-sm font-medium bg-amber-100 text-amber-950 shadow-md ring-1 ring-amber-900/15 dark:bg-yellow-400/15 dark:text-yellow-200 dark:ring-yellow-200/30">
                       ⭐ Featured
                     </span>
                   </div>
@@ -563,13 +563,13 @@ export default function BlogDetailsPage({
 
             {/* Tags */}
             {blog?.tags && blog?.tags?.length > 0 && (
-              <div className="mt-12 pt-8 border-t border-sky-500/20">
+              <div className="mt-12 pt-8 border-t border-sky-500/20 blog-tags-section">
                 <h3 className="text-white text-lg font-semibold mb-4">Tags</h3>
                 <div className="flex flex-wrap gap-2">
                   {blog?.tags?.map((tag, index) => (
                     <span
                       key={index}
-                      className="glass-button text-sky-300 px-3 py-1 rounded-full text-sm"
+                      className="blog-tag-pill glass-button px-3 py-1 rounded-full text-sm text-cyan-900 dark:text-sky-300"
                     >
                       #{tag}
                     </span>
@@ -705,11 +705,11 @@ export default function BlogDetailsPage({
                   <p className="text-gray-400">Loading comments...</p>
                 </div>
               ) : comments.length === 0 ? (
-                <div className="text-center py-2">
-                  <div className="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <MessageCircle className="h-8 w-8 text-gray-500" />
+                <div className="text-center py-2 comments-empty-state">
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 bg-sky-100 ring-2 ring-sky-200/80 dark:bg-gray-800 dark:ring-0">
+                    <MessageCircle className="h-8 w-8 text-sky-600 dark:text-gray-400" />
                   </div>
-                  <p className="text-gray-400">
+                  <p className="text-muted-foreground dark:text-gray-400">
                     No comments yet. Be the first to share your thoughts!
                   </p>
                 </div>
@@ -787,7 +787,7 @@ export default function BlogDetailsPage({
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                     <div className="absolute top-4 left-4">
-                      <span className="glass-button text-white px-3 py-1 rounded-full text-xs font-medium">
+                      <span className="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium bg-white/95 text-slate-900 shadow ring-1 ring-slate-900/10 backdrop-blur-sm dark:bg-white/15 dark:text-white dark:ring-white/25">
                         {relatedBlog.category}
                       </span>
                     </div>
