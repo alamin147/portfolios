@@ -228,22 +228,31 @@ const ProjectDetails = () => {
       {/* Image Preview Modal */}
       {selectedImage && (
         <div
-          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-          onClick={closeImagePreview}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Screenshot preview"
+          className="fixed inset-0 z-50 flex flex-col bg-black/80 backdrop-blur-sm"
         >
-          <div className="relative max-w-7xl max-h-[90vh] w-full h-full flex items-center justify-center">
+          <div className="flex shrink-0 items-center justify-end gap-2 px-3 pt-3 sm:px-4 sm:pt-4">
             <Button
               variant="ghost"
               size="icon"
-              className="absolute top-4 right-4 z-10 glass-card text-white hover:text-red-400 rounded-full transition-all duration-300"
+              type="button"
+              className="h-11 w-11 shrink-0 glass-card text-white hover:text-red-400 rounded-full transition-all duration-300"
               onClick={closeImagePreview}
+              aria-label="Close preview"
             >
               <X className="h-6 w-6" />
             </Button>
+          </div>
+          <div
+            className="flex min-h-0 flex-1 items-center justify-center px-4 pb-4 pt-1"
+            onClick={closeImagePreview}
+          >
             <img
               src={selectedImage}
               alt="Preview"
-              className="max-w-full max-h-full object-contain rounded-xl shadow-2xl"
+              className="max-h-[min(85vh,100%)] max-w-full object-contain rounded-xl shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             />
           </div>
