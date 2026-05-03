@@ -62,7 +62,10 @@ export default function ProjectsPage() {
   const totalPages = Math.ceil(projects.length / projectsPerPage);
 
   return (
-    <div className="min-h-screen bg-background pt-24 pb-20 px-4">
+    <div
+      id="project-gallery-page"
+      className="min-h-screen bg-background pt-24 pb-20 px-4"
+    >
       <div className="container mx-auto max-w-4/5 relative z-10">
         {/* Back button */}
         <Link to="/#projects">
@@ -179,7 +182,7 @@ export default function ProjectsPage() {
                         >
                           <Button
                             size="sm"
-                            className="cursor-pointer glass-button text-white hover:scale-105 rounded-full transition-all duration-300"
+                            className="cursor-pointer glass-button rounded-full transition-all duration-300 hover:scale-105 text-slate-900 hover:text-cyan-800 dark:text-white dark:hover:text-white"
                           >
                             <ExternalLink className="h-4 w-4 mr-2" />
                             Live URL
@@ -193,7 +196,7 @@ export default function ProjectsPage() {
                           <Button
                             size="sm"
                             variant="outline"
-                            className="cursor-pointer glass-card text-white hover:text-cyan-100 rounded-full transition-all duration-300"
+                            className="cursor-pointer glass-card rounded-full transition-all duration-300 text-slate-900 border-slate-400/40 hover:text-cyan-800 hover:border-cyan-600/50 dark:text-white dark:border-white/20 dark:hover:text-cyan-100"
                           >
                             <ExternalLink className="h-4 w-4 mr-2" />
                             Details
