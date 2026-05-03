@@ -47,20 +47,21 @@ export default function LinuxProjectModal({ isOpen, onClose, project }: ProjectM
   const projectDetails = getProjectDetails(project.title);
 
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-gray-900 border border-green-400 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/55 backdrop-blur-sm p-4 dark:bg-black/80">
+      <div className="bg-white border border-emerald-500 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl dark:bg-gray-900 dark:border-green-400">
         {/* Header */}
-        <div className="border-b border-gray-700 p-6 flex items-center justify-between">
-          <div className="flex items-center">
-            <Terminal className="text-red-400 mr-3" size={24} />
-            <h2 className="text-2xl font-bold text-white">{project.title}</h2>
-            <span className="ml-4 bg-red-500 text-black px-3 py-1 text-xs font-bold rounded">
+        <div className="border-b border-slate-200 p-6 flex items-center justify-between gap-4 flex-wrap dark:border-gray-700">
+          <div className="flex items-center flex-wrap gap-2">
+            <Terminal className="text-red-600 mr-3 shrink-0 dark:text-red-400" size={24} />
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">{project.title}</h2>
+            <span className="ml-0 sm:ml-2 bg-red-500 text-white px-3 py-1 text-xs font-bold rounded dark:text-black">
               {project.status}
             </span>
           </div>
           <button
+            type="button"
             onClick={onClose}
-            className="text-gray-400 hover:text-red-400 transition-colors p-2"
+            className="text-slate-500 hover:text-red-600 transition-colors p-2 rounded-lg hover:bg-slate-100 dark:text-gray-400 dark:hover:text-red-400 dark:hover:bg-transparent"
           >
             <X size={24} />
           </button>
@@ -70,11 +71,11 @@ export default function LinuxProjectModal({ isOpen, onClose, project }: ProjectM
         <div className="p-6 space-y-6">
           {/* Description */}
           <div>
-            <h3 className="text-lg font-bold text-red-400 mb-3 flex items-center">
+            <h3 className="text-lg font-bold text-red-600 mb-3 flex items-center dark:text-red-400">
               <Code className="mr-2" size={18} />
               Project Overview
             </h3>
-            <p className="text-green-300 leading-relaxed">
+            <p className="text-emerald-900 leading-relaxed dark:text-green-300">
               {projectDetails.fullDescription}
             </p>
           </div>
@@ -85,7 +86,7 @@ export default function LinuxProjectModal({ isOpen, onClose, project }: ProjectM
               href={projectDetails.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center bg-black border border-green-400 text-green-400 px-4 py-2 rounded hover:bg-green-400 hover:text-black transition-all duration-300"
+              className="flex items-center bg-emerald-50 border border-emerald-600 text-emerald-900 px-4 py-2 rounded hover:bg-emerald-600 hover:text-white transition-all duration-300 dark:bg-black dark:border-green-400 dark:text-green-400 dark:hover:bg-green-400 dark:hover:text-black"
             >
               <Github className="mr-2" size={18} />
               View Source Code
@@ -106,15 +107,15 @@ export default function LinuxProjectModal({ isOpen, onClose, project }: ProjectM
           {/* Architecture */}
           {Object.keys(projectDetails.architecture).length > 0 && (
             <div>
-              <h3 className="text-lg font-bold text-red-400 mb-3 flex items-center">
+              <h3 className="text-lg font-bold text-red-600 mb-3 flex items-center dark:text-red-400">
                 <Database className="mr-2" size={18} />
                 Architecture
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {Object.entries(projectDetails.architecture).map(([key, value]) => (
-                  <div key={key} className="bg-black border border-gray-700 rounded p-3">
-                    <span className="text-red-400 font-semibold capitalize">{key}:</span>
-                    <span className="text-green-300 ml-2">{value}</span>
+                  <div key={key} className="bg-slate-50 border border-slate-200 rounded p-3 dark:bg-black dark:border-gray-700">
+                    <span className="text-red-600 font-semibold capitalize dark:text-red-400">{key}:</span>
+                    <span className="text-emerald-800 ml-2 dark:text-green-300">{value}</span>
                   </div>
                 ))}
               </div>
@@ -123,14 +124,14 @@ export default function LinuxProjectModal({ isOpen, onClose, project }: ProjectM
 
           {/* Features */}
           <div>
-            <h3 className="text-lg font-bold text-red-400 mb-3">
+            <h3 className="text-lg font-bold text-red-600 mb-3 dark:text-red-400">
               Key Features
             </h3>
             <div className="space-y-2">
               {projectDetails.features.map((feature, index) => (
                 <div key={index} className="flex items-start">
-                  <span className="text-red-400 mr-3 mt-1">▸</span>
-                  <span className="text-green-300 flex-1">{feature}</span>
+                  <span className="text-red-600 mr-3 mt-1 dark:text-red-400">▸</span>
+                  <span className="text-emerald-900 flex-1 dark:text-green-300">{feature}</span>
                 </div>
               ))}
             </div>
@@ -138,14 +139,14 @@ export default function LinuxProjectModal({ isOpen, onClose, project }: ProjectM
 
           {/* Tech Stack */}
           <div>
-            <h3 className="text-lg font-bold text-red-400 mb-3">
+            <h3 className="text-lg font-bold text-red-600 mb-3 dark:text-red-400">
               Technology Stack
             </h3>
             <div className="flex flex-wrap gap-2">
               {projectDetails.techStack.map((tech: string, index: number) => (
                 <span
                   key={index}
-                  className="bg-black border border-green-400 text-green-400 px-3 py-1 rounded text-sm hover:bg-green-400 hover:text-black transition-all duration-300"
+                  className="bg-emerald-50 border border-emerald-600 text-emerald-900 px-3 py-1 rounded text-sm hover:bg-emerald-600 hover:text-white transition-all duration-300 dark:bg-black dark:border-green-400 dark:text-green-400 dark:hover:bg-green-400 dark:hover:text-black"
                 >
                   {tech}
                 </span>
@@ -170,8 +171,8 @@ export default function LinuxProjectModal({ isOpen, onClose, project }: ProjectM
         </div>
 
         {/* Footer */}
-        <div className="border-t border-gray-700 p-4 text-center">
-          <p className="text-gray-400 text-sm font-mono">
+        <div className="border-t border-slate-200 p-4 text-center dark:border-gray-700">
+          <p className="text-slate-600 text-sm font-mono dark:text-gray-400">
             ./project_explored.sh - Status: '{project.status}'
           </p>
         </div>
