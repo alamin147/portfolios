@@ -1,35 +1,45 @@
 import { Moon, Sun } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 export default function ThemeToggle() {
   const [isDark, setIsDark] = useState(() => {
     if (typeof window === 'undefined') return true;
-    return localStorage.getItem('theme') !== 'light';
+    const savedTheme = localStorage.getItem('theme');
+    const isLight = savedTheme === 'light';
+    if (isLight) {
+      document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.add('dark');
+    }
+    return !isLight;
   });
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
+    const isLight = savedTheme === 'light';
 
-    if (savedTheme === 'light') {
-      setIsDark(false);
+    if (isLight) {
       document.documentElement.classList.remove('dark');
+      setIsDark(false);
     } else {
-      setIsDark(true);
       document.documentElement.classList.add('dark');
+      setIsDark(true);
     }
   }, []);
 
-  const toggleTheme = () => {
-    if (isDark) {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-      setIsDark(false);
-    } else {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-      setIsDark(true);
-    }
-  };
+  const toggleTheme = useCallback(() => {
+    setIsDark(prev => {
+      const newIsDark = !prev;
+      if (newIsDark) {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      }
+      return newIsDark;
+    });
+  }, []);
 
   return (
     <button
