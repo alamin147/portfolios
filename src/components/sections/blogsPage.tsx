@@ -92,7 +92,7 @@ export default function BlogsPage() {
   };
 
   return (
-    <div className="min-h-screen relative">
+    <div id="blogs-list-page" className="min-h-screen relative bg-background">
       {/* Back Button */}
       <div className="container mx-auto max-w-4/5 relative z-10 pt-30">
         {/* Back button */}
