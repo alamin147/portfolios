@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script>
+      (function () {
+        try {
+          var s = localStorage.getItem("theme");
+          var r = document.documentElement;
+          if (s === "light") r.classList.remove("dark");
+          else r.classList.add("dark");
+        } catch (e) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
     <!-- Content Security Policy for XSS Protection -->
     <meta
       http-equiv="Content-Security-Policy"
