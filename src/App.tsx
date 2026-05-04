@@ -24,6 +24,9 @@ import {
   InitialLoader
 } from "@/components/layout";
 
+// AI
+import { Robot } from "@/components/ai/model/Robot";
+
 // Features
 import { LinuxPortfolio } from "@/components/features";
 
@@ -72,6 +75,7 @@ const AppContent = () => {
         <MouseTrail />
         <FloatingElements />
         <BackgroundStars />
+        <Robot />
         <div className="relative z-10">
           <Router>
             <Routes>
