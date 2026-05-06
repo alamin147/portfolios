@@ -133,22 +133,30 @@ export function Robot() {
     e.preventDefault();
     if (!message.trim() || isLoading) return;
 
-    const userMessage = message;
-    setMessages((prev) => [...prev, { id: Date.now().toString(), text: userMessage, sender: 'user' }]);
+    const userMessage = message.trim();
+    const userId = Date.now().toString();
+    setMessages((prev) => [...prev, { id: userId, text: userMessage, sender: 'user' }]);
     setMessage('');
     setIsLoading(true);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 800));
+      const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/chat`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({ message: userMessage }),
+      });
+
+      const result = await res.json();
+      const botMessage = typeof result?.message === 'string' ? result.message : 'No response received.';
 
       setMessages((prev) => [
         ...prev,
-        {
-          id: (Date.now() + 1).toString(),
-          text: "Custom Chatbot is currently under development. You can see the github repo of that custom chatbot here: https://github.com/alamin-dev/Custom-Chatbot.",
-          sender: 'bot',
-        },
+        { id: (Date.now() + 1).toString(), text: botMessage, sender: 'bot' },
       ]);
+    } catch (error) {
+      console.error('Error fetching projects:', error);
     } finally {
       setIsLoading(false);
     }
@@ -164,7 +172,7 @@ export function Robot() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
             transition={{ type: 'spring', damping: 20 }}
-            className="fixed bottom-32 right-6 w-96 h-[500px] bg-white dark:bg-slate-900 rounded-3xl shadow-2xl flex flex-col overflow-hidden z-50 border border-gray-200 dark:border-slate-700"
+            className="fixed inset-x-4 bottom-4 sm:bottom-32 sm:right-6 sm:left-auto sm:w-96 h-[60vh] sm:h-[500px] bg-white dark:bg-slate-900 rounded-3xl shadow-2xl flex flex-col overflow-hidden z-50 border border-gray-200 dark:border-slate-700"
           >
             {/* Header */}
             <div className="bg-gradient-to-r from-cyan-500 to-teal-500 dark:from-cyan-600 dark:to-teal-600 p-6 flex items-center justify-between">
@@ -255,14 +263,14 @@ export function Robot() {
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Type your message..."
                   disabled={isLoading}
-                  className="flex-1 px-4 py-3 border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white rounded-full focus:outline-none focus:ring-2 focus:ring-cyan-500 dark:focus:ring-cyan-400 text-sm disabled:opacity-50 placeholder-gray-500 dark:placeholder-gray-400"
+                  className="flex-1 min-w-0 px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white rounded-full focus:outline-none focus:ring-2 focus:ring-cyan-500 dark:focus:ring-cyan-400 text-sm disabled:opacity-50 placeholder-gray-500 dark:placeholder-gray-400"
                 />
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="bg-cyan-600 dark:bg-cyan-700 hover:bg-cyan-700 dark:hover:bg-cyan-800 text-white p-3 rounded-full transition flex items-center justify-center disabled:opacity-50"
+                  className="bg-cyan-600 dark:bg-cyan-700 hover:bg-cyan-700 dark:hover:bg-cyan-800 text-white p-2 sm:p-3 rounded-full transition flex items-center justify-center disabled:opacity-50"
                 >
-                  {isLoading ? <Loader size={18} className="animate-spin" /> : <Send size={18} />}
+                  {isLoading ? <Loader size={16} className="animate-spin" /> : <Send size={16} />}
                 </button>
               </form>
             </div>

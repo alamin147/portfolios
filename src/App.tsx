@@ -75,7 +75,7 @@ const AppContent = () => {
         <MouseTrail />
         <FloatingElements />
         <BackgroundStars />
-        {/* <Robot /> */}
+         <Robot />
         <div className="relative z-10">
           <Router>
             <Routes>

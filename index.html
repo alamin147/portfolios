@@ -22,19 +22,17 @@
         style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
         font-src 'self' https://fonts.gstatic.com data:;
         img-src 'self' data: https: blob:;
-        connect-src 'self' https://admin-server-portfolio.vercel.app https://www.google-analytics.com https://analytics.google.com;
+        connect-src 'self' http://localhost:3000 https://admin-server-portfolio.vercel.app https://www.google-analytics.com https://analytics.google.com;
         frame-src 'self' https://www.google.com;
         object-src 'none';
         base-uri 'self';
         form-action 'self' https://admin-server-portfolio.vercel.app;
-        frame-ancestors 'self';
         upgrade-insecure-requests;
       "
     />
 
     <!-- Security Headers -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
     <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
 
