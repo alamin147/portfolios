@@ -16,8 +16,10 @@ import {
   SiCplusplus,
   SiC,
   SiHtml5,
-  SiCss3,
+  SiCss,
   SiPrisma,
+  SiPython,
+  SiPytorch,
 } from "react-icons/si";
 import React from "react";
 
@@ -43,8 +45,10 @@ const skillsData = [
   { name: "C++", icon: <SiCplusplus />, color: "#00599c" },
   { name: "C", icon: <SiC />, color: "#a8b9cc" },
   { name: "HTML", icon: <SiHtml5 />, color: "#e34f26" },
-  { name: "CSS", icon: <SiCss3 />, color: "#1572b6" },
+  { name: "CSS", icon: <SiCss />, color: "#1572b6" },
   { name: "Prisma", icon: <SiPrisma />, color: "#2d3748" },
+  { name: "Python", icon: <SiPython />, color: "#3776ab" },
+  { name: "PyTorch", icon: <SiPytorch />, color: "#ee4c2c" },
 ];
 
 // Distribute skills evenly on a sphere using Fibonacci sphere algorithm

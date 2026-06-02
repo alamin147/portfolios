@@ -10,10 +10,12 @@ import {
   SiTailwindcss,
   SiRedux,
   SiCplusplus,
-  SiC,
+//   SiC,
   SiHtml5,
-  SiCss3,
+  SiCss,
   SiPrisma,
+  SiPython,
+  SiPytorch,
 } from "react-icons/si";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 import { SectionTitle } from "@/components/shared";
@@ -89,12 +91,12 @@ export default function Skills() {
       color: "hover:text-blue-600",
       shadowColor: "rgba(37, 99, 235, 0.4)",
     },
-    {
-      icon: <SiC />,
-      name: "C",
-      color: "hover:text-blue-700",
-      shadowColor: "rgba(29, 78, 216, 0.4)",
-    },
+    // {
+    //   icon: <SiC />,
+    //   name: "C",
+    //   color: "hover:text-blue-700",
+    //   shadowColor: "rgba(29, 78, 216, 0.4)",
+    // },
     {
       icon: <SiHtml5 />,
       name: "HTML",
@@ -102,7 +104,7 @@ export default function Skills() {
       shadowColor: "rgba(249, 115, 22, 0.4)",
     },
     {
-      icon: <SiCss3 />,
+      icon: <SiCss />,
       name: "CSS",
       color: "hover:text-blue-400",
       shadowColor: "rgba(59, 130, 246, 0.4)",
@@ -112,6 +114,18 @@ export default function Skills() {
       name: "Prisma",
       color: "hover:text-white",
       shadowColor: "rgba(255, 255, 255, 0.4)",
+    },
+    {
+      icon: <SiPython />,
+      name: "Python",
+      color: "hover:text-blue-500",
+      shadowColor: "rgba(59, 130, 246, 0.4)",
+    },
+    {
+      icon: <SiPytorch />,
+      name: "PyTorch",
+      color: "hover:text-orange-500",
+      shadowColor: "rgba(249, 115, 22, 0.4)",
     },
   ];
 
