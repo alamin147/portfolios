@@ -43,8 +43,7 @@ export default function Hero() {
                 <div className="w-12 sm:w-16 h-0.5 sm:h-1 bg-gradient-to-r from-sky-500 to-emerald-500 mx-auto lg:mx-0 rounded-full"></div>
 
                 <p className="text-xs sm:text-sm lg:text-base text-gray-300 leading-relaxed max-w-3xl mx-auto lg:mx-0">
-                  I am currently studying computer science and engineering.
-                  Passionate about
+                  Computer Science and Engineering graduate, passionate about
                   <span className="text-sky-400 font-semibold"> coding </span>
                   and learning new technologies. I thrive both working
                   independently and in teams, with experience in
@@ -91,7 +90,7 @@ export default function Hero() {
                     boxShadow: "0 4px 20px rgba(8, 145, 178, 0.5), inset 0 0 20px rgba(8, 145, 178, 0.2)"
                   }}>
                     <div className="text-sm font-semibold text-white whitespace-nowrap flex items-center gap-2">
-                      
+
                       View in 3D
                     </div>
                   </div>

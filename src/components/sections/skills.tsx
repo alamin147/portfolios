@@ -157,22 +157,37 @@ export default function Skills() {
           {skills.map((skill, index) => (
             <div
               key={index}
-              className={`group glass-card hover:glass-card-hover rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 text-center transition-all duration-200 hover:scale-105 flex flex-col justify-center items-center min-h-[100px] xs:min-h-[120px] sm:min-h-[140px] ${skill.color} relative overflow-hidden`}
+              className={`group glass-card hover:glass-card-hover rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 text-center transition-all duration-300 hover:scale-110 flex flex-col justify-center items-center min-h-[100px] xs:min-h-[120px] sm:min-h-[140px] ${skill.color} relative`}
               style={{
                 transitionDelay: skillsVisible ? `${50}ms` : "0ms",
+                boxShadow: "0 0 0 rgba(0,0,0,0)",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = `0 20px 40px ${skill.shadowColor}`;
+                e.currentTarget.style.boxShadow = `0 0 20px ${skill.shadowColor}, 0 0 40px ${skill.shadowColor}, 0 0 60px ${skill.shadowColor.replace("0.4)", "0.3)")}, inset 0 0 30px ${skill.shadowColor.replace("0.4)", "0.15)")}`;
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = "";
+                e.currentTarget.style.boxShadow = "0 0 0 rgba(0,0,0,0)";
               }}
             >
               <div className="relative z-10 flex flex-col items-center justify-center">
-                <div className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-3 md:mb-4 text-slate-800 dark:text-white transition-all duration-100 group-hover:scale-110 flex items-center justify-center">
-                  {skill.icon}
+                <div className="relative mb-2 sm:mb-3 md:mb-4">
+                  <div
+                    className="absolute -inset-4 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 blur-2xl -z-10 group-hover:blur-3xl"
+                    style={{
+                      backgroundColor: skill.shadowColor.replace("0.4)", "0.7)"),
+                    }}
+                  />
+                  <div
+                    className="absolute -inset-6 rounded-full opacity-0 group-hover:opacity-40 transition-all duration-300 blur-3xl -z-10"
+                    style={{
+                      backgroundColor: skill.shadowColor.replace("0.4)", "0.5)"),
+                    }}
+                  />
+                  <div className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl text-slate-800 dark:text-white transition-all duration-300 group-hover:scale-110 flex items-center justify-center drop-shadow-lg group-hover:drop-shadow-2xl">
+                    {skill.icon}
+                  </div>
                 </div>
-                <p className="text-xs xs:text-sm sm:text-base text-slate-700 dark:text-gray-100 font-medium group-hover:text-slate-900 dark:group-hover:text-white transition-colors duration-300 text-center leading-tight">
+                <p className="text-xs xs:text-sm sm:text-base text-slate-700 dark:text-gray-100 font-medium group-hover:text-slate-900 dark:group-hover:text-white transition-all duration-300 text-center leading-tight group-hover:font-bold">
                   {skill.name}
                 </p>
               </div>
