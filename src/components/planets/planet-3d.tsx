@@ -26,12 +26,12 @@ function PlanetSphere({ planet }: { planet: Planet }) {
   // Generate planet texture based on planet type
   const planetTexture = useMemo(() => {
     const canvas = document.createElement("canvas");
-    canvas.width = 512;
-    canvas.height = 512;
+    canvas.width = 256;
+    canvas.height = 256;
     const ctx = canvas.getContext("2d")!;
 
     // Create gradient based on planet color
-    const gradient = ctx.createLinearGradient(0, 0, 512, 512);
+    const gradient = ctx.createLinearGradient(0, 0, 256, 256);
 
     if (planet.id === "jupiter") {
       // Jupiter - bands of orange/brown
@@ -59,12 +59,12 @@ function PlanetSphere({ planet }: { planet: Planet }) {
     }
 
     ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, 512, 512);
+    ctx.fillRect(0, 0, 256, 256);
 
     // Add some noise/texture
     for (let i = 0; i < 5000; i++) {
-      const x = Math.random() * 512;
-      const y = Math.random() * 512;
+      const x = Math.random() * 256;
+      const y = Math.random() * 256;
       const size = Math.random() * 2;
       ctx.fillStyle = `rgba(255,255,255,${Math.random() * 0.3})`;
       ctx.fillRect(x, y, size, size);
@@ -73,24 +73,24 @@ function PlanetSphere({ planet }: { planet: Planet }) {
     // Add horizontal bands for gas giants
     if (planet.id === "jupiter" || planet.id === "saturn") {
       ctx.strokeStyle = "rgba(255,255,255,0.1)";
-      for (let i = 0; i < 512; i += 20) {
+      for (let i = 0; i < 256; i += 10) {
         ctx.beginPath();
         ctx.moveTo(0, i);
-        ctx.lineTo(512, i);
+        ctx.lineTo(256, i);
         ctx.stroke();
       }
     }
 
     // Add Great Red Spot for Jupiter
     if (planet.id === "jupiter") {
-      const centerX = 350;
-      const centerY = 200;
-      const spotGradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 40);
+      const centerX = 175;
+      const centerY = 100;
+      const spotGradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 20);
       spotGradient.addColorStop(0, "rgba(200, 50, 50, 0.8)");
       spotGradient.addColorStop(1, "rgba(150, 40, 40, 0.3)");
       ctx.fillStyle = spotGradient;
       ctx.beginPath();
-      ctx.ellipse(centerX, centerY, 50, 35, 0, 0, Math.PI * 2);
+      ctx.ellipse(centerX, centerY, 25, 18, 0, 0, Math.PI * 2);
       ctx.fill();
     }
 
@@ -105,7 +105,7 @@ function PlanetSphere({ planet }: { planet: Planet }) {
   return (
     <group>
       {/* Main Planet Sphere */}
-      <Sphere ref={meshRef} args={[2, 64, 64]}>
+      <Sphere ref={meshRef} args={[2, 32, 32]}>
         <meshStandardMaterial
           map={planetTexture}
           roughness={0.7}
@@ -127,7 +127,7 @@ function PlanetSphere({ planet }: { planet: Planet }) {
       )}
 
       {/* Atmosphere glow */}
-      <Sphere args={[2.15, 32, 32]}>
+      <Sphere args={[2.15, 16, 16]}>
         <meshBasicMaterial
           color={planet.color}
           transparent
@@ -144,7 +144,7 @@ function SaturnRings() {
   return (
     <group rotation={[Math.PI / 2.5, 0, 0]}>
       {/* Multiple ring layers */}
-      <Ring args={[2.5, 3.5, 64]}>
+      <Ring args={[2.5, 3.5, 32]}>
         <meshStandardMaterial
           color="#d8c4a0"
           transparent
@@ -153,7 +153,7 @@ function SaturnRings() {
           roughness={0.8}
         />
       </Ring>
-      <Ring args={[3.6, 4.2, 64]}>
+      <Ring args={[3.6, 4.2, 32]}>
         <meshStandardMaterial
           color="#c4b090"
           transparent
@@ -162,7 +162,7 @@ function SaturnRings() {
           roughness={0.8}
         />
       </Ring>
-      <Ring args={[4.3, 4.8, 64]}>
+      <Ring args={[4.3, 4.8, 32]}>
         <meshStandardMaterial
           color="#b0a080"
           transparent

@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import {
   Dialog,
   DialogContent,
@@ -6,15 +7,24 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import type { Planet } from "@/data/planets-data";
-import { Planet3D } from "./planet-3d";
-import { SkillsPlanet3D } from "./skills-planet-3d";
-import { ProfilePlanet3D } from "./profile-planet-3d";
-import CPPlanet3D from "./cp-planet-3d";
-import ProjectsPlanet3D from "./projects-planet-3d";
-import BlogPlanet3D from "./blog-planet-3d";
-import EducationPlanet3D from "./education-planet-3d";
-import ContactPlanet3D from "./contact-planet-3d";
-import FooterPlanet3D from "./footer-planet-3d";
+
+// Lazy-load all Three.js planet components so the 1MB three bundle is deferred
+// until the user actually opens a planet modal.
+const Planet3D = lazy(() => import("./planet-3d").then((m) => ({ default: m.Planet3D })));
+const SkillsPlanet3D = lazy(() => import("./skills-planet-3d").then((m) => ({ default: m.SkillsPlanet3D })));
+const ProfilePlanet3D = lazy(() => import("./profile-planet-3d").then((m) => ({ default: m.ProfilePlanet3D })));
+const CPPlanet3D = lazy(() => import("./cp-planet-3d"));
+const ProjectsPlanet3D = lazy(() => import("./projects-planet-3d"));
+const BlogPlanet3D = lazy(() => import("./blog-planet-3d"));
+const EducationPlanet3D = lazy(() => import("./education-planet-3d"));
+const ContactPlanet3D = lazy(() => import("./contact-planet-3d"));
+const FooterPlanet3D = lazy(() => import("./footer-planet-3d"));
+
+const PlanetLoader = () => (
+  <div className="w-full h-full flex items-center justify-center">
+    <div className="w-12 h-12 rounded-full border-4 border-cyan-500/30 border-t-cyan-400 animate-spin" />
+  </div>
+);
 
 interface PlanetModalProps {
   planet: Planet | null;
@@ -43,23 +53,25 @@ export function PlanetModal({ planet, isOpen, onClose }: PlanetModalProps) {
               <div className="planet-modal-canvas-section relative flex flex-col items-center justify-center p-4 md:p-8 bg-linear-to-br from-slate-900/50 to-slate-800/30">
                 {/* Three.js 3D Planet Canvas - Full Size */}
                 <div className="w-full h-[400px] md:h-[600px] relative">
-                  {planet.id === "skills" ? (
-                    <SkillsPlanet3D />
-                  ) : planet.id === "profile" ? (
-                    <ProfilePlanet3D />
-                  ) : planet.id === "cp" ? (
-                    <CPPlanet3D />
-                  ) : planet.id === "projects" ? (
-                    <ProjectsPlanet3D />
-                  ) : planet.id === "blog" ? (
-                    <BlogPlanet3D />
-                  ) : planet.id === "education" ? (
-                    <EducationPlanet3D />
-                  ) : planet.id === "contact" ? (
-                    <ContactPlanet3D />
-                  ) : planet.id === "social" ? (
-                    <FooterPlanet3D />
-                  ) : null}
+                  <Suspense fallback={<PlanetLoader />}>
+                    {planet.id === "skills" ? (
+                      <SkillsPlanet3D />
+                    ) : planet.id === "profile" ? (
+                      <ProfilePlanet3D />
+                    ) : planet.id === "cp" ? (
+                      <CPPlanet3D />
+                    ) : planet.id === "projects" ? (
+                      <ProjectsPlanet3D />
+                    ) : planet.id === "blog" ? (
+                      <BlogPlanet3D />
+                    ) : planet.id === "education" ? (
+                      <EducationPlanet3D />
+                    ) : planet.id === "contact" ? (
+                      <ContactPlanet3D />
+                    ) : planet.id === "social" ? (
+                      <FooterPlanet3D />
+                    ) : null}
+                  </Suspense>
                 </div>
 
                 {/* Planet name with icon */}
@@ -83,11 +95,13 @@ export function PlanetModal({ planet, isOpen, onClose }: PlanetModalProps) {
             <div className="planet-modal-canvas-section relative flex flex-col items-center justify-center p-8 bg-linear-to-br from-slate-900/50 to-slate-800/30 border-r border-cyan-500/20">
               {/* Three.js 3D Planet Canvas */}
               <div className="w-full h-[400px] relative">
-                {planet.id === "skills" ? (
-                  <SkillsPlanet3D />
-                ) : (
-                  <Planet3D planet={planet} />
-                )}
+                <Suspense fallback={<PlanetLoader />}>
+                  {planet.id === "skills" ? (
+                    <SkillsPlanet3D />
+                  ) : (
+                    <Planet3D planet={planet} />
+                  )}
+                </Suspense>
               </div>
 
               {/* Planet name with icon */}

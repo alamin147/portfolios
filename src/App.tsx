@@ -1,49 +1,51 @@
-// Sections
-import {
-  Hero,
-  Projects,
-  Skills,
-  Blog,
-  Education,
-  Contact,
-  CPProfiles,
-  ProjectsPage,
-  ProjectDetailsPage,
-  BlogDetailsWrapper,
-  BlogsPage
-} from "@/components/sections";
-
-// Layout
-import {
-  Navbar,
-  Footer,
-  FloatingElements,
-  FloatingPlanets,
-  BackgroundStars,
-  MouseTrail,
-  InitialLoader
-} from "@/components/layout";
-
-// AI
-import { Robot } from "@/components/ai/model/Robot";
-
-// Features
-import { LinuxPortfolio } from "@/components/features";
-
-// Shared
-import { NotFound, SEO } from "@/components/shared";
+import { lazy, Suspense, useState, useEffect } from "react";
 
 // Router
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// React
-import { useState, useEffect } from "react";
-
 // Context
 import { EasterEggsProvider, useEasterEggs } from "./context/easter-eggs-context";
 
-// Easter Eggs
-import SpaceCatcherGame from "./components/easter-eggs/space-catcher-game";
+// Eagerly load layout essentials (tiny, needed immediately)
+import { Navbar, Footer, BackgroundStars, MouseTrail, InitialLoader } from "@/components/layout";
+
+// Shared (tiny utilities)
+import { NotFound, SEO } from "@/components/shared";
+
+// Lazy-load everything else — heavy routes, sections, and optional features
+const FloatingElements = lazy(() =>
+  import("@/components/layout/floating-elements").then((m) => ({ default: m.FloatingElements }))
+);
+const FloatingPlanets = lazy(() =>
+  import("@/components/layout/floating-planets").then((m) => ({ default: m.FloatingPlanets }))
+);
+const Robot = lazy(() =>
+  import("@/components/ai/model/Robot").then((m) => ({ default: m.Robot }))
+);
+const SpaceCatcherGame = lazy(() => import("./components/easter-eggs/space-catcher-game"));
+
+// Homepage sections — lazy so they each become their own chunk
+const Hero = lazy(() => import("@/components/sections/hero"));
+const CPProfiles = lazy(() => import("@/components/sections/cp-profiles"));
+const Projects = lazy(() => import("@/components/sections/projects"));
+const Skills = lazy(() => import("@/components/sections/skills"));
+const Blog = lazy(() => import("@/components/sections/blog"));
+const Education = lazy(() => import("@/components/sections/education"));
+const Contact = lazy(() => import("@/components/sections/contact"));
+
+// Route pages
+const ProjectsPage = lazy(() => import("@/components/sections/projectsPage"));
+const ProjectDetailsPage = lazy(() => import("@/components/sections/project-details"));
+const BlogsPage = lazy(() => import("@/components/sections/blogsPage"));
+const BlogDetailsWrapper = lazy(() => import("@/components/sections/blog-details-wrapper"));
+const LinuxPortfolio = lazy(() => import("@/components/features/linux-portfolio"));
+
+// Minimal spinner shown while a lazy chunk loads
+const PageSpinner = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="w-10 h-10 rounded-full border-4 border-cyan-500/30 border-t-cyan-400 animate-spin" />
+  </div>
+);
 
 const AppContent = () => {
   const { isGameActive, updateGameScore, deactivateGame } = useEasterEggs();
@@ -51,9 +53,9 @@ const AppContent = () => {
 
   useEffect(() => {
     if (loading || isGameActive) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     }
   }, [loading, isGameActive]);
 
@@ -65,17 +67,27 @@ const AppContent = () => {
           onComplete={() => setLoading(false)}
         />
       )}
-      <SpaceCatcherGame
-        isActive={isGameActive}
-        onScoreChange={updateGameScore}
-        onClose={deactivateGame}
-      />
+
+      <Suspense fallback={null}>
+        <SpaceCatcherGame
+          isActive={isGameActive}
+          onScoreChange={updateGameScore}
+          onClose={deactivateGame}
+        />
+      </Suspense>
+
       <div className="min-h-screen relative">
-        {/* Rest of your app content */}
-        <MouseTrail />
-        <FloatingElements />
+        <Suspense fallback={null}>
+          <MouseTrail />
+          <FloatingElements />
+        </Suspense>
+
         <BackgroundStars />
-         <Robot />
+
+        <Suspense fallback={null}>
+          <Robot />
+        </Suspense>
+
         <div className="relative z-10">
           <Router>
             <Routes>
@@ -88,17 +100,20 @@ const AppContent = () => {
                       description="Full Stack Developer specializing in React, Node.js, Express, MongoDB, PostgreSQL, TypeScript, Prisma, and Tailwind CSS. Explore my portfolio of projects, skills, and competitive programming profiles."
                       url="https://alamin-portfolio-site.vercel.app/"
                     />
-                    {/* Floating Planets only on homepage */}
-                    <FloatingPlanets />
+                    <Suspense fallback={null}>
+                      <FloatingPlanets />
+                    </Suspense>
                     <Navbar />
                     <main id="main-content" role="main">
-                      <Hero />
-                      <CPProfiles />
-                      <Projects />
-                      <Skills />
-                      <Blog />
-                      <Education />
-                      <Contact />
+                      <Suspense fallback={<PageSpinner />}>
+                        <Hero />
+                        <CPProfiles />
+                        <Projects />
+                        <Skills />
+                        <Blog />
+                        <Education />
+                        <Contact />
+                      </Suspense>
                     </main>
                     <Footer />
                   </div>
@@ -114,7 +129,9 @@ const AppContent = () => {
                       url="https://alamin-portfolio-site.vercel.app/projects"
                     />
                     <Navbar />
-                    <ProjectsPage />
+                    <Suspense fallback={<PageSpinner />}>
+                      <ProjectsPage />
+                    </Suspense>
                     <Footer />
                   </>
                 }
@@ -129,7 +146,9 @@ const AppContent = () => {
                       url="https://alamin-portfolio-site.vercel.app/blogs"
                     />
                     <Navbar />
-                    <BlogsPage />
+                    <Suspense fallback={<PageSpinner />}>
+                      <BlogsPage />
+                    </Suspense>
                     <Footer />
                   </>
                 }
@@ -144,7 +163,9 @@ const AppContent = () => {
                       url="https://alamin-portfolio-site.vercel.app/projects"
                     />
                     <Navbar />
-                    <ProjectDetailsPage />
+                    <Suspense fallback={<PageSpinner />}>
+                      <ProjectDetailsPage />
+                    </Suspense>
                     <Footer />
                   </>
                 }
@@ -159,7 +180,9 @@ const AppContent = () => {
                       url="https://alamin-portfolio-site.vercel.app/blog"
                     />
                     <Navbar />
-                    <BlogDetailsWrapper />
+                    <Suspense fallback={<PageSpinner />}>
+                      <BlogDetailsWrapper />
+                    </Suspense>
                     <Footer />
                   </>
                 }
@@ -173,7 +196,9 @@ const AppContent = () => {
                       description="Experience my portfolio with a unique Linux terminal-inspired interface."
                       url="https://alamin-portfolio-site.vercel.app/linux"
                     />
-                    <LinuxPortfolio />
+                    <Suspense fallback={<PageSpinner />}>
+                      <LinuxPortfolio />
+                    </Suspense>
                   </>
                 }
               />

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, animate } from 'framer-motion';
 import { X, Send, Loader } from 'lucide-react';
 
 
@@ -10,7 +10,8 @@ export function Robot() {
     { id: '1', text: 'Hey there! I can answer about Al Amin', sender: 'bot' }
   ]);
   const [isBlownAway, setIsBlownAway] = useState(false);
-  const [botPosition, setBotPosition] = useState({ x: 0, y: 0 });
+  const xMotion = useMotionValue(0);
+  const yMotion = useMotionValue(0);
   const [isWaving, setIsWaving] = useState(false);
   const [showBubble, setShowBubble] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -21,10 +22,11 @@ export function Robot() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // Wind blow physics - natural flying around screen
+  // Wind blow physics — drives xMotion/yMotion directly, no React re-renders
   useEffect(() => {
     if (!isBlownAway) {
-      setBotPosition({ x: 0, y: 0 });
+      animate(xMotion, 0, { type: "spring", stiffness: 120, damping: 20 });
+      animate(yMotion, 0, { type: "spring", stiffness: 120, damping: 20 });
       return;
     }
 
@@ -36,15 +38,13 @@ export function Robot() {
     let velocityX = -8 + Math.random() * 3;
     let velocityY = -5 + Math.random() * 2;
     let time = 0;
+    let rafId: number;
 
-    const windInterval = setInterval(() => {
-      time += 0.016; // ~60fps
+    const step = () => {
+      time += 0.016;
 
-      // Target direction: top-left (center-ish)
       const targetX = -screenWidth * 0.3;
       const targetY = -screenHeight * 0.2;
-
-      // Calculate direction to target
       const dx = targetX - currentX;
       const dy = targetY - currentY;
       const distance = Math.sqrt(dx * dx + dy * dy);
@@ -52,52 +52,41 @@ export function Robot() {
       if (distance > 50) {
         const dirX = dx / distance;
         const dirY = dy / distance;
-
-        // Wind force towards target with some variation
         const windStrength = Math.sin(time * 0.8) * 0.4 + 0.8;
         velocityX += dirX * windStrength * 0.2;
         velocityY += dirY * windStrength * 0.2;
       }
 
-      // Smooth air resistance
       velocityX *= 0.95;
       velocityY *= 0.95;
 
-      // Soft boundary bouncing
       const margin = 100;
-      if (currentX < -screenWidth + margin) {
-        velocityX = Math.abs(velocityX) * 0.5;
-        currentX = -screenWidth + margin;
-      }
-      if (currentY < -screenHeight + margin) {
-        velocityY = Math.abs(velocityY) * 0.5;
-        currentY = -screenHeight + margin;
-      }
-      if (currentX > margin) {
-        velocityX = -Math.abs(velocityX) * 0.5;
-        currentX = margin;
-      }
-      if (currentY > margin) {
-        velocityY = -Math.abs(velocityY) * 0.5;
-        currentY = margin;
-      }
+      if (currentX < -screenWidth + margin) { velocityX = Math.abs(velocityX) * 0.5; currentX = -screenWidth + margin; }
+      if (currentY < -screenHeight + margin) { velocityY = Math.abs(velocityY) * 0.5; currentY = -screenHeight + margin; }
+      if (currentX > margin) { velocityX = -Math.abs(velocityX) * 0.5; currentX = margin; }
+      if (currentY > margin) { velocityY = -Math.abs(velocityY) * 0.5; currentY = margin; }
 
       currentX += velocityX;
       currentY += velocityY;
 
-      setBotPosition({ x: currentX, y: currentY });
-    }, 16);
+      // Update motion values directly — bypasses React rendering entirely
+      xMotion.set(currentX);
+      yMotion.set(currentY);
+
+      rafId = requestAnimationFrame(step);
+    };
+
+    rafId = requestAnimationFrame(step);
 
     const returnTimeout = setTimeout(() => {
       setIsBlownAway(false);
-      setBotPosition({ x: 0, y: 0 });
     }, 5000);
 
     return () => {
-      clearInterval(windInterval);
+      cancelAnimationFrame(rafId);
       clearTimeout(returnTimeout);
     };
-  }, [isBlownAway]);
+  }, [isBlownAway, xMotion, yMotion]);
 
   // Control waving based on dialog state
   useEffect(() => {
@@ -280,7 +269,8 @@ export function Robot() {
 
       {/* Bot Widget */}
       <motion.div
-        animate={{ x: botPosition.x, y: botPosition.y, rotate: isBlownAway ? 90 : 0 }}
+        style={{ x: xMotion, y: yMotion }}
+        animate={{ rotate: isBlownAway ? 90 : 0 }}
         transition={{ type: 'spring', stiffness: 120, damping: 20 }}
         className="fixed bottom-6 right-6 z-40"
         onHoverStart={() => !isOpen && setIsBlownAway(false)}
