@@ -53,9 +53,8 @@ const useSafeScrollAnimation = () => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
+        // Toggle so the reveal replays each time the element scrolls into view.
+        setIsVisible(entry.isIntersecting);
       },
       {
         threshold: 0.1,

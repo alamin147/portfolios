@@ -12,9 +12,9 @@ export function useScrollAnimation(threshold = 0.1) {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-        }
+        // Toggle visibility so the animation replays every time the element
+        // enters the viewport, not just the first time.
+        setIsVisible(entry.isIntersecting)
       },
       { threshold },
     )

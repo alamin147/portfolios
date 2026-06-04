@@ -155,6 +155,19 @@
 
     <!-- Accessibility: Skip to main content -->
     <style>
+      /* Set background before React mounts so fast-scroll never flashes white.
+         Only html gets the color — body stays transparent so BackgroundStars
+         (z-index:-1) stays visible above the html canvas layer. */
+      html {
+        background-color: #0f172a; /* slate-900 — dark mode default */
+      }
+      html:not(.dark) {
+        background-color: #f8fafc; /* slate-50 — light mode */
+      }
+      body {
+        margin: 0;
+      }
+
       .skip-to-main {
         position: absolute;
         left: -9999px;
