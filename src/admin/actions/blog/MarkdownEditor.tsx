@@ -333,7 +333,7 @@ const MarkdownEditor = () => {
               <ToolBtn onClick={() => prefixLine("## ")} title="Heading">
                 H
               </ToolBtn>
-              <ToolBtn onClick={() => surround("`")} title="Inline code">
+              <ToolBtn onClick={() => surround("```bash\n", "\n```", "code here")} title="Code block (bash)">
                 {"</>"}
               </ToolBtn>
               <ToolBtn onClick={() => prefixLine("> ")} title="Quote">
