@@ -55,6 +55,20 @@ const AppContent = () => {
   const { isGameActive, updateGameScore, deactivateGame } = useEasterEggs();
   const [loading, setLoading] = useState(true);
   const location = useLocation();
+
+  // Kick off chunk downloads immediately so they're ready when InitialLoader completes.
+  useEffect(() => {
+    import("@/components/sections/hero");
+    import("@/components/sections/cp-profiles");
+    import("@/components/sections/projects");
+    import("@/components/sections/skills");
+    import("@/components/sections/blog");
+    import("@/components/sections/education");
+    import("@/components/sections/contact");
+    import("@/components/layout/floating-elements");
+    import("@/components/layout/floating-planets");
+    import("@/components/ai/model/Robot");
+  }, []);
   // Admin runs as its own self-contained app — skip the space chrome & loader.
   const isAdmin = location.pathname.startsWith(ADMIN_BASE);
 
@@ -65,6 +79,26 @@ const AppContent = () => {
       document.body.style.overflow = "auto";
     }
   }, [loading, isGameActive, isAdmin]);
+
+  // After the initial loader completes, scroll to the hash section if present.
+  // Sections are lazy-loaded, so we retry until the element appears in the DOM.
+  useEffect(() => {
+    if (loading || isAdmin) return;
+    const hash = window.location.hash;
+    if (!hash) return;
+    const id = hash.slice(1);
+    let attempts = 0;
+    const tryScroll = () => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      } else if (attempts < 30) {
+        attempts++;
+        setTimeout(tryScroll, 100);
+      }
+    };
+    setTimeout(tryScroll, 100);
+  }, [loading, isAdmin]);
 
   return (
     <>
@@ -115,7 +149,7 @@ const AppContent = () => {
                     </Suspense>
                     <Navbar />
                     <main id="main-content" role="main">
-                      <Suspense fallback={<PageSpinner />}>
+                      <Suspense fallback={null}>
                         <Hero />
                         <CPProfiles />
                         <Projects />
