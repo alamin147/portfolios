@@ -31,10 +31,13 @@ const AdminLogin = () => {
       },
       body: JSON.stringify(data),
     })
-      .then((res) => res.json())
-      .then((result) => {
-        if (result?.error) {
-          toast.error(`${result?.message}`, toastOptions);
+      .then(async (res) => {
+        const result = await res.json();
+        return { ok: res.ok, result };
+      })
+      .then(({ ok, result }) => {
+        if (!ok || result?.error) {
+          toast.error("Invalid credentials", toastOptions);
         } else if (result?.token) {
           localStorage.setItem("token", result?.token);
           toast.success("Logged in", toastOptions);
