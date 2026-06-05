@@ -1,7 +1,7 @@
 import { lazy, Suspense, useState, useEffect } from "react";
 
 // Router
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 
 // Context
 import { EasterEggsProvider, useEasterEggs } from "./context/easter-eggs-context";
@@ -40,6 +40,10 @@ const BlogsPage = lazy(() => import("@/components/sections/blogsPage"));
 const BlogDetailsWrapper = lazy(() => import("@/components/sections/blog-details-wrapper"));
 const LinuxPortfolio = lazy(() => import("@/components/features/linux-portfolio"));
 
+// Admin section — fully separate chunk, only loaded under the admin base path
+import { ADMIN_BASE } from "@/admin/config";
+const AdminApp = lazy(() => import("@/admin/AdminApp"));
+
 // Minimal spinner shown while a lazy chunk loads
 const PageSpinner = () => (
   <div className="min-h-screen flex items-center justify-center">
@@ -50,18 +54,21 @@ const PageSpinner = () => (
 const AppContent = () => {
   const { isGameActive, updateGameScore, deactivateGame } = useEasterEggs();
   const [loading, setLoading] = useState(true);
+  const location = useLocation();
+  // Admin runs as its own self-contained app — skip the space chrome & loader.
+  const isAdmin = location.pathname.startsWith(ADMIN_BASE);
 
   useEffect(() => {
-    if (loading || isGameActive) {
+    if ((loading && !isAdmin) || isGameActive) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
     }
-  }, [loading, isGameActive]);
+  }, [loading, isGameActive, isAdmin]);
 
   return (
     <>
-      {loading && (
+      {loading && !isAdmin && (
         <InitialLoader
           duration={2500}
           onComplete={() => setLoading(false)}
@@ -77,20 +84,23 @@ const AppContent = () => {
       </Suspense>
 
       <div className="min-h-screen relative">
-        <Suspense fallback={null}>
-          <MouseTrail />
-          <FloatingElements />
-        </Suspense>
+        {!isAdmin && (
+          <>
+            <Suspense fallback={null}>
+              <MouseTrail />
+              <FloatingElements />
+            </Suspense>
 
-        <BackgroundStars />
+            <BackgroundStars />
 
-        <Suspense fallback={null}>
-          <Robot />
-        </Suspense>
+            <Suspense fallback={null}>
+              <Robot />
+            </Suspense>
+          </>
+        )}
 
         <div className="relative z-10">
-          <Router>
-            <Routes>
+          <Routes>
               <Route
                 path="/"
                 element={
@@ -203,6 +213,14 @@ const AppContent = () => {
                 }
               />
               <Route
+                path={`${ADMIN_BASE}/*`}
+                element={
+                  <Suspense fallback={<PageSpinner />}>
+                    <AdminApp />
+                  </Suspense>
+                }
+              />
+              <Route
                 path="*"
                 element={
                   <>
@@ -216,7 +234,6 @@ const AppContent = () => {
                 }
               />
             </Routes>
-          </Router>
         </div>
       </div>
     </>
@@ -226,7 +243,9 @@ const AppContent = () => {
 function App() {
   return (
     <EasterEggsProvider>
-      <AppContent />
+      <Router>
+        <AppContent />
+      </Router>
     </EasterEggsProvider>
   );
 }

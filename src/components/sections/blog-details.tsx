@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, lazy, Suspense } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
@@ -16,11 +16,17 @@ import { Button } from "@/components/ui/button";
 import { toast } from "react-toastify";
 import { ShareToast, ShareSuccessToast, LikeToast } from "@/components/shared";
 
+// Markdown rendering is heavy (react-markdown + highlight.js); load it only
+// when a post actually has markdown content.
+const MarkdownRenderer = lazy(() => import("@/components/shared/markdown-renderer"));
+
 type BlogPost = {
   _id: string;
   title: string;
   imgUrl: string;
   des: string;
+  /** Raw markdown body (newer posts). When present, takes priority over `des`. */
+  markdown?: string;
   category: string;
   time: string;
   shortDes: string;
@@ -540,7 +546,17 @@ export default function BlogDetailsPage({
             </div>
 
             {/* Main Content */}
-            <div className="prose prose-lg prose-invert max-w-none">
+            {blog.markdown && blog.markdown.trim() ? (
+              <Suspense
+                fallback={<p className="text-gray-400">Loading content…</p>}
+              >
+                <MarkdownRenderer
+                  content={blog.markdown}
+                  className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-slate-900 dark:prose-headings:text-white prose-p:text-slate-700 dark:prose-p:text-gray-300 prose-li:text-slate-700 dark:prose-li:text-gray-300 prose-a:text-sky-600 dark:prose-a:text-sky-400 prose-strong:text-slate-900 dark:prose-strong:text-white prose-code:text-sky-700 dark:prose-code:text-sky-300 prose-blockquote:border-sky-500 prose-blockquote:text-slate-600 dark:prose-blockquote:text-gray-300 prose-img:rounded-xl prose-pre:bg-transparent prose-pre:p-0"
+                />
+              </Suspense>
+            ) : (
+            <div className="prose prose-lg max-w-none dark:prose-invert">
               <div
                 className="quill-content [&>h1]:text-3xl [&>h1]:font-bold [&>h1]:text-white [&>h1]:mb-6 [&>h1]:mt-8
                [&>h2]:text-2xl [&>h2]:font-bold [&>h2]:text-white [&>h2]:mb-4 [&>h2]:mt-6
@@ -559,23 +575,40 @@ export default function BlogDetailsPage({
                 dangerouslySetInnerHTML={{ __html: blog.des }}
               />
             </div>
+            )}
 
             {/* Tags */}
-            {blog?.tags && blog?.tags?.length > 0 && (
-              <div className="mt-12 pt-8 border-t border-sky-500/20 blog-tags-section">
-                <h3 className="text-white text-lg font-semibold mb-4">Tags</h3>
-                <div className="flex flex-wrap gap-2">
-                  {blog?.tags?.map((tag, index) => (
-                    <span
-                      key={index}
-                      className="blog-tag-pill glass-button px-3 py-1 rounded-full text-sm text-cyan-900 dark:text-sky-300"
-                    >
-                      #{tag}
-                    </span>
-                  ))}
+            {(() => {
+              // Normalize: accept space/comma separated, strip leading '#', dedupe.
+              const tagList = Array.from(
+                new Set(
+                  (blog?.tags ?? [])
+                    .flatMap((t) => String(t).split(/[\s,]+/))
+                    .map((t) => t.replace(/^#+/, "").trim())
+                    .filter(Boolean)
+                )
+              );
+              if (tagList.length === 0) return null;
+              return (
+                <div className="mt-12 pt-8 border-t border-sky-500/20 blog-tags-section">
+                  <div className="flex items-center gap-2 mb-4">
+                    <Tag className="w-4 h-4 text-sky-400" />
+                    <h3 className="text-white text-lg font-semibold">Tags</h3>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {tagList.map((tag, index) => (
+                      <span
+                        key={index}
+                        className="blog-tag-pill inline-flex items-center px-3 py-1 rounded-full text-sm font-medium text-sky-300 bg-sky-500/10 border border-sky-500/30 hover:bg-sky-500/20 hover:border-sky-400/60 transition-colors"
+                      >
+                        <span className="text-sky-500/70 mr-0.5">#</span>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            )}
+              );
+            })()}
 
             {/* Engagement Section */}
             <div className="mt-12 pt-8 border-t border-sky-500/20">

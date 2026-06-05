@@ -7,6 +7,7 @@ type BlogPost = {
   title: string;
   imgUrl: string;
   des: string;
+  markdown?: string;
   category: string;
   time: string;
   shortDes: string;
