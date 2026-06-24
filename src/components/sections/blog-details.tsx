@@ -185,6 +185,7 @@ export default function BlogDetailsPage({
     const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
     const diffWeeks = Math.floor(diffDays / 7);
     const diffMonths = Math.floor(diffDays / 30);
+    const diffYears = Math.floor(diffDays / 365);
 
     if (diffMinutes < 1) return "Just now";
     if (diffMinutes < 60) return `${diffMinutes}m ago`;
@@ -194,7 +195,9 @@ export default function BlogDetailsPage({
     if (diffWeeks === 1) return "1 week ago";
     if (diffDays < 30) return `${diffWeeks} weeks ago`;
     if (diffMonths === 1) return "1 month ago";
-    return `${diffMonths} months ago`;
+    if (diffDays < 365) return `${diffMonths} months ago`;
+    if (diffYears === 1) return "1 year ago";
+    return `${diffYears} years ago`;
   };
 
   const handleShare = async () => {

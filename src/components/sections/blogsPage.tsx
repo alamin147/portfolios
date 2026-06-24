@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Clock, ArrowRight, Search, Tag } from "lucide-react";
+import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 import { Button } from "@/components/ui/button";
 import { SectionTitle } from "@/components/shared";
@@ -15,7 +16,18 @@ type BlogPost = {
   shortDes: string;
   featured?: boolean;
   no: number;
+  loves?: number;
+  likes?: number;
+  comments?: unknown[];
 };
+
+type SortOption = "recent" | "popular" | "alphabetical";
+
+const sortOptions: { value: SortOption; label: string }[] = [
+  { value: "recent", label: "Most Recent" },
+  { value: "popular", label: "Most Popular" },
+  { value: "alphabetical", label: "Alphabetical" },
+];
 
 export default function BlogsPage() {
   const navigate = useNavigate();
@@ -26,6 +38,7 @@ export default function BlogsPage() {
   const [filteredBlogs, setFilteredBlogs] = useState<BlogPost[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [sortBy, setSortBy] = useState<SortOption>("recent");
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -64,11 +77,24 @@ export default function BlogsPage() {
       );
     }
 
-    // Sort by 'no' field (serial number)
-    filtered = filtered.sort((a, b) => a.no - b.no);
+    // Sort (frontend-only, no server call)
+    const popularity = (blog: BlogPost) =>
+      (blog.loves || 0) + (blog.likes || 0) + (blog.comments?.length || 0);
+
+    filtered = [...filtered].sort((a, b) => {
+      switch (sortBy) {
+        case "popular":
+          return popularity(b) - popularity(a);
+        case "alphabetical":
+          return a.title.localeCompare(b.title);
+        case "recent":
+        default:
+          return new Date(b.time).getTime() - new Date(a.time).getTime();
+      }
+    });
 
     setFilteredBlogs(filtered);
-  }, [allBlogs, selectedCategory, searchQuery]);
+  }, [allBlogs, selectedCategory, searchQuery, sortBy]);
 
   const getTimeAgo = (dateString: string) => {
     const date = new Date(dateString);
@@ -79,6 +105,7 @@ export default function BlogsPage() {
     const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
     const diffWeeks = Math.floor(diffDays / 7);
     const diffMonths = Math.floor(diffDays / 30);
+    const diffYears = Math.floor(diffDays / 365);
 
     if (diffMinutes < 1) return "Just now";
     if (diffMinutes < 60) return `${diffMinutes}m ago`;
@@ -88,7 +115,9 @@ export default function BlogsPage() {
     if (diffWeeks === 1) return "1 week ago";
     if (diffDays < 30) return `${diffWeeks} weeks ago`;
     if (diffMonths === 1) return "1 month ago";
-    return `${diffMonths} months ago`;
+    if (diffDays < 365) return `${diffMonths} months ago`;
+    if (diffYears === 1) return "1 year ago";
+    return `${diffYears} years ago`;
   };
 
   return (
@@ -130,6 +159,38 @@ export default function BlogsPage() {
               : "opacity-0 translate-y-8"
           }`}
         >
+          {/* Sort / Filter bar */}
+          {!isLoading && allBlogs.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: -12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              className="flex flex-wrap items-center justify-center gap-3 mb-10"
+            >
+              {sortOptions.map((option) => (
+                <motion.button
+                  key={option.value}
+                  onClick={() => setSortBy(option.value)}
+                  whileTap={{ scale: 0.94 }}
+                  className={`relative px-5 py-2 rounded-full text-sm font-medium cursor-pointer transition-colors duration-300 ${
+                    sortBy === option.value
+                      ? "text-white"
+                      : "glass-button text-slate-600 dark:text-gray-300 hover:text-cyan-300"
+                  }`}
+                >
+                  {sortBy === option.value && (
+                    <motion.span
+                      layoutId="activeSortPill"
+                      transition={{ type: "spring", stiffness: 400, damping: 32 }}
+                      className="absolute inset-0 rounded-full bg-cyan-500/30 border border-cyan-500/40 shadow-[0_4px_16px_rgba(8,145,178,0.3)]"
+                    />
+                  )}
+                  <span className="relative z-10">{option.label}</span>
+                </motion.button>
+              ))}
+            </motion.div>
+          )}
+
           {isLoading ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[...Array(6)].map((_, index) => (
@@ -178,16 +239,17 @@ export default function BlogsPage() {
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredBlogs.map((blog) => (
-                <div
-                  key={blog._id}
-                  className={`group glass-card rounded-2xl overflow-hidden hover:glass-card-hover transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-sky-500/20 cursor-pointer flex flex-col ${
-                    gridVisible
-                      ? "opacity-100 translate-y-0"
-                      : "opacity-0 translate-y-8"
-                  }`}
-                  style={{
-                    transitionDelay: gridVisible ? `${1 * 100}ms` : "0ms",
+                <motion.div
+                  key={`${sortBy}-${blog._id}`}
+                  initial={{ opacity: 0, y: 32, scale: 0.94 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{
+                    duration: 0.5,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: 1 * 0.07,
                   }}
+                  whileHover={{ scale: 1.03 }}
+                  className="group glass-card rounded-2xl overflow-hidden hover:glass-card-hover transition-shadow duration-500 hover:shadow-2xl hover:shadow-sky-500/20 cursor-pointer flex flex-col"
                   onClick={() => navigate(`/blog/${blog._id}`)}
                 >
                   <div className="relative h-48 overflow-hidden">
@@ -235,7 +297,7 @@ export default function BlogsPage() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           )}
